@@ -11,6 +11,7 @@ blinker>=1.6.2
 Babel>=2.12
 pytz>=2022.7
 flask-mail>=0.9.1
+flask-wtf>=1.0.1
 
 
 requests~=2.32.4
