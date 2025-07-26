@@ -1,0 +1,7 @@
+<p>{{ _("Bonjour") }} {{ recipient.username }},</p>
+<p>{{ _("%(sender)s vous a envoyé un message sur UniPlace.", sender=sender.username) }}</p>
+<p>{{ _("Contenu du message :") }}</p>
+<blockquote>{{ content }}</blockquote>
+<p><a href="{{ url_for('messaging.inbox', _external=True) }}">{{ _("📥 Voir mes messages") }}</a></p>
+<hr>
+<p style="font-size:12px;color:gray;">UniPlace – {{ _("Soyez toujours informé") }}</p>

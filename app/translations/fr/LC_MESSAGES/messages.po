@@ -1,0 +1,3455 @@
+# French translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-07-15 14:13+0300\n"
+"PO-Revision-Date: 2025-07-15 14:03+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+msgid "Connexion"
+msgstr "Connexion"
+
+msgid "S'inscrire"
+msgstr "S'inscrire"
+
+msgid "Voir"
+msgstr "Voir"
+
+msgid "Rechercher…"
+msgstr "Rechercher…"
+
+msgid "Sponsorisé"
+msgstr "Sponsorisé"
+
+msgid "Promo"
+msgstr "Promo"
+
+msgid "Nouveau"
+msgstr "Nouveau"
+
+msgid "Annonces sponsorisées"
+msgstr "Annonces sponsorisées"
+
+msgid "Catégories"
+msgstr "Catégories"
+
+msgid "Nouveautés"
+msgstr "Nouveautés"
+
+msgid "Offres du jour"
+msgstr "Offres du jour"
+
+msgid "Recommandé pour vous"
+msgstr "Recommandé pour vous"
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Tous droits réservés"
+msgstr "Tous droits réservés"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "CGU"
+msgstr "CGU"
+
+msgid "Confidentialité"
+msgstr "Confidentialité"
+
+msgid "Rechercher"
+msgstr "Rechercher"
+
+msgid "Populaires"
+msgstr "Populaires"
+
+msgid "catégories"
+msgstr "catégories"
+
+msgid "⬅ Retour aux annonces"
+msgstr "⬅ Retour aux annonces"
+
+msgid "🏠 Accueil"
+msgstr "🏠 Accueil"
+
+msgid "Annonces"
+msgstr "Annonces"
+
+msgid "Frais de livraison"
+msgstr "Frais de livraison"
+
+msgid "Prix total (livraison incluse)"
+msgstr "Prix total (livraison incluse)"
+
+msgid "Frais de livraison inclus"
+msgstr "Frais de livraison inclus"
+
+msgid "Produit disponible – Stock restant"
+msgstr "Produit disponible – Stock restant"
+
+msgid "Ce produit est en rupture de stock"
+msgstr "Ce produit est en rupture de stock"
+
+msgid "Ajouter au panier"
+msgstr "Ajouter au panier"
+
+msgid "Acheter maintenant"
+msgstr "Acheter maintenant"
+
+msgid "Ajouter aux favoris"
+msgstr "Ajouter aux favoris"
+
+msgid "Contacter le vendeur"
+msgstr "Contacter le vendeur"
+
+msgid "À propos de cet article"
+msgstr "À propos de cet article"
+
+msgid "Détails techniques"
+msgstr "Détails techniques"
+
+msgid "Catégorie"
+msgstr "Catégorie"
+
+msgid "Sous-catégorie"
+msgstr "Sous-catégorie"
+
+msgid "Marque"
+msgstr "Marque"
+
+msgid "Modèle"
+msgstr "Modèle"
+
+msgid "Taille"
+msgstr "Taille"
+
+msgid "Poids"
+msgstr "Poids"
+
+msgid "Dimensions"
+msgstr "Dimensions"
+
+msgid "Contenu du pack"
+msgstr "Contenu du pack"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Date d'expiration"
+msgstr "Date d'expiration"
+
+msgid "Pointure"
+msgstr "Pointure"
+
+msgid "Fermeture"
+msgstr "Fermeture"
+
+msgid "Matière"
+msgstr "Matière"
+
+msgid "Couleur"
+msgstr "Couleur"
+
+msgid "Stock total"
+msgstr "Stock total"
+
+msgid "Expédition rapide"
+msgstr "Expédition rapide"
+
+msgid "État"
+msgstr "État"
+
+msgid "Ville"
+msgstr "Ville"
+
+msgid "Vendeur"
+msgstr "Vendeur"
+
+msgid "Autre"
+msgstr "Autre"
+
+msgid "Prix"
+msgstr "Prix"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Avis des acheteurs"
+msgstr "Avis des acheteurs"
+
+msgid "Aucun avis pour cet article."
+msgstr "Aucun avis pour cet article."
+
+msgid "Signaler cette annonce"
+msgstr "Signaler cette annonce"
+
+msgid "Expliquez le problème (arnaque, contenu inapproprié...)"
+msgstr "Expliquez le problème (arnaque, contenu inapproprié...)"
+
+msgid "Envoyer le signalement"
+msgstr "Envoyer le signalement"
+
+msgid "Voir"
+msgstr "Voir"
+
+msgid "Voir ses autres annonces"
+msgstr "Voir ses autres annonces"
+
+msgid "Nombre d’annonces"
+msgstr "Nombre d’annonces"
+
+msgid "Choisissez une variante"
+msgstr "Choisissez une variante"
+
+msgid "⚠️ Veuillez sélectionner une variante avant d'acheter."
+msgstr "⚠️ Veuillez sélectionner une variante avant d'acheter."
+
+msgid "Voir les annonces"
+msgstr "Voir les annonces"
+
+msgid "Tableau de bord"
+msgstr "Tableau de bord"
+
+msgid "Conditions de vente"
+msgstr "Conditions de vente"
+
+msgid "Nous contacter"
+msgstr "Nous contacter"
+
+msgid "Messagerie"
+msgstr "Messages"
+
+msgid "Bienvenue"
+msgstr "Bienvenue"
+
+msgid "Vous êtes connecté sur"
+msgstr "Vous êtes connecté sur"
+
+msgid "Voir les annonces publiques"
+msgstr "Voir les annonces publiques"
+
+msgid "Vos informations de paiement (visibles après commande)"
+msgstr "Vos informations de paiement (visibles après commande)"
+
+msgid "Ces informations seront transmises à l'acheteur uniquement"
+msgstr "Ces informations seront transmises à l'acheteur uniquement"
+
+msgid "après paiement de la commission"
+msgstr "après paiement de la commission"
+
+msgid "afin qu'il puisse vous régler directement."
+msgstr "afin qu'il puisse vous régler directement."
+
+msgid "Adresse USDT (TRC20) pour recevoir les paiements"
+msgstr "Adresse USDT (TRC20) pour recevoir les paiements"
+
+msgid "Enregistrer"
+msgstr "Enregistrer"
+
+msgid "Informations pour virement bancaire"
+msgstr "Informations pour virement bancaire"
+
+msgid "Nom de la banque"
+msgstr "Nom de la banque"
+
+msgid "Ex : Tinkoff, Sberbank..."
+msgstr "E.g.: Tinkoff, Sberbank..."
+
+msgid "Numéro de carte bancaire"
+msgstr "Numéro de carte bancaire"
+
+msgid "Nom complet sur la carte"
+msgstr "Nom complet sur la carte"
+
+msgid "Enregistrer mes infos bancaires"
+msgstr "Enregistrer mes infos bancaires"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "Publier une annonce"
+msgstr "Publier une annonce"
+
+msgid "Voir mes annonces"
+msgstr "Voir mes annonces"
+
+msgid "Commandes Crypto"
+msgstr "Commandes Crypto"
+
+msgid "Paiements carte"
+msgstr "Paiements carte"
+
+msgid "Mes achats"
+msgstr "Mes achats"
+
+msgid "Mes ventes"
+msgstr "Mes ventes"
+
+msgid "Mes commandes"
+msgstr "Mes commandes"
+
+msgid "Mes livraisons"
+msgstr "Mes livraisons"
+
+msgid "Panier"
+msgstr "Panier"
+
+msgid "Mes infos de paiement"
+msgstr "Mes infos de paiement"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Mes avis reçus"
+msgstr "Mes avis reçus"
+
+msgid "Mes favoris"
+msgstr "Mes favoris"
+
+msgid "Suivi des livraisons"
+msgstr "Suivi des livraisons"
+
+msgid "Signalements"
+msgstr "Signalements"
+
+msgid "Emails envoyés"
+msgstr "Emails envoyés"
+
+msgid "Messages bloqués"
+msgstr "Blocked messages"
+
+msgid "Gestion Sponsorisé"
+msgstr "Gestion Sponsorisé"
+
+msgid "Espace Admin"
+msgstr "Espace Admin"
+
+msgid "Gestion des promos"
+msgstr "Gestion des promos"
+
+msgid "Toutes les annonces disponibles"
+msgstr "Toutes les annonces disponibles"
+
+msgid "Mots-clés..."
+msgstr "Mots-clés..."
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Image de"
+msgstr "Image de"
+
+msgid "Pas d'image"
+msgstr "Pas d'image"
+
+msgid "Voir l'article"
+msgstr "Voir l'article"
+
+msgid "Page précédente"
+msgstr "Page précédente"
+
+msgid "Page suivante"
+msgstr "Page suivante"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "sur"
+msgstr "sur"
+
+msgid "Aucune annonce disponible pour le moment. 😕"
+msgstr "Aucune annonce disponible pour le moment. 😕"
+
+msgid "Catégorie & Sous-catégorie"
+msgstr "Catégorie & Sous-catégorie"
+
+msgid "Catégorie"
+msgstr "Catégorie"
+
+msgid "📚 Études & Livres"
+msgstr "📚 Études & Livres"
+
+msgid "💻 Électronique & Informatique"
+msgstr "💻 Électronique & Informatique"
+
+msgid "🧥 Vêtements & Mode"
+msgstr "🧥 Vêtements & Mode"
+
+msgid "🛋️ Meubles & Maison"
+msgstr "🛋️ Meubles & Maison"
+
+msgid "🏠 Logement étudiant"
+msgstr "🏠 Logement étudiant"
+
+msgid "🧑‍🍳 Cuisine & Produits alimentaires"
+msgstr "🧑‍🍳 Cuisine & Produits alimentaires"
+
+msgid "✈️ Voyages & Mobilité"
+msgstr "✈️ Voyages & Mobilité"
+
+msgid "👷 Services entre étudiants"
+msgstr "👷 Services entre étudiants"
+
+msgid "📣 Annonces diverses"
+msgstr "📣 Annonces diverses"
+
+msgid "🔍 Demandes & Recherches"
+msgstr "🔍 Demandes & Recherches"
+
+msgid "Sous-catégorie"
+msgstr "Sous-catégorie"
+
+msgid "Informations sur l’annonce"
+msgstr "Informations sur l’annonce"
+
+msgid "Titre"
+msgstr "Titre"
+
+msgid "Ex: Titre de votre annonce"
+msgstr "Ex: Titre de votre annonce"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Prix"
+msgstr "Prix"
+
+msgid "Prix initial (avant réduction)"
+msgstr "Prix initial (avant réduction)"
+
+msgid "Ex : 100.00"
+msgstr "Ex : 100.00"
+
+msgid "Prix promotionnel"
+msgstr "Prix promotionnel"
+
+msgid "Ex : 79.00"
+msgstr "Ex : 79.00"
+
+msgid "Date de début de la promotion"
+msgstr "Date de début de la promotion"
+
+msgid "Date de fin de la promotion"
+msgstr "Date de fin de la promotion"
+
+msgid "Frais de livraison estimés (₽)"
+msgstr "Frais de livraison estimés (₽)"
+
+msgid "Monnaie"
+msgstr "Monnaie"
+
+msgid "₽ RUB"
+msgstr "₽ RUB"
+
+msgid "$ USD"
+msgstr "$ USD"
+
+msgid "€ EUR"
+msgstr "€ EUR"
+
+msgid "Condition"
+msgstr "Condition"
+
+msgid "-- Choisir --"
+msgstr "-- Choisir --"
+
+msgid "Neuf"
+msgstr "Neuf"
+
+msgid "Occasion"
+msgstr "Occasion"
+
+msgid "Ville"
+msgstr "Ville"
+
+msgid "Variantes (Tailles / Couleurs / Stock)"
+msgstr "Variantes (Tailles / Couleurs / Stock)"
+
+msgid "Ajouter variant"
+msgstr "Ajouter variant"
+
+msgid "Caractéristiques supplémentaires"
+msgstr "Caractéristiques supplémentaires"
+
+msgid "Marque"
+msgstr "Marque"
+
+msgid "Ex: Apple"
+msgstr "Ex: Apple"
+
+msgid "Modèle"
+msgstr "Modèle"
+
+msgid "Ex: MacBook Pro M3 16 pouces"
+msgstr "Ex: MacBook Pro M3 16 pouces"
+
+msgid "Type de fermeture"
+msgstr "Type de fermeture"
+
+msgid "Ex: Fermeture éclair, Boutons, Lacets"
+msgstr "Ex: Fermeture éclair, Boutons, Lacets"
+
+msgid "Matière"
+msgstr "Matière"
+
+msgid "Ex: Coton, Cuir, Jean, Polyester"
+msgstr "Ex: Coton, Cuir, Jean, Polyester"
+
+msgid "Informations complémentaires"
+msgstr "Informations complémentaires"
+
+msgid "Poids (en kg)"
+msgstr "Poids (en kg)"
+
+msgid "Ex : 1.25"
+msgstr "Ex : 1.25"
+
+msgid "Dimensions (L × l × h en cm)"
+msgstr "Dimensions (L × l × h en cm)"
+
+msgid "Ex : 30 × 20 × 10"
+msgstr "Ex : 30 × 20 × 10"
+
+msgid "Contenu du pack"
+msgstr "Contenu du pack"
+
+msgid "Ex : 1 câble USB, 1 manuel, 1 housse de transport"
+msgstr "Ex : 1 câble USB, 1 manuel, 1 housse de transport"
+
+msgid "Mots-clés (séparés par des virgules)"
+msgstr "Mots-clés (séparés par des virgules)"
+
+msgid "Ex : bluetooth, rechargeable, sans fil, gaming"
+msgstr "Ex : bluetooth, rechargeable, sans fil, gaming"
+
+msgid "Date de fin d'affichage de l’annonce"
+msgstr "Date de fin d'affichage de l’annonce"
+
+msgid "Images de l’article"
+msgstr "Images de l’article"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Vidéo de démonstration (facultatif) (max 20 Mo, MP4 conseillé)"
+msgstr "Vidéo de démonstration (facultatif) (max 20 Mo, MP4 conseillé)"
+
+msgid "Supprimer la vidéo sélectionnée"
+msgstr "Supprimer la vidéo sélectionnée"
+
+msgid "Options d’expédition"
+msgstr "Options d’expédition"
+
+msgid "Livré en 1 à 3 jours 🚀"
+msgstr "Livré en 1 à 3 jours 🚀"
+
+msgid "👁️ Aperçu"
+msgstr "👁️ Aperçu"
+
+msgid "📢 Publier l’annonce"
+msgstr "📢 Publier l’annonce"
+
+msgid "Aperçu de l’annonce"
+msgstr "Aperçu de l’annonce"
+
+msgid "Fermer"
+msgstr "Fermer"
+
+msgid "Nom de la variante (ex : Taille / Couleur / Capacité)"
+msgstr "Nom de la variante (ex : Taille / Couleur / Capacité)"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Prix (RUB)"
+msgstr "Prix (RUB)"
+
+msgid "Prix initial"
+msgstr "Prix initial"
+
+msgid "Prix promo"
+msgstr "Prix promo"
+
+msgid "Image/*"
+msgstr "Image/*"
+
+msgid "Nom d'utilisateur"
+msgstr "Nom d'utilisateur"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Mot de passe"
+msgstr "Mot de passe"
+
+msgid "Confirmer le mot de passe"
+msgstr "Confirmer le mot de passe"
+
+msgid "Les mots de passe doivent correspondre."
+msgstr "Les mots de passe doivent correspondre."
+
+msgid "S'inscrire"
+msgstr "S'inscrire"
+
+msgid "Se connecter"
+msgstr "Se connecter"
+
+msgid "Mot de passe oublié ?"
+msgstr "Mot de passe oublié ?"
+
+msgid "Connexion à"
+msgstr "Connexion à"
+
+msgid "Inscription à"
+msgstr "Inscription à"
+
+msgid "Réinitialisation du mot de passe"
+msgstr "Réinitialisation du mot de passe"
+
+msgid "Entrez votre email"
+msgstr "Entrez votre email"
+
+msgid "Envoyer"
+msgstr "Envoyer"
+
+msgid "Mes annonces publiées"
+msgstr "Mes annonces publiées"
+
+msgid "Mes annonces publiées"
+msgstr "Mes annonces publiées"
+
+msgid "🛒 Historique de mes achats"
+msgstr "🛒 Historique de mes achats"
+
+msgid "💰 Prix payé"
+msgstr "💰 Prix payé"
+
+msgid "🗓 Date d'achat"
+msgstr "🗓 Date d'achat"
+
+msgid "Vendeur inconnu"
+msgstr "Vendeur inconnu"
+
+msgid "📞 Coordonnées du vendeur"
+msgstr "📞 Coordonnées du vendeur"
+
+msgid "Inconnu"
+msgstr "Inconnu"
+
+msgid "📌 Statut"
+msgstr "📌 Statut"
+
+msgid "Paiement confirmé"
+msgstr "Paiement confirmé"
+
+msgid "Commission payée"
+msgstr "Commission payée"
+
+msgid "En attente"
+msgstr "En attente"
+
+msgid "🚚 Méthode de livraison"
+msgstr "🚚 Méthode de livraison"
+
+msgid "Pochta Rossii"
+msgstr "Pochta Rossii"
+
+msgid "Remise en main propre"
+msgstr "Remise en main propre"
+
+msgid "Non spécifiée"
+msgstr "Non spécifiée"
+
+msgid "Non renseignée"
+msgstr "Non renseignée"
+
+msgid "🖟 Suivi colis"
+msgstr "🖟 Suivi colis"
+
+msgid "📦 Statut livraison"
+msgstr "📦 Statut livraison"
+
+msgid "En cours"
+msgstr "En cours"
+
+msgid "Annuler la commande"
+msgstr "Annuler la commande"
+
+msgid "Noter ce produit"
+msgstr "Noter ce produit"
+
+msgid "-- Choisissez une note --"
+msgstr "-- Choisissez une note --"
+
+msgid "étoile"
+msgstr "étoile"
+
+msgid "Commentaire"
+msgstr "Commentaire"
+
+msgid "Votre avis sur le produit..."
+msgstr "Votre avis sur le produit..."
+
+msgid "Laisser un avis"
+msgstr "Laisser un avis"
+
+msgid "Vous avez déjà laissé un avis."
+msgstr "Vous avez déjà laissé un avis."
+
+msgid "Vous n'avez encore rien acheté. 😕"
+msgstr "Vous n'avez encore rien acheté. 😕"
+
+
+msgid "Articles vendus"
+msgstr "Articles vendus"
+
+msgid "Image du produit"
+msgstr "Image du produit"
+
+msgid "Prix unitaire"
+msgstr "Prix unitaire"
+
+msgid "Quantité vendue"
+msgstr "Quantité vendue"
+
+msgid "Montant total payé"
+msgstr "Montant total payé"
+
+msgid "Montant que vous recevez"
+msgstr "Montant que vous recevez"
+
+msgid "Date de vente"
+msgstr "Date de vente"
+
+msgid "Acheteur"
+msgstr "Acheteur"
+
+msgid "Aucune vente enregistrée pour le moment."
+msgstr "Aucune vente enregistrée pour le moment."
+
+msgid "Statut du paiement"
+msgstr "Statut du paiement"
+
+msgid "Moyen de paiement"
+msgstr "Moyen de paiement"
+
+msgid "Mes Commandes"
+msgstr "Mes Commandes"
+
+msgid "Article épuisé"
+msgstr "Article épuisé"
+
+msgid "Article supprimé"
+msgstr "Article supprimé"
+
+msgid "N° suivi"
+msgstr "N° suivi"
+
+msgid "non défini"
+msgstr "non défini"
+
+msgid "Aucun suivi"
+msgstr "Aucun suivi"
+
+msgid "Non disponible"
+msgstr "Non disponible"
+
+msgid "Aucune commande pour l’instant."
+msgstr "Aucune commande pour l’instant."
+
+msgid "Nouveau statut"
+msgstr "Nouveau statut"
+
+msgid "Commande"
+msgstr "Commande"
+
+msgid "Livraison"
+msgstr "Livraison"
+
+msgid "Montant"
+msgstr "Montant"
+
+msgid "Paiement"
+msgstr "Paiement"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Payée"
+msgstr "Payée"
+
+msgid "Suivi de mes livraisons"
+msgstr "Suivi de mes livraisons"
+
+msgid "Acheteur"
+msgstr "Acheteur"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Adresse"
+msgstr "Adresse"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "Suivi"
+msgstr "Suivi"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "En préparation"
+msgstr "En préparation"
+
+msgid "Suivre"
+msgstr "Suivre"
+
+msgid "Numéro de suivi"
+msgstr "Numéro de suivi"
+
+msgid "Préparation"
+msgstr "Préparation"
+
+msgid "Expédié"
+msgstr "Expédié"
+
+msgid "Livré"
+msgstr "Livré"
+
+msgid "Mettre à jour"
+msgstr "Mettre à jour"
+
+msgid "Aucune vente enregistrée."
+msgstr "Aucune vente enregistrée."
+
+msgid "Boîte de réception"
+msgstr "Boîte de réception"
+
+msgid "Vous :"
+msgstr "Vous :"
+
+msgid " :"
+msgstr " :"
+
+msgid "Ouvrir la conversation"
+msgstr "Ouvrir la conversation"
+
+msgid "Vous n'avez pas encore reçu de messages."
+msgstr "Vous n'avez pas encore reçu de messages."
+
+msgid "Discussion avec"
+msgstr "Discussion avec"
+
+msgid "Ne partagez pas vos coordonnées personnelles. Les messages contenant des infos sensibles (emails, numéros, IBAN, etc.) sont filtrés."
+msgstr "Ne partagez pas vos coordonnées personnelles. Les messages contenant des infos sensibles (emails, numéros, IBAN, etc.) sont filtrés."
+
+msgid "Voir pièce jointe"
+msgstr "Voir pièce jointe"
+
+msgid "Tapez votre message ici..."
+msgstr "Tapez votre message ici..."
+
+msgid "Envoyer"
+msgstr "Envoyer"
+
+msgid "Erreur réseau"
+msgstr "Erreur réseau"
+
+msgid "Votre panier"
+msgstr "Votre panier"
+
+msgid "Image article"
+msgstr "Image article"
+
+msgid "Changer quantité :"
+msgstr "Changer quantité :"
+
+msgid "Mettre à jour"
+msgstr "Mettre à jour"
+
+msgid "Prix normal :"
+msgstr "Prix normal :"
+
+msgid "Prix promo :"
+msgstr "Prix promo :"
+
+msgid "Prix unitaire :"
+msgstr "Prix unitaire :"
+
+msgid "Variantes :"
+msgstr "Variantes :"
+
+msgid "Taille"
+msgstr "Taille"
+
+msgid "Couleur"
+msgstr "Couleur"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "Pas de variantes"
+msgstr "Pas de variantes"
+
+msgid "Quantité :"
+msgstr "Quantité :"
+
+msgid "Retirer"
+msgstr "Retirer"
+
+msgid "Total :"
+msgstr "Total :"
+
+msgid "Commander tout"
+msgstr "Commander tout"
+
+msgid "Votre panier est vide pour le moment."
+msgstr "Votre panier est vide pour le moment."
+
+msgid "Êtes-vous sûr de vouloir retirer cet article du panier ?"
+msgstr "Êtes-vous sûr de vouloir retirer cet article du panier ?"
+
+msgid "Discussion avec"
+msgstr "Chat with"
+
+msgid "Ne partagez pas vos coordonnées personnelles. Les messages contenant des infos sensibles (emails, numéros, IBAN, etc.) sont filtrés."
+msgstr "Do not share your personal details. Messages containing sensitive info (emails, phone numbers, IBAN, etc.) are filtered."
+
+msgid "Voir pièce jointe"
+msgstr "View attachment"
+
+msgid "Tapez votre message ici..."
+msgstr "Type your message here..."
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Erreur réseau"
+msgstr "Network error"
+
+msgid "Mes infos de paiement"
+msgstr "Mes infos de paiement"
+
+msgid "Adresse USDT (TRC20) :"
+msgstr "Adresse USDT (TRC20) :"
+
+msgid "Nom de la banque :"
+msgstr "Nom de la banque :"
+
+msgid "Numéro de carte :"
+msgstr "Numéro de carte :"
+
+msgid "Mes notifications"
+msgstr "Mes notifications"
+
+msgid "Nouveau"
+msgstr "Nouveau"
+
+msgid "Lu"
+msgstr "Lu"
+
+msgid "Vous n’avez aucune notification pour le moment."
+msgstr "Vous n’avez aucune notification pour le moment."
+
+msgid "Nom sur la carte :"
+msgstr "Nom sur la carte :"
+
+msgid "Enregistrer"
+msgstr "Enregistrer"
+
+msgid "Supprimer toutes mes infos"
+msgstr "Supprimer toutes mes infos"
+
+msgid "Es-tu sûr de vouloir supprimer toutes tes informations de paiement ? Cette action est irréversible."
+msgstr "Es-tu sûr de vouloir supprimer toutes tes informations de paiement ? Cette action est irréversible."
+
+msgid "Avis reçus sur vos annonces"
+msgstr "Avis reçus sur vos annonces"
+
+msgid "Annonce"
+msgstr "Annonce"
+
+msgid "Nouvel avis"
+msgstr "Nouvel avis"
+
+msgid "Note"
+msgstr "Note"
+
+msgid "Par"
+msgstr "Par"
+
+msgid "Commentaire"
+msgstr "Commentaire"
+
+msgid "Aucun"
+msgstr "Aucun"
+
+msgid "Aucun avis reçu pour l’instant."
+msgstr "Aucun avis reçu pour l’instant."
+
+msgid "Mes annonces favorites"
+msgstr "Mes annonces favorites"
+
+msgid "Image annonce"
+msgstr "Image annonce"
+
+msgid "Ajouté le"
+msgstr "Ajouté le"
+
+msgid "Voir"
+msgstr "Voir"
+
+msgid "Retirer"
+msgstr "Retirer"
+
+msgid "Vous n'avez ajouté aucune annonce en favori pour le moment."
+msgstr "Vous n'avez ajouté aucune annonce en favori pour le moment."
+
+msgid "Contactez UniPlace"
+msgstr "Contactez UniPlace"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Entrez votre email"
+msgstr "Entrez votre email"
+
+msgid "Sujet"
+msgstr "Sujet"
+
+msgid "Entrez le sujet"
+msgstr "Entrez le sujet"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Écrivez votre message ici..."
+msgstr "Écrivez votre message ici..."
+
+msgid "Envoyer"
+msgstr "Envoyer"
+
+msgid "Conditions de vente sur UniPlace"
+msgstr "Conditions de vente sur UniPlace"
+
+msgid "Commission sur les ventes"
+msgstr "Commission sur les ventes"
+
+msgid "Une commission fixe de"
+msgstr "Une commission fixe de"
+
+msgid "payée par l’acheteur"
+msgstr "payée par l’acheteur"
+
+msgid "est appliquée sur chaque vente. Elle est"
+msgstr "est appliquée sur chaque vente. Elle est"
+
+msgid "au moment de la commande, avant toute mise en relation avec le vendeur."
+msgstr "au moment de la commande, avant toute mise en relation avec le vendeur."
+
+msgid "Cette commission sert à couvrir les frais de plateforme et à sécuriser les échanges. Le reste du montant est payé directement au vendeur après accord entre les parties."
+msgstr "Cette commission sert à couvrir les frais de plateforme et à sécuriser les échanges. Le reste du montant est payé directement au vendeur après accord entre les parties."
+
+msgid "Paiement en deux étapes"
+msgstr "Paiement en deux étapes"
+
+msgid "Étape 1"
+msgstr "Étape 1"
+
+msgid "L’acheteur paie uniquement la"
+msgstr "L’acheteur paie uniquement la"
+
+msgid "commission à UniPlace (via USDT ou carte)."
+msgstr "commission à UniPlace (via USDT ou carte)."
+
+msgid "Étape 2"
+msgstr "Étape 2"
+
+msgid "Une fois la commande validée, l’acheteur et le vendeur sont mis en contact pour finaliser la transaction (paiement du produit et livraison)."
+msgstr "Une fois la commande validée, l’acheteur et le vendeur sont mis en contact pour finaliser la transaction (paiement du produit et livraison)."
+
+msgid "UniPlace ne gère pas le paiement du produit lui-même, seulement la commission."
+msgstr "UniPlace ne gère pas le paiement du produit lui-même, seulement la commission."
+
+msgid "Moyens de paiement acceptés (commission uniquement)"
+msgstr "Moyens de paiement acceptés (commission uniquement)"
+
+msgid "Adresse fournie à la confirmation de commande."
+msgstr "Adresse fournie à la confirmation de commande."
+
+msgid "Carte bancaire"
+msgstr "Carte bancaire"
+
+msgid "Paiement manuel via les coordonnées transmises après commande."
+msgstr "Paiement manuel via les coordonnées transmises après commande."
+
+msgid "Responsabilités & remboursements"
+msgstr "Responsabilités & remboursements"
+
+msgid "Une fois la commission payée, UniPlace met les deux parties en relation. Le reste de la transaction se déroule de manière privée entre l’acheteur et le vendeur."
+msgstr "Une fois la commission payée, UniPlace met les deux parties en relation. Le reste de la transaction se déroule de manière privée entre l’acheteur et le vendeur."
+
+msgid "n'intervient pas dans les litiges"
+msgstr "n'intervient pas dans les litiges"
+
+msgid "ou les problèmes liés aux produits."
+msgstr "ou les problèmes liés aux produits."
+
+msgid "Aucun remboursement ne sera effectué une fois la commission payée, sauf erreur manifeste ou fraude."
+msgstr "Aucun remboursement ne sera effectué une fois la commission payée, sauf erreur manifeste ou fraude."
+
+msgid "Acceptation des conditions"
+msgstr "Acceptation des conditions"
+
+msgid "En utilisant UniPlace, vous acceptez sans réserve ces conditions de vente, y compris le paiement en deux étapes et les modalités liées à la commission."
+msgstr "En utilisant UniPlace, vous acceptez sans réserve ces conditions de vente, y compris le paiement en deux étapes et les modalités liées à la commission."
+
+#: templates/privacy.html:6
+msgid "Politique de Confidentialité"
+msgstr "Politique de Confidentialité"
+
+#: templates/privacy.html:8
+msgid "1. Collecte des données"
+msgstr "1. Collecte des données"
+
+#: templates/privacy.html:9
+msgid "UniPlace collecte uniquement les données nécessaires à l’inscription et à la gestion des comptes utilisateurs (nom, email, mot de passe). Les informations de paiement de la commission sont gérées via des prestataires externes sécurisés."
+msgstr "UniPlace collecte uniquement les données nécessaires à l’inscription et à la gestion des comptes utilisateurs (nom, email, mot de passe). Les informations de paiement de la commission sont gérées via des prestataires externes sécurisés."
+
+#: templates/privacy.html:11
+msgid "2. Utilisation des données"
+msgstr "2. Utilisation des données"
+
+#: templates/privacy.html:12
+msgid "Les données personnelles sont utilisées pour gérer les comptes, envoyer les confirmations de commande, et permettre la mise en relation entre acheteurs et vendeurs. UniPlace ne partage pas les données personnelles avec des tiers, sauf pour les besoins légaux ou techniques indispensables."
+msgstr "Les données personnelles sont utilisées pour gérer les comptes, envoyer les confirmations de commande, et permettre la mise en relation entre acheteurs et vendeurs. UniPlace ne partage pas les données personnelles avec des tiers, sauf pour les besoins légaux ou techniques indispensables."
+
+#: templates/privacy.html:14
+msgid "3. Protection des données"
+msgstr "3. Protection des données"
+
+#: templates/privacy.html:15
+msgid "UniPlace met en place des mesures techniques pour protéger les données contre tout accès non autorisé ou divulgation. Les messages contenant des données sensibles sont automatiquement filtrés pour protéger les utilisateurs."
+msgstr "UniPlace met en place des mesures techniques pour protéger les données contre tout accès non autorisé ou divulgation. Les messages contenant des données sensibles sont automatiquement filtrés pour protéger les utilisateurs."
+
+#: templates/privacy.html:17
+msgid "4. Durée de conservation"
+msgstr "4. Durée de conservation"
+
+#: templates/privacy.html:18
+msgid "Les données des utilisateurs sont conservées aussi longtemps que nécessaire pour la gestion du compte et des transactions."
+msgstr "Les données des utilisateurs sont conservées aussi longtemps que nécessaire pour la gestion du compte et des transactions."
+
+#: templates/privacy.html:20
+msgid "5. Droits des utilisateurs"
+msgstr "5. Droits des utilisateurs"
+
+#: templates/privacy.html:21
+msgid "Chaque utilisateur peut accéder, modifier ou supprimer ses données personnelles en contactant UniPlace. Les utilisateurs peuvent demander la suppression définitive de leur compte."
+msgstr "Chaque utilisateur peut accéder, modifier ou supprimer ses données personnelles en contactant UniPlace. Les utilisateurs peuvent demander la suppression définitive de leur compte."
+
+msgid "Conditions Générales d’Utilisation (CGU)"
+msgstr "Conditions Générales d’Utilisation (CGU)"
+
+msgid "1. Objet"
+msgstr "1. Objet"
+
+msgid "Les présentes Conditions Générales d’Utilisation régissent l’accès et l’utilisation de la plateforme UniPlace, permettant la mise en relation entre acheteurs et vendeurs."
+msgstr "Les présentes Conditions Générales d’Utilisation régissent l’accès et l’utilisation de la plateforme UniPlace, permettant la mise en relation entre acheteurs et vendeurs."
+
+msgid "2. Accès à la plateforme"
+msgstr "2. Accès à la plateforme"
+
+msgid "L’accès à UniPlace est réservé aux utilisateurs inscrits qui acceptent ces conditions. Chaque utilisateur est responsable de ses informations et de ses actions sur la plateforme."
+msgstr "L’accès à UniPlace est réservé aux utilisateurs inscrits qui acceptent ces conditions. Chaque utilisateur est responsable de ses informations et de ses actions sur la plateforme."
+
+msgid "3. Fonctionnement de la plateforme"
+msgstr "3. Fonctionnement de la plateforme"
+
+msgid "UniPlace agit uniquement comme intermédiaire pour faciliter la mise en relation entre acheteurs et vendeurs."
+msgstr "UniPlace agit uniquement comme intermédiaire pour faciliter la mise en relation entre acheteurs et vendeurs."
+
+msgid "L’acheteur paie une commission de 10% à UniPlace avant la mise en relation avec le vendeur."
+msgstr "L’acheteur paie une commission de 10% à UniPlace avant la mise en relation avec le vendeur."
+
+msgid "Après paiement de la commission, UniPlace donne accès aux coordonnées du vendeur pour finaliser la transaction."
+msgstr "Après paiement de la commission, UniPlace donne accès aux coordonnées du vendeur pour finaliser la transaction."
+
+msgid "4. Responsabilités"
+msgstr "4. Responsabilités"
+
+msgid "UniPlace ne gère pas le paiement du produit ni la livraison. Toute transaction finale (paiement, livraison, garanties) se fait directement entre acheteur et vendeur. UniPlace ne pourra être tenu responsable des litiges, défauts, retards ou non-livraisons."
+msgstr "UniPlace ne gère pas le paiement du produit ni la livraison. Toute transaction finale (paiement, livraison, garanties) se fait directement entre acheteur et vendeur. UniPlace ne pourra être tenu responsable des litiges, défauts, retards ou non-livraisons."
+
+msgid "5. Sécurité et confidentialité"
+msgstr "5. Sécurité et confidentialité"
+
+msgid "UniPlace bloque les messages contenant des données personnelles sensibles afin de protéger les utilisateurs. Chaque utilisateur s’engage à ne pas divulguer d’informations sensibles dans les échanges via la plateforme."
+msgstr "UniPlace bloque les messages contenant des données personnelles sensibles afin de protéger les utilisateurs. Chaque utilisateur s’engage à ne pas divulguer d’informations sensibles dans les échanges via la plateforme."
+
+msgid "6. Modification des CGU"
+msgstr "6. Modification des CGU"
+
+msgid "UniPlace se réserve le droit de modifier ces CGU à tout moment. Les utilisateurs en seront informés et devront les accepter pour continuer à utiliser la plateforme."
+msgstr "UniPlace se réserve le droit de modifier ces CGU à tout moment. Les utilisateurs en seront informés et devront les accepter pour continuer à utiliser la plateforme."
+
+msgid "Commandes reçues (USDT ou Carte)"
+msgstr "Commandes reçues (USDT ou Carte)"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Vendeur"
+msgstr "Vendeur"
+
+msgid "Prix ₽"
+msgstr "Prix ₽"
+
+msgid "~ USDT"
+msgstr "~ USDT"
+
+msgid "Commission"
+msgstr "Commission"
+
+msgid "À reverser"
+msgstr "À reverser"
+
+msgid "Paiement vendeur"
+msgstr "Paiement vendeur"
+
+msgid "Méthode"
+msgstr "Méthode"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Détail"
+msgstr "Détail"
+
+msgid "Banque"
+msgstr "Banque"
+
+msgid "Carte"
+msgstr "Carte"
+
+msgid "Titulaire"
+msgstr "Titulaire"
+
+msgid "Adresse USDT"
+msgstr "Adresse USDT"
+
+msgid "Non fourni"
+msgstr "Non fourni"
+
+msgid "Non fournie"
+msgstr "Non fournie"
+
+msgid "Payé"
+msgstr "Payé"
+
+msgid "Commission payée"
+msgstr "Commission payée"
+
+msgid "En attente"
+msgstr "En attente"
+
+msgid "Marquer comme payé"
+msgstr "Marquer comme payé"
+
+msgid "Voir"
+msgstr "Voir"
+
+msgid "Commande"
+msgstr "Commande"
+
+msgid "liée à une annonce supprimée."
+msgstr "liée à une annonce supprimée."
+
+msgid "Aucune commande enregistrée."
+msgstr "Aucune commande enregistrée."
+
+msgid "Commandes reçues (Carte bancaire)"
+msgstr "Commandes reçues (Carte bancaire)"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Vendeur"
+msgstr "Vendeur"
+
+msgid "Prix vendeur (₽)"
+msgstr "Prix vendeur (₽)"
+
+msgid "Commission (10%)"
+msgstr "Commission (10%)"
+
+msgid "Total payé (₽)"
+msgstr "Total payé (₽)"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "Détails"
+msgstr "Détails"
+
+msgid "Banque"
+msgstr "Banque"
+
+msgid "Carte"
+msgstr "Carte"
+
+msgid "Titulaire"
+msgstr "Titulaire"
+
+msgid "Non fourni"
+msgstr "Non fourni"
+
+msgid "Payé"
+msgstr "Payé"
+
+msgid "Confirmer"
+msgstr "Confirmer"
+
+msgid "Voir"
+msgstr "Voir"
+
+msgid "Commande"
+msgstr "Commande"
+
+msgid "liée à une annonce supprimée."
+msgstr "liée à une annonce supprimée."
+
+msgid "Aucune commande par carte enregistrée."
+msgstr "Aucune commande par carte enregistrée."
+
+msgid "Suivi des livraisons"
+msgstr "Suivi des livraisons"
+
+msgid "Commande #"
+msgstr "Commande #"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Acheteur"
+msgstr "Acheteur"
+
+msgid "Méthodes"
+msgstr "Méthodes"
+
+msgid "Adresse"
+msgstr "Adresse"
+
+msgid "Statut livraison"
+msgstr "Statut livraison"
+
+msgid "Suivi"
+msgstr "Suivi"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Paiement"
+msgstr "Paiement"
+
+msgid "Crypto"
+msgstr "Crypto"
+
+msgid "Carte"
+msgstr "Carte"
+
+msgid "Inconnu"
+msgstr "Inconnu"
+
+msgid "Livraison"
+msgstr "Livraison"
+
+msgid "Pochta Rossii"
+msgstr "Pochta Rossii"
+
+msgid "Remise en main propre"
+msgstr "Remise en main propre"
+
+msgid "Non précisée"
+msgstr "Non précisée"
+
+msgid "Non fournie"
+msgstr "Non fournie"
+
+msgid "Livré"
+msgstr "Livré"
+
+msgid "Expédié"
+msgstr "Expédié"
+
+msgid "Préparation"
+msgstr "Préparation"
+
+msgid "Voir"
+msgstr "Voir"
+
+msgid "Aucune commande livrée pour le moment."
+msgstr "Aucune commande livrée pour le moment."
+
+#: templates/messages_bloques.html
+msgid "Messages bloqués (Tentatives de contournement)"
+msgstr "Messages bloqués (Tentatives de contournement)"
+
+#: templates/messages_bloques.html
+msgid "Expéditeur"
+msgstr "Expéditeur"
+
+#: templates/messages_bloques.html
+msgid "Destinataire"
+msgstr "Destinataire"
+
+#: templates/messages_bloques.html
+msgid "Message"
+msgstr "Message"
+
+#: templates/messages_bloques.html
+msgid "Date"
+msgstr "Date"
+
+#: templates/messages_bloques.html
+msgid "Supprimer"
+msgstr "Supprimer"
+
+#: templates/messages_bloques.html
+msgid "Supprimer ce message bloqué ?"
+msgstr "Supprimer ce message bloqué ?"
+
+#: templates/messages_bloques.html
+msgid "Aucun message bloqué pour le moment 👍"
+msgstr "Aucun message bloqué pour le moment 👍"
+
+msgid "Admin - Annonces Sponsorisées"
+msgstr "Admin - Annonces Sponsorisées"
+
+msgid "Gérer les annonces sponsorisées"
+msgstr "Gérer les annonces sponsorisées"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Titre"
+msgstr "Titre"
+
+msgid "Catégorie"
+msgstr "Catégorie"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Sponsorisé ?"
+msgstr "Sponsorisé ?"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Oui"
+msgstr "Oui"
+
+msgid "Non"
+msgstr "Non"
+
+msgid "Basculer"
+msgstr "Basculer"
+
+msgid "Retour au tableau de bord"
+msgstr "Retour au tableau de bord"
+
+msgid "Espace Administrateur"
+msgstr "Espace Administrateur"
+
+msgid "Utilisateurs"
+msgstr "Utilisateurs"
+
+msgid "Administrateurs"
+msgstr "Administrateurs"
+
+msgid "Annonces"
+msgstr "Annonces"
+
+msgid "Annonces vendues"
+msgstr "Annonces vendues"
+
+msgid "Rechercher un utilisateur..."
+msgstr "Rechercher un utilisateur..."
+
+msgid "Rechercher"
+msgstr "Rechercher"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Nom d'utilisateur"
+msgstr "Nom d'utilisateur"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Rôle"
+msgstr "Rôle"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Promotion"
+msgstr "Promotion"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Utilisateur"
+msgstr "Utilisateur"
+
+msgid "Supprimer cet utilisateur ?"
+msgstr "Supprimer cet utilisateur ?"
+
+msgid "Supprimer"
+msgstr "Supprimer"
+
+msgid "Confirmer la promotion au rôle admin ?"
+msgstr "Confirmer la promotion au rôle admin ?"
+
+msgid "Promouvoir admin"
+msgstr "Promouvoir admin"
+
+msgid "Confirmer le retrait du rôle admin ?"
+msgstr "Confirmer le retrait du rôle admin ?"
+
+msgid "Retirer admin"
+msgstr "Retirer admin"
+
+msgid "Vous"
+msgstr "Vous"
+
+msgid "Titre"
+msgstr "Titre"
+
+msgid "Prix"
+msgstr "Prix"
+
+msgid "Catégorie"
+msgstr "Catégorie"
+
+msgid "État"
+msgstr "État"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Vendu"
+msgstr "Vendu"
+
+msgid "Actif"
+msgstr "Actif"
+
+msgid "Confirmer la suppression de cette annonce ?"
+msgstr "Confirmer la suppression de cette annonce ?"
+
+msgid "Gestion des promos"
+msgstr "Gestion des promos"
+
+msgid "Gestion des promotions carrousel"
+msgstr "Gestion des promotions carrousel"
+
+msgid "Ajouter une promo"
+msgstr "Ajouter une promo"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Titre"
+msgstr "Titre"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "image"
+msgstr "image"
+
+msgid "Supprimer cette promo ?"
+msgstr "Supprimer cette promo ?"
+
+msgid "Supprimer"
+msgstr "Supprimer"
+
+msgid "Aucune promo trouvée."
+msgstr "Aucune promo trouvée."
+
+msgid "Journal des Emails envoyés"
+msgstr "Journal des Emails envoyés"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Destinataire"
+msgstr "Destinataire"
+
+msgid "Sujet"
+msgstr "Sujet"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "Détail"
+msgstr "Détail"
+
+msgid "Envoyé"
+msgstr "Envoyé"
+
+msgid "Erreur"
+msgstr "Erreur"
+
+msgid "Re-tester l’envoi de cet email ?"
+msgstr "Re-tester l’envoi de cet email ?"
+
+msgid "Retester"
+msgstr "Retester"
+
+msgid "Voir contenu"
+msgstr "Voir contenu"
+
+msgid "Précédent"
+msgstr "Précédent"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Suivant"
+msgstr "Suivant"
+
+msgid "Ajouter une promo"
+msgstr "Ajouter une promo"
+
+msgid "Ajouter une promotion"
+msgstr "Ajouter une promotion"
+
+msgid "Titre"
+msgstr "Titre"
+
+msgid "Description (optionnelle)"
+msgstr "Description (optionnelle)"
+
+msgid "Position (ordre d'affichage)"
+msgstr "Position (ordre d'affichage)"
+
+msgid "Image (png, jpg, jpeg, gif)"
+msgstr "Image (png, jpg, jpeg, gif)"
+
+msgid "Ajouter"
+msgstr "Ajouter"
+
+msgid "Annuler"
+msgstr "Annuler"
+
+msgid "Contact Messages"
+msgstr "Messages de Contact"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Subject"
+msgstr "Sujet"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Date Sent"
+msgstr "Date d'envoi"
+
+msgid " Signalements des annonces"
+msgstr " Signalements des annonces"
+
+msgid "Annonce"
+msgstr "Annonce"
+
+msgid "Utilisateur"
+msgstr "Utilisateur"
+
+msgid "Motif"
+msgstr "Motif"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Aucun motif"
+msgstr "Aucun motif"
+
+msgid "Traité"
+msgstr "Traité"
+
+msgid "Ouvert"
+msgstr "Ouvert"
+
+msgid " Traiter"
+msgstr " Traiter"
+
+msgid "🗑 Supprimer l'annonce"
+msgstr "🗑 Supprimer l'annonce"
+
+msgid "Confirmer la suppression de cette annonce signalée ?"
+msgstr "Confirmer la suppression de cette annonce signalée ?"
+
+msgid "Aucun signalement reçu."
+msgstr "Aucun signalement reçu."
+
+msgid "← Précédent"
+msgstr "← Précédent"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "sur"
+msgstr "sur"
+
+msgid "Suivant →"
+msgstr "Suivant →"
+
+
+msgid "Détail de la commande"
+msgstr "Détail de la commande"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Acheteur"
+msgstr "Acheteur"
+
+msgid "Vendeur"
+msgstr "Vendeur"
+
+msgid "Prix unitaire"
+msgstr "Prix unitaire"
+
+msgid "Quantité"
+msgstr "Quantité"
+
+msgid "Total payé"
+msgstr "Total payé"
+
+msgid "Commission"
+msgstr "Commission"
+
+msgid "À reverser au vendeur"
+msgstr "À reverser au vendeur"
+
+msgid "Méthode de paiement"
+msgstr "Méthode de paiement"
+
+msgid "Carte bancaire"
+msgstr "Carte bancaire"
+
+msgid "USDT"
+msgstr "USDT"
+
+msgid "Inconnue"
+msgstr "Inconnue"
+
+msgid "Commandée le"
+msgstr "Commandée le"
+
+msgid "Livraison (modifiable)"
+msgstr "Livraison (modifiable)"
+
+msgid "Méthode de livraison"
+msgstr "Méthode de livraison"
+
+msgid "-- Choisir --"
+msgstr "-- Choisir --"
+
+msgid "Pochta Rossii"
+msgstr "Pochta Rossii"
+
+msgid "Remise en main propre"
+msgstr "Remise en main propre"
+
+msgid "Adresse"
+msgstr "Adresse"
+
+msgid "Numéro de suivi"
+msgstr "Numéro de suivi"
+
+msgid "Statut"
+msgstr "Statut"
+
+msgid "En préparation"
+msgstr "En préparation"
+
+msgid "Expédié"
+msgstr "Expédié"
+
+msgid "Livré"
+msgstr "Livré"
+
+msgid "Mettre à jour les infos"
+msgstr "Mettre à jour les infos"
+
+msgid "Informations de paiement du vendeur"
+msgstr "Informations de paiement du vendeur"
+
+msgid "Banque"
+msgstr "Banque"
+
+msgid "Carte"
+msgstr "Carte"
+
+msgid "Titulaire"
+msgstr "Titulaire"
+
+msgid "Non fourni"
+msgstr "Non fourni"
+
+msgid "Adresse USDT"
+msgstr "Adresse USDT"
+
+msgid "Non fournie"
+msgstr "Non fournie"
+
+msgid "Informations vendeur non disponibles."
+msgstr "Informations vendeur non disponibles."
+
+msgid "Copier les infos"
+msgstr "Copier les infos"
+
+msgid "Historique des modifications"
+msgstr "Historique des modifications"
+
+msgid "Aucune modification enregistrée."
+msgstr "Aucune modification enregistrée."
+
+msgid "Retour"
+msgstr "Retour"
+
+msgid "Informations du vendeur copiées !"
+msgstr "Informations du vendeur copiées !"
+
+msgid "Erreur de copie"
+msgstr "Erreur de copie"
+
+msgid "Annonces de"
+msgstr "Annonces de"
+
+msgid "Commande confirmée !"
+msgstr "Commande confirmée !"
+
+msgid "Merci pour votre commande,"
+msgstr "Merci pour votre commande,"
+
+msgid "Votre commande a bien été enregistrée. Voici les détails :"
+msgstr "Votre commande a bien été enregistrée. Voici les détails :"
+
+msgid "Numéro de commande"
+msgstr "Numéro de commande"
+
+msgid "Produit(s)"
+msgstr "Produit(s)"
+
+msgid "Mode de paiement"
+msgstr "Mode de paiement"
+
+msgid "Mode de livraison"
+msgstr "Mode de livraison"
+
+msgid "Adresse de livraison"
+msgstr "Adresse de livraison"
+
+msgid "Suivre ma commande"
+msgstr "Suivre ma commande"
+
+msgid "Vous recevrez une notification par email dès que votre paiement sera confirmé. Merci de patienter !"
+msgstr "Vous recevrez une notification par email dès que votre paiement sera confirmé. Merci de patienter !"
+
+msgid "Conversation avec"
+msgstr "Conversation avec"
+
+msgid "Tapez votre message..."
+msgstr "Tapez votre message..."
+
+msgid "Envoyer"
+msgstr "Envoyer"
+
+msgid "Session expirée"
+msgstr "Session expirée"
+
+msgid "Oups, votre session a expiré"
+msgstr "Oups, votre session a expiré"
+
+msgid "Pour des raisons de sécurité, votre session a expiré après une période d'inactivité."
+msgstr "Pour des raisons de sécurité, votre session a expiré après une période d'inactivité."
+
+msgid "Veuillez"
+msgstr "Veuillez"
+
+msgid "vous reconnecter"
+msgstr "vous reconnecter"
+
+msgid "ou recharger la page pour renouveler votre session."
+msgstr "ou recharger la page pour renouveler votre session."
+
+msgid "Laisser un avis pour"
+msgstr "Laisser un avis pour"
+
+msgid "Note (1 à 5) :"
+msgstr "Note (1 à 5) :"
+
+msgid "Commentaire :"
+msgstr "Commentaire :"
+
+msgid "Partage ton avis ici..."
+msgstr "Partage ton avis ici..."
+
+msgid "Soumettre l’avis"
+msgstr "Soumettre l’avis"
+
+msgid "Récapitulatif de votre commande"
+msgstr "Récapitulatif de votre commande"
+
+msgid "Image du produit"
+msgstr "Image du produit"
+
+msgid "Variante"
+msgstr "Variante"
+
+msgid "Prix unitaire"
+msgstr "Prix unitaire"
+
+msgid "Livraison unitaire"
+msgstr "Livraison unitaire"
+
+msgid "Quantité"
+msgstr "Quantité"
+
+msgid "Détail de votre commande"
+msgstr "Détail de votre commande"
+
+msgid "Montant total produit"
+msgstr "Montant total produit"
+
+msgid "Livraison"
+msgstr "Livraison"
+
+msgid "Montant total"
+msgstr "Montant total"
+
+msgid "Frais de confirmation à payer maintenant"
+msgstr "Frais de confirmation à payer maintenant"
+
+msgid "Le reste"
+msgstr "Le reste"
+
+msgid "sera réglé directement avec le vendeur."
+msgstr "sera réglé directement avec le vendeur."
+
+msgid "Choisissez votre mode de paiement"
+msgstr "Choisissez votre mode de paiement"
+
+msgid "USDT"
+msgstr "USDT"
+
+msgid "Carte bancaire"
+msgstr "Carte bancaire"
+
+msgid "Méthode de livraison"
+msgstr "Méthode de livraison"
+
+msgid "-- Choisissez une méthode --"
+msgstr "-- Choisissez une méthode --"
+
+msgid "Pochta Rossii"
+msgstr "Pochta Rossii"
+
+msgid "Remise en main propre"
+msgstr "Remise en main propre"
+
+msgid "Choisissez une adresse enregistrée"
+msgstr "Choisissez une adresse enregistrée"
+
+msgid "-- Nouvelle adresse --"
+msgstr "-- Nouvelle adresse --"
+
+msgid "Nouvelle adresse (facultatif si vous avez sélectionné une adresse)"
+msgstr "Nouvelle adresse (facultatif si vous avez sélectionné une adresse)"
+
+msgid "Retour au panier"
+msgstr "Retour au panier"
+
+msgid "Confirmer ma commande"
+msgstr "Confirmer ma commande"
+
+msgid "Paiement par USDT (TRC20)"
+msgstr "Paiement par USDT (TRC20)"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Variante"
+msgstr "Variante"
+
+msgid "Quantité"
+msgstr "Quantité"
+
+msgid "Prix normal"
+msgstr "Prix normal"
+
+msgid "Prix promo"
+msgstr "Prix promo"
+
+msgid "Prix"
+msgstr "Prix"
+
+msgid "Frais de confirmation à payer maintenant"
+msgstr "Frais de confirmation à payer maintenant"
+
+msgid "Le reste du paiement sera effectué directement avec le vendeur après contact."
+msgstr "Le reste du paiement sera effectué directement avec le vendeur après contact."
+
+msgid "Veuillez envoyer exactement"
+msgstr "Veuillez envoyer exactement"
+
+msgid "à l’adresse suivante"
+msgstr "à l’adresse suivante"
+
+msgid "Copier"
+msgstr "Copier"
+
+msgid "Adresse copiée !"
+msgstr "Adresse copiée !"
+
+msgid "Méthode de livraison"
+msgstr "Méthode de livraison"
+
+msgid "Adresse de livraison"
+msgstr "Adresse de livraison"
+
+msgid "J'ai payé"
+msgstr "J'ai payé"
+
+msgid "Paiement manuel par carte bancaire"
+msgstr "Paiement manuel par carte bancaire"
+
+msgid "Produit"
+msgstr "Produit"
+
+msgid "Variante"
+msgstr "Variante"
+
+msgid "Quantité"
+msgstr "Quantité"
+
+msgid "Prix normal"
+msgstr "Prix normal"
+
+msgid "Prix promotionnel"
+msgstr "Prix promotionnel"
+
+msgid "Prix"
+msgstr "Prix"
+
+msgid "Frais de confirmation à payer maintenant"
+msgstr "Frais de confirmation à payer maintenant"
+
+msgid "Le reste du paiement sera effectué directement avec le vendeur après contact."
+msgstr "Le reste du paiement sera effectué directement avec le vendeur après contact."
+
+msgid "Veuillez effectuer un virement de"
+msgstr "Veuillez effectuer un virement de"
+
+msgid "sur l’un des comptes bancaires suivants"
+msgstr "sur l’un des comptes bancaires suivants"
+
+msgid "Banque Tinkoff"
+msgstr "Banque Tinkoff"
+
+msgid "Nom"
+msgstr "Nom"
+
+msgid "Carte"
+msgstr "Carte"
+
+msgid "Banque VTB"
+msgstr "Banque VTB"
+
+msgid "Référence à indiquer"
+msgstr "Référence à indiquer"
+
+msgid "Méthode de livraison"
+msgstr "Méthode de livraison"
+
+msgid "Adresse de livraison"
+msgstr "Adresse de livraison"
+
+msgid "J’ai payé"
+msgstr "J’ai payé"
+
+msgid "notif.new_message"
+msgstr "%(sender)s vous a envoyé un message."
+
+msgid "Vous ne pouvez pas discuter avec vous-même."
+msgstr "Vous ne pouvez pas discuter avec vous-même."
+
+msgid "❌ Ce message contient des informations interdites (email, numéro, etc.)."
+msgstr "❌ Ce message contient des informations interdites (email, numéro, etc.)."
+
+msgid "❌ Type de fichier non autorisé."
+msgstr "❌ Type de fichier non autorisé."
+
+msgid "❌ Le fichier est trop volumineux (max 2 Mo)."
+msgstr "❌ Le fichier est trop volumineux (max 2 Mo)."
+
+msgid "Message envoyé !"
+msgstr "Message envoyé !"
+
+msgid "📬 Nouveau message reçu sur UniPlace"
+msgstr "📬 Nouveau message reçu sur UniPlace"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "%(sender)s vous a envoyé un message sur UniPlace."
+msgstr "%(sender)s vous a envoyé un message sur UniPlace."
+
+msgid "Contenu du message :"
+msgstr "Contenu du message :"
+
+msgid "📥 Voir mes messages"
+msgstr "📥 Voir mes messages"
+
+msgid "Soyez toujours informé"
+msgstr "Soyez toujours informé"
+
+msgid "Votre annonce a bien été créée ✅"
+msgstr "Votre annonce a bien été créée ✅"
+
+msgid "Action non autorisée."
+msgstr "Action non autorisée."
+
+msgid "Vous n'êtes pas autorisé à modifier cette annonce."
+msgstr "Vous n'êtes pas autorisé à modifier cette annonce."
+
+msgid "❌ La vidéo dépasse la taille maximale autorisée (20 Mo)."
+msgstr "❌ La vidéo dépasse la taille maximale autorisée (20 Mo)."
+
+msgid "❌ Type de fichier vidéo non autorisé."
+msgstr "❌ Type de fichier vidéo non autorisé."
+
+msgid "Annonce modifiée avec succès !"
+msgstr "Annonce modifiée avec succès !"
+
+msgid "🎥 Vidéo supprimée avec succès."
+msgstr "🎥 Vidéo supprimée avec succès."
+
+msgid "Image supprimée avec succès."
+msgstr "Image supprimée avec succès."
+
+msgid "Quantité invalide."
+msgstr "Quantité invalide."
+
+msgid "Vous ne pouvez pas acheter votre propre annonce."
+msgstr "Vous ne pouvez pas acheter votre propre annonce."
+
+msgid "Variante invalide."
+msgstr "Variante invalide."
+
+msgid "Stock insuffisant pour cette variante. Il reste %(nb)s exemplaires."
+msgstr "Stock insuffisant pour cette variante. Il reste %(nb)s exemplaires."
+
+msgid "Stock insuffisant. Il reste %(nb)s exemplaires."
+msgstr "Stock insuffisant. Il reste %(nb)s exemplaires."
+
+msgid "Commande enregistrée avec succès !"
+msgstr "Commande enregistrée avec succès !"
+
+msgid "Vous ne pouvez pas signaler votre propre annonce."
+msgstr "Vous ne pouvez pas signaler votre propre annonce."
+
+msgid "Vous avez déjà signalé cette annonce."
+msgstr "Vous avez déjà signalé cette annonce."
+
+msgid "Signalement envoyé. Merci pour votre contribution ✅"
+msgstr "Signalement envoyé. Merci pour votre contribution ✅"
+
+msgid "Vous ne pouvez pas noter votre propre annonce."
+msgstr "Vous ne pouvez pas noter votre propre annonce."
+
+msgid "Vous devez avoir acheté ce produit pour laisser un avis."
+msgstr "Vous devez avoir acheté ce produit pour laisser un avis."
+
+msgid "Vous avez déjà laissé un avis pour ce produit."
+msgstr "Vous avez déjà laissé un avis pour ce produit."
+
+msgid "Merci pour votre avis !"
+msgstr "Merci pour votre avis !"
+
+msgid "Cette annonce est déjà dans vos favoris 💖"
+msgstr "Cette annonce est déjà dans vos favoris 💖"
+
+msgid "Ajouté aux favoris 💖"
+msgstr "Ajouté aux favoris 💖"
+
+msgid "Annonce retirée de vos favoris 💔"
+msgstr "Annonce retirée de vos favoris 💔"
+
+msgid "Cette annonce n’est pas dans vos favoris."
+msgstr "Cette annonce n’est pas dans vos favoris."
+
+msgid "❌ Variante non trouvée."
+msgstr "❌ Variante non trouvée."
+
+msgid "❌ Stock insuffisant pour cette variante."
+msgstr "❌ Stock insuffisant pour cette variante."
+
+msgid "❌ Stock insuffisant pour cet article."
+msgstr "❌ Stock insuffisant pour cet article."
+
+msgid "Note invalide. Elle doit être entre 1 et 5."
+msgstr "Note invalide. Elle doit être entre 1 et 5."
+
+msgid "Vous avez déjà laissé un avis pour cette commande."
+msgstr "Vous avez déjà laissé un avis pour cette commande."
+
+msgid "🛒 Produit ajouté au panier !"
+msgstr "🛒 Produit ajouté au panier !"
+
+msgid "Annonce supprimée avec succès !"
+msgstr "Annonce supprimée avec succès !"
+
+msgid "🎉 Paiement effectué avec succès !"
+msgstr "🎉 Paiement effectué avec succès !"
+
+msgid "Adresse USDT mise à jour ✅"
+msgstr "Adresse USDT mise à jour ✅"
+
+msgid "Commande(s) enregistrée(s) avec succès. Nous attendons votre paiement en USDT ✅"
+msgstr "Commande(s) enregistrée(s) avec succès. Nous attendons votre paiement en USDT ✅"
+
+msgid "L'annonce avec ID %(id)s est introuvable."
+msgstr "L'annonce avec ID %(id)s est introuvable."
+
+msgid "Variante introuvable ou invalide."
+msgstr "Variante introuvable ou invalide."
+
+msgid "Stock insuffisant pour %(titre)s"
+msgstr "Stock insuffisant pour %(titre)s"
+
+msgid "Commande confirmée avec succès. Le vendeur va vous contacter ✅"
+msgstr "Commande confirmée avec succès. Le vendeur va vous contacter ✅"
+
+msgid "Informations bancaires mises à jour ✅"
+msgstr "Informations bancaires mises à jour ✅"
+
+msgid "✅ Informations mises à jour"
+msgstr "✅ Informations mises à jour"
+
+msgid "🗑 Informations supprimées"
+msgstr "🗑 Informations supprimées"
+
+msgid "Retiré du panier ❌"
+msgstr "Retiré du panier ❌"
+
+msgid "Action non autorisée."
+msgstr "Action non autorisée."
+
+msgid "Mode de paiement invalide."
+msgstr "Mode de paiement invalide."
+
+msgid "Méthode de livraison invalide."
+msgstr "Méthode de livraison invalide."
+
+msgid "Adresse de livraison manquante."
+msgstr "Adresse de livraison manquante."
+
+msgid "Votre panier est vide."
+msgstr "Votre panier est vide."
+
+msgid "Impossible d'annuler cette commande : elle a déjà été traitée."
+msgstr "Impossible d'annuler cette commande : elle a déjà été traitée."
+
+msgid "Commande annulée avec succès ❌"
+msgstr "Commande annulée avec succès ❌"
+
+msgid "✅ Quantité mise à jour."
+msgstr "✅ Quantité mise à jour."
+
+msgid "⚠️ Quantité invalide."
+msgstr "⚠️ Quantité invalide."
+
+msgid "Infos de paiement mises à jour ✅"
+msgstr "Infos de paiement mises à jour ✅"
+
+msgid "Infos de paiement supprimées ✅"
+msgstr "Infos de paiement supprimées ✅"
+
+msgid "Accès non autorisé."
+msgstr "Accès non autorisé."
+
+msgid "Suivi mis à jour ✅"
+msgstr "Suivi mis à jour ✅"
+
+msgid "Tous les champs sont obligatoires."
+msgstr "Tous les champs sont obligatoires."
+
+msgid "Votre message a bien été envoyé ✅"
+msgstr "Votre message a bien été envoyé ✅"
+
+msgid "📢 Nouvelle commande (paiement crypto)"
+msgstr "📢 Nouvelle commande (paiement crypto)"
+
+msgid "Commande(s) passée(s) pour les annonces :"
+msgstr "Commande(s) passée(s) pour les annonces :"
+
+msgid "Acheteur :"
+msgstr "Acheteur :"
+
+msgid "Voir les commandes"
+msgstr "Voir les commandes"
+
+msgid "📦 Nouvelle commande reçue (Paiement en attente)"
+msgstr "📦 Nouvelle commande reçue (Paiement en attente)"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "Vous avez reçu une commande pour votre annonce :"
+msgstr "Vous avez reçu une commande pour votre annonce :"
+
+msgid "Mode de livraison :"
+msgstr "Mode de livraison :"
+
+msgid "Adresse de livraison :"
+msgstr "Adresse de livraison :"
+
+msgid "Acheteur :"
+msgstr "Acheteur :"
+
+msgid "Merci d’attendre la confirmation du paiement de la commission."
+msgstr "Merci d’attendre la confirmation du paiement de la commission."
+
+msgid "📦 Confirmation de votre commande #%(id)s"
+msgstr "📦 Confirmation de votre commande n°%(id)s"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "Nous avons bien reçu votre commande pour l'article(s) suivant(s) :"
+msgstr "Nous avons bien reçu votre commande pour l'article(s) suivant(s) :"
+
+msgid "Montant total :"
+msgstr "Montant total :"
+
+msgid "Livraison :"
+msgstr "Livraison :"
+
+msgid "Adresse de livraison :"
+msgstr "Adresse de livraison :"
+
+msgid "Vous serez notifié lorsque votre paiement sera confirmé. Merci pour votre achat !"
+msgstr "Vous serez notifié lorsque votre paiement sera confirmé. Merci pour votre achat !"
+
+msgid "📦 Nouvelle commande pour votre produit : %(titre)s"
+msgstr "📦 Nouvelle commande pour votre produit : %(titre)s"
+
+msgid "Un acheteur a commandé votre article :"
+msgstr "Un acheteur a commandé votre article :"
+
+msgid "Merci d'attendre la confirmation du paiement avant d'expédier l'article."
+msgstr "Merci d'attendre la confirmation du paiement avant d'expédier l'article."
+
+msgid "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+msgstr "🚚 Mise à jour de votre livraison (Commande n°%(id)s)"
+
+msgid ""
+"Bonjour {username},\n\n"
+"Le vendeur a mis à jour la livraison de votre commande :\n\n"
+"- Produit : {produit}\n"
+"- Statut : {statut}\n"
+"- Numéro de suivi : {tracking}\n"
+"- Suivi en ligne : {lien}\n\n"
+"Merci d'utiliser UniPlace !"
+msgstr ""
+"Bonjour {username},\n\n"
+"Le vendeur a mis à jour la livraison de votre commande :\n\n"
+"- Produit : {produit}\n"
+"- Statut : {statut}\n"
+"- Numéro de suivi : {tracking}\n"
+"- Suivi en ligne : {lien}\n\n"
+"Merci d'utiliser UniPlace !"
+
+msgid "[Contact UniPlace] %(sujet)s"
+msgstr "[Contact UniPlace] %(sujet)s"
+
+msgid "Expéditeur :"
+msgstr "Expéditeur :"
+
+msgid "Sujet :"
+msgstr "Sujet :"
+
+msgid "Message :"
+msgstr "Message :"
+
+msgid "💰 Paiement confirmé pour votre commande"
+msgstr "💰 Paiement confirmé pour votre commande"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "Le paiement de votre commande a été confirmé ✅"
+msgstr "Le paiement de votre commande a été confirmé ✅"
+
+msgid "📦 Détails de la commande :"
+msgstr "📦 Détails de la commande :"
+
+msgid "Acheteur :"
+msgstr "Acheteur :"
+
+msgid "Adresse de livraison :"
+msgstr "Adresse de livraison :"
+
+msgid "Mode de livraison :"
+msgstr "Mode de livraison :"
+
+msgid "🛒 Articles concernés :"
+msgstr "🛒 Articles concernés :"
+
+msgid "Vous pouvez maintenant contacter l’acheteur pour :"
+msgstr "Vous pouvez maintenant contacter l’acheteur pour :"
+
+msgid "Finaliser le paiement"
+msgstr "Finaliser le paiement"
+
+msgid "Organiser la livraison"
+msgstr "Organiser la livraison"
+
+msgid "Ajouter un numéro de suivi après envoi si nécessaire"
+msgstr "Ajouter un numéro de suivi après envoi si nécessaire"
+
+msgid "Écrivez-lui directement ici :"
+msgstr "Écrivez-lui directement ici :"
+
+msgid "Contacter l’acheteur"
+msgstr "Contacter l’acheteur"
+
+msgid "Une fois le colis envoyé, pensez à ajouter le numéro de suivi ici :"
+msgstr "Une fois le colis envoyé, pensez à ajouter le numéro de suivi ici :"
+
+msgid "Accéder à mes livraisons"
+msgstr "Accéder à mes livraisons"
+
+msgid "Merci encore de faire confiance à"
+msgstr "Merci encore de faire confiance à"
+
+msgid "✅ Paiement confirmé – Le vendeur vous contactera bientôt"
+msgstr "✅ Paiement confirmé – Le vendeur vous contactera bientôt"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "Votre paiement a bien été confirmé ✅ pour les articles suivants :"
+msgstr "Votre paiement a bien été confirmé ✅ pour les articles suivants :"
+
+msgid "📬 Et maintenant ?"
+msgstr "📬 Et maintenant ?"
+
+msgid "Pour finaliser votre achat, vous devez :"
+msgstr "Pour finaliser votre achat, vous devez :"
+
+msgid "Contacter le vendeur"
+msgstr "Contacter le vendeur"
+
+msgid "Effectuer le paiement restant"
+msgstr "Effectuer le paiement restant"
+
+msgid "Organiser la livraison"
+msgstr "Organiser la livraison"
+
+msgid "📁 Vous trouverez toutes les coordonnées utiles du vendeur dans votre tableau de bord, rubrique"
+msgstr "📁 Vous trouverez toutes les coordonnées utiles du vendeur dans votre tableau de bord, rubrique"
+
+msgid "Mes achats"
+msgstr "Mes achats"
+
+msgid "Accéder à Mes achats"
+msgstr "Accéder à Mes achats"
+
+msgid "Merci de faire confiance à UniPlace 🙌"
+msgstr "Merci de faire confiance à UniPlace 🙌"
+
+msgid "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+msgstr "🚚 Mise à jour de votre livraison (Commande n°%(id)s)"
+
+msgid "Bonjour"
+msgstr "Bonjour"
+
+msgid "Le statut de votre livraison a été mis à jour :"
+msgstr "Le statut de votre livraison a été mis à jour :"
+
+msgid "Statut :"
+msgstr "Statut :"
+
+msgid "Numéro de suivi :"
+msgstr "Numéro de suivi :"
+
+msgid "Méthode de livraison :"
+msgstr "Méthode de livraison :"
+
+msgid "Vous pouvez suivre l’évolution dans votre tableau de bord :"
+msgstr "Vous pouvez suivre l’évolution dans votre tableau de bord :"
+
+msgid "Accéder à mes achats"
+msgstr "Accéder à mes achats"
+
+msgid "Merci d’utiliser UniPlace"
+msgstr "Merci d’utiliser UniPlace"
+
+#: admin.py
+msgid "Accès refusé : réservé à l’administrateur."
+msgstr "Accès refusé : réservé à l’administrateur."
+
+#: admin.py
+msgid "Impossible de supprimer un administrateur."
+msgstr "Impossible de supprimer un administrateur."
+
+#: admin.py
+msgid "Utilisateur supprimé avec succès."
+msgstr "Utilisateur supprimé avec succès."
+
+#: admin.py
+msgid "Annonce supprimée avec succès"
+msgstr "Annonce supprimée avec succès"
+
+#: admin.py
+msgid "Accès refusé"
+msgstr "Accès refusé"
+
+#: admin.py
+msgid "L'utilisateur %(user)s est maintenant administrateur."
+msgstr "L'utilisateur %(user)s est maintenant administrateur."
+
+#: admin.py
+msgid "Vous ne pouvez pas retirer vos propres droits admin."
+msgstr "Vous ne pouvez pas retirer vos propres droits admin."
+
+#: admin.py
+msgid "Cet utilisateur n’est pas administrateur."
+msgstr "Cet utilisateur n’est pas administrateur."
+
+#: admin.py
+msgid "L'utilisateur %(user)s n'est plus administrateur."
+msgstr "L'utilisateur %(user)s n'est plus administrateur."
+
+#: admin.py
+msgid "Message bloqué supprimé avec succès ✅"
+msgstr "Message bloqué supprimé avec succès ✅"
+
+#: admin.py
+msgid "Cet email a déjà été envoyé avec succès."
+msgstr "Cet email a déjà été envoyé avec succès."
+
+#: admin.py
+msgid "Email renvoyé avec succès !"
+msgstr "Email renvoyé avec succès !"
+
+#: admin.py
+msgid "Échec de renvoi de l'email : %(erreur)s"
+msgstr "Échec de renvoi de l'email : %(erreur)s"
+
+#: admin.py
+msgid "Fichier image invalide."
+msgstr "Fichier image invalide."
+
+#: admin.py
+msgid "Promo ajoutée."
+msgstr "Promo ajoutée."
+
+#: admin.py
+msgid "Promo supprimée."
+msgstr "Promo supprimée."
+
+#: admin.py
+msgid "Accès réservé à l'administrateur."
+msgstr "Accès réservé à l'administrateur."
+
+#: admin.py
+msgid "Méthode de livraison invalide."
+msgstr "Méthode de livraison invalide."
+
+#: admin.py
+msgid "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+msgstr "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+
+#: admin.py
+msgid "Informations de livraison mises à jour ✅"
+msgstr "Informations de livraison mises à jour ✅"
+
+#: admin.py
+msgid "💰 Paiement confirmé pour votre commande"
+msgstr "💰 Paiement confirmé pour votre commande"
+
+#: admin.py
+msgid "✅ Paiement confirmé – Le vendeur vous contactera bientôt"
+msgstr "✅ Paiement confirmé – Le vendeur vous contactera bientôt"
+
+#: admin.py
+msgid "✅ Paiement confirmé, emails envoyés et articles marqués comme vendus."
+msgstr "✅ Paiement confirmé, emails envoyés et articles marqués comme vendus."
+
+msgid "Cet email est déjà utilisé. Veuillez en choisir un autre."
+msgstr "Cet email est déjà utilisé. Veuillez en choisir un autre."
+
+msgid "Un email de confirmation vous a été envoyé ✅"
+msgstr "Un email de confirmation vous a été envoyé ✅"
+
+msgid "Le lien de confirmation a expiré. Merci de vous réinscrire."
+msgstr "Le lien de confirmation a expiré. Merci de vous réinscrire."
+
+msgid "Lien de confirmation invalide."
+msgstr "Lien de confirmation invalide."
+
+msgid "Utilisateur introuvable pour cet email."
+msgstr "Utilisateur introuvable pour cet email."
+
+msgid "Votre adresse email est déjà confirmée."
+msgstr "Votre adresse email est déjà confirmée."
+
+msgid "Merci ! Votre adresse email est confirmée. Vous pouvez maintenant vous connecter."
+msgstr "Merci ! Votre adresse email est confirmée. Vous pouvez maintenant vous connecter."
+
+msgid "Un nouvel email de confirmation a été envoyé."
+msgstr "Un nouvel email de confirmation a été envoyé."
+
+msgid "Vous devez confirmer votre adresse email avant de vous connecter."
+msgstr "Vous devez confirmer votre adresse email avant de vous connecter."
+
+msgid "Bienvenue, %(username)s ! Vous êtes maintenant connecté."
+msgstr "Bienvenue, %(username)s ! Vous êtes maintenant connecté."
+
+msgid "Email ou mot de passe incorrect !"
+msgstr "Email ou mot de passe incorrect !"
+
+msgid "Vous devez confirmer votre adresse email pour accéder à cette page."
+msgstr "Vous devez confirmer votre adresse email pour accéder à cette page."
+
+msgid "Cet email n'est pas enregistré !"
+msgstr "Cet email n'est pas enregistré !"
+
+msgid "Un email contenant votre nouveau mot de passe a été envoyé ✅"
+msgstr "Un email contenant votre nouveau mot de passe a été envoyé ✅"
+
+msgid "Une erreur est survenue lors de l'envoi de l'email ❌"
+msgstr "Une erreur est survenue lors de l'envoi de l'email ❌"
+
+#: auth.py:signup
+msgid "Confirmez votre adresse email UniPlace"
+msgstr "Confirmez votre adresse email UniPlace"
+
+#: auth.py:signup
+msgid "Merci de vous être inscrit sur <strong>UniPlace</strong>."
+msgstr "Merci de vous être inscrit sur <strong>UniPlace</strong>."
+
+#: auth.py:signup
+msgid "Pour activer votre compte, cliquez ici :"
+msgstr "Pour activer votre compte, cliquez ici :"
+
+#: auth.py:signup
+msgid "✅ Confirmer mon adresse email"
+msgstr "✅ Confirmer mon adresse email"
+
+#: auth.py:signup
+msgid "Ce lien expirera dans 1 heure."
+msgstr "Ce lien expirera dans 1 heure."
+
+#: auth.py:unconfirmed
+msgid "Rappel : confirmez votre adresse email UniPlace"
+msgstr "Rappel : confirmez votre adresse email UniPlace"
+
+#: auth.py:unconfirmed
+msgid "Merci de confirmer votre adresse email en cliquant sur ce lien :"
+msgstr "Merci de confirmer votre adresse email en cliquant sur ce lien :"
+
+#: auth.py:forgot_password
+msgid "🔐 Réinitialisation de votre mot de passe UniPlace"
+msgstr "🔐 Réinitialisation de votre mot de passe UniPlace"
+
+#: auth.py:forgot_password
+msgid "Voici votre nouveau mot de passe temporaire :"
+msgstr "Voici votre nouveau mot de passe temporaire :"
+
+#: auth.py:forgot_password
+msgid "Connectez-vous dès maintenant et modifiez-le depuis votre profil."
+msgstr "Connectez-vous dès maintenant et modifiez-le depuis votre profil."
+
+#: auth.py:forgot_password
+msgid "Cet email est automatique – ne pas répondre."
+msgstr "Cet email est automatique – ne pas répondre."
+
+#: auth.py:forgot_password
+msgid "Un email contenant votre nouveau mot de passe a été envoyé ✅"
+msgstr "Un email contenant votre nouveau mot de passe a été envoyé ✅"
+
+#: auth.py:forgot_password
+msgid "Une erreur est survenue lors de l'envoi de l'email ❌"
+msgstr "Une erreur est survenue lors de l'envoi de l'email ❌"
+
+#: auth.py:login
+msgid "Vous devez confirmer votre adresse email avant de vous connecter."
+msgstr "Vous devez confirmer votre adresse email avant de vous connecter."
+
+#: auth.py:login
+msgid "Bienvenue, %s ! Vous êtes maintenant connecté."
+msgstr "Bienvenue, %s ! Vous êtes maintenant connecté."
+
+#: auth.py:login
+msgid "Email ou mot de passe incorrect !"
+msgstr "Email ou mot de passe incorrect !"
+
+#: auth.py:email_confirmed_required
+msgid "Vous devez confirmer votre adresse email pour accéder à cette page."
+msgstr "Vous devez confirmer votre adresse email pour accéder à cette page."
+
+msgid "Modifier"
+msgstr "Modifier"
+
+msgid "Supprimer"
+msgstr "Supprimer"
+
+msgid "Vous n'avez publié aucune annonce."
+msgstr "Vous n'avez publié aucune annonce."
+
+msgid "Modifier l'annonce"
+msgstr "Modifier l'annonce"
+
+msgid "Catégorie"
+msgstr "Catégorie"
+
+msgid "Sous-catégorie"
+msgstr "Sous-catégorie"
+
+msgid "Entrez une sous-catégorie"
+msgstr "Entrez une sous-catégorie"
+
+msgid "Prix"
+msgstr "Prix"
+
+msgid "Frais de livraison estimés"
+msgstr "Frais de livraison estimés"
+
+msgid "Livré en 1 à 3 jours 🚀"
+msgstr "Livré en 1 à 3 jours 🚀"
+
+msgid "Prix initial (avant réduction)"
+msgstr "Prix initial (avant réduction)"
+
+msgid "Prix promotionnel"
+msgstr "Prix promotionnel"
+
+msgid "Date de début de la promotion"
+msgstr "Date de début de la promotion"
+
+msgid "Date de fin de la promotion"
+msgstr "Date de fin de la promotion"
+
+msgid "Choisissez votre ville"
+msgstr "Choisissez votre ville"
+
+msgid "Entrez votre ville"
+msgstr "Entrez votre ville"
+
+msgid "État du produit"
+msgstr "État du produit"
+
+msgid "Neuf"
+msgstr "Neuf"
+
+msgid "Occasion"
+msgstr "Occasion"
+
+msgid "Autre..."
+msgstr "Autre..."
+
+msgid "💾 Enregistrer les modifications"
+msgstr "💾 Enregistrer les modifications"
+
+msgid "Informations complémentaires"
+msgstr "Informations complémentaires"
+
+msgid "Poids (en kg)"
+msgstr "Poids (en kg)"
+
+msgid "Dimensions (L × l × h en cm)"
+msgstr "Dimensions (L × l × h en cm)"
+
+msgid "Contenu du pack"
+msgstr "Contenu du pack"
+
+msgid "Mots-clés (séparés par des virgules)"
+msgstr "Mots-clés (séparés par des virgules)"
+
+msgid "Date de fin d'affichage de l’annonce"
+msgstr "Date de fin d'affichage de l’annonce"
+
+msgid "Vidéo de démonstration"
+msgstr "Vidéo de démonstration"
+
+msgid "Vidéo actuelle"
+msgstr "Vidéo actuelle"
+
+msgid "Supprimer la vidéo ❌"
+msgstr "Supprimer la vidéo ❌"
+
+msgid "Ajouter une nouvelle vidéo :"
+msgstr "Ajouter une nouvelle vidéo :"
+
+msgid "Variantes disponibles"
+msgstr "Variantes disponibles"
+
+msgid "Taille (ex : M, L, 42)"
+msgstr "Taille (ex : M, L, 42)"
+
+msgid "Couleur (ex : Bleu, Rouge)"
+msgstr "Couleur (ex : Bleu, Rouge)"
+
+msgid "Stock (ex : 2)"
+msgstr "Stock (ex : 2)"
+
+msgid "Prix :"
+msgstr "Prix :"
+
+msgid "Prix promotionnel :"
+msgstr "Prix promotionnel :"
+
+msgid "Date début promo :"
+msgstr "Date début promo :"
+
+msgid "Date fin promo :"
+msgstr "Date fin promo :"
+
+msgid "Image actuelle :"
+msgstr "Image actuelle :"
+
+msgid "Supprimer cette variante"
+msgstr "Supprimer cette variante"
+
+msgid "Ajouter une variante"
+msgstr "Ajouter une variante"
+
+msgid "💾 Enregistrer les modifications"
+msgstr "💾 Enregistrer les modifications"
+
+msgid "Électronique & Informatique"
+msgstr "Électronique & Informatique"
+
+msgid "Ordinateurs / Laptops"
+msgstr "Ordinateurs / Laptops"
+
+msgid "Smartphones"
+msgstr "Smartphones"
+
+msgid "Tablettes"
+msgstr "Tablettes"
+
+msgid "Casques / Écouteurs / Enceintes"
+msgstr "Casques / Écouteurs / Enceintes"
+
+msgid "Écrans / Claviers / Souris"
+msgstr "Écrans / Claviers / Souris"
+
+msgid "Disques durs / SSD / Clés USB"
+msgstr "Disques durs / SSD / Clés USB"
+
+msgid "Câbles & Chargeurs"
+msgstr "Câbles & Chargeurs"
+
+msgid "Accessoires tech"
+msgstr "Accessoires tech"
+
+msgid "Vêtements & Mode"
+msgstr "Vêtements & Mode"
+
+msgid "Vêtements hommes"
+msgstr "Vêtements hommes"
+
+msgid "Vêtements femmes"
+msgstr "Vêtements femmes"
+
+msgid "Vestes / Manteaux"
+msgstr "Vestes / Manteaux"
+
+msgid "Chaussures hommes"
+msgstr "Chaussures hommes"
+
+msgid "Chaussures femmes"
+msgstr "Chaussures femmes"
+
+msgid "Accessoires"
+msgstr "Accessoires"
+
+msgid "Meubles & Maison"
+msgstr "Meubles & Maison"
+
+msgid "Lits / Matelas"
+msgstr "Lits / Matelas"
+
+msgid "Chaises / Fauteuils"
+msgstr "Chaises / Fauteuils"
+
+msgid "Bureaux / Tables / Étagères"
+msgstr "Bureaux / Tables / Étagères"
+
+msgid "Armoires / Rangement"
+msgstr "Armoires / Rangement"
+
+msgid "Décoration intérieure"
+msgstr "Décoration intérieure"
+
+msgid "Cuisine & électroménager"
+msgstr "Cuisine & électroménager"
+
+msgid "Logement étudiant"
+msgstr "Logement étudiant"
+
+msgid "Colocation disponible"
+msgstr "Colocation disponible"
+
+msgid "Studio / Appartement à louer"
+msgstr "Studio / Appartement à louer"
+
+msgid "Chambre libre chez l’habitant"
+msgstr "Chambre libre chez l’habitant"
+
+msgid "Sous-location courte durée"
+msgstr "Sous-location courte durée"
+
+msgid "Échange temporaire de logement"
+msgstr "Échange temporaire de logement"
+
+msgid "Cuisine & Produits alimentaires"
+msgstr "Cuisine & Produits alimentaires"
+
+msgid "Épices / Condiments"
+msgstr "Épices / Condiments"
+
+msgid "Nourriture africaine / asiatique"
+msgstr "Nourriture africaine / asiatique"
+
+msgid "Produits de base"
+msgstr "Produits de base"
+
+msgid "Boissons & Snacks"
+msgstr "Boissons & Snacks"
+
+msgid "Ustensiles spécifiques"
+msgstr "Ustensiles spécifiques"
+
+msgid "Voyages & Mobilité"
+msgstr "Voyages & Mobilité"
+
+msgid "Sacs / Valises / Backpacks"
+msgstr "Sacs / Valises / Backpacks"
+
+msgid "Revente de billets de train / avion"
+msgstr "Revente de billets de train / avion"
+
+msgid "Covoiturage"
+msgstr "Covoiturage"
+
+msgid "Location de véhicule / trottinette"
+msgstr "Location de véhicule / trottinette"
+
+msgid "Cartes de transport / Abonnements"
+msgstr "Cartes de transport / Abonnements"
+
+msgid "Services entre étudiants"
+msgstr "Services entre étudiants"
+
+msgid "Cours particuliers / Aide scolaire"
+msgstr "Cours particuliers / Aide scolaire"
+
+msgid "Correction de devoirs / Mémoire"
+msgstr "Correction de devoirs / Mémoire"
+
+msgid "Traductions / Mise en page / CV"
+msgstr "Traductions / Mise en page / CV"
+
+msgid "Ménage / Repassage / Courses"
+msgstr "Ménage / Repassage / Courses"
+
+msgid "Soins personnels"
+msgstr "Soins personnels"
+
+msgid "Envoi de colis / Retrait"
+msgstr "Envoi de colis / Retrait"
+
+msgid "Soutien administratif"
+msgstr "Soutien administratif"
+
+msgid "Annonces diverses"
+msgstr "Annonces diverses"
+
+msgid "Événements / Soirées / Concerts"
+msgstr "Événements / Soirées / Concerts"
+
+msgid "Jeux vidéos / Consoles"
+msgstr "Jeux vidéos / Consoles"
+
+msgid "Appareils photo / Caméras"
+msgstr "Appareils photo / Caméras"
+
+msgid "Instruments de musique"
+msgstr "Instruments de musique"
+
+msgid "Objets perdus / retrouvés"
+msgstr "Objets perdus / retrouvés"
+
+msgid "Objets divers"
+msgstr "Objets divers"
+
+msgid "Demandes & Recherches"
+msgstr "Demandes & Recherches"
+
+msgid "Recherche de logement"
+msgstr "Recherche de logement"
+
+msgid "Recherche de colocataire"
+msgstr "Recherche de colocataire"
+
+msgid "Recherche d’objet"
+msgstr "Recherche d’objet"
+
+msgid "Recherche de service"
+msgstr "Recherche de service"
+
+msgid "Demande de transport"
+msgstr "Demande de transport"
+
+msgid "Études & Livres"
+msgstr "Études & Livres"
+
+msgid "Manuels & Livres universitaires"
+msgstr "Manuels & Livres universitaires"
+
+msgid "Cours imprimés / Polycopiés"
+msgstr "Cours imprimés / Polycopiés"
+
+msgid "Fiches de révision / Résumés"
+msgstr "Fiches de révision / Résumés"
+
+msgid "Matériel de bureau"
+msgstr "Matériel de bureau"
+
+msgid "Fournitures scientifiques"
+msgstr "Fournitures scientifiques"
+
+msgid "Manuels & Livres universitaires"
+msgstr "Manuels & Livres universitaires"
+
+msgid "Cours imprimés / Polycopiés"
+msgstr "Cours imprimés / Polycopiés"
+
+msgid "Fiches de révision / Résumés"
+msgstr "Fiches de révision / Résumés"
+
+msgid "Matériel de bureau"
+msgstr "Matériel de bureau"
+
+msgid "Fournitures scientifiques"
+msgstr "Fournitures scientifiques"
+
+msgid "Ordinateurs / Laptops"
+msgstr "Ordinateurs / Laptops"
+
+msgid "Smartphones"
+msgstr "Smartphones"
+
+msgid "Tablettes"
+msgstr "Tablettes"
+
+msgid "Casques / Écouteurs / Enceintes"
+msgstr "Casques / Écouteurs / Enceintes"
+
+msgid "Écrans / Claviers / Souris"
+msgstr "Écrans / Claviers / Souris"
+
+msgid "Disques durs / SSD / Clés USB"
+msgstr "Disques durs / SSD / Clés USB"
+
+msgid "Câbles & Chargeurs"
+msgstr "Câbles & Chargeurs"
+
+msgid "Accessoires tech"
+msgstr "Accessoires tech"
+
+msgid "Vêtements hommes"
+msgstr "Vêtements hommes"
+
+msgid "Vêtements femmes"
+msgstr "Vêtements femmes"
+
+msgid "Vestes / Manteaux"
+msgstr "Vestes / Manteaux"
+
+msgid "Chaussures hommes"
+msgstr "Chaussures hommes"
+
+msgid "Chaussures femmes"
+msgstr "Chaussures femmes"
+
+msgid "Accessoires"
+msgstr "Accessoires"
+
+msgid "Lits / Matelas"
+msgstr "Lits / Matelas"
+
+msgid "Chaises / Fauteuils"
+msgstr "Chaises / Fauteuils"
+
+msgid "Bureaux / Tables / Étagères"
+msgstr "Bureaux / Tables / Étagères"
+
+msgid "Armoires / Rangement"
+msgstr "Armoires / Rangement"
+
+msgid "Décoration intérieure"
+msgstr "Décoration intérieure"
+
+msgid "Cuisine & électroménager"
+msgstr "Cuisine & électroménager"
+
+msgid "Colocation disponible"
+msgstr "Colocation disponible"
+
+msgid "Studio / Appartement à louer"
+msgstr "Studio / Appartement à louer"
+
+msgid "Chambre libre chez l’habitant"
+msgstr "Chambre libre chez l’habitant"
+
+msgid "Sous-location courte durée"
+msgstr "Sous-location courte durée"
+
+msgid "Échange temporaire de logement"
+msgstr "Échange temporaire de logement"
+
+msgid "Épices / Condiments"
+msgstr "Épices / Condiments"
+
+msgid "Nourriture africaine / asiatique"
+msgstr "Nourriture africaine / asiatique"
+
+msgid "Produits de base"
+msgstr "Produits de base"
+
+msgid "Boissons & Snacks"
+msgstr "Boissons & Snacks"
+
+msgid "Ustensiles spécifiques"
+msgstr "Ustensiles spécifiques"
+
+msgid "Sacs / Valises / Backpacks"
+msgstr "Sacs / Valises / Backpacks"
+
+msgid "Revente de billets de train / avion"
+msgstr "Revente de billets de train / avion"
+
+msgid "Covoiturage"
+msgstr "Covoiturage"
+
+msgid "Location de véhicule / trottinette"
+msgstr "Location de véhicule / trottinette"
+
+msgid "Cartes de transport / Abonnements"
+msgstr "Cartes de transport / Abonnements"
+
+msgid "Cours particuliers / Aide scolaire"
+msgstr "Cours particuliers / Aide scolaire"
+
+msgid "Correction de devoirs / Mémoire"
+msgstr "Correction de devoirs / Mémoire"
+
+msgid "Traductions / Mise en page / CV"
+msgstr "Traductions / Mise en page / CV"
+
+msgid "Ménage / Repassage / Courses"
+msgstr "Ménage / Repassage / Courses"
+
+msgid "Soins personnels"
+msgstr "Soins personnels"
+
+msgid "Envoi de colis / Retrait"
+msgstr "Envoi de colis / Retrait"
+
+msgid "Soutien administratif"
+msgstr "Soutien administratif"
+
+msgid "Événements / Soirées / Concerts"
+msgstr "Événements / Soirées / Concerts"
+
+msgid "Jeux vidéos / Consoles"
+msgstr "Jeux vidéos / Consoles"
+
+msgid "Appareils photo / Caméras"
+msgstr "Appareils photo / Caméras"
+
+msgid "Instruments de musique"
+msgstr "Instruments de musique"
+
+msgid "Objets perdus / retrouvés"
+msgstr "Objets perdus / retrouvés"
+
+msgid "Objets divers"
+msgstr "Objets divers"
+
+msgid "Recherche de logement"
+msgstr "Recherche de logement"
+
+msgid "Recherche de colocataire"
+msgstr "Recherche de colocataire"
+
+msgid "Recherche d’objet"
+msgstr "Recherche d’objet"
+
+msgid "Recherche de service"
+msgstr "Recherche de service"
+
+msgid "Demande de transport"
+msgstr "Demande de transport"
+
+msgid "Vêtements hommes"
+msgstr "Taille / Couleur (Ex:M / Bleu)"
+
+msgid "Vêtements femmes"
+msgstr "Taille / Couleur (Ex:S / Rouge)"
+
+msgid "Vestes / Manteaux"
+msgstr "Taille / Couleur (Ex: L / Noir)"
+
+msgid "Chaussures hommes"
+msgstr "Taille / Couleur (Ex: 42 / Marron)"
+
+msgid "Chaussures femmes"
+msgstr "Taille / Couleur (Ex: 38 / Blanc)"
+
+msgid "Accessoires"
+msgstr "Taille unique / Doré"
+
+msgid "Smartphones"
+msgstr "128 Go / Noir"
+
+msgid "Ordinateurs / Laptops"
+msgstr "15\" / 512 Go / 16 Go RAM / Argent"
+
+msgid "Tablettes"
+msgstr "11\" / 256 Go / Wi-Fi / Gris"
+
+msgid "Casques / Écouteurs / Enceintes"
+msgstr "Version 2 / Blanc"
+
+msgid "Écrans / Claviers / Souris"
+msgstr "24\" / Gaming / Noir"
+
+msgid "Disques durs / SSD / Clés USB"
+msgstr "1To / USB 3.0 / Noir"
+
+msgid "Câbles & Chargeurs"
+msgstr "2m / 65W / USB-C / Blanc"
+
+msgid "Accessoires tech"
+msgstr "Support pliable / Métal / Noir"
+
+msgid "Lits / Matelas"
+msgstr "140x200 / Chêne clair"
+
+msgid "Chaises / Fauteuils"
+msgstr "Lot de 2 / Blanc"
+
+msgid "Bureaux / Tables / Étagères"
+msgstr "120x60 / Bois foncé"
+
+msgid "Armoires / Rangement"
+msgstr "3 portes / Blanc mat"
+
+msgid "Décoration intérieure"
+msgstr "Lot de 3 cadres / Doré"
+
+msgid "Cuisine & électroménager"
+msgstr "23L / Micro-ondes / Inox"
+
+msgid "Épices / Condiments"
+msgstr "200g / Curcuma / Bio"
+
+msgid "Produits de base"
+msgstr "5kg / Riz parfumé"
+
+msgid "Boissons & Snacks"
+msgstr "Pack x6 / Mangue / Frais"
+
+msgid "Ustensiles spécifiques"
+msgstr "24cm / Fonte / Rouge"
+
+msgid "Jeux vidéos / Consoles"
+msgstr "PS5 / Standard / 1 manette / Blanc"
+
+msgid "Appareils photo / Caméras"
+msgstr "Canon EOS / 50mm / Noir"
+
+msgid "Instruments de musique"
+msgstr "Guitare classique / Avec housse / Bois clair"
+
+msgid "Objets divers"
+msgstr "Lot x3 / Couleurs variées"
+
+msgid "Sacs / Valises / Backpacks"
+msgstr "40L / Étanche / Noir"
+
+msgid "Revente de billets de train / avion"
+msgstr "Billet TGV Paris → Lyon - 22 juin"
+
+msgid "Covoiturage"
+msgstr "Trajet Moscou → Saransk - 24 juin (2 places dispo)"
+
+msgid "Location de véhicule / trottinette"
+msgstr "Trottinette électrique à louer - 200 Rub/jour"
+
+msgid "Cartes de transport / Abonnements"
+msgstr "Carte de Bus valable jusqu'à fin juin"
+
+msgid "Cours particuliers / Aide scolaire"
+msgstr "Cours de Marketing Digital niveau L3– Prof expérimenté"
+
+msgid "Correction de devoirs / Mémoire"
+msgstr "Relecture + correction mémoire de licence – Rapide"
+
+msgid "Traductions / Mise en page / CV"
+msgstr "Traduction Anglais → français ou Russe → français + mise en page CV"
+
+msgid "Ménage / Repassage / Courses"
+msgstr "Aide ménage 2h/semaine; – Quartier Sud"
+
+msgid "Soins personnels"
+msgstr "Coiffure à domicile – Tresses ou défrisage"
+
+msgid "Envoi de colis / Retrait"
+msgstr "Retrait de colis à l'aéroport  + dépôt poste – dispo soir"
+
+msgid "Soutien administratif"
+msgstr "Aide démarches Campus Russie / dossier campus France"
+
+msgid "Événements / Soirées / Concerts"
+msgstr "Soirée afro prévue vendredi – entrée gratuite"
+
+msgid "Appareils photo / Caméras"
+msgstr "Appareil photo Canon EOS 2000D – Comme neuf"
+
+msgid "Instruments de musique"
+msgstr "Ex : Guitare classique Yamaha – Très bon état"
+
+msgid "Objets perdus / retrouvés"
+msgstr "Ex : Porte-feuille noir perdu près du campus"
+
+msgid "Objets divers"
+msgstr "Ex : Lot d’objets utiles (lampe, multiprise, rideaux)"
+
+msgid "Recherche de logement"
+msgstr "Ex : Cherche studio proche université – budget max 30 000 Rub"
+
+msgid "Recherche de colocataire"
+msgstr "Ex : Recherche colocataire pour T3 Moscou"
+
+msgid "Recherche d’objet"
+msgstr "Ex : Recherche vélo d’occasion pas trop cher"
+
+msgid "Recherche de service"
+msgstr "Ex : Besoin aide informatique pour installation PC"
+
+msgid "Demande de transport"
+msgstr "Ex : Cherche trajet Saint Peter → Moscou ce week-end"
+
+msgid "Uni"
+msgstr "Uni"
+
+msgid "Place"
+msgstr "Place"
+
+msgid "Achetez"
+msgstr "Achetez"
+
+msgid "ce que"
+msgstr "ce que"
+
+msgid "vous"
+msgstr "vous"
+
+msgid "aimez,"
+msgstr "aimez,"
+
+msgid "trouvez"
+msgstr "trouvez"
+
+msgid "ce que"
+msgstr "ce que"
+
+msgid "vous"
+msgstr "vous"
+
+msgid "cherchez"
+msgstr "cherchez"
+
+msgid "!!!"
+msgstr "!!!"
+
+msgid "Connectez-vous"
+msgstr "Connectez-vous"
+
+msgid "et explorez"
+msgstr "et explorez"
+
+msgid "un monde"
+msgstr "un monde"
+
+msgid "d'opportunités !"
+msgstr "d'opportunités !"
+

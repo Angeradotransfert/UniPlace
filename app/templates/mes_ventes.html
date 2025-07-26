@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 1100px; margin: auto; padding: 40px 20px; font-family: 'Baloo 2', cursive;">
+    <h2 style="text-align: center; font-size: 2.4rem; color: #2c3e50; margin-bottom: 30px;">📦 {{ _('Articles vendus') }}</h2>
+
+    {% if ventes %}
+        {% for item in ventes %}
+        <div style="background: #ffffff; border-left: 6px solid #4caf50; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+            <h3 style="color: #2c3e50; margin-bottom: 12px;">🛒 {{ item.listing.title }}</h3>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                {% if item.listing.images and item.listing.images[0] %}
+                <img src="{{ url_for('static', filename='uploads/' + item.listing.images[0].filename) }}"
+                     alt="{{ _('Image du produit') }}"
+                     style="max-width: 180px; border-radius: 10px; border: 1px solid #ccc;">
+                {% endif %}
+
+                <div>
+                    <p><strong>💰 {{ _('Prix unitaire') }} :</strong> {{ item.listing.price }} ₽</p>
+                    <p><strong>📦 {{ _('Quantité vendue') }} :</strong> {{ item.quantity }}</p>
+                    <p><strong>🧾 {{ _('Montant total payé') }} :</strong> {{ (item.listing.price + (item.listing.delivery_fee or 0)) * item.quantity }} ₽</p>
+                    <p><strong>💼 {{ _('Commission') }} :</strong> {{ item.commission }} ₽</p>
+                    <p><strong>💵 {{ _('Montant que vous recevez') }} :</strong> <span style="color: #2e7d32;">{{ item.seller_amount }} ₽</span></p>
+                    <p><strong>📅 {{ _('Date de vente') }} :</strong> {{ item.order.timestamp.strftime('%d/%m/%Y à %H:%M') }}</p>
+                    <p><strong>👤 {{ _('Acheteur') }} :</strong> {{ item.order.buyer.username }}</p>
+                    <p><strong>🏙️ {{ _('Ville') }} :</strong> {{ item.listing.city }}</p>
+                    <p><strong>📂 {{ _('Catégorie') }} :</strong> {{ item.listing.category }} – {{ item.listing.subcategory }}</p>
+                    <p><strong>💳 {{ _('Moyen de paiement') }} :</strong>
+                        {% if item.order.payment_method == 'usdt' %}
+                            <span style="color: #ff9800;">{{ _('USDT (crypto)') }}</span>
+                        {% elif item.order.payment_method == 'carte' %}
+                            <span style="color: #3f51b5;">{{ _('Carte bancaire') }}</span>
+                        {% else %}
+                            {{ _('Inconnu') }}
+                        {% endif %}
+                    </p>
+                    <p><strong>🔐 {{ _('Statut du paiement') }} :</strong>
+                        {% if item.order.status == 'paid' %}
+                            <span style="color: #4caf50;">✅ {{ _('Payé') }}</span>
+                        {% else %}
+                            <span style="color: #f44336;">⏳ {{ _('En attente') }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; font-size: 1.2rem; color: #555;">{{ _('Aucune vente enregistrée pour le moment.') }}</p>
+    {% endif %}
+</div>
+{% endblock %}

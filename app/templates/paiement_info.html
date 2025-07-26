@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .info-container {
+        max-width: 650px;
+        margin: 80px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        font-family: 'Baloo 2', cursive;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .info-container:hover {
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-container h2 {
+        text-align: center;
+        margin-bottom: 35px;
+        font-size: 2rem;
+        color: #2c3e50;
+    }
+
+    .info-container label {
+        font-weight: bold;
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 8px;
+        color: #34495e;
+    }
+
+    .info-container input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        background-color: #fdfdfd;
+        transition: border 0.3s ease;
+    }
+
+    .info-container input:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    .btn-submit {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 26px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #218838;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 26px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333;
+    }
+</style>
+
+<div class="info-container">
+    <h2>💳 {{ _('Mes infos de paiement') }}</h2>
+
+    <!-- Formulaire de mise à jour -->
+    <form method="POST" action="{{ url_for('main.update_usdt_address') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="update">
+
+        <label for="usdt_address">{{ _('Adresse USDT (TRC20) :') }}</label>
+        <input type="text" name="usdt_address" id="usdt_address" value="{{ current_user.usdt_address or '' }}" required>
+
+        <label for="bank_name">{{ _('Nom de la banque :') }}</label>
+        <input type="text" name="bank_name" id="bank_name" value="{{ current_user.bank_name or '' }}">
+
+        <label for="card_number">{{ _('Numéro de carte :') }}</label>
+        <input type="text" name="card_number" id="card_number" value="{{ current_user.card_number or '' }}">
+
+        <label for="card_holder">{{ _('Nom sur la carte :') }}</label>
+        <input type="text" name="card_holder" id="card_holder" value="{{ current_user.card_holder or '' }}">
+
+        <div class="btn-group">
+            <button type="submit" class="btn-submit">💾 {{ _('Enregistrer') }}</button>
+        </div>
+    </form>
+
+
+    <!-- Formulaire de suppression -->
+    <form method="POST" action="{{ url_for('main.update_usdt_address') }}" onsubmit="return confirm('⚠️ {{ _('Es-tu sûr de vouloir supprimer toutes tes informations de paiement ? Cette action est irréversible.') }}')">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="action" value="delete">
+        <div class="btn-group">
+            <button type="submit" class="btn-delete">🗑 {{ _('Supprimer toutes mes infos') }}</button>
+        </div>
+    </form>
+</div>
+
+<!-- ✅ Script de mise à jour automatique du CSRF -->
+<script>
+    function refreshCsrf() {
+        fetch("{{ url_for('main.generate_csrf_token') }}")
+            .then(response => response.text())
+            .then(token => {
+                document.querySelectorAll("input[name='csrf_token']").forEach(input => {
+                    input.value = token;
+                });
+            });
+    }
+
+    // Rafraîchir toutes les 10 minutes
+    setInterval(refreshCsrf, 10 * 60 * 1000);
+
+    // Rafraîchir dès que la page est chargée
+    window.addEventListener('load', refreshCsrf);
+</script>
+
+{% endblock %}

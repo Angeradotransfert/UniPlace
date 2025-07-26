@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 40px 20px; font-family: 'Baloo 2', sans-serif;">
+    <h2 style="text-align: center; color: #2c3e50;">🎉 {{ _('Commande confirmée !') }}</h2>
+
+    <div style="background: #f8f8f8; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 30px;">
+        <p style="font-size: 18px;">{{ _('Merci pour votre commande,') }} <strong>{{ current_user.username }}</strong> !</p>
+
+        <p style="font-size: 18px;">{{ _('Votre commande a bien été enregistrée. Voici les détails :') }}</p>
+
+        <hr style="margin: 20px 0;">
+
+        <p><strong>{{ _('Numéro de commande') }} :</strong> <span style="color: #28a745;">{{ order.id }}</span></p>
+
+        <p><strong>{{ _('Produit(s)') }} :</strong></p>
+        <ul>
+            {% for item in order.items %}
+                <li>{{ item.listing.title }} x {{ item.quantity }} ({{ item.listing.price }} ₽)</li>
+            {% endfor %}
+        </ul>
+
+        <p><strong>{{ _('Mode de paiement') }} :</strong> {{ _(order.payment_method.capitalize()) }}</p>
+        <p><strong>{{ _('Mode de livraison') }} :</strong> {{ _(order.delivery_method) }}</p>
+        <p><strong>{{ _('Adresse de livraison') }} :</strong> {{ order.delivery_address }}</p>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('main.mes_achats') }}" style="text-decoration: none; background-color: #28a745; color: white; padding: 12px 24px; border-radius: 8px; font-size: 16px;">
+                {{ _('Suivre ma commande') }}
+            </a>
+        </div>
+    </div>
+
+    <hr style="margin-top: 40px;">
+
+    <p style="text-align: center; font-size: 14px; color: #aaa;">
+        {{ _('Vous recevrez une notification par email dès que votre paiement sera confirmé. Merci de patienter !') }}
+    </p>
+</div>
+{% endblock %}

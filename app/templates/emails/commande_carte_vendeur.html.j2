@@ -1,0 +1,14 @@
+<p>{{ _("Bonjour") }} {{ vendeur.username }},</p>
+
+<p>
+  {{ _("Vous avez reçu une commande pour votre annonce :") }}
+  <strong>{{ title }}</strong>.
+</p>
+
+<p><strong>{{ _("Mode de livraison :") }}</strong> {{ delivery_method }}</p>
+<p><strong>{{ _("Adresse de livraison :") }}</strong> {{ delivery_address }}</p>
+<p><strong>{{ _("Acheteur :") }}</strong> {{ acheteur.username }}</p>
+
+<hr>
+
+<p><strong>{{ _("Merci d’attendre la confirmation du paiement de la commission.") }}</strong></p>

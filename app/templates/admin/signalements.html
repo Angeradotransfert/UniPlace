@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 1100px; margin: auto; padding: 40px 20px;">
+    <h2 style="text-align: center; margin-bottom: 30px;">🚩 {{ _("Signalements des annonces") }}</h2>
+
+    {% if signalements %}
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead style="background-color: #f2f2f2;">
+            <tr>
+                <th style="padding: 10px;">{{ _("Annonce") }}</th>
+                <th>{{ _("Utilisateur") }}</th>
+                <th>{{ _("Motif") }}</th>
+                <th>{{ _("Date") }}</th>
+                <th>{{ _("Statut") }}</th>
+                <th>{{ _("Action") }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in signalements %}
+            <tr style="border-bottom: 1px solid #ccc;">
+                <td style="padding: 10px;">
+                    <a href="{{ url_for('listings.annonce_detail', listing_id=s.listing.id) }}" target="_blank">{{ s.listing.title }}</a>
+                </td>
+                <td>{{ s.user.username }}</td>
+                <td>{{ s.message or _("Aucun motif") }}</td>
+                <td>{{ s.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td>
+                    {% if s.status == 'traite' %}
+                        <span style="color: green; font-weight: bold;">{{ _("Traité") }}</span>
+                    {% else %}
+                        <span style="color: red; font-weight: bold;">{{ _("Ouvert") }}</span>
+                    {% endif %}
+                </td>
+                <td style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    {% if s.status == 'ouvert' %}
+                    <form method="POST" action="{{ url_for('admin.traiter_signalement', id=s.id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" style="background: green; color: white; border: none; padding: 6px 12px; border-radius: 6px;">
+                            ✅ {{ _("Traiter") }}
+                        </button>
+                    </form>
+                    {% endif %}
+
+                    <form method="POST"
+                          action="{{ url_for('admin.admin_supprimer_annonce_signalee', listing_id=s.listing.id) }}"
+                          onsubmit="return confirm('{{ _('Confirmer la suppression de cette annonce signalée ?') }}')">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 6px;">
+                            🗑 {{ _("Supprimer l'annonce") }}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p style="text-align: center;">{{ _("Aucun signalement reçu.") }}</p>
+    {% endif %}
+
+    {% if pagination.pages > 1 %}
+    <div style="text-align: center; margin-top: 30px;">
+        {% if pagination.has_prev %}
+            <a href="{{ url_for('admin.admin_signalements', page=pagination.prev_num) }}" style="margin: 0 8px;">← {{ _("Précédent") }}</a>
+        {% endif %}
+
+        {{ _("Page") }} {{ pagination.page }} {{ _("sur") }} {{ pagination.pages }}
+
+        {% if pagination.has_next %}
+            <a href="{{ url_for('admin.admin_signalements', page=pagination.next_num) }}" style="margin: 0 8px;">{{ _("Suivant") }} →</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

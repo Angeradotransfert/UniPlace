@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 40px 30px; background-color: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); font-family: 'Baloo 2', cursive; margin-top: 60px;">
+
+  <h1 style="text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 30px;">📋 {{ _('Conditions Générales d’Utilisation (CGU)') }}</h1>
+
+  <h3 style="color: #007BFF;">{{ _('1. Objet') }}</h3>
+  <p>{{ _("Les présentes Conditions Générales d’Utilisation régissent l’accès et l’utilisation de la plateforme UniPlace, permettant la mise en relation entre acheteurs et vendeurs.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('2. Accès à la plateforme') }}</h3>
+  <p>{{ _("L’accès à UniPlace est réservé aux utilisateurs inscrits qui acceptent ces conditions. Chaque utilisateur est responsable de ses informations et de ses actions sur la plateforme.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('3. Fonctionnement de la plateforme') }}</h3>
+  <ul>
+    <li>{{ _("UniPlace agit uniquement comme intermédiaire pour faciliter la mise en relation entre acheteurs et vendeurs.") }}</li>
+    <li>{{ _("L’acheteur paie une commission de 10% à UniPlace avant la mise en relation avec le vendeur.") }}</li>
+    <li>{{ _("Après paiement de la commission, UniPlace donne accès aux coordonnées du vendeur pour finaliser la transaction.") }}</li>
+  </ul>
+
+  <h3 style="color: #007BFF;">{{ _('4. Responsabilités') }}</h3>
+  <p>{{ _("UniPlace ne gère pas le paiement du produit ni la livraison. Toute transaction finale (paiement, livraison, garanties) se fait directement entre acheteur et vendeur. UniPlace ne pourra être tenu responsable des litiges, défauts, retards ou non-livraisons.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('5. Sécurité et confidentialité') }}</h3>
+  <p>{{ _("UniPlace bloque les messages contenant des données personnelles sensibles afin de protéger les utilisateurs. Chaque utilisateur s’engage à ne pas divulguer d’informations sensibles dans les échanges via la plateforme.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('6. Modification des CGU') }}</h3>
+  <p>{{ _("UniPlace se réserve le droit de modifier ces CGU à tout moment. Les utilisateurs en seront informés et devront les accepter pour continuer à utiliser la plateforme.") }}</p>
+
+</div>
+{% endblock %}

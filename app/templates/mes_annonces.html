@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: auto; padding: 20px; font-family: 'Baloo 2', cursive;">
+
+    <!-- Section de recherche -->
+    <form method="get" action="{{ url_for('main.recherche') }}" style="text-align: center; margin-bottom: 30px;">
+        <input type="text" name="search" placeholder="{{ _('Rechercher une annonce...') }}" style="padding: 8px 16px; border-radius: 6px; border: 1px solid #ddd;">
+        <button type="submit" style="background-color: #6f42c1; color: white; border: none; padding: 8px 16px; border-radius: 6px;">🔍</button>
+    </form>
+
+    <h2 style="text-align: center; color: #6f42c1; font-size: 32px; margin-bottom: 30px;">📄 {{ _('Mes annonces publiées') }}</h2>
+
+    {% if listings %}
+        {% for listing in listings %}
+        <div class="listing-container" style="background: #fdfdfd; border-left: 6px solid #6f42c1; border-radius: 12px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07); transition: all 0.3s;">
+            <h3 style="color: #2c3e50; font-size: 24px; margin-bottom: 10px;">{{ listing.title }}</h3>
+
+            <!-- 📸 Image cliquable vers la fiche détail -->
+            <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" style="text-decoration: none;">
+                <div class="carousel" id="carousel-{{ listing.id }}" style="position: relative; max-width: 400px; height: 250px; overflow: hidden; margin: 15px auto; border-radius: 10px; border: 1px solid #ddd;">
+                    <div class="carousel-inner" style="display: flex; transition: transform 0.5s ease;">
+                        {% for img in listing.images %}
+                        <img src="{{ url_for('static', filename='uploads/' + img.filename) }}" style="width: 100%; height: 250px; object-fit: cover; flex-shrink: 0;">
+                        {% endfor %}
+                        {% if listing.is_actually_sold %}
+                        <div style="position: absolute; top: 10px; left: 10px; background: #dc3545; color: white; padding: 6px 10px; border-radius: 8px; font-size: 0.9rem; font-weight: bold;">
+                            {{ _('VENDU') }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+
+            <!-- Flèches de navigation en dehors du lien cliquable -->
+            {% if listing.images|length > 1 %}
+            <button onclick="prevSlide({{ listing.id }})"
+                    style="position: absolute; margin-left: calc(50% - 200px); margin-top: -140px; background: rgba(111, 66, 193, 0.8); color: white; border: none; border-radius: 0 6px 6px 0; padding: 6px 12px; cursor: pointer;">
+                ⬅
+            </button>
+            <button onclick="nextSlide({{ listing.id }})"
+                    style="position: absolute; margin-left: calc(50% + 160px); margin-top: -140px; background: rgba(111, 66, 193, 0.8); color: white; border: none; border-radius: 6px 0 0 6px; padding: 6px 12px; cursor: pointer;">
+                ➡
+            </button>
+            {% endif %}
+
+            <div style="margin-top: 10px; color: #444; line-height: 1.6;">
+                <p><strong>{{ _('Description') }} :</strong> {{ listing.description }}</p>
+                <p><strong>{{ _('Prix') }} :</strong> {{ listing.price }} {{ listing.currency }}</p>
+                <p><strong>{{ _('Catégorie') }} :</strong> {{ listing.category }}</p>
+                <p><strong>{{ _('Ville') }}  :</strong> {{ listing.city }}</p>
+                <p><strong>{{ _('État') }} :</strong> {{ listing.condition }}</p>
+
+                {% if listing.taille %}
+                <p><strong>{{ _('Taille') }} :</strong>
+                    <a href="{{ url_for('main.recherche') }}?taille={{ listing.taille }}">{{ listing.taille }}</a>
+                </p>
+                {% endif %}
+                {% if listing.pointure %}
+                <p><strong>{{ _('Pointure') }} :</strong>
+                    <a href="{{ url_for('main.recherche') }}?pointure={{ listing.pointure }}">{{ listing.pointure }}</a>
+                </p>
+                {% endif %}
+                {% if listing.marque %}
+                <p><strong>{{ _('Marque') }} :</strong>
+                    <a href="{{ url_for('main.recherche') }}?marque={{ listing.marque }}">{{ listing.marque }}</a>
+                </p>
+                {% endif %}
+                {% if listing.modele %}
+                <p><strong>{{ _('Modèle') }}  :</strong>
+                    <a href="{{ url_for('main.recherche') }}?modele={{ listing.modele }}">{{ listing.modele }}</a>
+                </p>
+                {% endif %}
+            </div>
+
+            <!-- Section des boutons Modifier et Supprimer -->
+            <div style="margin-top: 15px; display: flex; gap: 12px;">
+                <a href="{{ url_for('listings.edit_listing', listing_id=listing.id) }}">
+                    <button style="background-color: #ffc107; color: black; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                          <i class="fa fa-pencil-alt"></i> {{ _('Modifier') }}
+                    </button>
+                </a>
+                <form method="POST" action="{{ url_for('listings.delete_listing', listing_id=listing.id) }}" onsubmit="return confirm('Supprimer cette annonce ?');">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" style="background-color: #dc3545; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                         <i class="fa fa-trash"></i> {{ _('Supprimer') }}
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; color: #888; font-size: 18px;">{{ _('Vous n\'avez publié aucune annonce.') }}</p>
+    {% endif %}
+
+    <!-- Bouton de pagination ou "Charger plus" -->
+    <div style="text-align: center; margin-top: 30px;">
+        <button id="loadMore" style="width: 100%; padding: 10px; background-color: #6f42c1; color: white; border: none; border-radius: 6px;">Charger plus</button>
+    </div>
+</div>
+
+<script>
+const positions = {};
+function nextSlide(id) {
+    const carousel = document.querySelector(`#carousel-${id} .carousel-inner`);
+    const total = carousel.children.length;
+    if (!positions[id]) positions[id] = 0;
+    positions[id] = (positions[id] + 1) % total;
+    carousel.style.transform = `translateX(-${positions[id] * 100}%)`;
+}
+function prevSlide(id) {
+    const carousel = document.querySelector(`#carousel-${id} .carousel-inner`);
+    const total = carousel.children.length;
+    if (!positions[id]) positions[id] = 0;
+    positions[id] = (positions[id] - 1 + total) % total;
+    carousel.style.transform = `translateX(-${positions[id] * 100}%)`;
+}
+</script>
+{% endblock %}

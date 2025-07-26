@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="contact-header">📬 {{ _('Contactez UniPlace') }}</h2>
+
+<div class="contact-form-container">
+    <form method="POST" class="contact-form">
+        <label for="email">{{ _('Email') }} :</label>
+        <input type="email" name="email" id="email" class="input-field" placeholder="{{ _('Entrez votre email') }}" required>
+
+        <label for="subject">{{ _('Sujet') }} :</label>
+        <input type="text" name="subject" id="subject" class="input-field" placeholder="{{ _('Entrez le sujet') }}" required>
+
+        <label for="message">{{ _('Message') }} :</label>
+        <textarea name="message" id="message" rows="6" class="input-field" placeholder="{{ _('Écrivez votre message ici...') }}" required></textarea>
+
+        <button type="submit" class="submit-button">{{ _('Envoyer') }}</button>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </form>
+</div>
+
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Container principal du formulaire */
+    .contact-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 40px;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact-header {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+
+    /* Style des champs de saisie */
+    .input-field {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+
+    .input-field:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+
+    /* Style du bouton d'envoi */
+    .submit-button {
+        width: 100%;
+        padding: 12px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+        background-color: #2980b9;
+    }
+
+    /* Ajout d'un peu d'espace pour les petits écrans */
+    @media (max-width: 768px) {
+        .contact-form-container {
+            padding: 20px;
+        }
+
+        .input-field {
+            font-size: 14px;
+        }
+
+        .submit-button {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}

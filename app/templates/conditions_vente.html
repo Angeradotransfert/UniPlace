@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 40px 30px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); font-family: 'Baloo 2', cursive; margin-top: 60px;">
+    <h1 style="text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 30px;">📜 {{ _('Conditions de vente sur UniPlace') }}</h1>
+
+    <h3 style="color: #007BFF;">💰 {{ _('Commission sur les ventes') }}</h3>
+    <p>
+        {{ _('Une commission fixe de') }} <strong>10 %</strong> {{ _('est appliquée sur chaque vente. Elle est') }} <strong>{{ _('payée par l’acheteur') }}</strong> {{ _('au moment de la commande, avant toute mise en relation avec le vendeur.') }}
+    </p>
+    <p>
+        {{ _('Cette commission sert à couvrir les frais de plateforme et à sécuriser les échanges. Le reste du montant est payé directement au vendeur après accord entre les parties.') }}
+    </p>
+
+    <h3 style="color: #007BFF;">💸 {{ _('Paiement en deux étapes') }}</h3>
+    <ol>
+        <li><strong>{{ _('Étape 1') }} :</strong> {{ _('L’acheteur paie uniquement la') }} <strong>10 %</strong> {{ _('commission à UniPlace (via USDT ou carte).') }}</li>
+        <li><strong>{{ _('Étape 2') }} :</strong> {{ _('Une fois la commande validée, l’acheteur et le vendeur sont mis en contact pour finaliser la transaction (paiement du produit et livraison).') }}</li>
+    </ol>
+    <p>
+        {{ _('UniPlace ne gère pas le paiement du produit lui-même, seulement la commission.') }}
+    </p>
+
+    <h3 style="color: #007BFF;">✅ {{ _('Moyens de paiement acceptés (commission uniquement)') }}</h3>
+    <ul>
+        <li><strong>USDT (TRC20)</strong> : {{ _('Adresse fournie à la confirmation de commande.') }}</li>
+        <li><strong>{{ _('Carte bancaire') }}</strong> : {{ _('Paiement manuel via les coordonnées transmises après commande.') }}</li>
+    </ul>
+
+    <h3 style="color: #007BFF;">📦 {{ _('Responsabilités & remboursements') }}</h3>
+    <p>
+        {{ _('Une fois la commission payée, UniPlace met les deux parties en relation. Le reste de la transaction se déroule de manière privée entre l’acheteur et le vendeur.') }}<br>
+        {{ _('UniPlace') }} <strong>{{ _('n\'intervient pas dans les litiges') }}</strong> {{ _('ou les problèmes liés aux produits.') }}
+    </p>
+    <p style="color: #c0392b;">
+        {{ _('Aucun remboursement ne sera effectué une fois la commission payée, sauf erreur manifeste ou fraude.') }}
+    </p>
+
+    <h3 style="color: #007BFF;">📝 {{ _('Acceptation des conditions') }}</h3>
+    <p>
+        {{ _('En utilisant UniPlace, vous acceptez sans réserve ces conditions de vente, y compris le paiement en deux étapes et les modalités liées à la commission.') }}
+    </p>
+</div>
+{% endblock %}

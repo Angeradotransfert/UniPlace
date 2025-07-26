@@ -1,0 +1,17 @@
+<!-- templates/csrf_expired.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans %}Session expirée{% endtrans %}</title>
+</head>
+<body>
+    <h2>😕 {% trans %}Oups, votre session a expiré{% endtrans %}</h2>
+    <p>{% trans %}Pour des raisons de sécurité, votre session a expiré après une période d'inactivité.{% endtrans %}</p>
+    <p>
+      {% trans %}Veuillez{% endtrans %}
+      <a href="{{ url_for('login') }}">{% trans %}vous reconnecter{% endtrans %}</a>
+      {% trans %}ou recharger la page pour renouveler votre session.{% endtrans %}
+    </p>
+</body>
+</html>

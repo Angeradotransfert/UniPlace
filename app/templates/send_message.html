@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.react-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-right: 5px;
+}
+
+.react-btn.reacted {
+  font-weight: bold;
+  color: #e0245e;
+}
+</style>
+
+<div style="max-width: 750px; margin: auto; padding: 20px; font-family: 'Segoe UI', sans-serif;">
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 15px;">
+        💬 {{ _('Discussion avec') }} <span style="color: #007bff;">{{ recipient.username }}</span>
+    </h2>
+
+    <!-- Avertissement sécurité -->
+    <div style="background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; font-size: 14px; margin-bottom: 15px; border: 1px solid #ffeeba;">
+        ⚠️ {{ _("Ne partagez pas vos coordonnées personnelles. Les messages contenant des infos sensibles (emails, numéros, IBAN, etc.) sont filtrés.") }}
+    </div>
+
+    <!-- Zone de discussion -->
+    <div id="chat-container" style="border: 1px solid #ccc; background: #fff; padding: 15px; max-height: 400px; overflow-y: auto; border-radius: 10px; margin-bottom: 20px;">
+        {% for msg in messages %}
+            <div style="display: flex; justify-content: {% if msg.sender_id == current_user.id %}flex-end{% else %}flex-start{% endif %}; margin: 8px 0;">
+                <div style="
+                    max-width: 70%;
+                    background-color: {% if msg.sender_id == current_user.id %}#007BFF{% else %}#f0f0f0{% endif %};
+                    color: {% if msg.sender_id == current_user.id %}#fff{% else %}#000{% endif %};
+                    padding: 10px 15px;
+                    border-radius: 20px;
+                    word-wrap: break-word;
+                    font-size: 14px;">
+                    {{ msg.content }}
+                    {% if msg.file_path %}
+                        <br>
+                        {% set ext = msg.file_path.split('.')[-1].lower() %}
+                        {% if ext in ['jpg', 'jpeg', 'png', 'gif', 'webp'] %}
+                            <img src="{{ url_for('static', filename='uploads/messages/' + msg.file_path) }}"
+                                 style="max-width: 150px; max-height: 150px; margin-top: 5px; border-radius: 8px;">
+                        {% else %}
+                            <a href="{{ url_for('static', filename='uploads/messages/' + msg.file_path) }}" target="_blank" style="color: yellow;">
+                                📎 {{ _('Voir pièce jointe') }} ({{ ext|upper }})
+                            </a>
+                        {% endif %}
+                    {% endif %}
+
+                    <!-- Réactions emoji -->
+                    <div class="reactions" data-message-id="{{ msg.id }}" style="margin-top: 8px; user-select: none;">
+                      {% set user_reactions = msg.reactions | selectattr('user_id', 'equalto', current_user.id) | map(attribute='emoji') | list %}
+                      {% for emoji in ["🙂", "👍", "❤️", "😡"] %}
+                        <button type="button"
+                                class="react-btn {% if emoji in user_reactions %}reacted{% endif %}"
+                                data-emoji="{{ emoji }}"
+                                style="border:none; background:none; cursor:pointer; font-size: 1.2rem; margin-right: 6px;">
+                          {{ emoji }} <span class="count">{{ msg.reactions | selectattr('emoji', 'equalto', emoji) | list | length }}</span>
+                        </button>
+                      {% endfor %}
+                    </div>
+
+                    <div style="font-size: 11px; color: #ddd; margin-top: 5px; text-align: right;">
+                        {{ msg.timestamp.strftime('%d/%m %H:%M') }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Formulaire d'envoi -->
+    <form method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 12px;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <textarea name="content" required
+            placeholder="{{ _('Tapez votre message ici...') }}"
+            style="width: 100%; height: 100px; padding: 10px; border: 1px solid #ced4da; border-radius: 8px; font-size: 15px;"></textarea>
+
+        <input type="file" name="file" accept="image/*,.pdf,.doc,.docx,.txt" style="margin-top: 5px;">
+
+        <button type="submit"
+            style="padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">
+            📤 {{ _('Envoyer') }}
+        </button>
+    </form>
+</div>
+
+<!-- Scroll auto vers le bas -->
+<script>
+    const chatBox = document.getElementById("chat-container");
+    chatBox.scrollTop = chatBox.scrollHeight;
+</script>
+
+<script>
+document.querySelectorAll('.reactions').forEach(container => {
+  container.querySelectorAll('.react-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const messageId = container.dataset.messageId;
+      const emoji = button.dataset.emoji;
+
+      fetch(`/message/${messageId}/react`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ emoji: emoji })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        for (const [em, count] of Object.entries(data.counts)) {
+          const btn = container.querySelector(`button[data-emoji="${em}"]`);
+          btn.querySelector('.count').textContent = count;
+          if (em === emoji) {
+            if (data.action === 'added') {
+              btn.classList.add('reacted');
+            } else {
+              btn.classList.remove('reacted');
+            }
+          }
+        }
+      })
+      .catch(() => alert('{{ _("Erreur réseau") }}'));
+    });
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,20 @@
+<p>{{ _("Bonjour") }} {{ buyer.username }},</p>
+
+<p>{{ _("Le statut de votre livraison a été mis à jour :") }}</p>
+
+<ul>
+    <li><strong>{{ _("Statut :") }}</strong> {{ order.tracking_status }}</li>
+    <li><strong>{{ _("Numéro de suivi :") }}</strong> {{ order.tracking_number }}</li>
+    <li><strong>{{ _("Méthode de livraison :") }}</strong> {{ order.delivery_method }}</li>
+</ul>
+
+<p>{{ _("Vous pouvez suivre l’évolution dans votre tableau de bord :") }}</p>
+
+<p>
+  <a href="{{ url_for('main.mes_achats', _external=True) }}">📦 {{ _("Accéder à mes achats") }}</a>
+</p>
+
+<hr>
+<p style="font-size:12px;color:gray;">
+  {{ _("Merci d’utiliser UniPlace") }}
+</p>

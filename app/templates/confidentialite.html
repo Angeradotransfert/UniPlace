@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 40px 30px; background-color: #fff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); font-family: 'Baloo 2', cursive; margin-top: 60px;">
+
+  <h1 style="text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 30px;">🔐 {{ _('Politique de Confidentialité') }}</h1>
+
+  <h3 style="color: #007BFF;">{{ _('1. Collecte des données') }}</h3>
+  <p>{{ _("UniPlace collecte uniquement les données nécessaires à l’inscription et à la gestion des comptes utilisateurs (nom, email, mot de passe). Les informations de paiement de la commission sont gérées via des prestataires externes sécurisés.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('2. Utilisation des données') }}</h3>
+  <p>{{ _("Les données personnelles sont utilisées pour gérer les comptes, envoyer les confirmations de commande, et permettre la mise en relation entre acheteurs et vendeurs. UniPlace ne partage pas les données personnelles avec des tiers, sauf pour les besoins légaux ou techniques indispensables.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('3. Protection des données') }}</h3>
+  <p>{{ _("UniPlace met en place des mesures techniques pour protéger les données contre tout accès non autorisé ou divulgation. Les messages contenant des données sensibles sont automatiquement filtrés pour protéger les utilisateurs.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('4. Durée de conservation') }}</h3>
+  <p>{{ _("Les données des utilisateurs sont conservées aussi longtemps que nécessaire pour la gestion du compte et des transactions.") }}</p>
+
+  <h3 style="color: #007BFF;">{{ _('5. Droits des utilisateurs') }}</h3>
+  <p>{{ _("Chaque utilisateur peut accéder, modifier ou supprimer ses données personnelles en contactant UniPlace. Les utilisateurs peuvent demander la suppression définitive de leur compte.") }}</p>
+
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<h1>{{ _('Gestion de la Bannière') }}</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <label for="text">{{ _('Texte de la bannière') }}</label>
+        {{ form.text(class='form-control') }}
+    </div>
+    <div class="form-group">
+        <label for="image">{{ _('Image de la bannière') }}</label>
+        {{ form.image(class='form-control') }}
+    </div>
+    <div class="form-group">
+        {{ form.is_active }} {{ _('Activer la bannière') }}
+    </div>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="btn btn-primary">{{ _('Sauvegarder') }}</button>
+</form>
+
+<h2>{{ _('Liste des bannières') }}</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ _('Texte') }}</th>
+            <th>{{ _('Image') }}</th>
+            <th>{{ _('Actif') }}</th>
+            <th>{{ _('Actions') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for banner in banners %}
+            <tr>
+                <td>{{ banner.text }}</td>
+                <td><img src="{{ url_for('static', filename='uploads/' + banner.image_filename) }}" width="100" /></td>
+                <td>{{ 'Oui' if banner.is_active else 'Non' }}</td>
+                <td>
+                    <form action="{{ url_for('admin.delete_banner', banner_id=banner.id) }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-danger">{{ _('Supprimer') }}</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

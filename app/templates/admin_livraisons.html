@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .livraisons-wrapper {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .livraisons-wrapper h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    .livraisons-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .livraisons-table thead {
+        background-color: #f4f6f9;
+    }
+
+    .livraisons-table th,
+    .livraisons-table td {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .livraisons-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .badge {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .badge-pending {
+        background-color: #ffeeba;
+        color: #856404;
+    }
+
+    .badge-shipped {
+        background-color: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .badge-delivered {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .btn-view {
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.2s;
+    }
+
+    .btn-view:hover {
+        background-color: #0056b3;
+    }
+
+    @media screen and (max-width: 768px) {
+        .livraisons-table thead {
+            display: none;
+        }
+
+        .livraisons-table, .livraisons-table tbody, .livraisons-table tr, .livraisons-table td {
+            display: block;
+            width: 100%;
+        }
+
+        .livraisons-table tr {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .livraisons-table td {
+            padding: 12px;
+            font-size: 14px;
+            text-align: right;
+            position: relative;
+        }
+
+        .livraisons-table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 12px;
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+        }
+    }
+</style>
+
+<div class="livraisons-wrapper">
+    <h2>🚚 {{ _('Suivi des livraisons') }}</h2>
+
+    {% if commandes %}
+    <table class="livraisons-table">
+        <thead>
+            <tr>
+                <th>{{ _('Commande #') }}</th>
+                <th>{{ _('Produit') }}</th>
+                <th>{{ _('Acheteur') }}</th>
+                <th>{{ _('Méthodes') }}</th>
+                <th>{{ _('Adresse') }}</th>
+                <th>{{ _('Statut livraison') }}</th>
+                <th>{{ _('Suivi') }}</th>
+                <th>{{ _('Action') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cmd in commandes %}
+            <tr>
+                 <td data-label="{{ _('Commande #') }}">{{ cmd.id }}</td>
+                <td data-label="{{ _('Produit') }}">
+                    {% for item in cmd.items %}
+                        {{ item.listing.title }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td data-label="{{ _('Acheteur') }}">{{ cmd.buyer.username }}</td>
+                <td data-label="{{ _('Méthodes') }}">
+                    <strong>{{ _('Paiement') }} :</strong>
+                    {% if cmd.payment_method == 'usdt' %}
+                        💸 {{ _('Crypto') }}
+                    {% elif cmd.payment_method == 'carte' %}
+                        💳 {{ _('Carte') }}
+                    {% else %}
+                        ❓ {{ _('Inconnu') }}
+                    {% endif %}
+                    <br>
+                    <strong>{{ _('Livraison') }} :</strong>
+                    {% if cmd.delivery_method == 'pochta' %}
+                        📦 {{ _('Pochta Rossii') }}
+                    {% elif cmd.delivery_method == 'main_propre' %}
+                        🤝 {{ _('Remise en main propre') }}
+                    {% else %}
+                        {{ _('Non précisée') }}
+                    {% endif %}
+                </td>
+                <td data-label="{{ _('Adresse') }}">{{ cmd.delivery_address or _('Non fournie') }}</td>
+                <td data-label="{{ _('Statut livraison') }}">
+                    {% if cmd.tracking_status == 'livré' %}
+                        <span class="badge badge-delivered">{{ _('Livré') }}</span>
+                    {% elif cmd.tracking_status == 'expédié' %}
+                        <span class="badge badge-shipped">{{ _('Expédié') }}</span>
+                    {% else %}
+                        <span class="badge badge-pending">{{ cmd.tracking_status or _('Préparation') }}</span>
+                    {% endif %}
+                </td>
+                <td data-label="{{ _('Suivi') }}">{{ cmd.tracking_number or '-' }}</td>
+                <td data-label="{{ _('Action') }}">
+                    <a href="{{ url_for('admin.admin_commande_detail', order_id=cmd.id) }}" class="btn-view">{{ _('Voir') }}</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p style="text-align: center; font-size: 1.1rem; color: #666;">{{ _('Aucune commande livrée pour le moment.') }}</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .admin-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .return-btn {
+        display: inline-block;
+        background-color: #6c757d;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    h2 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .stats-row {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .stat-box {
+        background-color: #f1f3f5;
+        padding: 20px;
+        border-radius: 10px;
+        width: 200px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .stat-box h3 {
+        margin: 0;
+        font-size: 28px;
+        color: #007BFF;
+    }
+
+    .stat-box p {
+        margin: 5px 0 0;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .section-title {
+        margin-top: 40px;
+        margin-bottom: 10px;
+        color: #007BFF;
+        font-weight: bold;
+        font-size: 20px;
+        border-bottom: 2px solid #007BFF;
+        padding-bottom: 5px;
+    }
+
+    .search-form {
+        margin: 15px 0;
+        display: flex;
+        gap: 10px;
+        max-width: 400px;
+    }
+
+    .search-form input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .search-form button {
+        padding: 10px 14px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        border: 1px solid #dee2e6;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007BFF;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .badge-admin {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .badge-user {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .admin-btn {
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.admin-btn.promote {
+    background-color: #198754;
+    color: white;
+}
+
+.admin-btn.promote:hover {
+    background-color: #157347;
+    transform: scale(1.05);
+}
+
+.admin-btn.demote {
+    background-color: #dc3545;
+    color: white;
+}
+
+.admin-btn.demote:hover {
+    background-color: #bb2d3b;
+    transform: scale(1.05);
+}
+
+.admin-badge {
+    background-color: #0d6efd;
+    color: white;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+    .btn-delete {
+        background-color: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background-color: #bd2130;
+    }
+
+    .btn-promote {
+        background-color: #ffc107;
+    }
+
+    .btn-promote:hover {
+        background-color: #e0a800;
+    }
+</style>
+
+<div class="admin-container">
+    <a href="{{ url_for('main.dashboard') }}" class="return-btn"> {{ _('Retour au tableau de bord') }}</a>
+
+    <h2>🛠️ {{ _('Espace Administrateur') }}</h2>
+
+    <div class="stats-row">
+        <div class="stat-box">
+            <h3>{{ total_users }}</h3>
+            <p>{{ _('Utilisateurs') }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>{{ total_admins }}</h3>
+            <p>{{ _('Administrateurs') }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>{{ total_listings }}</h3>
+            <p>{{ _('Annonces') }}</p>
+        </div>
+        <div class="stat-box">
+            <h3>{{ total_sold }}</h3>
+            <p>{{ _('Annonces vendues') }}</p>
+        </div>
+    </div>
+
+    <div class="section-title">{{ _('Utilisateurs') }}</div>
+
+    <form method="GET" action="{{ url_for('admin.admin_panel') }}" class="search-form">
+        <input type="text" name="search" value="{{ search_query }}" placeholder="🔎 {{ _('Rechercher un utilisateur...') }}">
+        <button type="submit">{{ _('Rechercher') }}</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('ID') }}</th>
+                <th>{{ _('Nom d\'utilisateur') }}</th>
+                <th>{{ _('Email') }}</th>
+                <th>{{ _('Rôle') }}</th>
+                <th>{{ _('Action') }}</th>
+                <th>{{ _('Promotion') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% if user.is_admin %}
+                        <span class="badge badge-admin">{{ _('Admin') }}</span>
+                    {% else %}
+                        <span class="badge badge-user">{{ _('Utilisateur') }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not user.is_admin %}
+                    <form method="POST" action="{{ url_for('admin.delete_user', user_id=user.id) }}" onsubmit="return confirm('{{ _('Supprimer cet utilisateur ?') }}');" style="display: inline;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn-delete">🗑 {{ _('Supprimer') }}</button>
+                    </form>
+                    {% endif %}
+                </td>
+                <td>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+    {% if not user.is_admin %}
+        <!-- Bouton : Promouvoir admin -->
+        <form method="POST" action="{{ url_for('admin.make_admin', user_id=user.id) }}" onsubmit="return confirm('{{ _('Confirmer la promotion au rôle admin ?') }}');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="admin-btn promote">
+                 {{ _('Promouvoir admin') }}
+            </button>
+        </form>
+    {% elif user.id != current_user.id %}
+        <!-- Bouton : Retirer admin -->
+        <form method="POST" action="{{ url_for('admin.remove_admin', user_id=user.id) }}" onsubmit="return confirm('{{ _('Confirmer le retrait du rôle admin ?') }}');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="admin-btn demote">
+                🚫 {{ _('Retirer admin') }}
+            </button>
+        </form>
+    {% else %}
+        <span class="admin-badge">👑 {{ _('Vous') }}</span>
+    {% endif %}
+</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="section-title">{{ _('Annonces') }}</div>
+    <table>
+        <thead>
+            <tr>
+               <th>{{ _('ID') }}</th>
+                <th>{{ _('Titre') }}</th>
+                <th>{{ _('Utilisateur') }}</th>
+                <th>{{ _('Prix') }}</th>
+                <th>{{ _('Catégorie') }}</th>
+                <th>{{ _('État') }}</th>
+                <th>{{ _('Status') }}</th>
+                <th>{{ _('Action') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ad in listings %}
+            <tr>
+                <td>{{ ad.id }}</td>
+                <td>{{ ad.title }}</td>
+                <td>{{ ad.user.username }}</td>
+                <td>{{ ad.price }} {{ ad.currency }}</td>
+                <td>{{ ad.category }}</td>
+                <td>{{ ad.condition }}</td>
+                <td>
+                    {% if ad.is_sold %}
+                        <span class="badge badge-user">{{ _('Vendu') }}</span>
+                    {% else %}
+                        <span class="badge badge-admin">{{ _('Actif') }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('admin.delete_listing_admin', listing_id=ad.id) }}" onsubmit="return confirm('{{ _('Confirmer la suppression de cette annonce ?') }}');">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn-delete">🗑 {{ _('Supprimer') }}</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

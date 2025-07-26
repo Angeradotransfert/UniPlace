@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UniPlace</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        nav {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav .nav-left a,
+        nav .nav-right a {
+            margin: 0 12px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        nav .nav-left a:hover,
+        nav .nav-right a:hover {
+            color: #000;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f0f0f0;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            margin-top: 50px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .bank-info-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            max-width: 700px;
+            margin: 40px auto;
+            font-family: 'Baloo 2', cursive;
+        }
+
+        .bank-info-card h3 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .bank-info-card label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .bank-info-card input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        .bank-info-card input::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .bank-info-card button {
+            margin-top: 25px;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .bank-info-card button:hover {
+            background-color: #0056b3;
+        }
+        .nav-right a[href*="panier"] {
+    font-size: 20px;
+    position: relative;
+}
+        #icone-panier-flottant {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    color: #333;
+    padding: 10px 14px;
+    border-radius: 50px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    font-size: 22px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#icone-panier-flottant:hover {
+    background-color: #f0f0f0;
+}
+
+#compteur-panier-flottant {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <a href="{{ url_for('main.index') }}"><strong>UniPlace</strong></a>
+
+        <a href="{{ url_for('listings.annonces') }}">{{ _('Voir les annonces') }}</a>
+    </div>
+    <div class="nav-right">
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('main.panier') }}" style="position: relative;">
+            🛒
+            <span style="
+                position: absolute;
+                top: -8px;
+                right: -10px;
+                background-color: red;
+                color: white;
+                border-radius: 50%;
+                padding: 2px 6px;
+                font-size: 12px;
+                font-weight: bold;
+            ">
+                {{ panier_count }}
+            </span>
+        </a>
+       <a href="{{ url_for('main.dashboard') }}">{{ _('Dashboard') }}</a>
+<a href="{{ url_for('messaging.inbox') }}">{{ _('Messagerie') }}</a>
+<a href="{{ url_for('main.contact') }}">📬 {{ _('Contact') }}</a>
+<a href="{{ url_for('auth.logout') }}">{{ _('Se déconnecter') }}</a>
+    {% else %}
+        <a href="{{ url_for('main.contact') }}">📬 {{ _('Contact') }}</a>
+        <a href="{{ url_for('auth.login') }}">{{ _('Se connecter') }}</a>
+<a href="{{ url_for('auth.signup') }}">{{ _('S\'inscrire') }}</a>
+    {% endif %}
+
+</div>
+</nav>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    &copy; {{ current_year or 2025 }} UniPlace. {{ _('Tous droits réservés') }}. <br>
+<a href="{{ url_for('main.conditions_vente') }}">📜 {{ _('Conditions de vente') }}</a>
+<a href="{{ url_for('main.contact') }}">📬 {{ _('Nous contacter') }}</a>
+</footer>
+
+<!-- ✅ Script : mise à jour automatique du token CSRF toutes les 5 minutes -->
+<script>
+    setInterval(function () {
+        fetch("/generate_csrf_token")
+            .then(response => response.text())
+            .then(token => {
+                document.querySelectorAll('input[name="csrf_token"]').forEach(input => {
+                    input.value = token;
+                });
+            });
+    }, 5 * 60 * 1000);  // toutes les 5 minutes
+</script>
+
+<!-- Bloc extensible pour tes propres scripts -->
+{% block scripts %}
+ <script>
+function afficherPopupAjoutPanier() {
+    const popup = document.getElementById('popup-panier');
+    popup.style.display = 'block';
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, 2500);
+}
+</script>
+{% endblock %}
+{% if current_user.is_authenticated %}
+<a href="{{ url_for('main.panier') }}" id="icone-panier-flottant">
+    🛒
+    <span id="compteur-panier-flottant">{{ panier_count }}</span>
+</a>
+{% endif %}
+
+<div id="popup-panier" style="
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 9999;
+    display: none;
+    font-size: 16px;
+">
+    ✅ Ajouté au panier
+</div>
+</body>
+</html>

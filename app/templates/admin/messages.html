@@ -1,0 +1,27 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+  <h1>{{ _('Contact Messages') }}</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{{ _('ID') }}</th>
+        <th>{{ _('Email') }}</th>
+        <th>{{ _('Subject') }}</th>
+        <th>{{ _('Message') }}</th>
+        <th>{{ _('Date Sent') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for msg in messages %}
+        <tr>
+          <td>{{ msg.id }}</td>
+          <td>{{ msg.email }}</td>
+          <td>{{ msg.subject }}</td>
+          <td>{{ msg.message[:50] }}...</td>
+          <td>{{ msg.created_at }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

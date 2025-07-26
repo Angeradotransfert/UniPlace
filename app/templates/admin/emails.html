@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary"><i class="fas fa-envelope"></i> {{ _('Journal des Emails envoyés') }}</h2>
+
+    <div class="card shadow rounded">
+        <div class="card-body p-0">
+            <table class="table table-hover table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">📅 {{ _('Date') }}</th>
+                        <th scope="col">👤 {{ _('Destinataire') }}</th>
+                        <th scope="col">📝 {{ _('Sujet') }}</th>
+                        <th scope="col">📬 {{ _('Statut') }}</th>
+                        <th scope="col">🔍 {{ _('Détail') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in emails.items %}
+                    <tr>
+                        <td>{{ email.sent_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                        <td>{{ email.recipient }}</td>
+                        <td>{{ email.subject }}</td>
+                        <td>
+                            {% if email.status == 'success' %}
+                                <span class="badge bg-success">{{ _('Envoyé') }}</span>
+                            {% else %}
+                                <span class="badge bg-danger">{{ _('Erreur') }}</span>
+                                <br>
+                                <small class="text-muted">{{ email.error_message[:60] }}</small>
+
+                                <!-- Bouton Retester -->
+                                <form action="{{ url_for('admin.retry_email', email_id=email.id) }}" method="post" class="mt-2 d-inline">
+                                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn btn-sm btn-warning"
+                                        onclick="return confirm('{{ _('Re-tester l’envoi de cet email ?') }}');">
+                                        ↻ {{ _('Retester') }}
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#content{{ email.id }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                {{ _('Voir contenu') }}
+                            </button>
+                            <div id="content{{ email.id }}" class="collapse mt-2">
+                                <div class="card card-body bg-light" style="white-space: pre-wrap;">
+                                    {{ email.content|safe }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-3 text-center">
+        {% if emails.has_prev %}
+            <a href="{{ url_for('admin.admin_emails', page=emails.prev_num) }}" class="btn btn-outline-secondary">← {{ _('Précédent') }}</a>
+        {% endif %}
+        <span class="mx-2">{{ _('Page') }} {{ emails.page }} / {{ emails.pages }}</span>
+        {% if emails.has_next %}
+            <a href="{{ url_for('admin.admin_emails', page=emails.next_num) }}" class="btn btn-outline-secondary">{{ _('Suivant') }} →</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

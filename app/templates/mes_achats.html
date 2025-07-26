@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 1100px; margin: auto; padding: 40px 20px; font-family: 'Segoe UI', sans-serif;">
+    <h2 style="text-align: center; font-size: 2.4rem; color: #2c3e50; margin-bottom: 30px;">{{ _('🛒 Historique de mes achats') }}</h2>
+
+    {% if orders %}
+        {% set displayed_vendors = [] %}
+        {% for order in orders %}
+            {% for item in order.items %}
+
+            {% if item.listing %}
+            <div style="background: #ffffff; border-left: 6px solid #28a745; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+                <h3 style="color: #007BFF; margin-bottom: 10px;">
+                    <a href="{{ url_for('listings.annonce_detail', listing_id=item.listing.id) }}" style="color: #007BFF; text-decoration: none;">
+                        {{ item.listing.title }} 🔗
+                    </a>
+                </h3>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    {% if item.listing.images and item.listing.images[0] %}
+                        <a href="{{ url_for('listings.annonce_detail', listing_id=item.listing.id) }}">
+                            <img src="{{ url_for('static', filename='uploads/' + item.listing.images[0].filename) }}"
+                                 alt="Image du produit"
+                                 style="max-width: 180px; max-height: 180px; width: auto; height: auto; border-radius: 10px; border: 1px solid #ccc;">
+                        </a>
+                    {% endif %}
+
+                    <div style="flex: 1; min-width: 260px;">
+                        <p><strong>{{ _('💰 Prix payé') }} :</strong> <span style="color: #28a745;">{{ item.unit_price }} ₽</span></p>
+                        <p><strong>{{ _('🗓 Date d\'achat') }} :</strong> {{ order.timestamp.strftime('%d/%m/%Y à %H:%M') }}</p>
+                        <p><strong>{{ _('👤 Vendeur') }} :</strong>
+                            {% if item.listing.user %}
+                                {{ item.listing.user.username }}
+                            {% else %}
+                                Vendeur inconnu
+                            {% endif %}
+                        </p>
+
+                        {% if order.status == 'paid' and item.listing.user and item.listing.user.id not in displayed_vendors %}
+                        <div style="margin-top: 15px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; background-color: #f8f9fa;">
+                            <h4 style="margin-bottom: 10px;">{{ _('📞 Coordonnées du vendeur') }}</h4>
+                            {% if item.listing.user.usdt_address %}
+                                <p><strong>{{ _('🪙 Adresse USDT (TRC20)') }} :</strong> {{ item.listing.user.usdt_address }}</p>
+                            {% endif %}
+                            {% if item.listing.user.bank_name and item.listing.user.card_number and item.listing.user.card_holder %}
+                                <p><strong>{{ _('🏦 Banque') }} :</strong> {{ item.listing.user.bank_name }}</p>
+                                <p><strong>{{ _('💳 Numéro carte') }}:</strong> {{ item.listing.user.card_number }}</p>
+                                <p><strong>{{ _('👤 Titulaire') }} :</strong> {{ item.listing.user.card_holder }}</p>
+                            {% endif %}
+                            <a href="{{ url_for('messaging.send_message', user_id=item.listing.user.id) }}"
+                               style="display: inline-block; margin-top: 10px; padding: 8px 14px; background-color: #007BFF; color: white; border-radius: 8px; text-decoration: none;">
+                               📩 {{ _('Contacter le vendeur') }}
+                            </a>
+                        </div>
+                        {% do displayed_vendors.append(item.listing.user.id) %}
+                        {% endif %}
+
+                        <p><strong>{{ _('📍 Ville') }} :</strong> {{ item.listing.city }}</p>
+                        <p><strong>{{ _('📦 Catégorie') }} :</strong> {{ item.listing.category }} – {{ item.listing.subcategory }}</p>
+
+                        <p><strong>{{ _('💳 Paiement') }} :</strong>
+                            {% if order.payment_method == 'usdt' %}
+                                💸 {{ _('USDT') }}
+                            {% elif order.payment_method == 'carte' %}
+                                💳  {{ _('Carte bancaire') }}
+                            {% else %}
+                                ❓ {{ _('Inconnu') }}
+                            {% endif %}
+                        </p>
+
+                        <p><strong>{{ _('📌 Statut') }} :</strong>
+                            <span style="color: {% if order.status == 'paid' or order.status == 'commission_payee' %}green{% else %}orange{% endif %}; font-weight: bold;">
+                                {% if order.status == 'paid' %}
+                                    ✅ {{ _('Paiement confirmé') }}
+                                {% elif order.status == 'commission_payee' %}
+                                    💳 {{ _('Commission payée') }}
+                                {% else %}
+                                    🕒 {{ _('En attente') }}
+                                {% endif %}
+                            </span>
+                        </p>
+
+                        <p><strong>{{ _('🚚 Méthode de livraison') }} :</strong>
+                            {% if order.delivery_method == 'pochta' %}
+                                📦 {{ _('Pochta Rossii') }}
+                            {% elif order.delivery_method == 'main_propre' %}
+                                🤝 {{ _('Remise en main propre') }}
+                            {% else %}
+                                {{ _('Non spécifiée') }}
+                            {% endif %}
+                        </p>
+
+                        <p><strong>{{ _('🏠 Adresse') }}  :</strong> {{ order.delivery_address or _('Non renseignée') }}</p>
+
+                        {% if order.tracking_number %}
+                            <p><strong>{{ _('🖟 Suivi colis') }}:</strong> {{ order.tracking_number }}</p>
+                            <p><strong>{{ _('📦 Statut livraison') }}:</strong> {{ order.tracking_status or 'En cours' }}</p>
+                        {% endif %}
+
+                        {% if order.status == 'en_attente' %}
+                        <form action="{{ url_for('main.annuler_commande', order_id=order.id) }}" method="POST" style="margin-top: 15px;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit"
+                                    style="background-color: #dc3545; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-size: 15px; cursor: pointer;">
+                                ❌ {{ _('Annuler la commande') }}
+                            </button>
+                        </form>
+                        {% endif %}
+
+                        {% if (order.status == 'paid' or order.status == 'commission_payee') and not order.review %}
+                        <form action="{{ url_for('listings.laisser_avis', order_id=order.id) }}" method="POST" style="margin-top: 20px;">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <label><strong>⭐ {{ _('Noter ce produit') }} :</strong></label><br>
+                            <select name="rating" required style="margin-top: 6px; padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc;">
+                                <option value="">-- {{ _('-- Choisissez une note --') }} --</option>
+                                {% for i in range(1, 6) %}
+                                    <option value="{{ i }}">{{ i }} étoile{{ 's' if i > 1 }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <label style="margin-top: 10px;"><strong>💬 {{ _('Commentaire') }} :</strong></label><br>
+                            <textarea name="comment" rows="2" placeholder="{{ _('Votre avis sur le produit...') }}" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+
+                            <button type="submit" style="margin-top: 10px; background-color: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 8px;">
+                                ✅ {{ _('Laisser un avis') }}
+                            </button>
+                        </form>
+                        {% elif order.review %}
+                        <p style="margin-top: 20px; color: #007BFF;"><strong>✔️ {{ _('Vous avez déjà laissé un avis.') }}</strong></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div style="background: #fff3cd; border-left: 6px solid #ffc107; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                <p style="color: #856404; font-weight: bold;">⚠️ {{ _('Cette annonce a été supprimée ou n\'existe plus.') }}</p>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; font-size: 1.2rem; color: #555;">{{ _("Vous n'avez encore rien acheté. 😕") }}</p>
+    {% endif %}
+</div>
+{% endblock %}

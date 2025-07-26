@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Google Font Baloo 2 -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.reviews-wrapper {
+    max-width: 900px;
+    margin: 80px auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-wrapper h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.review-card {
+    background-color: #fefae0;
+    border-left: 6px solid #ffc107;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.review-card p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.review-card strong {
+    color: #222;
+}
+
+.review-card small {
+    display: block;
+    margin-top: 10px;
+    color: #777;
+    font-size: 14px;
+    text-align: right;
+}
+
+.no-reviews {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    padding: 40px 0;
+}
+
+.stars {
+    color: #ffc107;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+</style>
+
+<div class="reviews-wrapper">
+    <h2>🗣️ {{ _('Avis reçus sur vos annonces') }}</h2>
+
+    {% if avis %}
+        {% for r in avis %}
+        <div class="review-card">
+            <p>
+    <strong>🛒 {{ _('Annonce') }} :</strong> {{ r.listing.title }}
+    {% if r.is_new %}
+        <span style="background-color: #dc3545; color: white; padding: 4px 8px; border-radius: 8px; font-size: 12px; margin-left: 10px;">
+            🆕 {{ _('Nouvel avis') }}
+        </span>
+    {% endif %}
+</p>
+            <p><strong>⭐ {{ _('Note') }} :</strong>
+                <span class="stars">
+                    {% for i in range(1, 6) %}
+                        {% if i <= r.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                </span>
+            </p>
+            <p><strong>🧑 {{ _('Par') }} :</strong> {{ r.reviewer.username }}</p>
+            <p><strong>💬 {{ _('Commentaire') }} :</strong> {{ r.comment or _('Aucun') }}</p>
+            <small>📅 {{ r.created_at.strftime('%d/%m/%Y à %H:%M') }}</small>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-reviews">
+            <p>😔 {{ _('Aucun avis reçu pour l’instant.') }}</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

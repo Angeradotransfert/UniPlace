@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Inscription') }}  - UniPlace</title>
+
+    <!-- Police Baloo 2 -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffecd2, #fcb69f, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            font-family: 'Baloo 2', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .signup-container {
+            background-color: #fff;
+            padding: 35px 45px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .uniplace-logo {
+            font-family: 'Baloo 2', cursive;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .u { color: #ff5252; }
+        .n { color: #ffb300; }
+        .i { color: #00e676; }
+        .p { color: #2979ff; }
+        .l { color: #ab47bc; }
+        .a { color: #ff7043; }
+        .c { color: #26c6da; }
+        .e { color: #8d6e63; }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .flash-message {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 15px;
+            text-align: left;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>📝 {{ _('Inscription à') }}
+        <span class="uniplace-logo">
+            <span class="u">U</span><span class="n">n</span><span class="i">i</span>
+            <span class="p">P</span><span class="l">l</span><span class="a">a</span>
+            <span class="c">c</span><span class="e">e</span>
+        </span>
+    </h2>
+
+    <!-- ✅ Bloc d'affichage des flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('auth.signup') }}">
+        {{ form.hidden_tag() }}
+
+        {{ form.username(size=32, placeholder=_("Nom d'utilisateur")) }}
+        {% for error in form.username.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+
+        {{ form.email(size=32, placeholder=_("Email")) }}
+        {% for error in form.email.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+
+        {{ form.password(size=32, placeholder=_("Mot de passe")) }}
+        {% for error in form.password.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+
+        {{ form.confirm_password(size=32, placeholder=_("Confirmer le mot de passe")) }}
+        {% for error in form.confirm_password.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+
+        {{ form.submit() }}
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 20px; font-family: Arial, sans-serif;">
+    <h2 style="text-align: center; color: #333;">📥 {{ _('Boîte de réception') }}</h2>
+
+    {% if conversations %}
+        {% for conv in conversations %}
+        <div style="border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin: 15px 0; background-color: #f9f9f9; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <p style="margin: 0;"><strong>{{ conv.user.username }}</strong></p>
+            <p style="margin: 10px 0;">
+                {% if conv.last_message.sender_id == current_user.id %}
+                    {{ _('Vous :') }}
+                {% else %}
+                    {{ conv.user.username }}{{ _(' :') }}
+                {% endif %}
+                {{ conv.last_message.content[:100] }}{% if conv.last_message.content|length > 100 %}...{% endif %}
+            </p>
+            <small style="color: #666;">🕒 {{ conv.last_message.timestamp.strftime('%d/%m/%Y %H:%M') }}</small>
+            <div style="margin-top: 10px;">
+                <a href="{{ url_for('messaging.send_message', user_id=conv.user.id) }}">
+                    <button style="padding: 6px 14px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">↩️ {{ _('Ouvrir la conversation') }}</button>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; color: #777;">📭 {{ _("Vous n'avez pas encore reçu de messages.") }}</p>
+    {% endif %}
+</div>
+{% endblock %}

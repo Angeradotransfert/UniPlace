@@ -1,0 +1,1177 @@
+{% extends "base.html" %}
+{% block content %}
+
+<nav style="font-size: 0.95rem; margin: 20px auto 10px; max-width: 1200px; display: flex; align-items: center; justify-content: space-between;">
+
+  <!-- ✅ Bouton fixé à gauche -->
+  <a href="{{ url_for('listings.annonces') }}" class="btn-custom btn-back">
+    {{ _('⬅ Retour aux annonces') }}
+  </a>
+
+  <!-- ✅ Fil d’Ariane à droite -->
+  <div style="flex-grow: 1; display: flex; flex-wrap: wrap; gap: 5px;">
+    <a href="{{ url_for('main.index') }}" style="color: #3498db;">{{ _('🏠 Accueil') }}</a>
+    &nbsp;&gt;&nbsp;
+    <a href="{{ url_for('listings.annonces') }}" style="color: #007BFF; text-decoration: none;">{{ _('Annonces') }}</a>
+    {% if annonce.category %}
+    &nbsp;&gt;&nbsp;
+    <a href="{{ url_for('main.annonces_par_categorie', category_name=annonce.category|urlencode) }}">
+  {{ annonce.category }}
+</a>
+    {% endif %}
+    {% if annonce.subcategory %}
+    &nbsp;&gt;&nbsp;
+    <a href="{{ url_for('main.annonces_par_souscategorie', category_name=annonce.category|urlencode, subcategory_name=annonce.subcategory|urlencode) }}">
+  {{ annonce.subcategory }}
+</a>
+    {% endif %}
+  </div>
+
+</nav>
+
+
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.product-container {
+    display: flex;  /* Utilisation de flexbox pour organiser les éléments */
+    justify-content: space-between; /* Espace entre l'image et les boutons */
+    align-items: flex-start; /* Alignement au début pour garder l'image en haut */
+    max-width: 1200px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.product-images {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-images img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.product-details {
+    flex: 1 1 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 1.8rem;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.product-rating {
+    color: #ff9800;
+    font-size: 1.1rem;
+}
+
+.variant-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-variant {
+    padding: 10px 16px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    background: #f8f8f8;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-variant:hover {
+    background: #ffeaa7;
+}
+
+.product-description {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+}
+
+.table-tech {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.table-tech th, .table-tech td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.table-tech th {
+    background: #f9f9f9;
+    text-align: left;
+}
+
+.btn-actions {
+    display: flex;
+    flex-direction: column; /* Empile les boutons verticalement */
+    gap: 15px; /* Espacement entre les boutons */
+    align-self: flex-start; /* Aligner les boutons avec le début de l'article */
+    margin-left: auto; /* Pousse les boutons vers la droite */
+    position: sticky;
+    top: 20px; /* Fixe les boutons lorsqu'on descend la page */
+}
+
+.btn-custom {
+    width: 180px; /* Largeur ajustée pour un meilleur alignement */
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-custom:hover {
+  background-color: #e0a800;
+}
+.btn-custom:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+  color: #888;
+}
+
+
+.btn-panier { background: #28a745; }
+.btn-panier:hover { background: #218838; }
+
+.btn-favori { background: #f72585; }
+.btn-favori:hover { background: #b5179e; }
+
+.btn-message { background: #17a2b8; }
+.btn-message:hover { background: #117a8b; }
+
+.btn-back { background: #007BFF; }
+.btn-back:hover { background: #0056b3; }
+.btn-variant.active {
+    background-color: #ff9800;
+    color: white;
+    border: 2px solid #ff9800;
+}
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.thumbnail:hover {
+    border: 2px solid #3498db;
+}
+.product-images-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.miniatures-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.miniatures-column .thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.miniatures-column .thumbnail:hover {
+    border: 2px solid #3498db;
+}
+
+.main-image-column img {
+    width: 450px;
+    height: auto;
+    max-width: 100%;
+    border-radius: 12px;
+    object-fit: contain;
+}
+.miniatures-column .thumbnail.selected {
+    border: 2px solid #007BFF;
+}
+
+.miniatures-column .thumbnail:hover {
+    border-color: #3498db;
+}
+.miniatures-column {
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    width: 70px;
+}
+
+.thumbnail-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+    padding-right: 6px;
+}
+
+.thumbnail-carousel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.thumbnail-carousel::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+}
+
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.thumbnail:hover {
+    border: 2px solid #3498db;
+}
+.thumbnail.selected {
+    border: 2px solid #007BFF;
+}
+.color-preview {
+    position: relative;
+}
+
+.color-image-preview {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 6px;
+    background: white;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.color-image-preview img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+/* Effet shake du bouton */
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-6px); }
+    100% { transform: translateX(0); }
+}
+#variantWarning {
+    color: red;
+    display: none;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.disabled-visually {
+    opacity: 0.6;
+    cursor: not-allowed !important;
+    pointer-events: auto; /* permet quand même de cliquer */
+}
+.alert-variant {
+    color: red;
+    display: none;
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #ffe5e5;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* 💢 Animation tremblement */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.stock-bar-container {
+  margin: 10px 0;
+}
+.stock-bar-bg {
+  height: 8px;
+  background-color: #ddd;
+  border-radius: 6px;
+}
+.stock-bar-fill {
+  height: 6px;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  max-width: 100%; /* ✅ nouvelle ligne pour éviter le débordement */
+}
+
+
+.stock-bar-bg {
+  height: 6px;
+  background-color: #ddd;
+  border-radius: 4px;
+}
+.stock-bar-fill {
+  height: 6px;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+.video-wrapper {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background: black;
+}
+
+
+</style>
+
+<!-- 🛍️ Fiche produit 2 colonnes -->
+<div class="product-container">
+
+   <!-- Colonne gauche : miniatures + image principale -->
+<div class="product-images-wrapper">
+  <!-- Miniatures à gauche -->
+  <div class="miniatures-column">
+  <div class="thumbnail-carousel">
+  {% for img in annonce.images %}
+    <img class="thumbnail"
+         src="{{ url_for('static', filename='uploads/' + img.filename) }}"
+         onclick="changeImageFromThumbnail(this)">
+  {% endfor %}
+
+  {% if annonce.variants %}
+    {% for variant in annonce.variants %}
+      {% if variant.image_filename %}
+        <img class="thumbnail"
+             src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}"
+             data-variant="{{ variant.taille }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}"
+             data-prix="{{ variant.prix or annonce.price }}"
+             onclick="changeImageFromThumbnail(this)">
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+      {% if annonce.video_filename %}
+  <div class="thumbnail video-thumbnail" onclick="showVideoInMain()" data-is-video="true">
+  <img src="https://img.icons8.com/ios-filled/50/000000/play-button-circled.png"
+       alt="Vidéo"
+       style="width: 100%; height: 100%; object-fit: contain;">
+</div>
+
+{% endif %}
+</div>
+</div>
+
+  <!-- Image principale à droite -->
+  <div class="main-image-column">
+    {% if annonce.images and annonce.images[0] %}
+  <img id="mainProductImage" src="{{ url_for('static', filename='uploads/' + annonce.images[0].filename) }}" alt="Image principale">
+{% else %}
+  <img id="mainProductImage" src="{{ url_for('static', filename='default.png') }}" alt="Aucune image disponible">
+{% endif %}
+
+      {% if annonce.video_filename %}
+  <div id="mainProductVideo" style="display: none;">
+    <video controls style="width: 100%; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <source src="{{ url_for('static', filename=annonce.video_filename) }}">
+      Votre navigateur ne prend pas en charge la vidéo HTML5.
+    </video>
+  </div>
+{% endif %}
+  </div>
+</div>
+
+
+    <!-- Colonne droite : infos produit -->
+    <div class="product-details">
+
+        <div class="product-title">🛍️ {{ annonce.title }}</div>
+
+        {% set now = datetime.utcnow() %}
+
+{% if annonce.active_promo_var %}
+  <div class="product-price" id="mainProductPrice">
+    <span style="text-decoration: line-through; color: #999;">
+      {{ annonce.active_promo_var.original_price or annonce.active_promo_var.prix }} ₽
+    </span><br>
+    <span style="color: #e74c3c; font-size: 1.5rem; font-weight: bold;">
+      🔥 {{ annonce.active_promo_var.discount_price }} ₽
+    </span><br>
+    <small style="color: #e74c3c; font-weight: bold;">
+      –{{ ((1 - annonce.active_promo_var.discount_price / (annonce.active_promo_var.original_price or annonce.active_promo_var.prix)) * 100) | round(0) }}% de réduction
+    </small><br>
+    <span style="font-size: 0.9rem; color: #555;">(~ {{ (annonce.active_promo_var.discount_price / taux_usdt) | round(2) }} USDT)</span>
+  </div>
+{% elif annonce.discount_price and annonce.promo_start and annonce.promo_end and annonce.promo_start <= now <= annonce.promo_end %}
+  <div class="product-price" id="mainProductPrice">
+    <span style="text-decoration: line-through; color: #999;">
+      {{ annonce.original_price or annonce.price }} ₽
+    </span><br>
+    <span style="color: #27ae60; font-size: 1.5rem; font-weight: bold;">
+      🔥 {{ annonce.discount_price }} ₽
+    </span><br>
+    <small style="color: #e74c3c; font-weight: bold;">
+      –{{ ((1 - annonce.discount_price / (annonce.original_price or annonce.price)) * 100) | round(0) }}% de réduction
+    </small><br>
+    <span style="font-size: 0.9rem; color: #555;">(~ {{ (annonce.discount_price / taux_usdt) | round(2) }} USDT)</span>
+  </div>
+{% else %}
+  <div class="product-price" id="mainProductPrice">
+    💰 {{ annonce.price }} ₽ (~ {{ (annonce.price / taux_usdt) | round(2) }} USDT)
+  </div>
+{% endif %}
+
+
+
+
+
+
+    {% if annonce.variants %}
+    {% set total_stock = annonce.variants | map(attribute='stock') | sum %}
+{% else %}
+    {% set total_stock = annonce.stock %}
+{% endif %}
+
+
+{% if total_stock is not none and stock_max_global != 0 %}
+    {% set raw_percent = (total_stock / stock_max_global * 100) %}
+    {% set stock_percent = [raw_percent, 100] | min | round(0, 'floor') %}
+{% else %}
+    {% set stock_percent = 0 %}
+
+    <div class="stock-bar-container" style="margin-top: 6px;">
+        <div class="stock-bar-bg">
+            <div class="stock-bar-fill"
+     aria-label="Barre de stock : {{ stock_percent }}%"
+     style="width: {{ stock_percent }}%;
+            background-color:
+                {% if stock_percent > 60 %}
+                    green
+                {% elif stock_percent > 30 %}
+                    orange
+                {% else %}
+                    red
+                {% endif %};">
+</div>
+        </div>
+        <small style="color: #555;">Stock : {{ total_stock }}</small>
+    </div>
+{% endif %}
+
+    {% if stock_percent <= 20 %}
+  <p style="color: red; font-weight: bold; margin-top: 5px;">⚠️ {{ _('Stock très limité !') }} !</p>
+{% endif %}
+
+
+<!-- 💸 Détails paiement -->
+<div style="background: #f8f8f8; padding: 12px 15px; border-radius: 10px; margin-top: 10px; font-size: 1.05rem;">
+     <p><strong>{{ _('Frais de livraison') }}:</strong> {{ annonce.delivery_fee or 0 }} ₽ (~ {{ ((annonce.delivery_fee or 0) / taux_usdt) | round(2) }} USDT)</p>
+
+{% set total = annonce.price + (annonce.delivery_fee or 0) %}
+<p><strong>🧾 {{ _('Prix total (livraison incluse)') }} :</strong> {{ total }} ₽ (~ {{ (total / taux_usdt) | round(2) }} USDT)</p>
+
+<p style="font-size: 0.85rem; color: #666;">({{ _('Frais de livraison inclus') }})</p>
+</div>
+
+{% if annonce.average_rating %}
+<div class="product-rating">
+    ⭐ {{ annonce.average_rating }}/5 ({{ annonce.reviews.all()|length }} avis)
+</div>
+{% endif %}
+        <!-- 👉 Formulaire "Ajouter au panier" (bien fermé) -->
+
+<form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    {% if annonce.variants %}
+    <!-- ✅ Sélection de la variante -->
+    <div>
+        <label><strong>🧩{{ _('Choisissez une variante') }} :</strong></label>
+        <div class="variant-buttons">
+            {% for variant in annonce.variants %}
+            <label>
+    <input type="radio"
+       name="variant_id"
+       value="{{ variant.id }}"
+       required
+       style="position:absolute; left:-9999px;"
+       data-stock="{{ variant.stock }}"
+       onclick="updateStockInfo(this)">
+
+    <div class="btn-variant color-preview"
+         data-stock="{{ variant.stock }}"
+         {% if variant.image_filename %}
+         data-image="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}"
+         data-prix="{{ variant.prix or annonce.price }}"
+         data-original-price="{{ variant.original_price or '' }}"
+         data-discount-price="{{ variant.discount_price or '' }}"
+         data-promo-start="{{ variant.promo_start.isoformat() if variant.promo_start else '' }}"
+         data-promo-end="{{ variant.promo_end.isoformat() if variant.promo_end else '' }}"
+
+         onmouseenter="handleColorHover(this)"
+         onmouseleave="hidePreviewImage()"
+         onclick="changeImage(this); updateStockInfo(this)"
+         {% endif %}>
+
+
+        {{ variant.taille or '' }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}
+        {% if variant.image_filename %}
+        <div class="color-image-preview">
+            <img src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}" alt="aperçu"> alt="aperçu">
+        </div>
+        {% endif %}
+    </div>
+</label>
+            {% endfor %}
+        </div>
+
+
+    <!-- ✅ Affichage dynamique du stock -->
+<div id="variantStockInfo" style="margin-top: 10px;">
+  <div id="variantStockText" style="font-weight: bold;"></div>
+
+  <!-- Barre de stock -->
+  <div class="stock-bar-container" style="margin-top: 6px;">
+    <div class="stock-bar-bg">
+      <div class="stock-bar-fill" id="variantStockBar" style="width: 0%; background-color: green;"></div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <!-- ✅ Quantité -->
+    <div style="margin-top: 15px;">
+        <label><strong>Quantité :</strong></label><br>
+        <!-- ✅ Champ quantité avec valeur max dynamique -->
+<div style="margin-top: 15px;">
+    <label><strong>{{ _('Quantité') }} :</strong></label><br>
+    <input type="number" name="quantite" id="inputQuantite" value="1" min="1" max="10" required
+           style="padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+</div>
+
+    </div>
+
+    <!-- ✅ Message erreur (reste dans le form !) -->
+    <div id="variantWarning" class="alert-variant">
+    ⚠️ {{ _('Veuillez sélectionner une variante avant d’ajouter au panier.') }}
+    </div>
+
+        {% if total_stock > 0 %}
+  <p style="margin-top: 10px; color: green; font-weight: bold;">
+    ✅ {{ _('Produit disponible – Stock restant') }} : {{ total_stock }}
+  </p>
+{% else %}
+  <p style="margin-top: 10px; color: red; font-weight: bold;">
+    ❌ {{ _('Ce produit est en rupture de stock') }}
+  </p>
+{% endif %}
+
+    <!-- ✅ Conteneur horizontal pour les deux boutons -->
+<div style="display: flex; gap: 15px; margin-top: 15px; align-items: center;">
+
+
+  <!-- Bouton Ajouter au panier -->
+  <form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button id="btnAjouterPanier" type="submit" class="btn-custom btn-panier"
+        {% if total_stock == 0 %}disabled{% endif %}>
+  🛒 {{ _('Ajouter au panier') }}
+</button>
+  </form>
+
+  <!-- Bouton Acheter maintenant -->
+ <form action="{{ url_for('listings.acheter_maintenant', listing_id=annonce.id) }}" method="POST" id="formAcheterMaintenant" style="margin: 0;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="variant_id" id="variantAcheterMaintenant" value="">
+    <button type="submit" id="btnAcheterMaintenant" class="btn-custom"
+        {% if total_stock == 0 %}disabled{% endif %}>
+  {{ _('Acheter maintenant') }}
+</button>
+  </form>
+
+</div>
+
+
+</form>
+{% endif %}
+
+
+
+    <!-- ✅ Toast de confirmation -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+  <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        ✅ {{ get_flashed_messages(category_filter=['success'])[0] if get_flashed_messages(category_filter=['success']) else '' }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<!-- 🚀 Boutons "favoris" et "contact" séparés (en dehors du form) -->
+<!-- ✅ Boutons secondaires placés horizontalement -->
+
+<!-- ✅ Les autres boutons restent groupés -->
+<div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap; justify-content: center;">
+  <form method="POST" action="{{ url_for('listings.ajouter_favori', listing_id=annonce.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="btn-custom btn-favori">💖 {{ _('Ajouter aux favoris') }}</button>
+  </form>
+
+  <a href="{{ url_for('messaging.send_message', user_id=annonce.user.id) }}" class="btn-custom btn-message">
+    💬 {{ _('Contacter le vendeur') }}
+  </a>
+</div>
+
+
+
+    </div>
+</div>
+
+<!-- Section Détails produit -->
+<div style="max-width: 1100px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.1);">
+
+    <h3>📜 {{ _('À propos de cet article') }}</h3>
+    <div class="product-description">
+        {{ annonce.description }}
+    </div>
+
+  <h3 style="margin-top: 20px;">📋 {{ _('Détails techniques') }}</h3>
+<table class="table-tech">
+    <tr><th>{{ _('Catégorie') }}</th><td>{{ annonce.category or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Sous-catégorie') }}</th><td>{{ annonce.subcategory or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Marque') }}</th><td>{{ annonce.marque or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Modèle') }}</th><td>{{ annonce.modele or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Taille') }}</th><td>
+    <tr><th>{{ _('Poids') }}</th><td>{{ annonce.poids or 'N/A' }} kg</td></tr>
+    <tr><th>{{ _('Dimensions') }}</th><td>{{ annonce.dimensions or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Contenu du pack') }}</th><td>{{ annonce.contenu_pack or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Tags') }}</th><td>{{ annonce.tags or 'N/A' }}</td></tr>
+    <tr><th>{{ _("Date d'expiration") }}</th><td>
+  {% if annonce.date_expiration %}
+    {{ annonce.date_expiration.strftime('%d/%m/%Y') }}
+  {% else %}
+    N/A
+  {% endif %}
+</td></tr>
+
+        {% if annonce.variants %}
+            {% set tailles = annonce.variants | map(attribute='taille') | reject('equalto', None) | list %}
+            {{ tailles | join(', ') if tailles else 'N/A' }}
+        {% else %}
+            {{ annonce.taille or 'N/A' }}
+        {% endif %}
+    </td></tr>
+    <tr><th>{{ _('Pointure') }}</th><td>{{ annonce.pointure or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Fermeture') }}</th><td>{{ annonce.fermeture or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Matière') }}</th><td>{{ annonce.matiere or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Couleur') }}</th><td>
+        {% if annonce.variants %}
+            {% set couleurs = annonce.variants | map(attribute='couleur') | reject('equalto', None) | list %}
+            {{ couleurs | join(', ') if couleurs else 'N/A' }}
+        {% else %}
+            {{ annonce.couleur or 'N/A' }}
+        {% endif %}
+    </td></tr>
+    <tr><th>{{ _('Stock total') }}</th><td>
+        {% if annonce.variants %}
+            {{ annonce.variants | map(attribute='stock') | sum }}
+        {% else %}
+            {{ annonce.stock or 'N/A' }}
+        {% endif %}
+    </td></tr>
+    <tr><th>{{ _('Expédition rapide') }}</th><td>{{ 'Oui' if annonce.expedition_rapide else 'Non' }}</td></tr>
+    <tr><th>{{ _('État') }}</th><td>{{ annonce.condition or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Ville') }}</th><td>{{ annonce.city or 'N/A' }}</td></tr>
+    <tr><th>{{ _('Vendeur') }}</th><td>{{ annonce.user.username or 'N/A' }}</td></tr>
+</table>
+
+{% if annonce.variants and annonce.variants|length > 0 %}
+    <h3 style="margin-top: 30px;">🧵 Variantes disponibles</h3>
+    <table class="table-tech" style="width:100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr style="background: #3498db; color: white;">
+                <th style="padding: 8px; text-align: left;">{{ _('Taille') }}</th>
+                <th style="padding: 8px; text-align: left;">{{ _('Couleur') }}</th>
+                <th style="padding: 8px; text-align: left;">{{ _('Autre') }}</th>
+                <th style="padding: 8px; text-align: left;">{{ _('Prix') }}</th>
+                <th style="padding: 8px; text-align: left;">{{ _('Stock') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for variant in annonce.variants %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 8px;">{{ variant.taille or 'N/A' }}</td>
+                <td style="padding: 8px;">{{ variant.couleur or 'N/A' }}</td>
+                <td style="padding: 8px;">{{ variant.autre or '—' }}</td>
+                <td style="padding: 8px;">
+    {% set variant_price = variant.prix or annonce.price %}
+    {{ variant_price }} ₽ (~ {{ (variant_price / taux_usdt) | round(2) }} USDT)
+</td>
+
+                <td style="padding: 8px;">{{ variant.stock or 0 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<style>
+.table-tech th, .table-tech td {
+    border-bottom: 1px solid #ddd;
+}
+.table-tech th {
+    background-color: #ecf0f1;
+}
+.table-tech tbody tr:hover {
+    background-color: #f1f9ff;
+}
+@media (max-width: 600px) {
+    .table-tech, .table-tech thead, .table-tech tbody, .table-tech th, .table-tech td, .table-tech tr {
+        display: block;
+    }
+    .table-tech thead tr {
+        display: none;
+    }
+    .table-tech tr {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ddd;
+    }
+    .table-tech td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .table-tech td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+</style>
+                <tr><th>{{ _('Pointure') }}</th><td>
+    {% set pointures = annonce.variants | map(attribute='pointure') | unique | reject("equalto", None) | list %}
+    {{ pointures | join(", ") if pointures else 'N/A' }}
+</td></tr>
+        <tr><th>{{ _('Stock total') }}</th>
+            <td>
+                {% set total_stock = annonce.variants | map(attribute='stock') | sum %}
+                {{ total_stock if total_stock else 'N/A' }}
+            </td>
+        </tr>
+        <tr><th>{{ _('État') }}</th><td>{{ annonce.condition }}</td></tr>
+        <tr><th>{{ _('Ville') }}</th><td>{{ annonce.city }}</td></tr>
+        <tr><th>{{ _('Vendeur') }}</th><td>{{ annonce.user.username }}</td></tr>
+    </table>
+</div>
+
+<!-- Section Avis -->
+<div style="max-width: 1100px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.1);">
+    <h3>⭐ {{ _('Avis des acheteurs') }}</h3>
+
+    {% if annonce.reviews %}
+        {% for review in annonce.reviews|sort(attribute='created_at', reverse=True) %}
+        <div style="border-left: 4px solid #ffc107; background: #f9f9f9; padding: 10px 15px; margin-bottom: 12px; border-radius: 6px;">
+            <strong>{{ review.reviewer.username }}</strong> – ⭐ {{ review.rating }}/5 <small>{{ review.created_at.strftime('%d/%m/%Y') }}</small>
+            <p>{{ review.comment }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="font-style: italic;">{{ _('Aucun avis pour cet article.') }}</p>
+    {% endif %}
+</div>
+
+<!-- Section Signaler -->
+<div style="max-width: 1100px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.1);">
+    <h3 style="color: #c0392b;">🚩 {{ _('Signaler cette annonce') }}</h3>
+    <form method="POST" action="{{ url_for('listings.signaler_annonce', listing_id=annonce.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <textarea name="message" rows="3" placeholder="{{ _('Expliquez le problème (arnaque, contenu inapproprié...)') }}" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+        <button type="submit" style="margin-top: 12px; background-color: #e74c3c; color: white; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer;">🚨 {{ _('Envoyer le signalement') }}</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS (version 5 par exemple) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% if similar_annonces %}
+<h3 style="margin-top: 40px;">🔎 Produits similaires</h3>
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+  {% for item in similar_annonces %}
+    <div style="width: 220px; background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+      <img src="{{ url_for('static', filename='uploads/' + item.images[0].filename) }}" width="100%" style="height: 150px; object-fit: cover;">
+      <h5>{{ item.title }}</h5>
+      <p>{{ item.price }} ₽</p>
+      <a href="{{ url_for('listings.annonce_detail', listing_id=item.id) }}" class="btn-custom btn-message">Voir</a>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div style="margin-top: 40px; background: #f9f9f9; padding: 20px; border-radius: 10px;">
+  <h4>👤{{ _('Vendeur') }} : {{ annonce.user.username }}</h4>
+  <p>📍 {{ _('Ville') }} : {{ annonce.city }}</p>
+  <p>📦 {{ _('Nombre d’annonces') }} : {{ annonce.user.listings|length }}</p>
+  <a href="{{ url_for('main.annonces_par_vendeur', user_id=annonce.user.id) }}" class="btn-custom btn-message">
+    {{ _('Voir ses autres annonces') }}
+  </a>
+</div>
+
+<script>
+// Fonction effet fondu
+function fadeToImage(imgElement, newSrc) {
+    imgElement.style.transition = 'opacity 0.3s ease';
+    imgElement.style.opacity = 0;
+    setTimeout(() => {
+        imgElement.src = newSrc;
+        imgElement.style.opacity = 1;
+    }, 150);
+}
+
+// Affichage du prix (avec promo si dispo)
+function updatePrice(prix, promoPrix = null) {
+    const priceElement = document.getElementById('mainProductPrice');
+    if (!priceElement) return;
+
+    const devise = "{{ devise }}";
+    const taux_usdt = {{ taux_usdt }};
+    const prixFloat = parseFloat(prix);
+    if (isNaN(prixFloat)) return;
+
+    let html = '';
+    if (promoPrix) {
+        const promoFloat = parseFloat(promoPrix);
+        if (!isNaN(promoFloat)) {
+            const convertedPromo = (promoFloat / taux_usdt).toFixed(2);
+            const convertedNormal = (prixFloat / taux_usdt).toFixed(2);
+            html = `💰 <span style="text-decoration: line-through; color: #888;">${prixFloat} ₽ (~${convertedNormal} ${devise})</span> <span style="color: red; font-weight: bold;">${promoFloat} ₽ (~${convertedPromo} ${devise})</span>`;
+        }
+    } else {
+        const converted = (prixFloat / taux_usdt).toFixed(2);
+        html = `💰 ${prixFloat} ₽ (~ ${converted} ${devise})`;
+    }
+
+    priceElement.innerHTML = html;
+}
+
+// Synchroniser sélection
+function syncRadioSelection(variantId) {
+    if (!variantId) return;
+    const radio = document.querySelector(`input[name="variant_id"][value="${variantId}"]`);
+    if (radio) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+        const label = radio.closest('label');
+        if (label) {
+            const group = label.closest('.variant-buttons');
+            group.querySelectorAll('.btn-variant').forEach(btn => btn.classList.remove('active'));
+            const btn = label.querySelector('.btn-variant');
+            if (btn) btn.classList.add('active');
+        }
+    }
+}
+
+// Miniature hover ou clic
+function changeImageFromThumbnail(thumbnail) {
+    if (!thumbnail || thumbnail.tagName !== 'IMG') return;
+    if (thumbnail.closest('.video-thumbnail')) return;
+
+    const mainImg = document.getElementById('mainProductImage');
+    const mainVid = document.getElementById('mainProductVideo');
+
+    if (mainImg) {
+        fadeToImage(mainImg, thumbnail.src);
+        mainImg.style.display = 'block';
+    }
+    if (mainVid) {
+        mainVid.style.display = 'none';
+    }
+
+    const prix = thumbnail.getAttribute('data-prix') || "{{ annonce.price }}";
+    const promoPrix = thumbnail.getAttribute('data-discount-price');
+    updatePrice(prix, promoPrix);
+
+    document.querySelectorAll('.thumbnail').forEach(img => img.classList.remove('selected'));
+    thumbnail.classList.add('selected');
+
+    const variantId = thumbnail.getAttribute('data-variant-id');
+    if (variantId) {
+        syncRadioSelection(variantId);
+    }
+}
+
+// Clic sur variante
+function onVariantClick(label) {
+    const group = label.closest('.variant-buttons');
+    group.querySelectorAll('.btn-variant').forEach(btn => btn.classList.remove('active'));
+
+    const btn = label.querySelector('.btn-variant');
+    btn.classList.add('active');
+
+    const radio = label.querySelector('input[type="radio"]');
+    if (radio) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    const imageUrl = btn?.getAttribute('data-image');
+    const mainImg = document.getElementById('mainProductImage');
+    if (imageUrl && mainImg) {
+        fadeToImage(mainImg, imageUrl);
+    }
+
+    const prix = btn?.getAttribute('data-prix') || "{{ annonce.price }}";
+    const promoPrix = btn?.getAttribute('data-discount-price');
+    updatePrice(prix, promoPrix);
+
+    if (radio) {
+        const variantId = radio.value;
+        const thumb = document.querySelector(`.thumbnail[data-variant-id="${variantId}"]`);
+        if (thumb) {
+            document.querySelectorAll('.thumbnail').forEach(img => img.classList.remove('selected'));
+            thumb.classList.add('selected');
+        }
+    }
+}
+
+// Stock dynamique
+function updateStockInfo(element) {
+    const stock = parseInt(element.getAttribute('data-stock')) || 0;
+    const maxStock = 10;
+
+    const stockText = document.getElementById('variantStockText');
+    const stockBar = document.getElementById('variantStockBar');
+    const btnAcheter = document.getElementById('btnAcheterMaintenant');
+    const btnPanier = document.getElementById('btnAjouterPanier');
+    const inputQuantite = document.getElementById('inputQuantite');
+
+    if (inputQuantite) inputQuantite.max = stock;
+
+    if (stock > 0) {
+        stockText.innerHTML = `✅ Stock disponible : ${stock}`;
+        btnAcheter.disabled = false;
+        btnPanier.disabled = false;
+    } else {
+        stockText.innerHTML = `<span style="color:red;">❌ Cette variante est en rupture de stock</span>`;
+        btnAcheter.disabled = true;
+        btnPanier.disabled = true;
+    }
+
+    const percent = Math.min((stock / maxStock) * 100, 100);
+    stockBar.style.width = percent + '%';
+
+    stockBar.style.backgroundColor = percent > 60 ? 'green' : percent > 30 ? 'orange' : 'red';
+}
+
+// Vidéo principale
+function showVideoInMain() {
+    const image = document.getElementById('mainProductImage');
+    const video = document.getElementById('mainProductVideo');
+    if (image) image.style.display = 'none';
+    if (video) video.style.display = 'block';
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    const firstThumb = document.querySelector('.thumbnail');
+    if (firstThumb) {
+        firstThumb.classList.add('selected');
+        const prix = firstThumb.getAttribute('data-prix') || "{{ annonce.price }}";
+        const promoPrix = firstThumb.getAttribute('data-promo-prix');
+        updatePrice(prix, promoPrix);
+    }
+
+    document.querySelectorAll('.variant-buttons label').forEach(label => {
+        label.addEventListener('click', () => onVariantClick(label));
+    });
+
+    document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+        thumbnail.addEventListener('mouseenter', () => changeImageFromThumbnail(thumbnail));
+        thumbnail.addEventListener('click', () => changeImageFromThumbnail(thumbnail));
+    });
+
+    const btnAjouter = document.getElementById('btnAjouterPanier');
+    const btnAcheter = document.getElementById('btnAcheterMaintenant');
+    const variantInputAcheter = document.getElementById('variantAcheterMaintenant');
+    const radiosVariants = document.querySelectorAll('input[name="variant_id"]');
+    const msg = document.getElementById('variantWarning');
+
+    if (btnAjouter) btnAjouter.classList.add('disabled-visually');
+    if (btnAcheter) btnAcheter.disabled = true;
+
+    radiosVariants.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (btnAjouter) btnAjouter.classList.remove('disabled-visually');
+            if (btnAcheter) btnAcheter.disabled = false;
+
+            if (variantInputAcheter) variantInputAcheter.value = radio.value;
+            if (msg) msg.style.display = 'none';
+
+            const label = radio.closest('label');
+            const btnVar = label ? label.querySelector('.btn-variant') : null;
+            if (btnVar) updateStockInfo(btnVar);
+        });
+    });
+
+    if (btnAjouter) {
+        const formPanier = btnAjouter.closest('form');
+        formPanier.addEventListener('submit', (e) => {
+            const selected = document.querySelector('input[name="variant_id"]:checked');
+            if (!selected) {
+                e.preventDefault();
+                if (msg) msg.style.display = 'block';
+                btnAjouter.classList.add('shake');
+                setTimeout(() => btnAjouter.classList.remove('shake'), 500);
+            }
+        });
+    }
+
+    const formAcheter = document.getElementById('formAcheterMaintenant');
+    if (formAcheter && btnAcheter && variantInputAcheter) {
+        formAcheter.addEventListener('submit', (e) => {
+            if (!variantInputAcheter.value) {
+                e.preventDefault();
+                alert('{{ _("⚠️ Veuillez sélectionner une variante avant d\'acheter.") }}');
+                btnAcheter.disabled = true;
+            }
+        });
+    }
+
+    const toastEl = document.getElementById('successToast');
+    if (toastEl && toastEl.querySelector('.toast-body').textContent.trim() !== '') {
+        const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+        toast.show();
+    }
+});
+</script>
+<script>
+function changeImage(element) {
+  const priceDiv = document.getElementById("mainProductPrice");
+  const original = parseFloat(element.dataset.originalPrice || 0);
+  const discount = parseFloat(element.dataset.discountPrice || 0);
+  const prix = parseFloat(element.dataset.prix || 0);
+  const start = element.dataset.promoStart ? new Date(element.dataset.promoStart) : null;
+  const end = element.dataset.promoEnd ? new Date(element.dataset.promoEnd) : null;
+  const now = new Date();
+  const taux_usdt = {{ taux_usdt|default(0.01) }};
+
+  let html = '';
+
+  if (discount && start && end && now >= start && now <= end) {
+    const pourcentage = Math.round((1 - discount / (original || prix)) * 100);
+    html += `<span style="text-decoration: line-through; color: #999;">${original || prix} ₽</span><br>`;
+    html += `<span style="color: #e74c3c; font-size: 1.5rem; font-weight: bold;">🔥 ${discount} ₽</span><br>`;
+    html += `<small style="color: #e74c3c; font-weight: bold;">–${pourcentage}% de réduction</small><br>`;
+    html += `<span style="font-size: 0.9rem; color: #555;">(~ ${(discount / taux_usdt).toFixed(2)} USDT)</span>`;
+  } else {
+    html += `💰 ${prix} ₽ (~ ${(prix / taux_usdt).toFixed(2)} USDT)`;
+  }
+
+  priceDiv.innerHTML = html;
+}
+</script>
+
+{% endblock %}

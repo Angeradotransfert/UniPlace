@@ -1,0 +1,35 @@
+<p>{{ _("Bonjour") }} {{ vendeur.username }},</p>
+
+<p>{{ _("Le paiement de votre commande a été confirmé ✅") }}</p>
+
+<p><strong>{{ _("📦 Détails de la commande :") }}</strong><br>
+👤 {{ _("Acheteur :") }} {{ buyer.username }}<br>
+📍 {{ _("Adresse de livraison :") }} {{ delivery_address }}<br>
+🚚 {{ _("Mode de livraison :") }} {{ delivery_method }}
+</p>
+
+<p><strong>{{ _("🛒 Articles concernés :") }}</strong><br>
+{% for item in articles %}
+  {{ item.quantity }} × {{ item.listing.title }}<br>
+{% endfor %}
+</p>
+
+<p>{{ _("Vous pouvez maintenant contacter l’acheteur pour :") }}</p>
+<ul>
+  <li>{{ _("Finaliser le paiement") }}</li>
+  <li>{{ _("Organiser la livraison") }}</li>
+  <li>{{ _("Ajouter un numéro de suivi après envoi si nécessaire") }}</li>
+</ul>
+
+<p>
+  👉 <strong>{{ _("Écrivez-lui directement ici :") }}</strong><br>
+  <a href="{{ url_for('messaging.send_message', user_id=buyer.id, _external=True) }}">📨 {{ _("Contacter l’acheteur") }}</a>
+</p>
+
+<p>
+  📦 {{ _("Une fois le colis envoyé, pensez à ajouter le numéro de suivi ici :") }}<br>
+  👉 <a href="{{ url_for('main.dashboard', _external=True) }}">{{ _("Accéder à mes livraisons") }}</a>
+</p>
+
+<hr>
+<p>{{ _("Merci encore de faire confiance à") }} <strong>UniPlace</strong> 🎉</p>

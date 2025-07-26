@@ -1,0 +1,14 @@
+<p>{{ _("Bonjour") }} {{ user.username }},</p>
+
+<p>{{ _("Nous avons bien reçu votre commande pour l'article(s) suivant(s) :") }}</p>
+<ul>
+  {% for item in order.items %}
+    <li>{{ item.listing.title }} x {{ item.quantity }} ({{ item.unit_price }} ₽)</li>
+  {% endfor %}
+</ul>
+
+<p><strong>{{ _("Montant total :") }}</strong> {{ total_rub }} RUB (~{{ total_usdt }} USDT)</p>
+<p><strong>{{ _("Livraison :") }}</strong> {{ order.delivery_method }}</p>
+<p><strong>{{ _("Adresse de livraison :") }}</strong> {{ order.delivery_address }}</p>
+
+<p>{{ _("Vous serez notifié lorsque votre paiement sera confirmé. Merci pour votre achat !") }}</p>

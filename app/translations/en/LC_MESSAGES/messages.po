@@ -1,0 +1,3440 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-07-15 14:13+0300\n"
+"PO-Revision-Date: 2025-07-15 14:03+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+msgid "Connexion"
+msgstr "Login"
+
+msgid "S'inscrire"
+msgstr "Sign up"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Rechercher…"
+msgstr "Search…"
+
+msgid "Sponsorisé"
+msgstr "Sponsored"
+
+msgid "Promo"
+msgstr "Deal"
+
+msgid "Nouveau"
+msgstr "New"
+
+msgid "Annonces sponsorisées"
+msgstr "Sponsored Listings"
+
+msgid "Catégories"
+msgstr "Categories"
+
+msgid "Nouveautés"
+msgstr "New Arrivals"
+
+msgid "Offres du jour"
+msgstr "Deals of the Day"
+
+msgid "Recommandé pour vous"
+msgstr "Recommended for You"
+
+msgid "Note"
+msgstr "Rating"
+
+msgid "Tous droits réservés"
+msgstr "All Rights Reserved"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "CGU"
+msgstr "Terms of Use"
+
+msgid "Confidentialité"
+msgstr "Privacy"
+
+msgid "Rechercher"
+msgstr "Search"
+
+msgid "Populaires"
+msgstr "Popular"
+
+msgid "catégories"
+msgstr "categories"
+
+msgid "⬅ Retour aux annonces"
+msgstr "⬅ Back to listings"
+
+msgid "🏠 Accueil"
+msgstr "🏠 Home"
+
+msgid "Annonces"
+msgstr "Listings"
+
+msgid "Frais de livraison"
+msgstr "Shipping fee"
+
+msgid "Prix total (livraison incluse)"
+msgstr "Total price (shipping included)"
+
+msgid "Frais de livraison inclus"
+msgstr "Shipping included"
+
+msgid "Produit disponible – Stock restant"
+msgstr "Product available – Remaining stock"
+
+msgid "Ce produit est en rupture de stock"
+msgstr "This product is out of stock"
+
+msgid "Ajouter au panier"
+msgstr "Add to cart"
+
+msgid "Acheter maintenant"
+msgstr "Buy now"
+
+msgid "Ajouter aux favoris"
+msgstr "Add to favorites"
+
+msgid "Contacter le vendeur"
+msgstr "Contact the seller"
+
+msgid "À propos de cet article"
+msgstr "About this item"
+
+msgid "Détails techniques"
+msgstr "Technical details"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "Sous-catégorie"
+msgstr "Subcategory"
+
+msgid "Marque"
+msgstr "Brand"
+
+msgid "Modèle"
+msgstr "Model"
+
+msgid "Taille"
+msgstr "Size"
+
+msgid "Poids"
+msgstr "Weight"
+
+msgid "Dimensions"
+msgstr "Dimensions"
+
+msgid "Contenu du pack"
+msgstr "Box contents"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Date d'expiration"
+msgstr "Expiration date"
+
+msgid "Pointure"
+msgstr "Shoe size"
+
+msgid "Fermeture"
+msgstr "Closure"
+
+msgid "Matière"
+msgstr "Material"
+
+msgid "Couleur"
+msgstr "Color"
+
+msgid "Stock total"
+msgstr "Total stock"
+
+msgid "Expédition rapide"
+msgstr "Fast shipping"
+
+msgid "État"
+msgstr "Condition"
+
+msgid "Ville"
+msgstr "City"
+
+msgid "Vendeur"
+msgstr "Seller"
+
+msgid "Autre"
+msgstr "Other"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Avis des acheteurs"
+msgstr "Customer reviews"
+
+msgid "Aucun avis pour cet article."
+msgstr "No reviews for this item."
+
+msgid "Signaler cette annonce"
+msgstr "Report this listing"
+
+msgid "Expliquez le problème (arnaque, contenu inapproprié...)"
+msgstr "Explain the issue (scam, inappropriate content...)"
+
+msgid "Envoyer le signalement"
+msgstr "Send report"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Voir ses autres annonces"
+msgstr "See other listings"
+
+msgid "Nombre d’annonces"
+msgstr "Number of listings"
+
+msgid "Choisissez une variante"
+msgstr "Choose a variant"
+
+msgid "⚠️ Veuillez sélectionner une variante avant d'acheter."
+msgstr "⚠️ Please select a variant before purchasing."
+
+msgid "Voir les annonces"
+msgstr "Browse Listings"
+
+msgid "Messagerie"
+msgstr "Messages"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Se déconnecter"
+msgstr "Log out"
+
+msgid "Conditions de vente"
+msgstr "Terms of Sale"
+
+msgid "Nous contacter"
+msgstr "Contact us"
+
+msgid "Bienvenue"
+msgstr "Welcome"
+
+msgid "Vous êtes connecté sur"
+msgstr "You are logged into"
+
+msgid "Voir les annonces publiques"
+msgstr "View public listings"
+
+msgid "Vos informations de paiement (visibles après commande)"
+msgstr "Your payment information (visible after order)"
+
+msgid "Ces informations seront transmises à l'acheteur uniquement"
+msgstr "This information will only be sent to the buyer"
+
+msgid "après paiement de la commission"
+msgstr "after commission payment"
+
+msgid "afin qu'il puisse vous régler directement."
+msgstr "so they can pay you directly."
+
+msgid "Adresse USDT (TRC20) pour recevoir les paiements"
+msgstr "USDT (TRC20) address to receive payments"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Informations pour virement bancaire"
+msgstr "Bank transfer information"
+
+msgid "Nom de la banque"
+msgstr "Bank name"
+
+msgid "Ex : Tinkoff, Sberbank..."
+msgstr "E.g.: Tinkoff, Sberbank..."
+
+msgid "Numéro de carte bancaire"
+msgstr "Card number"
+
+msgid "Nom complet sur la carte"
+msgstr "Full name on the card"
+
+msgid "Enregistrer mes infos bancaires"
+msgstr "Save my bank information"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "Publier une annonce"
+msgstr "Post a listing"
+
+msgid "Voir mes annonces"
+msgstr "View my listings"
+
+msgid "Commandes Crypto"
+msgstr "Crypto Orders"
+
+msgid "Paiements carte"
+msgstr "Card Payments"
+
+msgid "Mes achats"
+msgstr "My purchases"
+
+msgid "Mes ventes"
+msgstr "My sales"
+
+msgid "Mes commandes"
+msgstr "My orders"
+
+msgid "Mes livraisons"
+msgstr "My deliveries"
+
+msgid "Panier"
+msgstr "Cart"
+
+msgid "Mes infos de paiement"
+msgstr "My payment info"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Mes avis reçus"
+msgstr "My received reviews"
+
+msgid "Mes favoris"
+msgstr "My favorites"
+
+msgid "Suivi des livraisons"
+msgstr "Delivery tracking"
+
+msgid "Signalements"
+msgstr "Reports"
+
+msgid "Emails envoyés"
+msgstr "Sent emails"
+
+msgid "Gestion Sponsorisé"
+msgstr "Sponsored management"
+
+msgid "Espace Admin"
+msgstr "Admin area"
+
+msgid "Gestion des promos"
+msgstr "Promotions management"
+
+msgid "Toutes les annonces disponibles"
+msgstr "All available listings"
+
+msgid "Mots-clés..."
+msgstr "Keywords..."
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Image de"
+msgstr "Image of"
+
+msgid "Pas d'image"
+msgstr "No image"
+
+msgid "Voir l'article"
+msgstr "View item"
+
+msgid "Page précédente"
+msgstr "Previous page"
+
+msgid "Page suivante"
+msgstr "Next page"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "sur"
+msgstr "of"
+
+msgid "Aucune annonce disponible pour le moment. 😕"
+msgstr "No listings available at the moment. 😕"
+
+msgid "Catégorie & Sous-catégorie"
+msgstr "Category & Subcategory"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "📚 Études & Livres"
+msgstr "📚 Studies & Books"
+
+msgid "💻 Électronique & Informatique"
+msgstr "💻 Electronics & IT"
+
+msgid "🧥 Vêtements & Mode"
+msgstr "🧥 Clothing & Fashion"
+
+msgid "🛋️ Meubles & Maison"
+msgstr "🛋️ Furniture & Home"
+
+msgid "🏠 Logement étudiant"
+msgstr "🏠 Student Housing"
+
+msgid "🧑‍🍳 Cuisine & Produits alimentaires"
+msgstr "🧑‍🍳 Cooking & Food Products"
+
+msgid "✈️ Voyages & Mobilité"
+msgstr "✈️ Travel & Mobility"
+
+msgid "👷 Services entre étudiants"
+msgstr "👷 Student Services"
+
+msgid "📣 Annonces diverses"
+msgstr "📣 Miscellaneous Ads"
+
+msgid "🔍 Demandes & Recherches"
+msgstr "🔍 Requests & Searches"
+
+msgid "Sous-catégorie"
+msgstr "Subcategory"
+
+msgid "Informations sur l’annonce"
+msgstr "Ad Information"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Ex: Titre de votre annonce"
+msgstr "Ex: Title of your ad"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Prix initial (avant réduction)"
+msgstr "Original Price (before discount)"
+
+msgid "Ex : 100.00"
+msgstr "Ex: 100.00"
+
+msgid "Prix promotionnel"
+msgstr "Promotional Price"
+
+msgid "Ex : 79.00"
+msgstr "Ex: 79.00"
+
+msgid "Date de début de la promotion"
+msgstr "Promotion Start Date"
+
+msgid "Date de fin de la promotion"
+msgstr "Promotion End Date"
+
+msgid "Frais de livraison estimés (₽)"
+msgstr "Estimated Delivery Fee (₽)"
+
+msgid "Monnaie"
+msgstr "Currency"
+
+msgid "₽ RUB"
+msgstr "₽ RUB"
+
+msgid "$ USD"
+msgstr "$ USD"
+
+msgid "€ EUR"
+msgstr "€ EUR"
+
+msgid "Condition"
+msgstr "Condition"
+
+msgid "-- Choisir --"
+msgstr "-- Choose --"
+
+msgid "Neuf"
+msgstr "New"
+
+msgid "Occasion"
+msgstr "Used"
+
+msgid "Ville"
+msgstr "City"
+
+msgid "Variantes (Tailles / Couleurs / Stock)"
+msgstr "Variants (Sizes / Colors / Stock)"
+
+msgid "Ajouter variant"
+msgstr "Add variant"
+
+msgid "Caractéristiques supplémentaires"
+msgstr "Additional Features"
+
+msgid "Marque"
+msgstr "Brand"
+
+msgid "Ex: Apple"
+msgstr "Ex: Apple"
+
+msgid "Modèle"
+msgstr "Model"
+
+msgid "Ex: MacBook Pro M3 16 pouces"
+msgstr "Ex: MacBook Pro M3 16 inch"
+
+msgid "Type de fermeture"
+msgstr "Closure Type"
+
+msgid "Ex: Fermeture éclair, Boutons, Lacets"
+msgstr "Ex: Zipper, Buttons, Laces"
+
+msgid "Matière"
+msgstr "Material"
+
+msgid "Ex: Coton, Cuir, Jean, Polyester"
+msgstr "Ex: Cotton, Leather, Denim, Polyester"
+
+msgid "Informations complémentaires"
+msgstr "Additional Information"
+
+msgid "Poids (en kg)"
+msgstr "Weight (kg)"
+
+msgid "Ex : 1.25"
+msgstr "Ex: 1.25"
+
+msgid "Dimensions (L × l × h en cm)"
+msgstr "Dimensions (L × W × H in cm)"
+
+msgid "Ex : 30 × 20 × 10"
+msgstr "Ex: 30 × 20 × 10"
+
+msgid "Contenu du pack"
+msgstr "Pack Contents"
+
+msgid "Ex : 1 câble USB, 1 manuel, 1 housse de transport"
+msgstr "Ex: 1 USB cable, 1 manual, 1 carrying case"
+
+msgid "Mots-clés (séparés par des virgules)"
+msgstr "Keywords (comma-separated)"
+
+msgid "Ex : bluetooth, rechargeable, sans fil, gaming"
+msgstr "Ex: bluetooth, rechargeable, wireless, gaming"
+
+msgid "Date de fin d'affichage de l’annonce"
+msgstr "Ad Expiration Date"
+
+msgid "Images de l’article"
+msgstr "Item Images"
+
+msgid "Images"
+msgstr "Images"
+
+msgid "Vidéo de démonstration (facultatif) (max 20 Mo, MP4 conseillé)"
+msgstr "Demo Video (optional) (max 20 MB, MP4 recommended)"
+
+msgid "Supprimer la vidéo sélectionnée"
+msgstr "Remove selected video"
+
+msgid "Options d’expédition"
+msgstr "Shipping Options"
+
+msgid "Livré en 1 à 3 jours 🚀"
+msgstr "Delivered in 1 to 3 days 🚀"
+
+msgid "👁️ Aperçu"
+msgstr "👁️ Preview"
+
+msgid "📢 Publier l’annonce"
+msgstr "📢 Publish Ad"
+
+msgid "Aperçu de l’annonce"
+msgstr "Ad Preview"
+
+msgid "Fermer"
+msgstr "Close"
+
+msgid "Nom de la variante (ex : Taille / Couleur / Capacité)"
+msgstr "Variant name (e.g.: Size / Color / Capacity)"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Prix (RUB)"
+msgstr "Price (RUB)"
+
+msgid "Prix initial"
+msgstr "Original Price"
+
+msgid "Prix promo"
+msgstr "Promo Price"
+
+msgid "Image/*"
+msgstr "Image/*"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+msgid "Les mots de passe doivent correspondre."
+msgstr "Passwords must match."
+
+msgid "S'inscrire"
+msgstr "Register"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Mot de passe oublié ?"
+msgstr "Forgot password?"
+
+msgid "Connexion à"
+msgstr "Login to"
+
+msgid "Inscription à"
+msgstr "Sign up to"
+
+msgid "Réinitialisation du mot de passe"
+msgstr "Password Reset"
+
+msgid "Entrez votre email"
+msgstr "Enter your email"
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Mes annonces publiées"
+msgstr "My published listings"
+
+msgid "🛒 Historique de mes achats"
+msgstr "🛒 My purchase history"
+
+msgid "💰 Prix payé"
+msgstr "💰 Price paid"
+
+msgid "🗓 Date d'achat"
+msgstr "🗓 Purchase date"
+
+msgid "Vendeur inconnu"
+msgstr "Unknown seller"
+
+msgid "📞 Coordonnées du vendeur"
+msgstr "📞 Seller's contact info"
+
+msgid "Inconnu"
+msgstr "Unknown"
+
+msgid "📌 Statut"
+msgstr "📌 Status"
+
+msgid "Paiement confirmé"
+msgstr "Payment confirmed"
+
+msgid "Commission payée"
+msgstr "Commission paid"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "🚚 Méthode de livraison"
+msgstr "🚚 Delivery method"
+
+
+msgid "Pochta Rossii"
+msgstr "Russian Post"
+
+msgid "Remise en main propre"
+msgstr "In-person handoff"
+
+msgid "Non spécifiée"
+msgstr "Not specified"
+
+msgid "Non renseignée"
+msgstr "Not provided"
+
+msgid "🖟 Suivi colis"
+msgstr "🖟 Tracking number"
+
+msgid "📦 Statut livraison"
+msgstr "📦 Delivery status"
+
+msgid "En cours"
+msgstr "In progress"
+
+msgid "Annuler la commande"
+msgstr "Cancel order"
+
+msgid "Noter ce produit"
+msgstr "Rate this product"
+
+msgid "-- Choisissez une note --"
+msgstr "-- Choose a rating --"
+
+msgid "étoile"
+msgstr "star"
+
+msgid "Commentaire"
+msgstr "Comment"
+
+msgid "Votre avis sur le produit..."
+msgstr "Your review of the product..."
+
+
+msgid "Laisser un avis"
+msgstr "Leave a review"
+
+msgid "Vous avez déjà laissé un avis."
+msgstr "You already left a review."
+
+msgid "Vous n'avez encore rien acheté. 😕"
+msgstr "You haven't bought anything yet. 😕"
+
+msgid "Articles vendus"
+msgstr "Sold items"
+
+msgid "Image du produit"
+msgstr "Product image"
+
+msgid "Prix unitaire"
+msgstr "Unit price"
+
+msgid "Quantité vendue"
+msgstr "Quantity sold"
+
+msgid "Montant total payé"
+msgstr "Total amount paid"
+
+msgid "Montant que vous recevez"
+msgstr "Amount you receive"
+
+msgid "Date de vente"
+msgstr "Sale date"
+
+msgid "Acheteur"
+msgstr "Buyer"
+
+msgid "Aucune vente enregistrée pour le moment."
+msgstr "No sales recorded yet."
+
+msgid "Statut du paiement"
+msgstr "Payment status"
+
+msgid "Moyen de paiement"
+msgstr "Payment method"
+
+msgid "Mes Commandes"
+msgstr "My Orders"
+
+msgid "Article épuisé"
+msgstr "Out of stock"
+
+msgid "Article supprimé"
+msgstr "Listing deleted"
+
+msgid "N° suivi"
+msgstr "Tracking No."
+
+msgid "non défini"
+msgstr "not defined"
+
+msgid "Aucun suivi"
+msgstr "No tracking info"
+
+msgid "Livraison"
+msgstr "Delivery"
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Paiement"
+msgstr "Payment"
+
+msgid "Statut"
+msgstr "Status"
+
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Payée"
+msgstr "Paid"
+
+msgid "Non disponible"
+msgstr "Not available"
+
+msgid "Aucune commande pour l’instant."
+msgstr "No orders at the moment."
+
+msgid "Nouveau statut"
+msgstr "New status"
+
+msgid "Commande"
+msgstr "Order"
+
+msgid "Suivi de mes livraisons"
+msgstr "My Deliveries Tracking"
+
+msgid "Acheteur"
+msgstr "Buyer"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Suivi"
+msgstr "Tracking"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "En préparation"
+msgstr "In preparation"
+
+msgid "Suivre"
+msgstr "Track"
+
+msgid "Numéro de suivi"
+msgstr "Tracking number"
+
+msgid "Préparation"
+msgstr "Preparation"
+
+msgid "Expédié"
+msgstr "Shipped"
+
+msgid "Livré"
+msgstr "Delivered"
+
+msgid "Mettre à jour"
+msgstr "Update"
+
+msgid "Aucune vente enregistrée."
+msgstr "No sales recorded."
+
+msgid "Boîte de réception"
+msgstr "Inbox"
+
+msgid "Vous :"
+msgstr "You:"
+
+msgid " :"
+msgstr ":"
+
+msgid "Ouvrir la conversation"
+msgstr "Open conversation"
+
+msgid "Vous n'avez pas encore reçu de messages."
+msgstr "You haven't received any messages yet."
+
+msgid "Discussion avec"
+msgstr "Chat with"
+
+msgid "Ne partagez pas vos coordonnées personnelles. Les messages contenant des infos sensibles (emails, numéros, IBAN, etc.) sont filtrés."
+msgstr "Do not share your personal details. Messages containing sensitive info (emails, phone numbers, IBAN, etc.) are filtered."
+
+msgid "Voir pièce jointe"
+msgstr "View attachment"
+
+msgid "Tapez votre message ici..."
+msgstr "Type your message here..."
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Erreur réseau"
+msgstr "Network error"
+
+msgid "Votre panier"
+msgstr "Your cart"
+
+msgid "Image article"
+msgstr "Item image"
+
+msgid "Changer quantité :"
+msgstr "Change quantity:"
+
+msgid "Mettre à jour"
+msgstr "Update"
+
+msgid "Prix normal :"
+msgstr "Regular price:"
+
+msgid "Prix promo :"
+msgstr "Promo price:"
+
+msgid "Prix unitaire :"
+msgstr "Unit price:"
+
+msgid "Variantes :"
+msgstr "Variants:"
+
+msgid "Taille"
+msgstr "Size"
+
+msgid "Couleur"
+msgstr "Color"
+
+msgid "Option"
+msgstr "Option"
+
+msgid "Pas de variantes"
+msgstr "No variants"
+
+msgid "Quantité :"
+msgstr "Quantity:"
+
+msgid "Retirer"
+msgstr "Remove"
+
+msgid "Total :"
+msgstr "Total:"
+
+msgid "Commander tout"
+msgstr "Order all"
+
+msgid "Votre panier est vide pour le moment."
+msgstr "Your cart is empty for now."
+
+msgid "Êtes-vous sûr de vouloir retirer cet article du panier ?"
+msgstr "Are you sure you want to remove this item from your cart?"
+
+msgid "Mes infos de paiement"
+msgstr "My payment info"
+
+msgid "Adresse USDT (TRC20) :"
+msgstr "USDT Address (TRC20):"
+
+msgid "Nom de la banque :"
+msgstr "Bank name:"
+
+msgid "Numéro de carte :"
+msgstr "Card number:"
+
+msgid "Nom sur la carte :"
+msgstr "Name on card:"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Supprimer toutes mes infos"
+msgstr "Delete all my info"
+
+msgid "Es-tu sûr de vouloir supprimer toutes tes informations de paiement ? Cette action est irréversible."
+msgstr "Are you sure you want to delete all your payment information? This action is irreversible."
+
+msgid "Mes notifications"
+msgstr "My notifications"
+
+msgid "Nouveau"
+msgstr "New"
+
+msgid "Lu"
+msgstr "Read"
+
+msgid "Vous n’avez aucune notification pour le moment."
+msgstr "You have no notifications at the moment."
+
+msgid "Avis reçus sur vos annonces"
+msgstr "Reviews received on your listings"
+
+msgid "Annonce"
+msgstr "Listing"
+
+msgid "Nouvel avis"
+msgstr "New review"
+
+msgid "Note"
+msgstr "Rating"
+
+msgid "Par"
+msgstr "By"
+
+msgid "Commentaire"
+msgstr "Comment"
+
+msgid "Aucun"
+msgstr "None"
+
+msgid "Aucun avis reçu pour l’instant."
+msgstr "No reviews received yet."
+
+msgid "Mes annonces favorites"
+msgstr "My favorite listings"
+
+msgid "Image annonce"
+msgstr "Listing image"
+
+msgid "Ajouté le"
+msgstr "Added on"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Retirer"
+msgstr "Remove"
+
+msgid "Vous n'avez ajouté aucune annonce en favori pour le moment."
+msgstr "You haven't added any favorite listings yet."
+
+msgid "Contactez UniPlace"
+msgstr "Contact UniPlace"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Entrez votre email"
+msgstr "Enter your email"
+
+msgid "Sujet"
+msgstr "Subject"
+
+msgid "Conditions de vente sur UniPlace"
+msgstr "Sales Terms on UniPlace"
+
+msgid "Commission sur les ventes"
+msgstr "Sales Commission"
+
+msgid "Une commission fixe de"
+msgstr "A fixed commission of"
+
+msgid "payée par l’acheteur"
+msgstr "paid by the buyer"
+
+msgid "est appliquée sur chaque vente. Elle est"
+msgstr "is applied to each sale. It is"
+
+msgid "au moment de la commande, avant toute mise en relation avec le vendeur."
+msgstr "at the time of ordering, before any contact with the seller."
+
+msgid "Cette commission sert à couvrir les frais de plateforme et à sécuriser les échanges. Le reste du montant est payé directement au vendeur après accord entre les parties."
+msgstr "This commission covers platform fees and ensures secure transactions. The rest is paid directly to the seller after mutual agreement."
+
+msgid "Paiement en deux étapes"
+msgstr "Two-Step Payment"
+
+msgid "Étape 1"
+msgstr "Step 1"
+
+msgid "L’acheteur paie uniquement la"
+msgstr "The buyer only pays the"
+
+msgid "commission à UniPlace (via USDT ou carte)."
+msgstr "commission to UniPlace (via USDT or card)."
+
+msgid "Étape 2"
+msgstr "Step 2"
+
+msgid "Une fois la commande validée, l’acheteur et le vendeur sont mis en contact pour finaliser la transaction (paiement du produit et livraison)."
+msgstr "Once the order is confirmed, buyer and seller are connected to finalize the transaction (payment and delivery)."
+
+msgid "UniPlace ne gère pas le paiement du produit lui-même, seulement la commission."
+msgstr "UniPlace does not handle the product payment itself, only the commission."
+
+msgid "Moyens de paiement acceptés (commission uniquement)"
+msgstr "Accepted Payment Methods (commission only)"
+
+msgid "Adresse fournie à la confirmation de commande."
+msgstr "Address provided upon order confirmation."
+
+msgid "Carte bancaire"
+msgstr "Credit card"
+
+msgid "Paiement manuel via les coordonnées transmises après commande."
+msgstr "Manual payment using details provided after ordering."
+
+msgid "Responsabilités & remboursements"
+msgstr "Responsibilities & Refunds"
+
+msgid "Une fois la commission payée, UniPlace met les deux parties en relation. Le reste de la transaction se déroule de manière privée entre l’acheteur et le vendeur."
+msgstr "Once the commission is paid, UniPlace connects both parties. The rest is handled privately between buyer and seller."
+
+msgid "n'intervient pas dans les litiges"
+msgstr "does not intervene in disputes"
+
+msgid "ou les problèmes liés aux produits."
+msgstr "or issues related to products."
+
+msgid "Aucun remboursement ne sera effectué une fois la commission payée, sauf erreur manifeste ou fraude."
+msgstr "No refunds will be issued once the commission is paid, except in case of clear error or fraud."
+
+msgid "Acceptation des conditions"
+msgstr "Acceptance of the Terms"
+
+msgid "En utilisant UniPlace, vous acceptez sans réserve ces conditions de vente, y compris le paiement en deux étapes et les modalités liées à la commission."
+msgstr "By using UniPlace, you fully accept these sales terms, including the two-step payment and commission policies."
+
+#: templates/privacy.html:6
+msgid "Politique de Confidentialité"
+msgstr "Privacy Policy"
+
+#: templates/privacy.html:8
+msgid "1. Collecte des données"
+msgstr "1. Data Collection"
+
+#: templates/privacy.html:9
+msgid "UniPlace collecte uniquement les données nécessaires à l’inscription et à la gestion des comptes utilisateurs (nom, email, mot de passe). Les informations de paiement de la commission sont gérées via des prestataires externes sécurisés."
+msgstr "UniPlace only collects data necessary for registration and user account management (name, email, password). Commission payment information is handled by secure external providers."
+
+#: templates/privacy.html:11
+msgid "2. Utilisation des données"
+msgstr "2. Use of Data"
+
+#: templates/privacy.html:12
+msgid "Les données personnelles sont utilisées pour gérer les comptes, envoyer les confirmations de commande, et permettre la mise en relation entre acheteurs et vendeurs. UniPlace ne partage pas les données personnelles avec des tiers, sauf pour les besoins légaux ou techniques indispensables."
+msgstr "Personal data is used to manage accounts, send order confirmations, and enable interaction between buyers and sellers. UniPlace does not share personal data with third parties, except for essential legal or technical reasons."
+
+#: templates/privacy.html:14
+msgid "3. Protection des données"
+msgstr "3. Data Protection"
+
+#: templates/privacy.html:15
+msgid "UniPlace met en place des mesures techniques pour protéger les données contre tout accès non autorisé ou divulgation. Les messages contenant des données sensibles sont automatiquement filtrés pour protéger les utilisateurs."
+msgstr "UniPlace implements technical measures to protect data from unauthorized access or disclosure. Messages containing sensitive information are automatically filtered to protect users."
+
+#: templates/privacy.html:17
+msgid "4. Durée de conservation"
+msgstr "4. Retention Period"
+
+#: templates/privacy.html:18
+msgid "Les données des utilisateurs sont conservées aussi longtemps que nécessaire pour la gestion du compte et des transactions."
+msgstr "User data is retained for as long as necessary to manage the account and transactions."
+
+#: templates/privacy.html:20
+msgid "5. Droits des utilisateurs"
+msgstr "5. User Rights"
+
+#: templates/privacy.html:21
+msgid "Chaque utilisateur peut accéder, modifier ou supprimer ses données personnelles en contactant UniPlace. Les utilisateurs peuvent demander la suppression définitive de leur compte."
+msgstr "Each user may access, modify, or delete their personal data by contacting UniPlace. Users may request permanent deletion of their account."
+
+msgid "Conditions Générales d’Utilisation (CGU)"
+msgstr "Terms of Use (ToU)"
+
+msgid "1. Objet"
+msgstr "1. Purpose"
+
+msgid "Les présentes Conditions Générales d’Utilisation régissent l’accès et l’utilisation de la plateforme UniPlace, permettant la mise en relation entre acheteurs et vendeurs."
+msgstr "These Terms of Use govern access to and use of the UniPlace platform, enabling connections between buyers and sellers."
+
+msgid "2. Accès à la plateforme"
+msgstr "2. Access to the Platform"
+
+msgid "L’accès à UniPlace est réservé aux utilisateurs inscrits qui acceptent ces conditions. Chaque utilisateur est responsable de ses informations et de ses actions sur la plateforme."
+msgstr "Access to UniPlace is restricted to registered users who accept these terms. Each user is responsible for their information and actions on the platform."
+
+msgid "3. Fonctionnement de la plateforme"
+msgstr "3. Platform Operation"
+
+msgid "UniPlace agit uniquement comme intermédiaire pour faciliter la mise en relation entre acheteurs et vendeurs."
+msgstr "UniPlace acts only as an intermediary to facilitate connections between buyers and sellers."
+
+msgid "L’acheteur paie une commission de 10% à UniPlace avant la mise en relation avec le vendeur."
+msgstr "The buyer pays a 10% commission to UniPlace before being connected with the seller."
+
+msgid "Après paiement de la commission, UniPlace donne accès aux coordonnées du vendeur pour finaliser la transaction."
+msgstr "After the commission is paid, UniPlace provides access to the seller’s contact information to complete the transaction."
+
+msgid "4. Responsabilités"
+msgstr "4. Responsibilities"
+
+msgid "UniPlace ne gère pas le paiement du produit ni la livraison. Toute transaction finale (paiement, livraison, garanties) se fait directement entre acheteur et vendeur. UniPlace ne pourra être tenu responsable des litiges, défauts, retards ou non-livraisons."
+msgstr "UniPlace does not handle product payment or delivery. All final transactions (payment, delivery, guarantees) occur directly between buyer and seller. UniPlace cannot be held responsible for disputes, defects, delays, or non-delivery."
+
+msgid "5. Sécurité et confidentialité"
+msgstr "5. Security and Confidentiality"
+
+msgid "UniPlace bloque les messages contenant des données personnelles sensibles afin de protéger les utilisateurs. Chaque utilisateur s’engage à ne pas divulguer d’informations sensibles dans les échanges via la plateforme."
+msgstr "UniPlace blocks messages containing sensitive personal data to protect users. Each user agrees not to disclose sensitive information in communications through the platform."
+
+msgid "6. Modification des CGU"
+msgstr "6. Modification of the Terms"
+
+msgid "UniPlace se réserve le droit de modifier ces CGU à tout moment. Les utilisateurs en seront informés et devront les accepter pour continuer à utiliser la plateforme."
+msgstr "UniPlace reserves the right to modify these Terms at any time. Users will be notified and must accept them to continue using the platform."
+
+msgid "Entrez le sujet"
+msgstr "Enter the subject"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Écrivez votre message ici..."
+msgstr "Write your message here..."
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Commandes reçues (USDT ou Carte)"
+msgstr "Orders received (USDT or Card)"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Client"
+msgstr "Customer"
+
+msgid "Vendeur"
+msgstr "Seller"
+
+msgid "Prix ₽"
+msgstr "Price ₽"
+
+msgid "~ USDT"
+msgstr "~ USDT"
+
+msgid "Commission"
+msgstr "Commission"
+
+msgid "À reverser"
+msgstr "To transfer"
+
+msgid "Paiement vendeur"
+msgstr "Seller payment"
+
+msgid "Méthode"
+msgstr "Method"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Détail"
+msgstr "Detail"
+
+msgid "Banque"
+msgstr "Bank"
+
+msgid "Carte"
+msgstr "Card"
+
+msgid "Titulaire"
+msgstr "Cardholder"
+
+msgid "Adresse USDT"
+msgstr "USDT address"
+
+msgid "Non fourni"
+msgstr "Not provided"
+
+msgid "Non fournie"
+msgstr "Not provided"
+
+msgid "Payé"
+msgstr "Paid"
+
+msgid "Commission payée"
+msgstr "Commission paid"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Marquer comme payé"
+msgstr "Mark as paid"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Commande"
+msgstr "Order"
+
+msgid "liée à une annonce supprimée."
+msgstr "linked to a deleted listing."
+
+msgid "Aucune commande enregistrée."
+msgstr "No orders recorded."
+
+msgid "Commandes reçues (Carte bancaire)"
+msgstr "Orders received (Bank card)"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Client"
+msgstr "Customer"
+
+msgid "Vendeur"
+msgstr "Seller"
+
+msgid "Prix vendeur (₽)"
+msgstr "Seller price (₽)"
+
+msgid "Commission (10%)"
+msgstr "Commission (10%)"
+
+msgid "Total payé (₽)"
+msgstr "Total paid (₽)"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Détails"
+msgstr "Details"
+
+msgid "Banque"
+msgstr "Bank"
+
+msgid "Carte"
+msgstr "Card"
+
+msgid "Titulaire"
+msgstr "Cardholder"
+
+msgid "Non fourni"
+msgstr "Not provided"
+
+msgid "Payé"
+msgstr "Paid"
+
+msgid "Confirmer"
+msgstr "Confirm"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Commande"
+msgstr "Order"
+
+msgid "liée à une annonce supprimée."
+msgstr "linked to a deleted listing."
+
+msgid "Aucune commande par carte enregistrée."
+msgstr "No card orders recorded."
+
+msgid "Suivi des livraisons"
+msgstr "Delivery Tracking"
+
+msgid "Commande "
+msgstr "Order "
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Acheteur"
+msgstr "Buyer"
+
+msgid "Méthodes"
+msgstr "Methods"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Statut livraison"
+msgstr "Delivery Status"
+
+msgid "Suivi"
+msgstr "Tracking"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Paiement"
+msgstr "Payment"
+
+msgid "Crypto"
+msgstr "Crypto"
+
+msgid "Carte"
+msgstr "Card"
+
+msgid "Inconnu"
+msgstr "Unknown"
+
+msgid "Livraison"
+msgstr "Delivery"
+
+msgid "Pochta Rossii"
+msgstr "Pochta Rossii"
+
+msgid "Remise en main propre"
+msgstr "Hand Delivery"
+
+msgid "Non précisée"
+msgstr "Not specified"
+
+msgid "Non fournie"
+msgstr "Not provided"
+
+msgid "Livré"
+msgstr "Delivered"
+
+msgid "Expédié"
+msgstr "Shipped"
+
+msgid "Préparation"
+msgstr "Preparing"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Aucune commande livrée pour le moment."
+msgstr "No delivered orders at the moment."
+
+#: templates/messages_bloques.html
+msgid "Messages bloqués (Tentatives de contournement)"
+msgstr "Blocked messages (Bypass attempts)"
+
+#: templates/messages_bloques.html
+msgid "Expéditeur"
+msgstr "Sender"
+
+#: templates/messages_bloques.html
+msgid "Destinataire"
+msgstr "Receiver"
+
+#: templates/messages_bloques.html
+msgid "Message"
+msgstr "Message"
+
+#: templates/messages_bloques.html
+msgid "Date"
+msgstr "Date"
+
+#: templates/messages_bloques.html
+msgid "Supprimer"
+msgstr "Delete"
+
+#: templates/messages_bloques.html
+msgid "Supprimer ce message bloqué ?"
+msgstr "Delete this blocked message?"
+
+#: templates/messages_bloques.html
+msgid "Aucun message bloqué pour le moment 👍"
+msgstr "No blocked messages at the moment 👍"
+
+msgid "Admin - Annonces Sponsorisées"
+msgstr "Admin - Sponsored Listings"
+
+msgid "Gérer les annonces sponsorisées"
+msgstr "Manage Sponsored Listings"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Sponsorisé ?"
+msgstr "Sponsored?"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Oui"
+msgstr "Yes"
+
+msgid "Non"
+msgstr "No"
+
+msgid "Basculer"
+msgstr "Toggle"
+
+msgid "Retour au tableau de bord"
+msgstr "← Back to Dashboard"
+
+msgid "Espace Administrateur"
+msgstr "🛠️ Admin Area"
+
+msgid "Utilisateurs"
+msgstr "Users"
+
+msgid "Administrateurs"
+msgstr "Administrators"
+
+msgid "Annonces"
+msgstr "Listings"
+
+msgid "Annonces vendues"
+msgstr "Sold Listings"
+
+msgid "Rechercher un utilisateur..."
+msgstr "🔎 Search for a user..."
+
+msgid "Rechercher"
+msgstr "Search"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Rôle"
+msgstr "Role"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Promotion"
+msgstr "Promotion"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Utilisateur"
+msgstr "User"
+
+msgid "Supprimer cet utilisateur ?"
+msgstr "Delete this user?"
+
+msgid "Supprimer"
+msgstr "🗑 Delete"
+
+msgid "Confirmer la promotion au rôle admin ?"
+msgstr "Confirm promotion to admin role?"
+
+msgid "Promouvoir admin"
+msgstr "🛡 Promote to Admin"
+
+msgid "Confirmer le retrait du rôle admin ?"
+msgstr "Confirm removal of admin role?"
+
+msgid "Retirer admin"
+msgstr "🚫 Remove Admin"
+
+msgid "Vous"
+msgstr "👑 You"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "État"
+msgstr "Condition"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Vendu"
+msgstr "Sold"
+
+msgid "Actif"
+msgstr "Active"
+
+msgid "Confirmer la suppression de cette annonce ?"
+msgstr "Confirm deletion of this listing?"
+
+msgid "Gestion des promos"
+msgstr "Promotions Management"
+
+msgid "Gestion des promotions carrousel"
+msgstr "Carousel Promotions Management"
+
+msgid "Ajouter une promo"
+msgstr "Add a Promo"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "image"
+msgstr "image"
+
+msgid "Supprimer cette promo ?"
+msgstr "Delete this promo?"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Aucune promo trouvée."
+msgstr "No promos found."
+
+msgid "Journal des Emails envoyés"
+msgstr "Sent Emails Log"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Destinataire"
+msgstr "Recipient"
+
+msgid "Sujet"
+msgstr "Subject"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Détail"
+msgstr "Detail"
+
+msgid "Envoyé"
+msgstr "Sent"
+
+msgid "Erreur"
+msgstr "Error"
+
+msgid "Re-tester l’envoi de cet email ?"
+msgstr "Retry sending this email?"
+
+msgid "Retester"
+msgstr "Retry"
+
+msgid "Voir contenu"
+msgstr "View content"
+
+msgid "Précédent"
+msgstr "Previous"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Ajouter une promo"
+msgstr "Add a promo"
+
+msgid "Ajouter une promotion"
+msgstr "Add a promotion"
+
+msgid "Titre"
+msgstr "Title"
+
+msgid "Description (optionnelle)"
+msgstr "Description (optional)"
+
+msgid "Position (ordre d'affichage)"
+msgstr "Position (display order)"
+
+msgid "Image (png, jpg, jpeg, gif)"
+msgstr "Image (png, jpg, jpeg, gif)"
+
+msgid "Ajouter"
+msgstr "Add"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Contact Messages"
+msgstr "Contact Messages"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Date Sent"
+msgstr "Date Sent"
+
+msgid " Signalements des annonces"
+msgstr " Reported Listings"
+
+msgid "Annonce"
+msgstr "Listing"
+
+msgid "Utilisateur"
+msgstr "User"
+
+msgid "Motif"
+msgstr "Reason"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Aucun motif"
+msgstr "No reason provided"
+
+msgid "Traité"
+msgstr "Resolved"
+
+msgid "Ouvert"
+msgstr "Open"
+
+msgid " Traiter"
+msgstr " Mark as Resolved"
+
+msgid "🗑 Supprimer l'annonce"
+msgstr "🗑 Delete Listing"
+
+msgid "Confirmer la suppression de cette annonce signalée ?"
+msgstr "Confirm deletion of this reported listing?"
+
+msgid "Aucun signalement reçu."
+msgstr "No reports received."
+
+msgid "← Précédent"
+msgstr "← Previous"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "sur"
+msgstr "of"
+
+msgid "Suivant →"
+msgstr "Next →"
+
+
+msgid "Détail de la commande"
+msgstr "Order details"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Acheteur"
+msgstr "Buyer"
+
+msgid "Vendeur"
+msgstr "Seller"
+
+msgid "Prix unitaire"
+msgstr "Unit price"
+
+msgid "Quantité"
+msgstr "Quantity"
+
+msgid "Total payé"
+msgstr "Total paid"
+
+msgid "Commission"
+msgstr "Commission"
+
+msgid "À reverser au vendeur"
+msgstr "Amount to seller"
+
+msgid "Méthode de paiement"
+msgstr "Payment method"
+
+msgid "Carte bancaire"
+msgstr "Credit card"
+
+msgid "USDT"
+msgstr "USDT"
+
+msgid "Inconnue"
+msgstr "Unknown"
+
+msgid "Commandée le"
+msgstr "Ordered on"
+
+msgid "Livraison (modifiable)"
+msgstr "Delivery (editable)"
+
+msgid "Méthode de livraison"
+msgstr "Delivery method"
+
+msgid "-- Choisir --"
+msgstr "-- Select --"
+
+msgid "Pochta Rossii"
+msgstr "Russian Post"
+
+msgid "Remise en main propre"
+msgstr "Hand delivery"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Numéro de suivi"
+msgstr "Tracking number"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "En préparation"
+msgstr "In preparation"
+
+msgid "Expédié"
+msgstr "Shipped"
+
+msgid "Livré"
+msgstr "Delivered"
+
+msgid "Mettre à jour les infos"
+msgstr "Update information"
+
+msgid "Informations de paiement du vendeur"
+msgstr "Seller payment information"
+
+msgid "Banque"
+msgstr "Bank"
+
+msgid "Carte"
+msgstr "Card"
+
+msgid "Titulaire"
+msgstr "Card holder"
+
+msgid "Non fourni"
+msgstr "Not provided"
+
+msgid "Adresse USDT"
+msgstr "USDT address"
+
+msgid "Non fournie"
+msgstr "Not provided"
+
+msgid "Informations vendeur non disponibles."
+msgstr "Seller information not available."
+
+msgid "Copier les infos"
+msgstr "Copy information"
+
+msgid "Historique des modifications"
+msgstr "Modification history"
+
+msgid "Aucune modification enregistrée."
+msgstr "No modifications recorded."
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Informations du vendeur copiées !"
+msgstr "Seller information copied!"
+
+msgid "Erreur de copie"
+msgstr "Copy error"
+
+msgstr "Annonces de"
+msgstr "Listings by"
+
+msgid "Commande confirmée !"
+msgstr "Order confirmed!"
+
+msgid "Merci pour votre commande,"
+msgstr "Thank you for your order,"
+
+msgid "Votre commande a bien été enregistrée. Voici les détails :"
+msgstr "Your order has been successfully recorded. Here are the details:"
+
+msgid "Numéro de commande"
+msgstr "Order number"
+
+msgid "Produit(s)"
+msgstr "Product(s)"
+
+msgid "Mode de paiement"
+msgstr "Payment method"
+
+msgid "Mode de livraison"
+msgstr "Delivery method"
+
+msgid "Adresse de livraison"
+msgstr "Delivery address"
+
+msgid "Suivre ma commande"
+msgstr "Track my order"
+
+msgid "Session expirée"
+msgstr "Session expired"
+
+msgid "Oups, votre session a expiré"
+msgstr "Oops, your session has expired"
+
+msgid "Pour des raisons de sécurité, votre session a expiré après une période d'inactivité."
+msgstr "For security reasons, your session has expired after a period of inactivity."
+
+msgid "Veuillez"
+msgstr "Please"
+
+msgid "vous reconnecter"
+msgstr "log back in"
+
+msgid "ou recharger la page pour renouveler votre session."
+msgstr "or reload the page to renew your session."
+
+msgid "Laisser un avis pour"
+msgstr "Leave a review for"
+
+msgid "Note (1 à 5) :"
+msgstr "Rating (1 to 5):"
+
+msgid "Commentaire :"
+msgstr "Comment:"
+
+msgid "Partage ton avis ici..."
+msgstr "Share your review here..."
+
+msgid "Soumettre l’avis"
+msgstr "Submit Review"
+
+msgid "Vous recevrez une notification par email dès que votre paiement sera confirmé. Merci de patienter !"
+msgstr "You will receive an email notification once your payment is confirmed. Thank you for your patience!"
+
+msgid "Conversation avec"
+msgstr "Conversation with"
+
+msgid "Tapez votre message..."
+msgstr "Type your message..."
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Récapitulatif de votre commande"
+msgstr "Order Summary"
+
+msgid "Image du produit"
+msgstr "Product Image"
+
+msgid "Variante"
+msgstr "Variant"
+
+msgid "Prix unitaire"
+msgstr "Unit Price"
+
+msgid "Livraison unitaire"
+msgstr "Unit Shipping"
+
+msgid "Quantité"
+msgstr "Quantity"
+
+msgid "Détail de votre commande"
+msgstr "Order Details"
+
+msgid "Montant total produit"
+msgstr "Total Product Amount"
+
+msgid "Livraison"
+msgstr "Shipping"
+
+msgid "Montant total"
+msgstr "Total Amount"
+
+msgid "Frais de confirmation à payer maintenant"
+msgstr "Confirmation Fee to Pay Now"
+
+msgid "Le reste"
+msgstr "The remaining amount"
+
+msgid "sera réglé directement avec le vendeur."
+msgstr "will be paid directly to the seller."
+
+msgid "Choisissez votre mode de paiement"
+msgstr "Choose your payment method"
+
+msgid "USDT"
+msgstr "USDT"
+
+msgid "Carte bancaire"
+msgstr "Credit Card"
+
+msgid "Méthode de livraison"
+msgstr "Delivery Method"
+
+msgid "-- Choisissez une méthode --"
+msgstr "-- Choose a method --"
+
+msgid "Pochta Rossii"
+msgstr "Russian Post"
+
+msgid "Remise en main propre"
+msgstr "In-person delivery"
+
+msgid "Choisissez une adresse enregistrée"
+msgstr "Choose a saved address"
+
+msgid "-- Nouvelle adresse --"
+msgstr "-- New address --"
+
+msgid "Nouvelle adresse (facultatif si vous avez sélectionné une adresse)"
+msgstr "New address (optional if you've selected one above)"
+
+msgid "Retour au panier"
+msgstr "Back to cart"
+
+msgid "Confirmer ma commande"
+msgstr "Confirm my order"
+
+msgid "Paiement par USDT (TRC20)"
+msgstr "Payment via USDT (TRC20)"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Variante"
+msgstr "Variant"
+
+msgid "Quantité"
+msgstr "Quantity"
+
+msgid "Prix normal"
+msgstr "Regular Price"
+
+msgid "Prix promo"
+msgstr "Promo Price"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Frais de confirmation à payer maintenant"
+msgstr "Confirmation fee to pay now"
+
+msgid "Le reste du paiement sera effectué directement avec le vendeur après contact."
+msgstr "The remaining payment will be made directly with the seller after contact."
+
+msgid "Veuillez envoyer exactement"
+msgstr "Please send exactly"
+
+msgid "à l’adresse suivante"
+msgstr "to the following address"
+
+msgid "Copier"
+msgstr "Copy"
+
+msgid "Adresse copiée !"
+msgstr "Address copied!"
+
+msgid "Méthode de livraison"
+msgstr "Delivery method"
+
+msgid "Adresse de livraison"
+msgstr "Delivery address"
+
+msgid "J'ai payé"
+msgstr "I have paid"
+
+msgid "Paiement manuel par carte bancaire"
+msgstr "Manual payment by bank card"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Variante"
+msgstr "Variant"
+
+msgid "Quantité"
+msgstr "Quantity"
+
+msgid "Prix normal"
+msgstr "Regular Price"
+
+msgid "Prix promotionnel"
+msgstr "Promotional Price"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Frais de confirmation à payer maintenant"
+msgstr "Confirmation fee to pay now"
+
+msgid "Le reste du paiement sera effectué directement avec le vendeur après contact."
+msgstr "The remaining payment will be made directly with the seller after contact."
+
+msgid "Veuillez effectuer un virement de"
+msgstr "Please make a transfer of"
+
+msgid "sur l’un des comptes bancaires suivants"
+msgstr "to one of the following bank accounts"
+
+msgid "Banque Tinkoff"
+msgstr "Tinkoff Bank"
+
+msgid "Nom"
+msgstr "Name"
+
+msgid "Carte"
+msgstr "Card"
+
+msgid "Banque VTB"
+msgstr "VTB Bank"
+
+msgid "Référence à indiquer"
+msgstr "Reference to provide"
+
+msgid "Méthode de livraison"
+msgstr "Delivery Method"
+
+msgid "Adresse de livraison"
+msgstr "Delivery Address"
+
+msgid "J’ai payé"
+msgstr "I have paid"
+
+msgid "notif.new_message"
+msgstr "%(sender)s sent you a message."
+
+msgid "Vous ne pouvez pas discuter avec vous-même."
+msgstr "You cannot chat with yourself."
+
+msgid "❌ Ce message contient des informations interdites (email, numéro, etc.)."
+msgstr "❌ This message contains forbidden content (email, phone number, etc.)."
+
+msgid "❌ Type de fichier non autorisé."
+msgstr "❌ File type not allowed."
+
+msgid "❌ Le fichier est trop volumineux (max 2 Mo)."
+msgstr "❌ The file is too large (max 2 MB)."
+
+msgid "Message envoyé !"
+msgstr "Message sent!"
+
+msgid "📬 Nouveau message reçu sur UniPlace"
+msgstr "📬 New message received on UniPlace"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "%(sender)s vous a envoyé un message sur UniPlace."
+msgstr "%(sender)s sent you a message on UniPlace."
+
+msgid "Contenu du message :"
+msgstr "Message content:"
+
+msgid "📥 Voir mes messages"
+msgstr "📥 View my messages"
+
+msgid "Soyez toujours informé"
+msgstr "Stay informed"
+
+msgid "Votre annonce a bien été créée ✅"
+msgstr "Your listing has been successfully created ✅"
+
+msgid "Action non autorisée."
+msgstr "Unauthorized action."
+
+msgid "Vous n'êtes pas autorisé à modifier cette annonce."
+msgstr "You are not allowed to edit this listing."
+
+msgid "❌ La vidéo dépasse la taille maximale autorisée (20 Mo)."
+msgstr "❌ The video exceeds the maximum allowed size (20 MB)."
+
+msgid "❌ Type de fichier vidéo non autorisé."
+msgstr "❌ Unauthorized video file type."
+
+msgid "Annonce modifiée avec succès !"
+msgstr "Listing successfully updated!"
+
+msgid "🎥 Vidéo supprimée avec succès."
+msgstr "🎥 Video successfully deleted."
+
+msgid "Image supprimée avec succès."
+msgstr "Image successfully deleted."
+
+msgid "Quantité invalide."
+msgstr "Invalid quantity."
+
+msgid "Vous ne pouvez pas acheter votre propre annonce."
+msgstr "You cannot purchase your own listing."
+
+msgid "Variante invalide."
+msgstr "Invalid variant."
+
+msgid "Stock insuffisant pour cette variante. Il reste %(nb)s exemplaires."
+msgstr "Insufficient stock for this variant. Only %(nb)s left."
+
+msgid "Stock insuffisant. Il reste %(nb)s exemplaires."
+msgstr "Insufficient stock. Only %(nb)s left."
+
+msgid "Commande enregistrée avec succès !"
+msgstr "Order successfully placed!"
+
+msgid "Vous ne pouvez pas signaler votre propre annonce."
+msgstr "You cannot report your own listing."
+
+msgid "Vous avez déjà signalé cette annonce."
+msgstr "You have already reported this listing."
+
+msgid "Signalement envoyé. Merci pour votre contribution ✅"
+msgstr "Report submitted. Thank you for your contribution ✅"
+
+msgid "Vous ne pouvez pas noter votre propre annonce."
+msgstr "You cannot review your own listing."
+
+msgid "Vous devez avoir acheté ce produit pour laisser un avis."
+msgstr "You must have purchased this item to leave a review."
+
+msgid "Vous avez déjà laissé un avis pour ce produit."
+msgstr "You have already reviewed this product."
+
+msgid "Merci pour votre avis !"
+msgstr "Thank you for your review!"
+
+msgid "Cette annonce est déjà dans vos favoris 💖"
+msgstr "This listing is already in your favorites 💖"
+
+msgid "Ajouté aux favoris 💖"
+msgstr "Added to favorites 💖"
+
+msgid "Annonce retirée de vos favoris 💔"
+msgstr "Listing removed from your favorites 💔"
+
+msgid "Cette annonce n’est pas dans vos favoris."
+msgstr "This listing is not in your favorites."
+
+msgid "❌ Variante non trouvée."
+msgstr "❌ Variant not found."
+
+msgid "❌ Stock insuffisant pour cette variante."
+msgstr "❌ Insufficient stock for this variant."
+
+msgid "❌ Stock insuffisant pour cet article."
+msgstr "❌ Insufficient stock for this item."
+
+msgid "Note invalide. Elle doit être entre 1 et 5."
+msgstr "Invalid rating. It must be between 1 and 5."
+
+msgid "Vous avez déjà laissé un avis pour cette commande."
+msgstr "You have already left a review for this order."
+
+msgid "🛒 Produit ajouté au panier !"
+msgstr "🛒 Product added to cart!"
+
+msgid "Annonce supprimée avec succès !"
+msgstr "Listing successfully deleted!"
+
+msgid "🎉 Paiement effectué avec succès !"
+msgstr "🎉 Payment completed successfully!"
+
+msgid "Adresse USDT mise à jour ✅"
+msgstr "USDT address updated ✅"
+
+msgid "Commande(s) enregistrée(s) avec succès. Nous attendons votre paiement en USDT ✅"
+msgstr "Order(s) successfully registered. We are waiting for your USDT payment ✅"
+
+msgid "L'annonce avec ID %(id)s est introuvable."
+msgstr "The listing with ID %(id)s was not found."
+
+msgid "Variante introuvable ou invalide."
+msgstr "Variant not found or invalid."
+
+msgid "Stock insuffisant pour %(titre)s"
+msgstr "Insufficient stock for %(titre)s"
+
+msgid "Commande confirmée avec succès. Le vendeur va vous contacter ✅"
+msgstr "Order confirmed successfully. The seller will contact you ✅"
+
+msgid "Informations bancaires mises à jour ✅"
+msgstr "Bank details updated ✅"
+
+msgid "✅ Informations mises à jour"
+msgstr "✅ Information updated"
+
+msgid "🗑 Informations supprimées"
+msgstr "🗑 Information deleted"
+
+msgid "Retiré du panier ❌"
+msgstr "Removed from cart ❌"
+
+msgid "Action non autorisée."
+msgstr "Unauthorized action."
+
+msgid "Mode de paiement invalide."
+msgstr "Invalid payment method."
+
+msgid "Méthode de livraison invalide."
+msgstr "Invalid delivery method."
+
+msgid "Adresse de livraison manquante."
+msgstr "Missing delivery address."
+
+msgid "Votre panier est vide."
+msgstr "Your cart is empty."
+
+msgid "Impossible d'annuler cette commande : elle a déjà été traitée."
+msgstr "Cannot cancel this order: it has already been processed."
+
+msgid "Commande annulée avec succès ❌"
+msgstr "Order successfully cancelled ❌"
+
+msgid "✅ Quantité mise à jour."
+msgstr "✅ Quantity updated."
+
+msgid "⚠️ Quantité invalide."
+msgstr "⚠️ Invalid quantity."
+
+msgid "Infos de paiement mises à jour ✅"
+msgstr "Payment info updated ✅"
+
+msgid "Infos de paiement supprimées ✅"
+msgstr "Payment info deleted ✅"
+
+msgid "Accès non autorisé."
+msgstr "Unauthorized access."
+
+msgid "Suivi mis à jour ✅"
+msgstr "Tracking updated ✅"
+
+msgid "Tous les champs sont obligatoires."
+msgstr "All fields are required."
+
+msgid "Votre message a bien été envoyé ✅"
+msgstr "Your message has been sent ✅"
+
+msgid "📢 Nouvelle commande (paiement crypto)"
+msgstr "📢 New order (crypto payment)"
+
+msgid "Commande(s) passée(s) pour les annonces :"
+msgstr "Order(s) placed for the following listings:"
+
+msgid "Acheteur :"
+msgstr "Buyer:"
+
+msgid "Voir les commandes"
+msgstr "View orders"
+
+msgid "📦 Nouvelle commande reçue (Paiement en attente)"
+msgstr "📦 New order received (Payment pending)"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "Vous avez reçu une commande pour votre annonce :"
+msgstr "You have received an order for your listing:"
+
+msgid "Mode de livraison :"
+msgstr "Delivery method:"
+
+msgid "Adresse de livraison :"
+msgstr "Delivery address:"
+
+msgid "Acheteur :"
+msgstr "Buyer:"
+
+msgid "Merci d’attendre la confirmation du paiement de la commission."
+msgstr "Please wait for the commission payment confirmation."
+
+msgid "📦 Confirmation de votre commande #%(id)s"
+msgstr "📦 Order confirmation #%(id)s"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "Nous avons bien reçu votre commande pour l'article(s) suivant(s) :"
+msgstr "We have received your order for the following item(s):"
+
+msgid "Montant total :"
+msgstr "Total amount:"
+
+msgid "Livraison :"
+msgstr "Delivery method:"
+
+msgid "Adresse de livraison :"
+msgstr "Delivery address:"
+
+msgid "Vous serez notifié lorsque votre paiement sera confirmé. Merci pour votre achat !"
+msgstr "You will be notified once your payment is confirmed. Thank you for your purchase!"
+
+msgid "📦 Nouvelle commande pour votre produit : %(titre)s"
+msgstr "📦 New order for your product: %(titre)s"
+
+msgid "Un acheteur a commandé votre article :"
+msgstr "A buyer has ordered your item:"
+
+msgid "Merci d'attendre la confirmation du paiement avant d'expédier l'article."
+msgstr "Please wait for the payment confirmation before shipping the item."
+
+msgid "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+msgstr "🚚 Shipping update (Order #%(id)s)"
+
+msgid ""
+"Bonjour {username},\n\n"
+"Le vendeur a mis à jour la livraison de votre commande :\n\n"
+"- Produit : {produit}\n"
+"- Statut : {statut}\n"
+"- Numéro de suivi : {tracking}\n"
+"- Suivi en ligne : {lien}\n\n"
+"Merci d'utiliser UniPlace !"
+msgstr ""
+"Hello {username},\n\n"
+"The seller has updated the shipping status of your order:\n\n"
+"- Item: {produit}\n"
+"- Status: {statut}\n"
+"- Tracking number: {tracking}\n"
+"- Track online: {lien}\n\n"
+"Thank you for using UniPlace!"
+
+msgid "[Contact UniPlace] %(sujet)s"
+msgstr "[Contact UniPlace] %(sujet)s"
+
+msgid "Expéditeur :"
+msgstr "Sender:"
+
+msgid "Sujet :"
+msgstr "Subject:"
+
+msgid "Message :"
+msgstr "Message:"
+
+msgid "💰 Paiement confirmé pour votre commande"
+msgstr "💰 Payment confirmed for your order"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "Le paiement de votre commande a été confirmé ✅"
+msgstr "Your order payment has been confirmed ✅"
+
+msgid "📦 Détails de la commande :"
+msgstr "📦 Order details:"
+
+msgid "Acheteur :"
+msgstr "Buyer:"
+
+msgid "Adresse de livraison :"
+msgstr "Delivery address:"
+
+msgid "Mode de livraison :"
+msgstr "Delivery method:"
+
+msgid "🛒 Articles concernés :"
+msgstr "🛒 Items concerned:"
+
+msgid "Vous pouvez maintenant contacter l’acheteur pour :"
+msgstr "You can now contact the buyer to:"
+
+msgid "Finaliser le paiement"
+msgstr "Complete the payment"
+
+msgid "Organiser la livraison"
+msgstr "Arrange the delivery"
+
+msgid "Ajouter un numéro de suivi après envoi si nécessaire"
+msgstr "Add a tracking number after shipping if needed"
+
+msgid "Écrivez-lui directement ici :"
+msgstr "Write to them directly here:"
+
+msgid "Contacter l’acheteur"
+msgstr "Contact the buyer"
+
+msgid "Une fois le colis envoyé, pensez à ajouter le numéro de suivi ici :"
+msgstr "Once the package is shipped, don’t forget to add the tracking number here:"
+
+msgid "Accéder à mes livraisons"
+msgstr "Access my deliveries"
+
+msgid "Merci encore de faire confiance à"
+msgstr "Thank you again for trusting"
+
+msgid "✅ Paiement confirmé – Le vendeur vous contactera bientôt"
+msgstr "✅ Payment confirmed – The seller will contact you soon"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "Votre paiement a bien été confirmé ✅ pour les articles suivants :"
+msgstr "Your payment has been confirmed ✅ for the following items:"
+
+msgid "📬 Et maintenant ?"
+msgstr "📬 What's next?"
+
+msgid "Pour finaliser votre achat, vous devez :"
+msgstr "To complete your purchase, you need to:"
+
+msgid "Contacter le vendeur"
+msgstr "Contact the seller"
+
+msgid "Effectuer le paiement restant"
+msgstr "Complete the remaining payment"
+
+msgid "Organiser la livraison"
+msgstr "Arrange the delivery"
+
+msgid "📁 Vous trouverez toutes les coordonnées utiles du vendeur dans votre tableau de bord, rubrique"
+msgstr "📁 You will find all the seller’s contact information in your dashboard, under"
+
+msgid "Mes achats"
+msgstr "My purchases"
+
+msgid "Accéder à Mes achats"
+msgstr "Access My purchases"
+
+msgid "Merci de faire confiance à UniPlace 🙌"
+msgstr "Thank you for choosing UniPlace 🙌"
+
+msgid "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+msgstr "🚚 Delivery update (Order #%(id)s)"
+
+msgid "Bonjour"
+msgstr "Hello"
+
+msgid "Le statut de votre livraison a été mis à jour :"
+msgstr "Your delivery status has been updated:"
+
+msgid "Statut :"
+msgstr "Status:"
+
+msgid "Numéro de suivi :"
+msgstr "Tracking number:"
+
+msgid "Méthode de livraison :"
+msgstr "Delivery method:"
+
+msgid "Vous pouvez suivre l’évolution dans votre tableau de bord :"
+msgstr "You can track it in your dashboard:"
+
+msgid "Accéder à mes achats"
+msgstr "Access My purchases"
+
+msgid "Merci d’utiliser UniPlace"
+msgstr "Thank you for using UniPlace"
+
+#: admin.py
+msgid "Accès refusé : réservé à l’administrateur."
+msgstr "Access denied: reserved for administrators only."
+
+#: admin.py
+msgid "Impossible de supprimer un administrateur."
+msgstr "Cannot delete an administrator."
+
+#: admin.py
+msgid "Utilisateur supprimé avec succès."
+msgstr "User successfully deleted."
+
+#: admin.py
+msgid "Annonce supprimée avec succès"
+msgstr "Listing successfully deleted."
+
+#: admin.py
+msgid "Accès refusé"
+msgstr "Access denied"
+
+#: admin.py
+msgid "L'utilisateur %(user)s est maintenant administrateur."
+msgstr "User %(user)s is now an administrator."
+
+#: admin.py
+msgid "Vous ne pouvez pas retirer vos propres droits admin."
+msgstr "You cannot remove your own admin rights."
+
+#: admin.py
+msgid "Cet utilisateur n’est pas administrateur."
+msgstr "This user is not an administrator."
+
+#: admin.py
+msgid "L'utilisateur %(user)s n'est plus administrateur."
+msgstr "User %(user)s is no longer an administrator."
+
+#: admin.py
+msgid "Message bloqué supprimé avec succès ✅"
+msgstr "Blocked message successfully deleted ✅"
+
+#: admin.py
+msgid "Cet email a déjà été envoyé avec succès."
+msgstr "This email has already been sent successfully."
+
+#: admin.py
+msgid "Email renvoyé avec succès !"
+msgstr "Email resent successfully!"
+
+#: admin.py
+msgid "Échec de renvoi de l'email : %(erreur)s"
+msgstr "Failed to resend email: %(erreur)s"
+
+#: admin.py
+msgid "Fichier image invalide."
+msgstr "Invalid image file."
+
+#: admin.py
+msgid "Promo ajoutée."
+msgstr "Promo added."
+
+#: admin.py
+msgid "Promo supprimée."
+msgstr "Promo deleted."
+
+#: admin.py
+msgid "Accès réservé à l'administrateur."
+msgstr "Access restricted to administrator."
+
+#: admin.py
+msgid "Méthode de livraison invalide."
+msgstr "Invalid delivery method."
+
+#: admin.py
+msgid "🚚 Mise à jour de votre livraison (Commande #%(id)s)"
+msgstr "🚚 Delivery update for your order (#%(id)s)"
+
+#: admin.py
+msgid "Informations de livraison mises à jour ✅"
+msgstr "Delivery information updated ✅"
+
+#: admin.py
+msgid "💰 Paiement confirmé pour votre commande"
+msgstr "💰 Payment confirmed for your order"
+
+#: admin.py
+msgid "✅ Paiement confirmé – Le vendeur vous contactera bientôt"
+msgstr "✅ Payment confirmed – The seller will contact you soon"
+
+#: admin.py
+msgid "✅ Paiement confirmé, emails envoyés et articles marqués comme vendus."
+msgstr "✅ Payment confirmed, emails sent, and items marked as sold."
+
+msgid "Cet email est déjà utilisé. Veuillez en choisir un autre."
+msgstr "This email is already in use. Please choose another one."
+
+msgid "Un email de confirmation vous a été envoyé ✅"
+msgstr "A confirmation email has been sent to you ✅"
+
+msgid "Le lien de confirmation a expiré. Merci de vous réinscrire."
+msgstr "The confirmation link has expired. Please sign up again."
+
+msgid "Lien de confirmation invalide."
+msgstr "Invalid confirmation link."
+
+msgid "Utilisateur introuvable pour cet email."
+msgstr "No user found with this email."
+
+msgid "Votre adresse email est déjà confirmée."
+msgstr "Your email address is already confirmed."
+
+msgid "Merci ! Votre adresse email est confirmée. Vous pouvez maintenant vous connecter."
+msgstr "Thank you! Your email address has been confirmed. You can now log in."
+
+msgid "Un nouvel email de confirmation a été envoyé."
+msgstr "A new confirmation email has been sent."
+
+msgid "Vous devez confirmer votre adresse email avant de vous connecter."
+msgstr "You must confirm your email address before logging in."
+
+msgid "Bienvenue, %(username)s ! Vous êtes maintenant connecté."
+msgstr "Welcome, %(username)s! You are now logged in."
+
+msgid "Email ou mot de passe incorrect !"
+msgstr "Incorrect email or password!"
+
+msgid "Vous devez confirmer votre adresse email pour accéder à cette page."
+msgstr "You must confirm your email address to access this page."
+
+msgid "Cet email n'est pas enregistré !"
+msgstr "This email is not registered!"
+
+msgid "Un email contenant votre nouveau mot de passe a été envoyé ✅"
+msgstr "An email with your new password has been sent ✅"
+
+msgid "Une erreur est survenue lors de l'envoi de l'email ❌"
+msgstr "An error occurred while sending the email ❌"
+
+#: auth.py:signup
+msgid "Confirmez votre adresse email UniPlace"
+msgstr "Подтвердите ваш адрес электронной почты UniPlace"
+
+#: auth.py:signup
+msgid "Merci de vous être inscrit sur <strong>UniPlace</strong>."
+msgstr "Спасибо за регистрацию на <strong>UniPlace</strong>."
+
+#: auth.py:signup
+msgid "Pour activer votre compte, cliquez ici :"
+msgstr "Чтобы активировать аккаунт, нажмите здесь:"
+
+#: auth.py:signup
+msgid "✅ Confirmer mon adresse email"
+msgstr "✅ Подтвердить мой адрес электронной почты"
+
+#: auth.py:signup
+msgid "Ce lien expirera dans 1 heure."
+msgstr "Эта ссылка истечет через 1 час."
+
+#: auth.py:unconfirmed
+msgid "Rappel : confirmez votre adresse email UniPlace"
+msgstr "Напоминание: подтвердите ваш адрес электронной почты UniPlace"
+
+#: auth.py:unconfirmed
+msgid "Merci de confirmer votre adresse email en cliquant sur ce lien :"
+msgstr "Пожалуйста, подтвердите ваш адрес электронной почты, перейдя по этой ссылке:"
+
+#: auth.py:forgot_password
+msgid "🔐 Réinitialisation de votre mot de passe UniPlace"
+msgstr "🔐 Сброс пароля UniPlace"
+
+#: auth.py:forgot_password
+msgid "Voici votre nouveau mot de passe temporaire :"
+msgstr "Вот ваш новый временный пароль:"
+
+#: auth.py:forgot_password
+msgid "Connectez-vous dès maintenant et modifiez-le depuis votre profil."
+msgstr "Войдите сейчас и измените его в вашем профиле."
+
+#: auth.py:forgot_password
+msgid "Cet email est automatique – ne pas répondre."
+msgstr "Это автоматическое письмо – не отвечайте на него."
+
+#: auth.py:forgot_password
+msgid "Un email contenant votre nouveau mot de passe a été envoyé ✅"
+msgstr "Письмо с вашим новым паролем было отправлено ✅"
+
+#: auth.py:forgot_password
+msgid "Une erreur est survenue lors de l'envoi de l'email ❌"
+msgstr "Произошла ошибка при отправке письма ❌"
+
+#: auth.py:login
+msgid "Vous devez confirmer votre adresse email avant de vous connecter."
+msgstr "Вы должны подтвердить ваш адрес электронной почты перед входом."
+
+#: auth.py:login
+msgid "Bienvenue, %s ! Vous êtes maintenant connecté."
+msgstr "Добро пожаловать, %s! Вы успешно вошли в систему."
+
+#: auth.py:login
+msgid "Email ou mot de passe incorrect !"
+msgstr "Неверный email или пароль!"
+
+#: auth.py:email_confirmed_required
+msgid "Vous devez confirmer votre adresse email pour accéder à cette page."
+msgstr "Вы должны подтвердить ваш адрес электронной почты для доступа к этой странице."
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Vous n'avez publié aucune annonce."
+msgstr "You have not posted any listings."
+
+msgid "Modifier l'annonce"
+msgstr "Edit the listing"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "Sous-catégorie"
+msgstr "Subcategory"
+
+msgid "Entrez une sous-catégorie"
+msgstr "Enter a subcategory"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Frais de livraison estimés"
+msgstr "Estimated delivery fee"
+
+msgid "Livré en 1 à 3 jours 🚀"
+msgstr "Delivered in 1 to 3 days 🚀"
+
+msgid "Prix initial (avant réduction)"
+msgstr "Original price (before discount)"
+
+msgid "Prix promotionnel"
+msgstr "Discounted price"
+
+msgid "Date de début de la promotion"
+msgstr "Promotion start date"
+
+msgid "Date de fin de la promotion"
+msgstr "Promotion end date"
+
+msgid "Choisissez votre ville"
+msgstr "Choose your city"
+
+msgid "Entrez votre ville"
+msgstr "Enter your city"
+
+msgid "État du produit"
+msgstr "Condition of the product"
+
+msgid "Neuf"
+msgstr "New"
+
+msgid "Occasion"
+msgstr "Used"
+
+msgid "Autre..."
+msgstr "Other..."
+
+msgid "💾 Enregistrer les modifications"
+msgstr "💾 Save changes"
+
+msgid "Informations complémentaires"
+msgstr "Additional Information"
+
+msgid "Poids (en kg)"
+msgstr "Weight (in kg)"
+
+msgid "Dimensions (L × l × h en cm)"
+msgstr "Dimensions (L × W × H in cm)"
+
+msgid "Contenu du pack"
+msgstr "Package Contents"
+
+msgid "Mots-clés (séparés par des virgules)"
+msgstr "Keywords (separated by commas)"
+
+msgid "Date de fin d'affichage de l’annonce"
+msgstr "Listing Expiration Date"
+
+msgid "Vidéo de démonstration"
+msgstr "Demo Video"
+
+msgid "Vidéo actuelle"
+msgstr "Current Video"
+
+msgid "Supprimer la vidéo ❌"
+msgstr "Delete Video ❌"
+
+msgid "Ajouter une nouvelle vidéo :"
+msgstr "Add New Video:"
+
+msgid "Variantes disponibles"
+msgstr "Available Variants"
+
+msgid "Taille (ex : M, L, 42)"
+msgstr "Size (e.g., M, L, 42)"
+
+msgid "Couleur (ex : Bleu, Rouge)"
+msgstr "Color (e.g., Blue, Red)"
+
+msgid "Stock (ex : 2)"
+msgstr "Stock (e.g., 2)"
+
+msgid "Prix :"
+msgstr "Price:"
+
+msgid "Prix promotionnel :"
+msgstr "Discount Price:"
+
+msgid "Date début promo :"
+msgstr "Promo Start Date:"
+
+msgid "Date fin promo :"
+msgstr "Promo End Date:"
+
+msgid "Image actuelle :"
+msgstr "Current Image:"
+
+msgid "Supprimer cette variante"
+msgstr "Delete this Variant"
+
+msgid "Ajouter une variante"
+msgstr "Add a Variant"
+
+msgid "💾 Enregistrer les modifications"
+msgstr "💾 Save Changes"
+
+msgid "Électronique & Informatique"
+msgstr "Electronics & Computers"
+
+msgid "Ordinateurs / Laptops"
+msgstr "Computers / Laptops"
+
+msgid "Smartphones"
+msgstr "Smartphones"
+
+msgid "Tablettes"
+msgstr "Tablets"
+
+msgid "Casques / Écouteurs / Enceintes"
+msgstr "Headphones / Earphones / Speakers"
+
+msgid "Écrans / Claviers / Souris"
+msgstr "Screens / Keyboards / Mice"
+
+msgid "Disques durs / SSD / Clés USB"
+msgstr "Hard drives / SSD / USB drives"
+
+msgid "Câbles & Chargeurs"
+msgstr "Cables & Chargers"
+
+msgid "Accessoires tech"
+msgstr "Tech Accessories"
+
+msgid "Vêtements & Mode"
+msgstr "Clothing & Fashion"
+
+msgid "Vêtements hommes"
+msgstr "Men's Clothing"
+
+msgid "Vêtements femmes"
+msgstr "Women's Clothing"
+
+msgid "Vestes / Manteaux"
+msgstr "Jackets / Coats"
+
+msgid "Chaussures hommes"
+msgstr "Men's Shoes"
+
+msgid "Chaussures femmes"
+msgstr "Women's Shoes"
+
+msgid "Accessoires"
+msgstr "Accessories"
+
+msgid "Meubles & Maison"
+msgstr "Furniture & Home"
+
+msgid "Lits / Matelas"
+msgstr "Beds / Mattresses"
+
+msgid "Chaises / Fauteuils"
+msgstr "Chairs / Armchairs"
+
+msgid "Bureaux / Tables / Étagères"
+msgstr "Desks / Tables / Shelves"
+
+msgid "Armoires / Rangement"
+msgstr "Wardrobes / Storage"
+
+msgid "Décoration intérieure"
+msgstr "Interior Decoration"
+
+msgid "Cuisine & électroménager"
+msgstr "Kitchen & Appliances"
+
+msgid "Logement étudiant"
+msgstr "Student Housing"
+
+msgid "Colocation disponible"
+msgstr "Available Flatshare"
+
+msgid "Studio / Appartement à louer"
+msgstr "Studio / Apartment for Rent"
+
+msgid "Chambre libre chez l’habitant"
+msgstr "Room for Rent (Host)"
+
+msgid "Sous-location courte durée"
+msgstr "Short-Term Sublet"
+
+msgid "Échange temporaire de logement"
+msgstr "Temporary Housing Exchange"
+
+msgid "Cuisine & Produits alimentaires"
+msgstr "Food & Grocery"
+
+msgid "Épices / Condiments"
+msgstr "Spices / Condiments"
+
+msgid "Nourriture africaine / asiatique"
+msgstr "African / Asian Food"
+
+msgid "Produits de base"
+msgstr "Staples"
+
+msgid "Boissons & Snacks"
+msgstr "Drinks & Snacks"
+
+msgid "Ustensiles spécifiques"
+msgstr "Specific Kitchen Tools"
+
+msgid "Voyages & Mobilité"
+msgstr "Travel & Mobility"
+
+msgid "Sacs / Valises / Backpacks"
+msgstr "Bags / Suitcases / Backpacks"
+
+msgid "Revente de billets de train / avion"
+msgstr "Train / Flight Ticket Resale"
+
+msgid "Covoiturage"
+msgstr "Carpooling"
+
+msgid "Location de véhicule / trottinette"
+msgstr "Vehicle / Scooter Rental"
+
+msgid "Cartes de transport / Abonnements"
+msgstr "Transport Cards / Subscriptions"
+
+msgid "Services entre étudiants"
+msgstr "Services Between Students"
+
+msgid "Cours particuliers / Aide scolaire"
+msgstr "Private Lessons / School Help"
+
+msgid "Correction de devoirs / Mémoire"
+msgstr "Homework Correction / Thesis"
+
+msgid "Traductions / Mise en page / CV"
+msgstr "Translations / Formatting / CV"
+
+msgid "Ménage / Repassage / Courses"
+msgstr "Cleaning / Ironing / Shopping"
+
+msgid "Soins personnels"
+msgstr "Personal Care"
+
+msgid "Envoi de colis / Retrait"
+msgstr "Package Delivery / Pickup"
+
+msgid "Soutien administratif"
+msgstr "Administrative Support"
+
+msgid "Annonces diverses"
+msgstr "Miscellaneous Listings"
+
+msgid "Événements / Soirées / Concerts"
+msgstr "Events / Parties / Concerts"
+
+msgid "Jeux vidéos / Consoles"
+msgstr "Video Games / Consoles"
+
+msgid "Appareils photo / Caméras"
+msgstr "Cameras / Cameras"
+
+msgid "Instruments de musique"
+msgstr "Musical Instruments"
+
+msgid "Objets perdus / retrouvés"
+msgstr "Lost & Found Items"
+
+msgid "Objets divers"
+msgstr "Miscellaneous Items"
+
+msgid "Demandes & Recherches"
+msgstr "Requests & Searches"
+
+msgid "Recherche de logement"
+msgstr "Looking for Housing"
+
+msgid "Recherche de colocataire"
+msgstr "Looking for Flatmates"
+
+msgid "Recherche d’objet"
+msgstr "Looking for Items"
+
+msgid "Recherche de service"
+msgstr "Looking for Services"
+
+msgid "Demande de transport"
+msgstr "Request for Transport"
+
+msgid "Études & Livres"
+msgstr "Studies & Books"
+
+msgid "Manuels & Livres universitaires"
+msgstr "Textbooks & University Books"
+
+msgid "Cours imprimés / Polycopiés"
+msgstr "Printed Courses / Photocopied Notes"
+
+msgid "Fiches de révision / Résumés"
+msgstr "Revision Notes / Summaries"
+
+msgid "Matériel de bureau"
+msgstr "Office Supplies"
+
+msgid "Fournitures scientifiques"
+msgstr "Scientific Supplies"
+
+msgid "Manuels & Livres universitaires"
+msgstr "Academic Books & Manuals"
+
+msgid "Cours imprimés / Polycopiés"
+msgstr "Printed Courses / Handouts"
+
+msgid "Fiches de révision / Résumés"
+msgstr "Revision Sheets / Summaries"
+
+msgid "Matériel de bureau"
+msgstr "Office Supplies"
+
+msgid "Fournitures scientifiques"
+msgstr "Scientific Supplies"
+
+msgid "Ordinateurs / Laptops"
+msgstr "Computers / Laptops"
+
+msgid "Smartphones"
+msgstr "Smartphones"
+
+msgid "Tablettes"
+msgstr "Tablets"
+
+msgid "Casques / Écouteurs / Enceintes"
+msgstr "Headphones / Earphones / Speakers"
+
+msgid "Écrans / Claviers / Souris"
+msgstr "Monitors / Keyboards / Mice"
+
+msgid "Disques durs / SSD / Clés USB"
+msgstr "Hard Drives / SSDs / USB Drives"
+
+msgid "Câbles & Chargeurs"
+msgstr "Cables & Chargers"
+
+msgid "Accessoires tech"
+msgstr "Tech Accessories"
+
+msgid "Vêtements hommes"
+msgstr "Men's Clothing"
+
+msgid "Vêtements femmes"
+msgstr "Women's Clothing"
+
+msgid "Vestes / Manteaux"
+msgstr "Jackets / Coats"
+
+msgid "Chaussures hommes"
+msgstr "Men's Shoes"
+
+msgid "Chaussures femmes"
+msgstr "Women's Shoes"
+
+msgid "Accessoires"
+msgstr "Accessories"
+
+msgid "Lits / Matelas"
+msgstr "Beds / Mattresses"
+
+msgid "Chaises / Fauteuils"
+msgstr "Chairs / Armchairs"
+
+msgid "Bureaux / Tables / Étagères"
+msgstr "Desks / Tables / Shelves"
+
+msgid "Armoires / Rangement"
+msgstr "Wardrobes / Storage"
+
+msgid "Décoration intérieure"
+msgstr "Home Decor"
+
+msgid "Cuisine & électroménager"
+msgstr "Kitchen & Appliances"
+
+msgid "Colocation disponible"
+msgstr "Available Shared Apartments"
+
+msgid "Studio / Appartement à louer"
+msgstr "Studio / Apartment for Rent"
+
+msgid "Chambre libre chez l’habitant"
+msgstr "Room for Rent with Host"
+
+msgid "Sous-location courte durée"
+msgstr "Short-Term Sublets"
+
+msgid "Échange temporaire de logement"
+msgstr "Temporary Housing Exchange"
+
+msgid "Épices / Condiments"
+msgstr "Spices / Condiments"
+
+msgid "Nourriture africaine / asiatique"
+msgstr "African / Asian Food"
+
+msgid "Produits de base"
+msgstr "Staple Foods"
+
+msgid "Boissons & Snacks"
+msgstr "Drinks & Snacks"
+
+msgid "Ustensiles spécifiques"
+msgstr "Specialized Kitchenware"
+
+msgid "Sacs / Valises / Backpacks"
+msgstr "Bags / Suitcases / Backpacks"
+
+msgid "Revente de billets de train / avion"
+msgstr "Train / Flight Ticket Resale"
+
+msgid "Covoiturage"
+msgstr "Carpooling"
+
+msgid "Location de véhicule / trottinette"
+msgstr "Vehicle / Scooter Rental"
+
+msgid "Cartes de transport / Abonnements"
+msgstr "Transport Cards / Subscriptions"
+
+msgid "Cours particuliers / Aide scolaire"
+msgstr "Private Lessons / School Help"
+
+msgid "Correction de devoirs / Mémoire"
+msgstr "Homework Correction / Thesis"
+
+msgid "Traductions / Mise en page / CV"
+msgstr "Translations / Formatting / CVs"
+
+msgid "Ménage / Repassage / Courses"
+msgstr "Cleaning / Ironing / Shopping"
+
+msgid "Soins personnels"
+msgstr "Personal Care"
+
+msgid "Envoi de colis / Retrait"
+msgstr "Package Sending / Pickup"
+
+msgid "Soutien administratif"
+msgstr "Administrative Support"
+
+msgid "Événements / Soirées / Concerts"
+msgstr "Events / Parties / Concerts"
+
+msgid "Jeux vidéos / Consoles"
+msgstr "Video Games / Consoles"
+
+msgid "Appareils photo / Caméras"
+msgstr "Cameras / Camcorders"
+
+msgid "Instruments de musique"
+msgstr "Musical Instruments"
+
+msgid "Objets perdus / retrouvés"
+msgstr "Lost / Found Items"
+
+msgid "Objets divers"
+msgstr "Miscellaneous Items"
+
+msgid "Recherche de logement"
+msgstr "Searching for Housing"
+
+msgid "Recherche de colocataire"
+msgstr "Looking for a Roommate"
+
+msgid "Recherche d’objet"
+msgstr "Searching for Items"
+
+msgid "Recherche de service"
+msgstr "Searching for Services"
+
+msgid "Demande de transport"
+msgstr "Transport Request"
+
+msgid "Vêtements hommes"
+msgstr "Size / Color (e.g., M / Blue)"
+
+msgid "Vêtements femmes"
+msgstr "Size / Color (e.g., S / Red)"
+
+msgid "Vestes / Manteaux"
+msgstr "Size / Color (e.g., L / Black)"
+
+msgid "Chaussures hommes"
+msgstr "Size / Color (e.g., 42 / Brown)"
+
+msgid "Chaussures femmes"
+msgstr "Size / Color (e.g., 38 / White)"
+
+msgid "Accessoires"
+msgstr "One size / Gold"
+
+msgid "Smartphones"
+msgstr "128 GB / Black"
+
+msgid "Ordinateurs / Laptops"
+msgstr "15\" / 512 GB / 16 GB RAM / Silver"
+
+msgid "Tablettes"
+msgstr "11\" / 256 GB / Wi-Fi / Gray"
+
+msgid "Casques / Écouteurs / Enceintes"
+msgstr "Version 2 / White"
+
+msgid "Écrans / Claviers / Souris"
+msgstr "24\" / Gaming / Black"
+
+msgid "Disques durs / SSD / Clés USB"
+msgstr "1TB / USB 3.0 / Black"
+
+msgid "Câbles & Chargeurs"
+msgstr "2m / 65W / USB-C / White"
+
+msgid "Accessoires tech"
+msgstr "Foldable stand / Metal / Black"
+
+msgid "Lits / Matelas"
+msgstr "140x200 / Light oak"
+
+msgid "Chaises / Fauteuils"
+msgstr "Set of 2 / White"
+
+msgid "Bureaux / Tables / Étagères"
+msgstr "120x60 / Dark wood"
+
+msgid "Armoires / Rangement"
+msgstr "3 doors / Matte white"
+
+msgid "Décoration intérieure"
+msgstr "Set of 3 frames / Gold"
+
+msgid "Cuisine & électroménager"
+msgstr "23L / Microwave / Stainless steel"
+
+msgid "Épices / Condiments"
+msgstr "200g / Turmeric / Organic"
+
+msgid "Produits de base"
+msgstr "5kg / Fragrant rice"
+
+msgid "Boissons & Snacks"
+msgstr "Pack x6 / Mango / Fresh"
+
+msgid "Ustensiles spécifiques"
+msgstr "24cm / Cast iron / Red"
+
+msgid "Jeux vidéos / Consoles"
+msgstr "PS5 / Standard / 1 controller / White"
+
+msgid "Appareils photo / Caméras"
+msgstr "Canon EOS / 50mm / Black"
+
+msgid "Instruments de musique"
+msgstr "Classical guitar / With case / Light wood"
+
+msgid "Objets divers"
+msgstr "Set of 3 / Various colors"
+
+msgid "Sacs / Valises / Backpacks"
+msgstr "40L / Waterproof / Black"
+
+msgid "Revente de billets de train / avion"
+msgstr "TGV ticket Paris → Lyon - June 22"
+
+msgid "Covoiturage"
+msgstr "Trip Moscow → Saransk - June 24 (2 seats available)"
+
+msgid "Location de véhicule / trottinette"
+msgstr "Electric scooter for rent - 200 Rub/day"
+
+msgid "Cartes de transport / Abonnements"
+msgstr "Bus card valid until end of June"
+
+msgid "Cours particuliers / Aide scolaire"
+msgstr "Digital Marketing lessons (L3) – Experienced tutor"
+
+msgid "Correction de devoirs / Mémoire"
+msgstr "Proofreading + thesis correction – Fast"
+
+msgid "Traductions / Mise en page / CV"
+msgstr "Translation EN→FR or RU→FR + CV formatting"
+
+msgid "Ménage / Repassage / Courses"
+msgstr "Housekeeping 2h/week – South district"
+
+msgid "Soins personnels"
+msgstr "Home hairdressing – Braids or straightening"
+
+msgid "Envoi de colis / Retrait"
+msgstr "Parcel pickup at airport + drop at post – evening"
+
+msgid "Uni"
+msgstr "Uni"
+
+msgid "Place"
+msgstr "Place"
+
+msgid "Achetez"
+msgstr "Buy"
+
+msgid "ce que"
+msgstr "what"
+
+msgid "vous"
+msgstr "you"
+
+msgid "aimez,"
+msgstr "like,"
+
+msgid "trouvez"
+msgstr "find"
+
+msgid "ce que"
+msgstr "what"
+
+msgid "vous"
+msgstr "you"
+
+msgid "cherchez"
+msgstr "are looking for"
+
+msgid "!!!"
+msgstr "!!!"
+
+msgid "Connectez-vous"
+msgstr "Log in"
+
+msgid "et explorez"
+msgstr "and explore"
+
+msgid "un monde"
+msgstr "a world"
+
+msgid "d'opportunités !"
+msgstr "of opportunities!"
+
+
+msgid "Soutien administratif"
+msgstr "Help with Campus Russia / Campus France paperwork"
+
+msgid "Événements / Soirées / Concerts"
+msgstr "Afro party on Friday – Free entry"
+
+msgid "Appareils photo / Caméras"
+msgstr "Canon EOS 2000D – Like new"
+
+msgid "Instruments de musique"
+msgstr "e.g., Yamaha classical guitar – Very good condition"
+
+msgid "Objets perdus / retrouvés"
+msgstr "e.g., Lost black wallet near the campus"
+
+msgid "Objets divers"
+msgstr "e.g., Set of useful items (lamp, power strip, curtains)"
+
+msgid "Recherche de logement"
+msgstr "e.g., Looking for studio near university – Max 30,000 Rub"
+
+msgid "Recherche de colocataire"
+msgstr "e.g., Looking for roommate for T3 in Moscow"
+
+msgid "Recherche d’objet"
+msgstr "e.g., Looking for second-hand bike, cheap"
+
+msgid "Recherche de service"
+msgstr "e.g., Need help installing PC"
+
+msgid "Demande de transport"
+msgstr "e.g., Looking for ride Saint Peter → Moscow this weekend"
+
+
+
+

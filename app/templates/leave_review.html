@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Google Font Baloo 2 -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.review-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.review-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #555;
+}
+
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Baloo 2', cursive;
+    font-size: 16px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #28a745;
+    color: white;
+    padding: 14px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+</style>
+
+<div class="review-container">
+    <h2>📝 {% trans %}Laisser un avis pour{% endtrans %} <strong>{{ listing.title }}</strong></h2>
+
+    <form method="POST">
+        <label for="rating">⭐ {% trans %}Note (1 à 5) :{% endtrans %}</label>
+        <input type="number" name="rating" min="1" max="5" required>
+
+        <label for="comment">💬 {% trans %}Commentaire :{% endtrans %}</label>
+        <textarea name="comment" rows="5" placeholder="{{ _('Partage ton avis ici...') }}"></textarea>
+
+        <button type="submit">✅ {% trans %}Soumettre l’avis{% endtrans %}</button>
+    </form>
+</div>
+{% endblock %}

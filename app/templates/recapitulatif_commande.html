@@ -1,0 +1,266 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<style>
+  .recap-container {
+    max-width: 900px;
+    margin: 40px auto 80px;
+    background: #fff8f0;
+    border-radius: 18px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 24px rgba(255, 132, 82, 0.25);
+    font-family: 'Baloo 2', cursive, sans-serif;
+    color: #5a3e36;
+  }
+
+  .recap-container h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+    color: #ff6f3c;
+    text-shadow: 1px 1px 5px #fcd8b6;
+  }
+
+  .card {
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(255, 110, 30, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(255, 110, 30, 0.35);
+  }
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 4px solid #ff6f3c;
+  }
+
+  .card-body {
+    background: #fff3e6;
+    padding: 20px;
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #d94a00;
+    margin-bottom: 12px;
+  }
+
+  .card-text strong {
+    color: #ff7a3c;
+  }
+
+  .total-section {
+    border-top: 3px solid #ff6f3c;
+    padding-top: 20px;
+    margin-top: 40px;
+    text-align: right;
+  }
+
+  .total-section h4 {
+    font-size: 1.8rem;
+    color: #cc4a00;
+    margin-bottom: 8px;
+  }
+
+  .total-section p {
+    font-size: 1.2rem;
+    margin: 3px 0;
+    font-weight: 600;
+  }
+
+  form {
+    margin-top: 40px;
+    background: #ffeedb;
+    border-radius: 16px;
+    padding: 30px 35px;
+    box-shadow: 0 6px 18px rgba(255, 111, 48, 0.2);
+  }
+
+  label {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #bb4f00;
+  }
+
+  select.form-select, textarea.form-control {
+    border-radius: 12px;
+    border: 2px solid #ff8c4a;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #5a3e36;
+    background-color: #fff8f0;
+    transition: border-color 0.3s ease;
+  }
+
+  select.form-select:focus, textarea.form-control:focus {
+    border-color: #ff6f3c;
+    outline: none;
+    box-shadow: 0 0 8px #ff8c4a88;
+  }
+
+  .btn {
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 14px;
+    padding: 12px 28px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px #ff6f3caa;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-success {
+    background-color: #ff6f3c;
+    border: none;
+    color: #fff;
+  }
+  .btn-success:hover {
+    background-color: #e65a1a;
+  }
+
+  .btn-outline-secondary {
+    background-color: transparent;
+    border: 2px solid #ff6f3c;
+    color: #ff6f3c;
+  }
+  .btn-outline-secondary:hover {
+    background-color: #ff6f3c;
+    color: white;
+  }
+
+  .d-flex {
+    display: flex !important;
+  }
+  .justify-content-between {
+    justify-content: space-between !important;
+  }
+
+</style>
+
+<div class="recap-container">
+  <h2>🧾 {{ _('Récapitulatif de votre commande') }}</h2>
+
+  <div class="row">
+  {% for item in items %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card shadow-sm h-100">
+        {% if item.variant and item.variant.image_filename %}
+  <img src="{{ url_for('static', filename='uploads/variants/' ~ item.variant.image_filename) }}" class="card-img-top" alt="{{ _('Image du produit') }}">
+{% elif item.listing.images and item.listing.images[0].filename %}
+  <img src="{{ url_for('static', filename='uploads/' ~ item.listing.images[0].filename) }}" class="card-img-top" alt="{{ _('Image du produit') }}">
+{% else %}
+  <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" class="card-img-top" alt="{{ _('Image du produit') }}">
+{% endif %}
+
+
+        <div class="card-body">
+          <h5 class="card-title">🛍️ {{ item.title }}</h5>
+<p class="card-text">
+  {% if item.variant %}
+    <strong>📦 {{ _('Variante') }} :</strong> {{ item.variant.taille }} {{ item.variant.couleur }}<br>
+  {% endif %}
+  <strong>💰 {{ _('Prix unitaire') }} :</strong>
+{% if item.variant %}
+  {% set original_price = item.variant.prix or item.listing.price %}
+  {% set promo_price = item.unit_price %}
+{% else %}
+  {% set original_price = item.listing.price %}
+  {% set promo_price = item.unit_price %}
+{% endif %}
+
+{% if promo_price != original_price %}
+  <span style="text-decoration: line-through; color: #999;">{{ original_price }} RUB</span>
+  <br>
+  <strong style="color: #e67e22;">{{ promo_price }} RUB</strong>
+{% else %}
+  {{ promo_price }} RUB
+{% endif %}
+(~ {{ (promo_price / taux) | round(2) }} {{ devise }})<br>
+
+  <strong>🚚 {{ _('Livraison unitaire') }} :</strong> {{ item.delivery_fee }} RUB (~ {{ (item.delivery_fee / taux) | round(2) }} {{ devise }})<br>
+  <strong>📦 {{ _('Quantité') }} :</strong> {{ item.quantity }}<br>
+</p>
+
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+
+  <div class="total-section">
+  <h4>💰 {{ _('Détail de votre commande') }} :</h4>
+  <p><strong>{{ _('Montant total produit') }} :</strong> {{ subtotal_rub }} RUB (~ {{ (subtotal_rub / taux) | round(2) }} {{ devise }})</p>
+  <p><strong>+ {{ _('Livraison') }} :</strong> {{ total_livraison }} RUB (~ {{ (total_livraison / taux) | round(2) }} {{ devise }})</p>
+  <p><strong>= {{ _('Montant total') }} :</strong> {{ subtotal_rub + total_livraison }} RUB (~ {{ ((subtotal_rub + total_livraison) / taux) | round(2) }} {{ devise }})</p>
+
+  <hr>
+
+  <p><strong>💸 {{ _('Frais de confirmation à payer maintenant') }} :</strong> {{ commission_rub }} RUB (~ {{ (commission_rub / taux) | round(2) }} {{ devise }})</p>
+  <p class="text-warning mt-3">
+    ⚠️  {{ _('Le reste') }} ({{ subtotal_rub + total_livraison - commission_rub }} RUB) {{ _('sera réglé directement avec le vendeur.') }}
+  </p>
+</div>
+
+
+
+
+  <form method="post" action="{{ url_for('main.commander_panier') }}" class="mt-4">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="mb-3">
+      <label for="payment_method">💳 {{ _('Choisissez votre mode de paiement') }} :</label>
+      <select class="form-select" name="payment_method" required>
+        <option value="usdt">💸 {{ _('USDT') }}</option>
+        <option value="carte">💳 {{ _('Carte bancaire') }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="delivery_method">🚚 {{ _('Méthode de livraison') }} :</label>
+      <select class="form-select" name="delivery_method" id="delivery_method" required>
+        <option value="">{{ _('-- Choisissez une méthode --') }}</option>
+        <option value="pochta">📦 {{ _('Pochta Rossii') }}</option>
+        <option value="main_propre">🤝 {{ _('Remise en main propre') }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="existing_address">📬 {{ _('Choisissez une adresse enregistrée') }} :</label>
+<select class="form-select mb-3" name="existing_address" id="existing_address">
+  <option value="">{{ _('-- Nouvelle adresse --') }}</option>
+  {% for addr in adresses %}
+    <option value="{{ addr.adresse }}">{{ addr.adresse }}</option>
+  {% endfor %}
+</select>
+
+<label for="delivery_address">✏️ {{ _('Nouvelle adresse (facultatif si vous avez sélectionné une adresse)') }} :</label>
+<textarea class="form-control" id="delivery_address" name="delivery_address" rows="4"></textarea>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <a href="{{ url_for('main.panier') }}" class="btn btn-outline-secondary">← {{ _('Retour au panier') }}</a>
+      <button type="submit" class="btn btn-success">✅ {{ _('Confirmer ma commande') }}</button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById('existing_address').addEventListener('change', function () {
+    const selected = this.value;
+    const textarea = document.getElementById('delivery_address');
+    if (selected) {
+        textarea.value = selected;
+        textarea.readOnly = true;
+    } else {
+        textarea.value = '';
+        textarea.readOnly = false;
+    }
+});
+</script>
+{% endblock %}

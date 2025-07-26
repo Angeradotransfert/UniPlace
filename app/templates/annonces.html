@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background: linear-gradient(120deg, #cfd9df, #e2ebf0);
+    background-size: 200% 200%;
+    animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.annonces-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.annonces-title {
+    text-align: center;
+    font-size: 2.4rem;
+    color: #6f42c1;
+    margin-bottom: 30px;
+}
+
+.annonces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.annonce-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+    text-align: center;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.annonce-card:hover {
+    transform: translateY(-6px);
+}
+
+.annonce-image img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.annonce-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 12px 0;
+    min-height: 2.6em;
+    display: block;
+    text-decoration: none;
+}
+
+.annonce-price {
+    font-size: 1.2rem;
+    color: #27ae60;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.annonce-rating {
+    font-size: 0.95rem;
+    color: #ff9800;
+    margin-bottom: 6px;
+}
+
+.badge-vendu {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #dc3545;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.btn-view {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 14px;
+    background-color: #6f42c1;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.btn-view:hover {
+    background-color: #5a329e;
+}
+
+.btn-pagination {
+    padding: 10px 15px;
+    background-color: #6f42c1;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 5px;
+}
+.filter-pill {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f0f4ff;
+  color: #333;
+  border-radius: 24px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.filter-pill:hover {
+  background-color: #dbe5ff;
+}
+
+.filter-pill.active {
+  background-color: #6f42c1;
+  color: white;
+}
+.badge-nouveau {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #28a745;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+
+</style>
+
+
+<div class="annonces-container">
+
+    <h1 class="annonces-title">🛍️ {{ _('Toutes les annonces disponibles') }}</h1>
+
+    <!-- 🔍 Barre de filtres -->
+    <form method="GET" action="{{ url_for('listings.annonces') }}" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; background: #f8fbff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+
+        <input type="text" name="search" placeholder="🔎 {{ _('Mots-clés...') }}" value="{{ request.args.get('search', '') }}"
+               style="flex: 2; min-width: 180px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+
+        <select name="category" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+    <option value="">{{ _('Catégorie') }}</option>
+    {% for cat, _ in categories %}
+        <option value="{{ cat }}" {% if request.args.get('category') == cat %}selected{% endif %}>{{ cat }}</option>
+    {% endfor %}
+</select>
+
+    <select name="subcategory" id="subcategory-filter" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+    <option value="">{{ _('Sous-catégorie') }}</option>
+    {% for sub, _ in subcategories %}
+        <option value="{{ sub }}" {% if request.args.get('subcategory') == sub %}selected{% endif %}>{{ sub }}</option>
+    {% endfor %}
+</select>
+
+
+        <select name="city" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+    <option value="">{{ _('Ville') }}</option>
+    {% for city, _ in villes %}
+        <option value="{{ city }}" {% if request.args.get('city') == city %}selected{% endif %}>{{ city }}</option>
+    {% endfor %}
+</select>
+
+        <select name="condition" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+            <option value="">{{ _('État') }}</option>
+            <option value="{{ _('Neuf') }}" {% if request.args.get('condition') == 'Neuf' %}selected{% endif %}>Neuf</option>
+            <option value="{{ _('Occasion') }}" {% if request.args.get('condition') == 'Occasion' %}selected{% endif %}>Occasion</option>
+        </select>
+
+        <input type="number" name="min_price" placeholder="{{ _('Min') }} ₽" style="width: 100px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" value="{{ request.args.get('min_price', '') }}">
+        <input type="number" name="max_price" placeholder="{{ _('Max') }} ₽" style="width: 100px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" value="{{ request.args.get('max_price', '') }}">
+
+        <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">🔍 {{ _('Filtrer') }}</button>
+    </form>
+
+<!-- 🌐 Navbar horizontale de filtres -->
+<style>
+.filter-navbar {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 12px 10px;
+  gap: 10px;
+  scrollbar-width: thin; /* For Firefox */
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling on mobile */
+}
+
+.filter-navbar::-webkit-scrollbar {
+  height: 8px; /* Taille de la barre de défilement pour les navigateurs Webkit (Chrome, Safari) */
+}
+
+.filter-navbar::-webkit-scrollbar-thumb {
+  background-color: #888; /* Couleur de la barre de défilement */
+  border-radius: 4px;
+}
+
+.filter-pill {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f0f4ff;
+  color: #333;
+  border-radius: 24px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.filter-pill:hover {
+  background-color: #dbe5ff;
+}
+
+.filter-pill.active {
+  background-color: #6f42c1;
+  color: white;
+}
+
+
+</style>
+
+<!-- 📍 À mettre juste en dessous du header ou dans un bloc sticky -->
+<nav class="filter-navbar">
+  {% for cat, count in categories %}
+    <a class="filter-pill {% if request.args.get('category') == cat %}active{% endif %}" href="{{ url_for('listings.annonces', category=cat) }}">{{ cat }} ({{ count }})</a>
+  {% endfor %}
+  {% for sub, count in subcategories %}
+    <a class="filter-pill {% if request.args.get('subcategory') == sub %}active{% endif %}" href="{{ url_for('listings.annonces', subcategory=sub) }}">{{ sub }} ({{ count }})</a>
+  {% endfor %}
+  {% for city, count in villes %}
+    <a class="filter-pill {% if request.args.get('city') == city %}active{% endif %}" href="{{ url_for('listings.annonces', city=city) }}">{{ city }} ({{ count }})</a>
+  {% endfor %}
+</nav>
+
+
+
+
+    {% if listings.items %}
+    <div class="annonces-grid">
+        {% for listing in listings.items %}
+        <div class="annonce-card">
+
+  {% if listing.is_new %}
+    <div class="badge-nouveau">{{ _('NOUVEAU') }}</div>
+{% endif %}
+
+{% if listing.active_promo_var or (listing.discount_price and listing.promo_start <= now <= listing.promo_end) %}
+    <div class="badge-promo">{{ _('PROMO') }}</div>
+{% endif %}
+
+{% if listing.is_actually_sold %}
+
+    <div class="badge-vendu">{{ _('VENDU') }}</div>
+{% endif %}
+
+
+
+             {% set main_image = listing.images | selectattr("is_main", "equalto", True) | first %}
+
+            <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" class="annonce-image">
+                {% if main_image %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ main_image.filename) }}" alt="{{ _('Image de') }} {{ listing.title }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='placeholder.png') }}" alt="{{ _('Pas d\'image') }}">
+                {% endif %}
+            </a>
+
+            <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" class="annonce-title">
+                {{ listing.title }}
+            </a>
+
+{% if listing.active_promo_var %}
+    <div class="annonce-price">
+        <span style="text-decoration: line-through; color: #999;">
+            {{ listing.active_promo_var.original_price or listing.active_promo_var.prix }} ₽
+        </span><br>
+        <span style="color: #e74c3c; font-weight: bold;">🔥 {{ listing.active_promo_var.discount_price }} ₽</span><br>
+        <span style="font-size: 0.9rem; color: #e74c3c; font-weight: bold;">
+            -{{ ((1 - listing.active_promo_var.discount_price / (listing.active_promo_var.original_price or listing.active_promo_var.prix)) * 100) | round(0) }}%
+        </span>
+    </div>
+{% elif listing.discount_price and listing.promo_start and listing.promo_end and listing.promo_start <= now <= listing.promo_end %}
+    <div class="annonce-price">
+        <span style="text-decoration: line-through; color: #999;">{{ listing.original_price or listing.price }} ₽</span><br>
+        <span style="color: #27ae60; font-weight: bold;">🔥 {{ listing.discount_price }} ₽ (~ {{ "%.2f"|format(listing.discount_price / taux_usdt) }} USDT)</span><br>
+        <span style="font-size: 0.9rem; color: #e74c3c; font-weight: bold;">
+            -{{ ((1 - listing.discount_price / (listing.original_price or listing.price)) * 100) | round(0) }}%
+        </span>
+    </div>
+{% else %}
+    <div class="annonce-price">
+        💰 {{ listing.price }} ₽ (~ {{ "%.2f"|format(listing.price / taux_usdt) }} USDT)
+    </div>
+{% endif %}
+
+
+            {% if listing.reviews %}
+            <div class="annonce-rating">
+                ⭐ {{ listing.average_rating }}/5 ({{ listing.reviews.all()|length }} {{ _('avis') }})
+            </div>
+            {% endif %}
+
+            <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" class="btn-view">🔎 {{ _('Voir l\'article') }}</a>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div style="margin-top: 30px; text-align: center;">
+        {% if listings.has_prev %}
+        <a href="{{ url_for('listings.annonces', page=listings.prev_num, **request.args.to_dict(flat=True)) }}" class="btn-pagination">⬅️ {{ _('Page précédente') }}</a>
+        {% endif %}
+        <span style="margin: 0 10px; font-size: 16px;">{{ _('Page') }} {{ listings.page }} {{ _('sur') }} {{ listings.pages }}</span>
+        {% if listings.has_next %}
+        <a href="{{ url_for('listings.annonces', page=listings.next_num, **request.args.to_dict(flat=True)) }}" class="btn-pagination">{{ _('Page suivante') }} ➡️</a>
+        {% endif %}
+    </div>
+
+    {% else %}
+    <p style="text-align: center; font-size: 1.1rem;">{{ _('Aucune annonce disponible pour le moment. 😕') }}
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

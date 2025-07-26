@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Gestion des promos') }}{% endblock %}
+
+{% block content %}
+<h1>{{ _('Gestion des promotions carrousel') }}</h1>
+
+<a href="{{ url_for('admin.add_promo') }}" class="btn btn-primary mb-3">{{ _('Ajouter une promo') }}</a>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>{{ _('Position') }}</th>
+      <th>{{ _('Image') }}</th>
+      <th>{{ _('Titre') }}</th>
+      <th>{{ _('Description') }}</th>
+      <th>{{ _('Actions') }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for promo in promos %}
+    <tr>
+      <td>{{ promo.position }}</td>
+      <td><img src="{{ url_for('static', filename='uploads/' + promo.image_filename) }}" alt="{{ _('image') }}" width="120"></td>
+      <td>{{ promo.title }}</td>
+      <td>{{ promo.description }}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin.delete_promo', promo_id=promo.id) }}" onsubmit="return confirm('{{ _('Supprimer cette promo ?') }}');">
+          <button type="submit" class="btn btn-danger btn-sm">{{ _('Supprimer') }}</button>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        </form>
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5">{{ _('Aucune promo trouvée.') }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,7 @@
+<p>{{ _("Commande(s) passée(s) pour les annonces :") }}<br> {{ titles }}</p>
+<p>{{ _("Acheteur :") }} {{ username }} ({{ email }})</p>
+<p>
+    👉 <a href="{{ url_for('admin.admin_commandes_carte', _external=True) }}">
+        {{ _("Voir les commandes") }}
+    </a>
+</p>

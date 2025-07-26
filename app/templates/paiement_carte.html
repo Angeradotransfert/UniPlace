@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 40px 20px; font-family: 'Baloo 2', cursive;">
+    <h2 style="text-align: center; color: #2c3e50;">💳 {{ _('Paiement manuel par carte bancaire') }}</h2>
+
+    {% if order_items %}
+    {% for item in order_items %}
+        {% set listing = item.listing %}
+        {% set variant = item.variant %}
+        {% set qty = item.quantity %}
+        {% set now = now %}
+
+
+        <div style="background: #ffffff; padding: 30px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-top: 25px;">
+            <p><strong>{{ _('Produit') }}  :</strong> {{ listing.title }}</p>
+
+            {% if variant %}
+                <p><strong>{{ _('Variante') }} :</strong> {{ variant.taille or '' }} {{ variant.couleur or '' }}</p>
+            {% endif %}
+
+            <p><strong>{{ _('Quantité') }} :</strong> {{ qty }}</p>
+
+            {# Affichage du prix avec promotion si applicable #}
+            {% set promo_active = false %}
+            {% if variant and variant.discount_price and variant.promo_start and variant.promo_end and variant.promo_start <= now <= variant.promo_end %}
+                {% set promo_active = true %}
+            {% elif listing.discount_price and listing.promo_start and listing.promo_end and listing.promo_start <= now <= listing.promo_end %}
+                {% set promo_active = true %}
+            {% endif %}
+
+            {% if promo_active %}
+               <p>
+    <strong>{{ _('Prix normal') }} :</strong> <span style="text-decoration: line-through; color: #999;">{{ listing.price }} RUB</span><br>
+    <strong style="color: #27ae60;">{{ _('Prix promotionnel') }} : {{ item.unit_price }} RUB</strong>
+    <span style="color: #666;">(~{{ (item.unit_price / taux) | round(2) }} USDT)</span>
+</p>
+
+            {% else %}
+                <p><strong>{{ _('Prix') }} :</strong> {{ item.unit_price }} RUB (~{{ (item.unit_price / taux) | round(2) }} USDT)</p>
+            {% endif %}
+
+            <p><strong>💸 {{ _('Frais de confirmation à payer maintenant') }} :</strong>
+                <span style="color: #e67e22; font-weight: bold;">
+                    {{ commission }} RUB (~{{ commission / taux | round(2) }} USDT)
+                </span>
+            </p>
+
+            <p style="color: #c0392b; font-style: italic;">
+                ⚠️ {{ _('Le reste du paiement sera effectué directement avec le vendeur après contact.') }}
+            </p>
+
+            <hr style="margin: 25px 0;">
+
+            <p style="margin-bottom: 10px;">
+                {{ _('Veuillez effectuer un virement de') }} <strong>{{ commission }} RUB (~{{ (commission / taux) | round(2) }} USDT)</strong> sur <strong>{{ _('sur l’un des comptes bancaires suivants') }}</strong> :
+            </p>
+
+            <!-- Banque Tinkoff -->
+            <div style="background: #eef7ff; padding: 15px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 20px;">
+                <h3 style="margin: 0 0 10px;">🏦 {{ _('Banque Tinkoff') }}</h3>
+                <p><strong>{{ _('Nom') }}:</strong> Ali KONÉ</p>
+                <p><strong>{{ _('Carte') }} :</strong> 5536 9141 3358 4577</p>
+            </div>
+
+            <!-- Banque VTB -->
+            <div style="background: #fff6e5; padding: 15px; border-radius: 10px; border-left: 5px solid #ff9800;">
+                <h3 style="margin: 0 0 10px;">🏦 {{ _('Banque VTB') }}</h3>
+                <p><strong>{{ _('Nom') }} :</strong> Ali KONÉ</p>
+                <p><strong>{{ _('Carte') }} :</strong> 2200 2418 7212 5582</p>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>📋 {{ _('Référence à indiquer') }} :</strong> {{ listing.title }} - UniPlace</p>
+
+            <hr style="margin: 25px 0;">
+            <p><strong>🚚 {{ _('Méthode de livraison') }} :</strong> {{ delivery_method }}</p>
+            <p><strong>📬 Adresse de livraison :</strong><br>{{ delivery_address }}</p>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Bouton de confirmation -->
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" style="margin-top: 25px; background-color: #28a745; color: white; padding: 12px 24px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;">
+            ✅ {{ _('J’ai payé') }}
+        </button>
+    </form>
+</div>
+{% endblock %}

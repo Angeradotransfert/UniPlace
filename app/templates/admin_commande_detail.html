@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Même styles que précédemment, inchangés */
+    .commande-box { background-color: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); max-width: 800px; margin: 50px auto; font-family: 'Segoe UI', sans-serif; }
+    .commande-box h2 { font-size: 26px; margin-bottom: 25px; color: #2c3e50; text-align: center; }
+    .commande-box p { margin: 12px 0; font-size: 16px; }
+    .commande-box strong { color: #333; }
+    .commande-box hr { margin: 30px 0; }
+    .btn-retour { display: inline-block; margin-top: 30px; padding: 10px 18px; background-color: #007BFF; color: white; border-radius: 8px; text-decoration: none; transition: background-color 0.2s; }
+    .btn-retour:hover { background-color: #0056b3; }
+    .btn-copier { margin-top: 10px; background-color: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+    .btn-copier:hover { background-color: #0056b3; }
+    code { background-color: #f4f4f4; padding: 3px 6px; border-radius: 5px; font-family: monospace; }
+    .form-suivi input, .form-suivi select, .form-suivi textarea { width: 100%; padding: 8px; margin: 8px 0 16px 0; border-radius: 6px; border: 1px solid #ccc; }
+    .form-suivi button { background-color: #28a745; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+    .form-suivi button:hover { background-color: #218838; }
+    .historique-log { background-color: #f8f9fa; border-radius: 10px; padding: 20px; font-size: 15px; margin-top: 30px; }
+    .historique-log ul { padding-left: 20px; }
+    .historique-log li { margin-bottom: 10px; list-style: disc; }
+</style>
+
+<div class="commande-box">
+    <h2>📦 {{ _('Détail de la commande') }} #{{ commande.id }}</h2>
+
+    {% for item in commande.items %}
+        {% set prix_total = item.unit_price * item.quantity %}
+        <p><strong>🛍 {{ _('Produit') }} :</strong> {{ item.listing.title }}</p>
+        <p><strong>👤 {{ _('Acheteur') }} :</strong> {{ commande.buyer.username }}</p>
+        <p><strong>🏪 {{ _('Vendeur') }} :</strong> {{ item.listing.user.username }}</p>
+        <p><strong>💰 {{ _('Prix unitaire') }} :</strong> {{ item.unit_price }} ₽</p>
+        <p><strong>📦 {{ _('Quantité') }} :</strong> {{ item.quantity }}</p>
+        <p><strong>💸 {{ _('Total payé') }} :</strong> {{ prix_total | round(2) }} ₽</p>
+        <p><strong>💼 {{ _('Commission') }} :</strong> {{ item.commission | round(2) }} ₽</p>
+        <p><strong>🧾 {{ _('À reverser au vendeur') }} :</strong> {{ item.seller_amount | round(2) }} ₽</p>
+        <p><strong>💳 {{ _('Méthode de paiement') }} :</strong>
+            {% if commande.payment_method == "carte" %}
+                💳 {{ _('Carte bancaire') }}
+            {% elif commande.payment_method == "usdt" %}
+                💸 {{ _('USDT') }}
+            {% else %}
+                ❓ {{ _('Inconnue') }}
+            {% endif %}
+        </p>
+        <p><strong>📅 {{ _('Commandée le') }} :</strong> {{ commande.timestamp.strftime('%d/%m/%Y à %Hh%M') }}</p>
+        <hr>
+    {% endfor %}
+
+    <h3>🚚 {{ _('Livraison (modifiable)') }}</h3>
+    <form method="POST" action="{{ url_for('admin.admin_update_tracking', order_id=commande.id) }}" class="form-suivi">
+        <label for="delivery_method">{{ _('Méthode de livraison') }} :</label>
+        <select name="delivery_method" id="delivery_method" required>
+            <option value="">{{ _('-- Choisir --') }}</option>
+            <option value="pochta" {% if commande.delivery_method == 'pochta' %}selected{% endif %}>📦 {{ _('Pochta Rossii') }}</option>
+            <option value="main_propre" {% if commande.delivery_method == 'main_propre' %}selected{% endif %}>🤝 {{ _('Remise en main propre') }}</option>
+        </select>
+
+        <label for="delivery_address">{{ _('Adresse') }} :</label>
+        <textarea name="delivery_address" id="delivery_address" rows="3">{{ commande.delivery_address or '' }}</textarea>
+
+        <label for="tracking_number">{{ _('Numéro de suivi') }} :</label>
+        <input type="text" name="tracking_number" id="tracking_number" value="{{ commande.tracking_number or '' }}">
+
+        <label for="tracking_status">{{ _('Statut') }} :</label>
+        <select name="tracking_status" id="tracking_status">
+            <option value="en préparation" {% if commande.tracking_status == 'en préparation' %}selected{% endif %}>{{ _('En préparation') }}</option>
+            <option value="expédié" {% if commande.tracking_status == 'expédié' %}selected{% endif %}>{{ _('Expédié') }}</option>
+            <option value="livré" {% if commande.tracking_status == 'livré' %}selected{% endif %}>{{ _('Livré') }}</option>
+        </select>
+
+        <button type="submit">✅ {{ _('Mettre à jour les infos') }}</button>
+    </form>
+
+    <hr>
+    <h3>🔐 {{ _('Informations de paiement du vendeur') }}</h3>
+    <div id="infos-vendeur" style="margin-top: 15px; font-size: 15px;">
+        {% set vendeur = commande.items[0].listing.user if commande.items|length > 0 else None %}
+        {% if vendeur %}
+            {% if commande.payment_method == "carte" %}
+                🏦 {{ _('Banque') }} : {{ vendeur.bank_name or _('Non fourni') }}<br>
+                💳 {{ _('Carte') }} : {{ vendeur.card_number or _('Non fourni') }}<br>
+                👤 {{ _('Titulaire') }} : {{ vendeur.card_holder or _('Non fourni') }}
+            {% else %}
+                🪙 {{ _('Adresse USDT') }} : <code>{{ vendeur.usdt_address or _('Non fournie') }}</code>
+            {% endif %}
+        {% else %}
+            <p>{{ _('Informations vendeur non disponibles.') }}</p>
+        {% endif %}
+    </div>
+
+    <button onclick="copierInfos()" class="btn-copier">📋 {{ _('Copier les infos') }}</button>
+
+    <hr>
+    <div class="historique-log">
+        <h3>📜 {{ _('Historique des modifications') }}</h3>
+        {% if commande.logs %}
+            <ul>
+                {% for log in commande.logs|sort(attribute='timestamp', reverse=True) %}
+                    <li>
+                        🕒 {{ log.timestamp.strftime('%d/%m/%Y %H:%M') }} —
+                        👤 {{ log.admin.username }} :
+                        {{ _(log.action) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ _('Aucune modification enregistrée.') }}</p>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('main.dashboard') }}" class="btn-retour">⬅️ {{ _('Retour') }}</a>
+</div>
+
+<script>
+function copierInfos() {
+    const div = document.getElementById("infos-vendeur");
+    const texte = div.innerText;
+    navigator.clipboard.writeText(texte).then(function () {
+        alert("✅ {{ _('Informations du vendeur copiées !') }}");
+    }, function (err) {
+        alert("❌ {{ _('Erreur de copie') }}");
+    });
+}
+</script>
+{% endblock %}

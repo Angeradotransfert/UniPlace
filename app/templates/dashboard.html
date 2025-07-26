@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Google Font Baloo 2 -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    margin: 0;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.dashboard-container {
+    max-width: 700px;
+    margin: 70px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.flash-message {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    z-index: 1001;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    height: 100%;
+    width: 250px;
+    background-color: #007BFF;
+    color: white;
+    padding: 30px 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow-y: auto; /* permet de défiler verticalement */
+}
+
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    font-size: 17px;
+    padding: 12px 0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+    padding-left: 10px;
+}
+
+.sidebar a .badge {
+    background-color: red;
+    color: white;
+    border-radius: 50px;
+    padding: 2px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    position: absolute;
+    top: 8px;
+    right: 20px;
+}
+
+.btn-view-annonces {
+    margin-top: 30px;
+    background-color: #28a745;
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-view-annonces:hover {
+    background-color: #218838;
+}
+
+/* Style UniPlace coloré */
+.uniplace-logo {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.uniplace-logo span {
+    font-family: 'Baloo 2', cursive;
+}
+
+.u { color: #ff5252; }
+.n { color: #ffb300; }
+.i { color: #00e676; }
+.p { color: #2979ff; }
+.l { color: #ab47bc; }
+.a { color: #ff7043; }
+.c { color: #26c6da; }
+.e { color: #8d6e63; }
+
+/* Scrollbar personnalisée pour sidebar */
+.scrollbar {
+    scrollbar-width: thin; /* Pour Firefox */
+    scrollbar-color: rgba(255,255,255,0.6) rgba(255,255,255,0.1);
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+</style>
+
+<!-- ✅ Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div style="max-width: 700px; margin: 20px auto;">
+      {% for category, message in messages %}
+        <div class="flash-message" style="background-color:
+            {% if category == 'success' %}#4CAF50
+            {% elif category == 'error' %}#f44336
+            {% else %}#2196F3{% endif %};">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- ☰ Menu -->
+<button class="menu-button" onclick="toggleSidebar()">☰</button>
+
+<!-- 🚪 Sidebar -->
+<div id="sidebar" class="sidebar scrollbar">
+    <h2>👋 {{ _('Bonjour') }} {{ current_user.username }}</h2>
+
+    <a href="{{ url_for('listings.new_listing') }}">📢 {{ _('Publier une annonce') }}</a>
+    <a href="{{ url_for('main.mes_annonces') }}">📄 {{ _('Voir mes annonces') }}</a>
+
+    <!-- Ajout du bouton "Ajouter/Modifier Bannière" -->
+    <a href="{{ url_for('admin.banner_management') }}">🖼️ {{ _('Bannière du site') }}</a>
+
+
+
+
+
+    {% if current_user.is_admin %}
+    <a href="{{ url_for('admin.admin_commandes_crypto') }}">🧾 {{ _('Commandes Crypto') }}</a>
+    <a href="{{ url_for('admin.admin_commandes_carte') }}">
+        💳 {{ _('Paiements carte') }}
+        {% if nb_commandes_carte_non_confirmées and nb_commandes_carte_non_confirmées > 0 %}
+            <span class="badge">{{ nb_commandes_carte_non_confirmées }}</span>
+        {% endif %}
+    </a>
+    {% endif %}
+
+    <a href="{{ url_for('main.mes_achats') }}">🛒 {{ _('Mes achats') }}</a>
+    <a href="{{ url_for('main.mes_ventes') }}">📦 {{ _('Mes ventes') }}</a>
+    <li><a href="{{ url_for('main.mes_commandes') }}">🛒 {{ _('Mes commandes') }}</a>
+
+    {% if current_user.is_authenticated and current_user.listings|length > 0 %}
+    <a href="{{ url_for('main.mes_livraisons') }}">🚚 {{ _('Mes livraisons') }}</a>
+    {% endif %}
+
+    <a href="{{ url_for('messaging.inbox') }}">
+        📨 {{ _('Messagerie') }}
+        {% if unread_count and unread_count > 0 %}
+            <span class="badge">{{ unread_count }}</span>
+        {% endif %}
+    </a>
+
+    <a class="nav-link d-flex justify-content-between align-items-center" href="{{ url_for('main.panier') }}">
+      🛒 {{ _('Panier') }}
+      {% if panier_count > 0 %}
+        <span class="badge bg-danger">{{ panier_count }}</span>
+      {% endif %}
+    </a>
+
+    <a href="{{ url_for('main.mes_infos_paiement') }}">💳 {{ _('Mes infos de paiement') }}</a>
+
+    <a href="{{ url_for('messaging.mes_notifications') }}">
+        🔔 {{ _('Notifications') }}
+        {% set unread_notifs = current_user.notifications|selectattr("is_read", "equalto", False)|list %}
+        {% if unread_notifs|length > 0 %}
+            <span class="badge bg-danger">{{ unread_notifs|length }}</span>
+        {% endif %}
+    </a>
+
+    <li><a href="{{ url_for('main.mes_avis') }}">🗣️ {{ _('Mes avis reçus') }}</a>
+
+    <a href="{{ url_for('main.mes_favoris') }}">💖 {{ _('Mes favoris') }}</a>
+
+    {% if current_user.is_authenticated and current_user.is_admin %}
+    <li>
+        <a href="{{ url_for('admin.admin_livraisons') }}" class="sidebar-link">🚚 {{ _('Suivi des livraisons') }}</a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('admin.admin_signalements') }}" class="sidebar-link">
+            🚩 {{ _('Signalements') }}
+            {% if nb_signalements_ouverts and nb_signalements_ouverts > 0 %}
+                <span class="badge bg-danger">{{ nb_signalements_ouverts }}</span>
+            {% endif %}
+        </a>
+    </li>
+    {% endif %}
+
+    {% if current_user.is_authenticated and current_user.is_admin %}
+<li>
+    <a href="{{ url_for('admin.admin_emails') }}">📧 {{ _('Emails envoyés') }}</a>
+</li>
+{% endif %}
+
+{% if current_user.is_authenticated and current_user.is_admin %}
+<li>
+  <a href="{{ url_for('admin.admin_messages_bloques') }}" style="color: #c0392b; position: relative;">
+    🚫 {{ _('Messages bloqués') }}
+    {% if nb_messages_bloques > 0 %}
+      <span style="background-color: #e74c3c; color: white; border-radius: 10px; padding: 2px 7px; font-size: 12px; margin-left: 5px;">
+        {{ nb_messages_bloques }}
+      </span>
+    {% endif %}
+  </a>
+</li>
+{% endif %}
+
+   {% if current_user.is_authenticated and current_user.is_admin %}
+    <a href="{{ url_for('admin.admin_sponsor') }}" class="btn btn-warning w-100 mb-2">
+        {{ _('Gestion Sponsorisé') }}
+    </a>
+{% endif %}
+
+
+    {% if current_user.is_admin %}
+    <a href="{{ url_for('admin.admin_panel') }}">🛠 {{ _('Espace Admin') }}</a>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('main.changer_devise') }}" style="display: inline;">
+    <select name="devise" onchange="this.form.submit()" style="padding: 6px; border-radius: 6px;">
+        <option value="RUB" {% if session.get('devise') == 'RUB' %}selected{% endif %}>₽ RUB</option>
+        <option value="USDT" {% if session.get('devise') == 'USDT' %}selected{% endif %}>USDT</option>
+        <option value="USD" {% if session.get('devise') == 'USD' %}selected{% endif %}>$ USD</option>
+        <option value="EUR" {% if session.get('devise') == 'EUR' %}selected{% endif %}>€ EUR</option>
+    </select>
+</form>
+
+    <li><a href="{{ url_for('main.contact') }}">📬 {{ _('Contact') }}</a></li>
+
+    {% if current_user.is_authenticated and current_user.is_admin %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('admin.admin_promos') }}">
+      <i class="bi bi-images"></i> <!-- ou une autre icône Bootstrap -->
+      {{ _('Gestion des promos') }}
+    </a>
+  </li>
+{% endif %}
+
+
+    <a href="{{ url_for('main.conditions_vente') }}">📜 {{ _('Conditions de vente') }}</a>
+    <a href="{{ url_for('auth.logout') }}">🔓 {{ _('Se déconnecter') }}</a>
+</div>
+
+
+<!-- ✅ Contenu principal -->
+<div class="dashboard-container">
+    <h1>👋 {{ _('Bienvenue') }}, {{ current_user.username }} !</h1>
+    <p>{{ _("Vous êtes connecté sur") }}
+        <span class="uniplace-logo">
+            <span class="u">U</span><span class="n">n</span><span class="i">i</span>
+            <span class="p">P</span><span class="l">l</span><span class="a">a</span>
+            <span class="c">c</span><span class="e">e</span>
+        </span>.
+    </p>
+
+    <a href="{{ url_for('listings.annonces') }}" class="btn-view-annonces">🌍 {{ _('Voir les annonces publiques') }}</a>
+
+{% if current_user.listings|length > 0 %}
+
+
+
+
+    <h3>💳 {{ _('Vos informations de paiement (visibles après commande)') }}</h3>
+
+
+    <p style="font-size: 14px; color: #555; margin-bottom: 10px;">
+{{ _("Ces informations seront transmises à l'acheteur uniquement") }} <strong>{{ _('après paiement de la commission') }}</strong>, {{ _("afin qu'il puisse vous régler directement") }}.
+</p>
+
+
+<form method="POST" action="{{ url_for('main.update_usdt_address') }}" style="margin-top: 25px;">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="usdt_address">💰 {{ _('Adresse USDT (TRC20) pour recevoir les paiements') }} :</label><br>
+    <input type="text" name="usdt_address" value="{{ current_user.usdt_address or '' }}" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" required>
+    <button type="submit" style="margin-top: 10px; background-color: #28a745; color: white; padding: 10px 18px; border: none; border-radius: 8px;">
+        💾 {{ _('Enregistrer') }}
+    </button>
+</form>
+
+<div class="bank-info-card">
+
+    <h3>💳 {{ _('Informations pour virement bancaire') }}</h3>
+
+    <form method="POST" action="{{ url_for('main.update_bank_info') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="bank_name">🏦 {{ _('Nom de la banque') }} :</label>
+    <input type="text" name="bank_name" id="bank_name" placeholder="{{ _('Ex : Tinkoff, Sberbank...') }}"> value="{{ current_user.bank_name or '' }}" required>
+
+    <label for="card_number">💳 {{ _('Numéro de carte bancaire') }}  :</label>
+    <input type="text" name="card_number" id="card_number" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" maxlength="19" value="{{ current_user.card_number or '' }}" required>
+
+    <label for="card_holder">👤 {{ _('Nom complet sur la carte') }} :</label>
+    <input type="text" name="card_holder" id="card_holder" placeholder="{{ _('ISAMAEL KONÉ') }}" value="{{ current_user.card_holder or '' }}" required>
+
+    <button type="submit">💾 {{ _('Enregistrer mes infos bancaires') }}</button>
+</form>
+</div>
+
+</div>
+{% endif %}
+<!-- ✅ JS -->
+<script>
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('active');
+}
+setTimeout(() => {
+    const alerts = document.querySelectorAll('.flash-message');
+    alerts.forEach(alert => {
+        alert.style.transition = "opacity 0.5s ease";
+        alert.style.opacity = "0";
+        setTimeout(() => alert.remove(), 500);
+    });
+}, 5000);
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 1100px; margin: 40px auto;">
+  <h2>{{ _('Annonces de') }} {{ user.username }}</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for annonce in annonces %}
+      <div style="border: 1px solid #ccc; border-radius: 10px; padding: 10px; width: 220px; background: white;">
+        <a href="{{ url_for('listings.annonce_detail', listing_id=annonce.id) }}">
+          <img src="{{ url_for('static', filename='uploads/' + annonce.images[0].filename) }}" width="100%" style="height: 140px; object-fit: cover; border-radius: 6px;">
+          <h4 style="margin: 10px 0;">{{ annonce.title }}</h4>
+          <p>{{ annonce.price }} ₽</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

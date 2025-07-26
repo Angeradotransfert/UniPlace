@@ -1,0 +1,25 @@
+<p>{{ _("Bonjour") }} {{ buyer.username }},</p>
+
+<p>{{ _("Votre paiement a bien été confirmé ✅ pour les articles suivants :") }}</p>
+
+<p>
+{% for item in commande.items %}
+  {{ item.quantity }} × {{ item.listing.title }}<br>
+{% endfor %}
+</p>
+
+<p><strong>{{ _("📬 Et maintenant ?") }}</strong></p>
+<p>{{ _("Pour finaliser votre achat, vous devez :") }}</p>
+<ul>
+  <li>{{ _("Contacter le vendeur") }}</li>
+  <li>{{ _("Effectuer le paiement restant") }}</li>
+  <li>{{ _("Organiser la livraison") }}</li>
+  <li>{{ _("📁 Vous trouverez toutes les coordonnées utiles du vendeur dans votre tableau de bord, rubrique") }} <strong>{{ _("Mes achats") }}</strong></li>
+</ul>
+
+<p>
+  👉 <a href="{{ url_for('main.mes_achats', _external=True) }}">{{ _("Accéder à Mes achats") }}</a>
+</p>
+
+<hr>
+<p style="font-size:12px;color:gray;">{{ _("Merci de faire confiance à UniPlace 🙌") }}</p>

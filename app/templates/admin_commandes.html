@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 1100px; margin: auto; padding: 40px 20px; font-family: 'Baloo 2', cursive;">
+    <h2 style="text-align: center; font-size: 2.4rem; color: #2c3e50;">📦 {{ _('Commandes reçues (USDT ou Carte)') }}</h2>
+
+    {% if orders %}
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background-color: #f0f0f0;">
+                    <th style="padding: 12px;">{{ _('Produit') }}</th>
+                    <th>{{ _('Client') }}</th>
+                    <th>{{ _('Vendeur') }}</th>
+                    <th>{{ _('Prix ₽') }}</th>
+                    <th>{{ _('~ USDT') }}</th>
+                    <th>💰 {{ _('Commission') }}</th>
+                    <th>{{ _('À reverser') }}</th>
+                    <th>💼 {{ _('Paiement vendeur') }}</th>
+                    <th>💳 {{ _('Méthode') }}</th>
+                    <th>📌 {{ _('Statut') }}</th>
+                    <th>✅ {{ _('Action') }}</th>
+                    <th>🔍 {{ _('Détail') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    {% for item in order.items %}
+                        {% if item.listing %}
+                            {% set prix_rub = item.unit_price * item.quantity %}
+                            {% set prix_usdt = prix_rub / taux %}
+                            {% set commission = item.commission %}
+                            {% set reversement = prix_usdt - (commission / taux) %}
+                            <tr style="border-bottom: 1px solid #ddd;">
+                                <td style="padding: 10px;">{{ item.listing.title }}</td>
+                                <td>{{ order.buyer.username }}</td>
+                                <td>{{ item.listing.user.username }}</td>
+                                <td>{{ prix_rub | round(2) }}</td>
+                                <td>{{ prix_usdt | round(2) }} USDT</td>
+                                <td style="color: red;">-{{ (commission / taux) | round(2) }} USDT</td>
+                                <td style="color: green;">{{ reversement | round(2) }} USDT</td>
+                                <td>
+                                    {% if order.payment_method == 'carte' %}
+                                        <strong>🏦 {{ _('Banque') }} :</strong> {{ item.listing.user.bank_name or _('Non fourni') }}<br>
+                                        <strong>💳 {{ _('Carte') }} :</strong> {{ item.listing.user.card_number or _('Non fourni') }}<br>
+                                        <strong>👤 {{ _('Titulaire') }} :</strong> {{ item.listing.user.card_holder or _('Non fourni') }}
+                                    {% else %}
+                                        <strong>💰 {{ _('Adresse USDT') }} :</strong><br>
+                                        <code>{{ item.listing.user.usdt_address or _('Non fournie') }}</code>
+                                    {% endif %}
+                                </td>
+                                <td>{{ order.payment_method or 'USDT' }}</td>
+                                <td>
+                                    {% if order.status == 'paid' %}
+                                        <span style="color: green; font-weight: bold;">✅ {{ _('Payé') }}</span>
+                                    {% elif order.status == 'commission_payee' %}
+                                        <span style="color: orange; font-weight: bold;">🕒 {{ _('Commission payée') }}</span>
+                                    {% else %}
+                                        <span style="color: gray;">⏳ {{ _('En attente') }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.status != 'paid' %}
+                                        <form method="POST" action="{% if order.payment_method == 'usdt' %}{{ url_for('admin.confirmer_paiement', order_id=order.id) }}{% else %}{{ url_for('confirmer_paiement', order_id=order.id) }}{% endif %}">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                            <button type="submit" style="padding: 6px 12px; background: #28a745; color: white; border: none; border-radius: 6px;">
+                                                ✅ {{ _('Marquer comme payé') }}
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        ✔️
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <a href="{{ url_for('admin.admin_commande_detail', order_id=order.id) }}" style="background-color: #6c757d; color: white; padding: 6px 10px; border-radius: 6px; text-decoration: none;">
+                                        🔍 {{ _('Voir') }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr style="border-bottom: 1px solid #ddd; background-color: #fff3cd;">
+                                <td colspan="12" style="padding: 12px; color: #856404;">
+                                    ⚠️ {{ _('Commande') }} #{{ order.id }} {{ _('liée à une annonce supprimée.') }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="text-align: center;">{{ _('Aucune commande enregistrée.') }}</p>
+    {% endif %}
+</div>
+{% endblock %}

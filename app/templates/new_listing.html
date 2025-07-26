@@ -1,0 +1,1111 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        font-family: 'Baloo 2', cursive;
+        background: #f5f7fa;
+        color: #2c3e50;
+    }
+    .form-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px 40px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    h3 {
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #34495e;
+    }
+    label {
+        display: block;
+        margin-top: 16px;
+        font-weight: 600;
+        color: #34495e;
+    }
+    select, input[type="text"], input[type="number"], textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1.5px solid #ccc;
+        border-radius: 10px;
+        margin-top: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+    select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+    .variant-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+    }
+    .variant-row input {
+        flex: 1;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+    .btn-add, .btn-remove {
+        margin-top: 12px;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s;
+    }
+    .btn-add {
+        background-color: #2980b9;
+        color: white;
+    }
+    .btn-add:hover {
+        background-color: #1c5980;
+    }
+    .btn-remove {
+        background-color: #e74c3c;
+        color: white;
+        flex-shrink: 0;
+        width: 36px;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+    .btn-remove:hover {
+        background-color: #b63122;
+    }
+    .btn-publish {
+        margin-top: 30px;
+        background-color: #27ae60;
+        color: white;
+        font-size: 1.2rem;
+        padding: 14px 30px;
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        font-weight: 700;
+        transition: background-color 0.3s;
+    }
+    .btn-publish:hover {
+        background-color: #1e8449;
+    }
+    .example-title {
+        font-style: italic;
+        color: #7f8c8d;
+        margin-top: 6px;
+        font-size: 0.95rem;
+    }
+</style>
+
+<div class="form-container">
+    <form action="{{ url_for('listings.new_listing') }}" method="POST" enctype="multipart/form-data">
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+
+
+        <!-- Catégorie et Sous-catégorie -->
+        <h3>📂 {{ _('Catégorie & Sous-catégorie') }}</h3>
+<label for="category">{{ _('Catégorie') }} :</label>
+<select name="category" id="category" required>
+    <option value="">{{ _('-- Catégorie --') }}</option>
+    <option value="Études & Livres">{{ _('📚 Études & Livres') }}</option>
+    <option value="Électronique & Informatique">{{ _('💻 Électronique & Informatique') }}</option>
+    <option value="Vêtements & Mode">{{ _('🧥 Vêtements & Mode') }}</option>
+    <option value="Meubles & Maison">{{ _('🛋️ Meubles & Maison') }}</option>
+    <option value="Logement étudiant">{{ _('🏠 Logement étudiant') }}</option>
+    <option value="Cuisine & Produits alimentaires">{{ _('🧑‍🍳 Cuisine & Produits alimentaires') }}</option>
+    <option value="Voyages & Mobilité">{{ _('✈️ Voyages & Mobilité') }}</option>
+    <option value="Services entre étudiants">{{ _('👷 Services entre étudiants') }}</option>
+    <option value="Annonces diverses">{{ _('📣 Annonces diverses') }}</option>
+    <option value="Demandes & Recherches">{{ _('🔍 Demandes & Recherches') }}</option>
+</select>
+
+        <label for="subcategory">{{ _('Sous-catégorie') }} :</label>
+             <select name="subcategory" id="subcategory" required>
+             <option value="">{{ _('-- Sous-catégorie --') }}</option>
+        </select>
+
+        <!-- Titre et Description -->
+        <h3>📝 {{ _('Informations sur l’annonce') }}</h3>
+        <label for="title">{{ _('Titre') }} :</label>
+        <input type="text" name="title" id="title" placeholder="{{ _('Ex: Titre de votre annonce') }}" required>
+        <div class="example-title" id="title-example"></div>
+
+        <label for="description">{{ _('Description') }} :</label>
+        <textarea name="description" id="description" rows="5" required></textarea>
+
+        <!-- Prix et Monnaie -->
+        <label for="price">{{ _('Prix') }} :</label>
+        <input type="number" name="price" id="price" min="0" step="0.01" required>
+
+        <label for="original_price">{{ _('Prix initial (avant réduction)') }} :</label>
+        <input type="number" name="original_price" id="original_price" step="0.01" placeholder="{{ _('Ex : 100.00') }}">
+
+        <label for="discount_price">{{ _('Prix promotionnel') }} :</label>
+        <input type="number" name="discount_price" id="discount_price" step="0.01" placeholder="{{ _('Ex : 79.00') }}">
+
+        <label for="promo_start">{{ _('Date de début de la promotion') }} :</label>
+        <input type="datetime-local" name="promo_start" id="promo_start">
+
+        <label for="promo_end">{{ _('Date de fin de la promotion') }} :</label>
+        <input type="datetime-local" name="promo_end" id="promo_end">
+
+
+        <label for="delivery_fee">{{ _('Frais de livraison estimés (₽)') }} :</label>
+        <input type="number" name="delivery_fee" id="delivery_fee" step="0.01" min="0" required>
+
+
+        <label for="currency">{{ _('Monnaie') }} :</label>
+        <select name="currency" id="currency" required>
+            <option value="RUB">{{ _('₽ RUB') }}</option>
+            <option value="USDT">{{ _('USDT') }}</option>
+            <option value="USD">{{ _('$ USD') }}</option>
+            <option value="EUR">{{ _('€ EUR') }}</option>
+        </select>
+
+        <!-- Condition et Ville -->
+        <label for="condition">{{ _('Condition') }} :</label>
+        <select name="condition" id="condition" required>
+            <option value="">{{ _('-- Choisir --') }}</option>
+            <option value="Neuf">{{ _('Neuf') }}</option>
+            <option value="Occasion">{{ _('Occasion') }}</option>
+        </select>
+
+        <label for="city">{{ _('Ville') }} :</label>
+        <input type="text" name="city" id="city" required>
+
+        <!-- Section Variantes (visible dynamiquement) -->
+        <div id="variants-section" style="display:none;">
+            <h3>🧵 {{ _('Variantes (Tailles / Couleurs / Stock)') }}</h3>
+            <div id="variants-container"></div>
+            <button type="button" class="btn-add" onclick="addVariantRow()">+ {{ _('Ajouter variant') }}</button>
+        </div>
+
+        <!-- Caractéristiques supplémentaires (visible dynamiquement) -->
+<div id="features-section" style="display:none;">
+    <h3>🛠️ {{ _('Caractéristiques supplémentaires') }}</h3>
+
+    <div id="field-marque">
+        <label for="marque">{{ _('Marque') }} :</label>
+        <input type="text" name="marque" id="marque" placeholder="{{ _('Ex: Apple') }}">
+    </div>
+
+    <div id="field-modele">
+        <label for="modele">{{ _('Modèle') }} :</label>
+        <input type="text" name="modele" id="modele" placeholder="{{ _('Ex: MacBook Pro M3 16 pouces') }}">
+    </div>
+
+    <div id="field-fermeture">
+        <label for="fermeture">{{ _('Type de fermeture') }} :</label>
+        <input type="text" name="fermeture" id="fermeture" placeholder="{{ _('Ex: Fermeture éclair, Boutons, Lacets') }}">
+    </div>
+
+    <div id="field-matiere">
+        <label for="matiere">{{ _('Matière') }} :</label>
+        <input type="text" name="matiere" id="matiere" placeholder="{{ _('Ex: Coton, Cuir, Jean, Polyester') }}">
+    </div>
+</div>
+          <!-- 📦 Informations logistiques et pratiques -->
+<h3>📦 {{ _('Informations complémentaires') }}</h3>
+
+<!-- ✅ Poids -->
+<label for="poids">{{ _('Poids (en kg)') }} :</label>
+<input type="number" name="poids" id="poids" step="0.01" min="0" placeholder="{{ _('Ex : 1.25') }}">
+
+<!-- ✅ Dimensions -->
+<label for="dimensions">{{ _('Dimensions (L × l × h en cm)') }} :</label>
+<input type="text" name="dimensions" id="dimensions" placeholder="{{ _('Ex : 30 × 20 × 10') }}">
+
+<!-- ✅ Contenu du pack -->
+<label for="contenu_pack">{{ _('Contenu du pack') }} :</label>
+<textarea name="contenu_pack" id="contenu_pack" placeholder="{{ _('Ex : 1 câble USB, 1 manuel, 1 housse de transport') }}"></textarea>
+
+<!-- ✅ Tags / Mots-clés -->
+<label for="tags">{{ _('Mots-clés (séparés par des virgules)') }} :</label>
+<input type="text" name="tags" id="tags" placeholder="{{ _('Ex : bluetooth, rechargeable, sans fil, gaming') }}">
+
+<!-- ✅ Date d’expiration de l’annonce -->
+<label for="date_expiration">{{ _('Date de fin d\'affichage de l’annonce') }} :</label>
+<input type="date" name="date_expiration" id="date_expiration">
+
+
+        <!-- Images -->
+        <h3>🖼️ {{ _('Images de l’article') }}</h3>
+        <label for="images">{{ _('Images') }} :</label>
+
+<input type="file" name="images[]" id="images" multiple accept="image/*" onchange="previewImages(this.files)">
+<div id="image-preview-container"></div>
+        <div id="main-image-container" style="text-align:center; margin-top: 20px;">
+    <img id="mainProductImage" src="" alt="Image principale" style="max-width: 400px; border-radius: 10px;">
+    <p id="priceDisplay" style="font-weight: bold; font-size: 1.2rem; margin-top: 10px;">Prix : {{ _('−') }}</p>
+</div>
+<input type="hidden" name="main_image_index" id="main_image_index">
+
+
+        <label for="video_file">{{ _('Vidéo de démonstration (facultatif) (max 20 Mo, MP4 conseillé)') }} :</label>
+<input type="file" name="video_file" id="video_file" accept="video/*">
+<div id="video-preview-container" style="margin-top: 10px;"></div>
+<button type="button" id="remove-video-btn" style="display:none; margin-top:10px; background:#e74c3c; color:white; border:none; padding:6px 12px; border-radius:6px;">
+    ❌ {{ _('Supprimer la vidéo sélectionnée') }}
+</button>
+
+        <!-- Expédition rapide -->
+        <h3>🚀 {{ _('Options d’expédition') }}</h3>
+        <label><input type="checkbox" name="expedition_rapide" id="expedition_rapide"> {{ _('Livré en 1 à 3 jours 🚀') }}</label>
+
+        <!-- Bouton Publier -->
+        <!-- Boutons -->
+        <button type="button" class="btn-add" onclick="previewAnnonce()">{{ _('👁️ Aperçu') }}</button>
+        <button type="submit" class="btn-publish">{{ _('📢 Publier l’annonce') }}</button>
+
+    </form>
+</div>
+
+<script>
+    const categories = {{ categories | tojson }};
+    const examples = {{ examples | tojson }};
+
+    const sousCategoriesAvecVariantes = [
+    // 🧥 Vêtements & Mode
+    "Vêtements hommes", "Vêtements femmes", "Vestes / Manteaux",
+    "Chaussures hommes", "Chaussures femmes", "Accessoires",
+
+    // 💻 Électronique & Informatique
+    "Smartphones", "Ordinateurs / Laptops", "Tablettes",
+
+    // 🛋️ Meubles & Maison
+    "Lits / Matelas", "Chaises / Fauteuils", "Bureaux / Tables / Étagères",
+    "Armoires / Rangement", "Décoration intérieure", "Cuisine & électroménager",
+
+    // 🍳 Cuisine & Produits alimentaires
+    "Épices / Condiments", "Produits de base", "Boissons & Snacks", "Ustensiles spécifiques",
+
+    // 📣 Annonces diverses
+    "Jeux vidéos / Consoles", "Appareils photo / Caméras", "Instruments de musique", "Objets divers",
+
+    // ✈️ Voyages & Mobilité
+    "Sacs / Valises / Backpacks"
+];
+
+
+    function updateSubcategories() {
+        const catSelect = document.getElementById('category');
+        const subSelect = document.getElementById('subcategory');
+        const selectedCat = catSelect.value;
+
+        subSelect.innerHTML = '<option value="">-- Sous-catégorie --</option>';
+
+        if (categories[selectedCat]) {
+            categories[selectedCat].forEach(subcat => {
+                const option = document.createElement('option');
+                option.value = subcat;
+                option.textContent = subcat;
+                subSelect.appendChild(option);
+            });
+        }
+
+        // Reset affichage des sections
+        document.getElementById('variants-section').style.display = 'none';
+        document.getElementById('features-section').style.display = 'none';
+        document.getElementById('title-example').textContent = '';
+
+        // ✅ Mise à jour automatique
+        handleVariantVisibility();
+        updateTitleExample();
+    }
+
+    function handleVariantVisibility() {
+    const selectedSubcat = document.getElementById('subcategory').value;
+
+    const showMarqueModele = [
+    // 🖥️ Électronique & Informatique
+    "Smartphones", "Ordinateurs / Laptops", "Tablettes",
+    "Casques / Écouteurs / Enceintes", "Écrans / Claviers / Souris",
+    "Disques durs / SSD / Clés USB", "Câbles & Chargeurs", "Accessoires tech",
+
+    // 👟 Vêtements & Mode
+    "Chaussures hommes", "Chaussures femmes", "Vestes / Manteaux", "Accessoires",
+
+     "Vêtements hommes", "Vêtements femmes",
+
+    // 🏠 Meubles & Maison
+    "Cuisine & électroménager", "Décoration intérieure",
+
+    // 📸 Annonces diverses
+    "Appareils photo / Caméras", "Instruments de musique", "Jeux vidéos / Consoles",
+
+    // ✈️ Voyages & Mobilité
+    "Sacs / Valises / Backpacks",
+
+    // 🍳 Cuisine & Produits alimentaires
+    "Ustensiles spécifiques",
+
+    // 📚 Études & Livres
+    "Fournitures scientifiques", "Matériel de bureau"
+];
+
+// 📦 Adapter le placeholder du contenu du pack
+const packPlaceholder = exemplesContenuPackParSousCategorie[selectedSubcat];
+if (packPlaceholder) {
+    document.getElementById("contenu_pack").placeholder = `Ex : ${packPlaceholder}`;
+} else {
+    document.getElementById("contenu_pack").placeholder = "Ex : 1 câble USB, 1 manuel";
+}
+
+// 🎯 Adapter le placeholder du modèle
+const modelePlaceholder = exemplesModeleParSousCategorie[selectedSubcat];
+if (modelePlaceholder) {
+    document.getElementById("modele").placeholder = `Ex : ${modelePlaceholder}`;
+} else {
+    document.getElementById("modele").placeholder = "Ex : Modèle spécifique";
+}
+
+
+
+    const showTextileFields = [
+        "Vêtements hommes", "Vêtements femmes", "Vestes / Manteaux",
+        "Chaussures femmes", "Chaussures hommes", "Accessoires"
+    ];
+
+    // Affichage conditionnel des champs individuels
+    document.getElementById('field-marque').style.display = showMarqueModele.includes(selectedSubcat) ? 'block' : 'none';
+    document.getElementById('field-modele').style.display = showMarqueModele.includes(selectedSubcat) ? 'block' : 'none';
+    document.getElementById('field-fermeture').style.display = showTextileFields.includes(selectedSubcat) ? 'block' : 'none';
+    document.getElementById('field-matiere').style.display = showTextileFields.includes(selectedSubcat) ? 'block' : 'none';
+
+    // Affichage de la section variantes
+    if (sousCategoriesAvecVariantes.includes(selectedSubcat)) {
+        document.getElementById('variants-section').style.display = 'block';
+    } else {
+        document.getElementById('variants-section').style.display = 'none';
+    }
+
+    // Affichage de toute la section "Caractéristiques supplémentaires"
+    const hasVisibleFields = [
+        document.getElementById('field-marque'),
+        document.getElementById('field-modele'),
+        document.getElementById('field-fermeture'),
+        document.getElementById('field-matiere')
+    ].some(el => el.style.display === 'block');
+
+    document.getElementById('features-section').style.display = hasVisibleFields ? 'block' : 'none';
+}
+
+const exemplesParSousCategorie = {
+    // 🧥 Vêtements & Mode
+    "Vêtements hommes": " Taille / Couleur (Ex:M / Bleu)",
+    "Vêtements femmes": " Taille / Couleur (Ex:S / Rouge)",
+    "Vestes / Manteaux": " Taille / Couleur (Ex: L / Noir)",
+    "Chaussures hommes": " Taille / Couleur (Ex: 42 / Marron)",
+    "Chaussures femmes": " Taille / Couleur (Ex: 38 / Blanc)",
+    "Accessoires": "Taille unique / Doré",
+
+    // 💻 Électronique & Informatique
+    "Smartphones": "128 Go / Noir",
+    "Ordinateurs / Laptops": "15\" / 512 Go / 16 Go RAM / Argent",
+    "Tablettes": "11\" / 256 Go / Wi-Fi / Gris",
+    "Casques / Écouteurs / Enceintes": "Version 2 / Blanc",
+    "Écrans / Claviers / Souris": "24\" / Gaming / Noir",
+    "Disques durs / SSD / Clés USB": "1To / USB 3.0 / Noir",
+    "Câbles & Chargeurs": "2m / 65W / USB-C / Blanc",
+    "Accessoires tech": "Support pliable / Métal / Noir",
+
+    // 🛋️ Meubles & Maison
+    "Lits / Matelas": "140x200 / Chêne clair",
+    "Chaises / Fauteuils": "Lot de 2 / Blanc",
+    "Bureaux / Tables / Étagères": "120x60 / Bois foncé",
+    "Armoires / Rangement": "3 portes / Blanc mat",
+    "Décoration intérieure": "Lot de 3 cadres / Doré",
+    "Cuisine & électroménager": "23L / Micro-ondes / Inox",
+
+    // 🍳 Cuisine & Produits alimentaires
+    "Épices / Condiments": "200g / Curcuma / Bio",
+    "Produits de base": "5kg / Riz parfumé",
+    "Boissons & Snacks": "Pack x6 / Mangue / Frais",
+    "Ustensiles spécifiques": "24cm / Fonte / Rouge",
+
+    // 📣 Annonces diverses
+    "Jeux vidéos / Consoles": "PS5 / Standard / 1 manette / Blanc",
+    "Appareils photo / Caméras": "Canon EOS / 50mm / Noir",
+    "Instruments de musique": "Guitare classique / Avec housse / Bois clair",
+    "Objets divers": "Lot x3 / Couleurs variées",
+
+    // ✈️ Voyages & Mobilité
+    "Sacs / Valises / Backpacks": "40L / Étanche / Noir"
+};
+
+const exemplesContenuPackParSousCategorie = {
+    "Smartphones": "1 câble USB-C, 1 coque, 1 chargeur",
+    "Ordinateurs / Laptops": "Chargeur, souris sans fil, housse",
+    "Casques / Écouteurs / Enceintes": "Casque, câble jack, housse",
+    "Lits / Matelas": "Cadre, visserie, clé Allen",
+    "Chaises / Fauteuils": "2 chaises, coussins",
+    "Jeux vidéos / Consoles": "Console, manette, câble HDMI",
+    "Objets divers": "3 stylos, 1 lampe, 1 carnet"
+};
+
+const exemplesModeleParSousCategorie = {
+    "Smartphones": "iPhone 13 Pro, Galaxy S23",
+    "Ordinateurs / Laptops": "MacBook Pro M2, HP Envy x360",
+    "Chaussures hommes": "Air Max 90, Timberland Classic",
+    "Vêtements femmes": "Zara Oversize, Levi's 501",
+    "Vestes / Manteaux": "North Face Nuptse, Adidas Windbreaker",
+    "Appareils photo / Caméras": "Canon EOS 90D, Nikon D5600"
+};
+
+
+    function addVariantRow() {
+    const container = document.getElementById('variants-container');
+    const newRow = document.createElement('div');
+    newRow.className = 'variant-row';
+    newRow.style.flexDirection = 'column';
+    newRow.style.gap = '6px';
+
+    const selectedSubcat = document.getElementById('subcategory').value;
+
+    // Première ligne : nom, stock, prix, image
+    const row1 = document.createElement('div');
+    row1.style.display = 'flex';
+    row1.style.gap = '10px';
+
+    const input1 = document.createElement('input');
+    input1.name = "variant_name[]";
+    input1.placeholder = exemplesParSousCategorie[selectedSubcat] || "{{ _('Nom de la variante (ex : Taille / Couleur / Capacité)') }}";
+    input1.style.flex = "1";
+
+    const input2 = document.createElement('input');
+    input2.placeholder = "{{ _('Stock') }}";
+    input2.type = "number";
+    input2.min = "0";
+    input2.name = "variant_stock[]";
+    input2.style.flex = "1";
+
+    const input3 = document.createElement('input');
+    input3.placeholder = "{{ _('Prix (RUB)') }}";
+    input3.type = "number";
+    input3.step = "0.01";
+    input3.name = "variant_price[]";
+    input3.style.flex = "1";
+
+    const input4 = document.createElement('input');
+    input4.type = "file";
+    input4.name = "variant_image[]";
+    input4.accept = "{{ _('Image/*') }}";
+    input4.style.flex = "2";
+
+    row1.appendChild(input1);
+    row1.appendChild(input2);
+    row1.appendChild(input3);
+    row1.appendChild(input4);
+
+    // Deuxième ligne : promo + dates
+    const row2 = document.createElement('div');
+    row2.style.display = 'flex';
+    row2.style.gap = '10px';
+
+    const input5 = document.createElement('input');
+    input5.placeholder = "{{ _('Prix initial') }}";
+    input5.type = "number";
+    input5.step = "0.01";
+    input5.name = "variant_original_price[]";
+    input5.style.flex = "1";
+
+    const input6 = document.createElement('input');
+    input6.placeholder = "{{ _('Prix promo') }}";
+    input6.type = "number";
+    input6.step = "0.01";
+    input6.name = "variant_discount_price[]";
+    input6.style.flex = "1";
+
+    const input7 = document.createElement('input');
+    input7.type = "datetime-local";
+    input7.name = "variant_promo_start[]";
+    input7.style.flex = "1.2";
+
+    const input8 = document.createElement('input');
+    input8.type = "datetime-local";
+    input8.name = "variant_promo_end[]";
+    input8.style.flex = "1.2";
+
+    const removeButton = document.createElement('button');
+    removeButton.className = 'btn-remove';
+    removeButton.type = "button";
+    removeButton.textContent = '−';
+    removeButton.onclick = () => newRow.remove();
+
+    row2.appendChild(input5);
+    row2.appendChild(input6);
+    row2.appendChild(input7);
+    row2.appendChild(input8);
+    row2.appendChild(removeButton);
+
+    newRow.appendChild(row1);
+    newRow.appendChild(row2);
+    container.appendChild(newRow);
+}
+
+
+
+    function updateTitleExample() {
+    const subcat = document.getElementById('subcategory').value;
+    const exampleEl = document.getElementById('title-example');
+    const marqueInput = document.getElementById('marque');
+    const modeleInput = document.getElementById('modele');
+
+    if (!subcat) {
+        exampleEl.textContent = '';
+        marqueInput.placeholder = "Ex: Apple";
+        modeleInput.placeholder = "Ex: MacBook Pro M3 16 pouces";
+        return;
+    }
+
+    let exampleText = '';
+    let marquePlaceholder = '';
+    let modelePlaceholder = '';
+
+    switch (subcat) {
+        case "Smartphones":
+            exampleText = "Ex: iPhone 14 Pro Max 256GB - Comme Neuf";
+            marquePlaceholder = "Ex: Apple";
+            modelePlaceholder = "Ex: iPhone 14 Pro Max";
+            break;
+        case "Ordinateurs / Laptops":
+            exampleText = "Ex: MacBook Air M1 256 Go - Très bon état";
+            marquePlaceholder = "Ex: Apple";
+            modelePlaceholder = "Ex: MacBook Air M1";
+            break;
+        case "Tablettes":
+            exampleText = "Ex: iPad Pro 11 pouces 128 Go - Très bon état";
+            marquePlaceholder = "Ex: Apple";
+            modelePlaceholder = "Ex: iPad Pro 11";
+            break;
+        case "Casques / Écouteurs / Enceintes":
+            exampleText = "Ex: AirPods Pro 2ème génération - Neufs";
+            marquePlaceholder = "Ex: Apple";
+            modelePlaceholder = "Ex: AirPods Pro 2";
+            break;
+        case "Écrans / Claviers / Souris":
+            exampleText = "Ex: Écran Dell 24 pouces Full HD - Très bon état";
+            marquePlaceholder = "Ex: Dell";
+            modelePlaceholder = "Ex: Dell P2419H";
+            break;
+        case "Disques durs / SSD / Clés USB":
+            exampleText = "Ex: SSD Samsung 1To - Neuf";
+            marquePlaceholder = "Ex: Samsung";
+            modelePlaceholder = "Ex: 870 EVO 1To";
+            break;
+        case "Câbles & Chargeurs":
+            exampleText = "Ex: Chargeur USB-C 65W - Universel";
+            marquePlaceholder = "Ex: Anker";
+            modelePlaceholder = "Ex: PowerPort III";
+            break;
+        case "Accessoires tech":
+            exampleText = "Ex: Souris Logitech MX Master 3 - Neuve";
+            marquePlaceholder = "Ex: Logitech";
+            modelePlaceholder = "Ex: MX Master 3";
+            break;
+        case "Vêtements hommes":
+            exampleText = "Ex: T-shirt Nike taille M - Bleu";
+            marquePlaceholder = "Ex: Nike";
+            modelePlaceholder = "";
+            break;
+        case "Vêtements femmes":
+            exampleText = "Ex: Robe Zara taille S - Très bon état";
+            marquePlaceholder = "Ex: Zara";
+            modelePlaceholder = "";
+            break;
+        case "Vestes / Manteaux":
+            exampleText = "Ex: Manteau H&M long - taille L";
+            marquePlaceholder = "Ex: H&M";
+            modelePlaceholder = "";
+            break;
+        case "Chaussures femmes":
+            exampleText = "Ex: Talons Zara taille 38 - Neufs";
+            marquePlaceholder = "Ex: Zara";
+            modelePlaceholder = "";
+            break;
+        case "Chaussures hommes":
+            exampleText = "Ex: Baskets Adidas taille 42 - Bon état";
+            marquePlaceholder = "Ex: Adidas";
+            modelePlaceholder = "";
+            break;
+        case "Accessoires":
+            exampleText = "Ex: Sac à main Guess noir";
+            marquePlaceholder = "Ex: Guess";
+            modelePlaceholder = "";
+            break;
+        case "Jeux vidéos / Consoles":
+            exampleText = "Ex: PS5 avec 2 manettes + FIFA 24";
+            marquePlaceholder = "Ex: Sony";
+            modelePlaceholder = "Ex: PlayStation 5";
+            break;
+        case "Manuels & Livres universitaires":
+            exampleText = "Ex: Manuel de mathématiques MPSI - édition 2023";
+            break;
+        case "Cours imprimés / Polycopiés":
+            exampleText = "Ex: Polycopié physique-chimie semestre 1";
+            break;
+        case "Revente de billets de train / avion":
+            exampleText = "Ex: Billet TGV Paris → Lyon - 22 juin";
+            break;
+        case "Colocation disponible":
+            exampleText = "Ex: Chambre en colocation proche campus";
+            break;
+        default:
+            exampleText = "Titre de votre annonce";
+        case "Fiches de révision / Résumés":
+            exampleText = "Ex: Fiches de révision mathématiques - Prépa scientifique";
+            break;
+        case "Matériel de bureau":
+            exampleText = "Ex: Agrafeuse électrique Leitz - Très bon état";
+            break;
+        case "Fournitures scientifiques":
+            exampleText = "Ex: Micropipette Gilson P20 - Comme neuve";
+            break;
+        case "Lits / Matelas":
+        exampleText = "Ex: Lit double IKEA avec matelas 140x200 - Bon état";
+        break;
+    case "Chaises / Fauteuils":
+        exampleText = "Ex: 2 chaises design noires en métal - Neuves";
+        break;
+    case "Bureaux / Tables / Étagères":
+        exampleText = "Ex: Bureau en bois massif 120cm + étagère";
+        break;
+    case "Armoires / Rangement":
+        exampleText = "Ex: Armoire 3 portes blanche - Très bon état";
+        break;
+    case "Décoration intérieure":
+        exampleText = "Ex: Lot de cadres muraux + lampe déco";
+        break;
+    case "Cuisine & électroménager":
+        exampleText = "Ex: Micro-ondes Samsung 25L - Très bon état";
+        break;
+
+    // Logement
+    case "Colocation disponible":
+        exampleText = "Ex: Chambre en colocation à 5 min du campus";
+        break;
+    case "Studio / Appartement à louer":
+        exampleText = "Ex: Studio meublé 22m² à louer - Centre-ville";
+        break;
+    case "Chambre libre chez l’habitant":
+        exampleText = "Ex: Chambre chez l’habitant - Calme et lumineuse";
+        break;
+    case "Sous-location courte durée":
+        exampleText = "Ex: Sous-location 1 mois - Studio équipé à Amsterdam";
+        break;
+    case "Échange temporaire de logement":
+        exampleText = "Ex: Échange studio Paris contre chambre à Bruxelles";
+        break;
+
+    // Produits alimentaires
+    case "Épices / Condiments":
+        exampleText = "Ex: Lot d'épices indiennes + sauces piquantes";
+        break;
+    case "Nourriture africaine / asiatique":
+        exampleText = "Ex: Attiéké, gombo, gari - produits africains";
+        break;
+    case "Produits de base":
+        exampleText = "Ex: Riz, huile, sucre - en lot (neuf)";
+        break;
+    case "Boissons & Snacks":
+        exampleText = "Ex: Boissons tropicales + snacks asiatiques";
+        break;
+    case "Ustensiles spécifiques":
+        exampleText = "Ex: Mortier en bois + cocotte traditionnelle";
+        break;
+
+    // Transport
+    case "Sacs / Valises / Backpacks":
+        exampleText = "Ex: Sac à dos Eastpak 30L - Neuf";
+        break;
+    case "Revente de billets de train / avion":
+        exampleText = "Ex: Billet Train Kazan → Moscou - 3 juillet";
+        break;
+    case "Covoiturage":
+        exampleText = "Ex: Trajet Moscou → Saransk - 24 juin (2 places dispo)";
+        break;
+    case "Location de véhicule / trottinette":
+        exampleText = "Ex: Trottinette électrique à louer - 200 Rub/jour";
+        break;
+    case "Cartes de transport / Abonnements":
+        exampleText = "Ex: Carte de Bus valable jusqu'à fin juin";
+        break;
+    // Services entre étudiants
+    case "Cours particuliers / Aide scolaire":
+    exampleText = "Ex: Cours de Marketing Digital niveau L3– Prof expérimenté";
+    break;
+case "Correction de devoirs / Mémoire":
+    exampleText = "Ex: Relecture + correction mémoire de licence – Rapide";
+    break;
+case "Traductions / Mise en page / CV":
+    exampleText = "Ex: Traduction Anglais → français ou Russe → français + mise en page CV";
+    break;
+case "Ménage / Repassage / Courses":
+    exampleText = "Ex: Aide ménage 2h/semaine; – Quartier Sud";
+    break;
+case "Soins personnels":
+    exampleText = "Ex: Coiffure à domicile – Tresses ou défrisage";
+    break;
+case "Envoi de colis / Retrait":
+    exampleText = "Ex: Retrait de colis à l'aéroport  + dépôt poste – dispo soir";
+    break;
+case "Soutien administratif":
+    exampleText = "Ex: Aide démarches Campus Russie / dossier campus France";
+    break;
+
+// Loisirs & culture
+case "Événements / Soirées / Concerts":
+    exampleText = "Ex: Soirée afro prévue vendredi – entrée gratuite";
+    break;
+case "Appareils photo / Caméras":
+    exampleText = "Ex: Appareil photo Canon EOS 2000D – Comme neuf";
+    break;
+case "Instruments de musique":
+    exampleText = "Ex: Guitare classique Yamaha – Très bon état";
+    break;
+case "Objets perdus / retrouvés":
+    exampleText = "Ex: Porte-feuille noir perdu près du campus";
+    break;
+case "Objets divers":
+    exampleText = "Ex: Lot d’objets utiles (lampe, multiprise, rideaux)";
+    break;
+
+// Annonces de recherche
+case "Recherche de logement":
+    exampleText = "Ex: Cherche studio proche université – budget max 30 000 Rub";
+    break;
+case "Recherche de colocataire":
+    exampleText = "Ex: Recherche colocataire pour T3 Moscou";
+    break;
+case "Recherche d’objet":
+    exampleText = "Ex: Recherche vélo d’occasion pas trop cher";
+    break;
+case "Recherche de service":
+    exampleText = "Ex: Besoin aide informatique pour installation PC";
+    break;
+case "Demande de transport":
+    exampleText = "Ex: Cherche trajet Saint Peter → Moscou ce week-end";
+    break;
+case "Lits / Matelas":
+    exampleText = "Ex: Lit IKEA 140x200 avec tiroirs – Bon état";
+    break;
+
+case "Chaises / Fauteuils":
+    exampleText = "Ex: Lot de 2 chaises design – Couleur blanc";
+    break;
+
+case "Bureaux / Tables / Étagères":
+    exampleText = "Ex: Bureau bois clair 120cm – comme neuf";
+    break;
+
+case "Armoires / Rangement":
+    exampleText = "Ex: Armoire 3 portes avec miroir – blanc";
+    break;
+
+case "Décoration intérieure":
+    exampleText = "Ex: Set de 3 cadres dorés – style minimaliste";
+    break;
+
+case "Cuisine & électroménager":
+    exampleText = "Ex: Micro-ondes Samsung 23L – noir";
+    break;
+
+case "Épices / Condiments":
+    exampleText = "Ex: Curcuma bio 200g – neuf";
+    break;
+
+case "Produits de base":
+    exampleText = "Ex: Riz parfumé Thaï – 5kg";
+    break;
+
+case "Boissons & Snacks":
+    exampleText = "Ex: Pack de jus exotiques x6 – Mango/Passion";
+    break;
+
+case "Ustensiles spécifiques":
+    exampleText = "Ex: Casserole fonte 24cm – rouge";
+    break;
+
+case "Objets divers":
+    exampleText = "Ex: Lot multiprise + lampe + support téléphone";
+    break;
+
+case "Sacs / Valises / Backpacks":
+    exampleText = "Ex: Sac à dos 40L – étanche – noir/gris";
+    break;
+
+    }
+
+    exampleEl.textContent = exampleText;
+
+    // Appliquer les placeholders seulement si les inputs existent
+    if (marqueInput) marqueInput.placeholder = marquePlaceholder;
+    if (modeleInput) modeleInput.placeholder = modelePlaceholder;
+}
+
+// Événements
+document.getElementById('category').addEventListener('change', () => {
+    updateSubcategories();
+    handleVariantVisibility();
+    updateTitleExample();
+});
+
+document.getElementById('subcategory').addEventListener('change', () => {
+    handleVariantVisibility();
+    updateTitleExample();
+});
+
+document.getElementById('title').addEventListener('input', () => {
+    updateTitleExample();
+});
+
+// Initialisation au chargement de la page
+window.addEventListener('DOMContentLoaded', () => {
+    updateSubcategories();
+    handleVariantVisibility();
+    updateTitleExample();
+});
+
+function previewImages(files) {
+    const previewContainer = document.getElementById('image-preview-container');
+    previewContainer.innerHTML = '';
+
+    // Récupérer les prix des variantes (inputs variant_price[])
+    const prices = Array.from(document.getElementsByName('variant_price[]')).map(input => input.value);
+
+    Array.from(files).forEach((file, index) => {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'inline-block';
+            wrapper.style.margin = '10px';
+            wrapper.style.position = 'relative';
+
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.width = '120px';
+            img.style.height = '120px';
+            img.style.objectFit = 'cover';
+            img.style.border = '3px solid transparent';
+            img.style.borderRadius = '10px';
+            img.style.cursor = 'pointer';
+
+            // Ajout du prix comme data-attribute
+            if (prices[index]) {
+                img.setAttribute('data-price', prices[index]);
+            }
+
+            // Au survol : afficher le prix
+            img.onmouseenter = () => {
+                const priceDisplay = document.getElementById('priceDisplay');
+                if (priceDisplay && img.getAttribute('data-price')) {
+                    priceDisplay.textContent = "Prix : " + img.getAttribute('data-price') + " ₽";
+                }
+            };
+
+            // Au départ du survol : remettre prix par défaut
+            img.onmouseleave = () => {
+                const priceDisplay = document.getElementById('priceDisplay');
+                if (priceDisplay) {
+                    priceDisplay.textContent = "Prix : -";
+                }
+            };
+
+            // Au clic : sélection image principale + mise à jour prix
+            img.onclick = () => {
+                // Bordure pour montrer la sélection
+                document.querySelectorAll('#image-preview-container img').forEach(img => img.style.border = '3px solid transparent');
+                img.style.border = '3px solid #3498db';
+
+                document.getElementById('main_image_index').value = index;
+
+                // Met à jour l'image principale et le prix
+                const mainImg = document.getElementById('mainProductImage');
+                const priceDisplay = document.getElementById('priceDisplay');
+                if (mainImg) mainImg.src = e.target.result;
+                if (priceDisplay && img.getAttribute('data-price')) {
+                    priceDisplay.textContent = "Prix : " + img.getAttribute('data-price') + " ₽";
+                }
+            };
+
+            const label = document.createElement('div');
+            label.textContent = "Image " + (index + 1);
+            label.style.textAlign = "center";
+            label.style.marginTop = "5px";
+            label.style.fontSize = "0.85rem";
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(label);
+            previewContainer.appendChild(wrapper);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    // Par défaut, sélectionner la première image et afficher son prix
+    document.getElementById('main_image_index').value = 0;
+
+    // Petite attente pour que la première image soit bien chargée avant de l'afficher
+    setTimeout(() => {
+        const firstImg = previewContainer.querySelector('img');
+        if (firstImg) firstImg.click();
+    }, 300);
+}
+</script>
+
+<script>
+function previewImages(files) {
+    const container = document.getElementById('image-preview-container');
+    container.innerHTML = ''; // On vide les anciennes previews
+
+    Array.from(files).forEach((file, index) => {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.maxWidth = '120px';
+                img.style.margin = '8px';
+                img.style.borderRadius = '8px';
+                img.style.border = '1px solid #ccc';
+                img.title = file.name;
+
+                // Quand on clique sur une image, elle devient l’image principale
+                img.onclick = () => {
+                    document.getElementById('main_image_index').value = index;
+                    document.querySelectorAll('#image-preview-container img').forEach(i => i.style.border = '1px solid #ccc');
+                    img.style.border = '3px solid #27ae60';
+                }
+
+                container.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+</script>
+
+    <script>
+function previewAnnonce() {
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const price = document.getElementById('price').value;
+    const video = document.getElementById('video').value;
+    const mainImg = document.getElementById('mainProductImage').src;
+
+    let content = `
+        <h4>${title}</h4>
+        <img src="${mainImg}" alt="Image" style="max-width:100%; border-radius:8px; margin-top:10px;"><br><br>
+        <strong>Prix :</strong> ${price} ₽<br><br>
+        <strong>Description :</strong><br>
+        <p>${description}</p>
+    `;
+
+    if (video) {
+        const embedUrl = video.replace("watch?v=", "embed/");
+        content += `<strong>Vidéo :</strong><br><iframe width="100%" height="300" src="${embedUrl}" frameborder="0" allowfullscreen style="border-radius:10px;"></iframe>`;
+    }
+
+    document.getElementById('previewContent').innerHTML = content;
+    document.getElementById('previewModal').style.display = "flex";
+}
+
+function closePreview() {
+    document.getElementById('previewModal').style.display = "none";
+}
+</script>
+
+    <script>
+function previewVideo(files) {
+    const container = document.getElementById('video-preview-container');
+    container.innerHTML = ''; // Reset
+
+    if (files.length === 0) return;
+
+    const file = files[0];
+
+    if (file.type.startsWith('video/')) {
+        const video = document.createElement('video');
+        video.controls = true;
+        video.style.maxWidth = '100%';
+        video.style.borderRadius = '10px';
+        video.style.marginTop = '10px';
+
+        const source = document.createElement('source');
+        source.src = URL.createObjectURL(file);
+        source.type = file.type;
+
+        video.appendChild(source);
+        container.appendChild(video);
+    } else {
+        container.innerHTML = "<p style='color:red;'>Fichier non valide. Veuillez choisir une vidéo.</p>";
+    }
+}
+
+<!-- Aperçu Modal -->
+<div id="previewModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; padding:20px; border-radius:10px; max-width:600px; width:90%; overflow-y:auto; max-height:80%;">
+    <h3 style="text-align:center;">{{ _('Aperçu de l’annonce') }}</h3>
+    <div id="previewContent"></div>
+    <button onclick="closePreview()" class="btn-publish" style="margin-top:20px;">{{ _('Fermer') }}priceDisplay</button>
+  </div>
+</div>
+</script>
+
+    <script>
+const videoInput = document.getElementById('video_file');
+const previewContainer = document.getElementById('video-preview-container');
+const removeBtn = document.getElementById('remove-video-btn');
+
+videoInput?.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    previewContainer.innerHTML = '';
+    removeBtn.style.display = 'none';
+
+    if (file) {
+        const allowed = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
+        const ext = file.name.split('.').pop().toLowerCase();
+
+        if (!allowed.includes(ext)) {
+            alert("❌ Format non autorisé. Vidéos autorisées : mp4, mov, avi, mkv, webm");
+            event.target.value = '';
+            return;
+        }
+
+        if (file.size > 20 * 1024 * 1024) {
+            alert("❌ Vidéo trop lourde (max 20 Mo).");
+            event.target.value = '';
+            return;
+        }
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.width = 320;
+        video.src = URL.createObjectURL(file);
+        previewContainer.appendChild(video);
+        removeBtn.style.display = 'inline-block';
+    }
+});
+
+removeBtn?.addEventListener('click', function () {
+    videoInput.value = '';
+    previewContainer.innerHTML = '';
+    removeBtn.style.display = 'none';
+});
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background: linear-gradient(120deg, #c2e9fb, #a1c4fd);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.favoris-wrapper {
+    max-width: 1100px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.favoris-wrapper h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.favori-card {
+    display: flex;
+    align-items: center;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.favori-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.favori-card img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+}
+
+.favori-info h4 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.favori-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.favori-actions {
+    margin-left: auto;
+}
+
+.favori-actions a {
+    text-decoration: none;
+    background-color: #f72585;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.favori-actions a:hover {
+    background-color: #b5179e;
+}
+</style>
+
+<div class="favoris-wrapper">
+    <h2>💖 {{ _('Mes annonces favorites') }}</h2>
+
+    {% if favoris %}
+        {% for fav in favoris %}
+        <div class="favori-card">
+            {% if fav.listing.images %}
+                <img src="{{ url_for('static', filename='uploads/' + fav.listing.images[0].filename) }}" alt="{{ _('Image annonce') }}">
+            {% endif %}
+            <div class="favori-info">
+                <h4>{{ fav.listing.title }}</h4>
+                <p>{{ fav.listing.price }} {{ fav.listing.currency.upper() }} — {{ fav.listing.city }}</p>
+                <p>{{ _('Ajouté le') }} {{ fav.added_at.strftime('%d/%m/%Y à %H:%M') }}</p>
+            </div>
+            <div class="favori-actions" style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="{{ url_for('listings.annonce_detail', listing_id=fav.listing.id) }}">🔍 {{ _('Voir') }}</a>
+
+                <form action="{{ url_for('listings.retirer_favori', listing_id=fav.listing.id) }}" method="POST" style="margin: 0;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" style="background-color: #e74c3c; color: white; padding: 8px 14px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer;">
+                        💔 {{ _('Retirer') }}
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center; font-size: 18px;">{{ _("Vous n'avez ajouté aucune annonce en favori pour le moment.") }}</p>
+    {% endif %}
+</div>
+{% endblock %}

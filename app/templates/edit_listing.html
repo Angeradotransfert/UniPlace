@@ -1,0 +1,736 @@
+{% extends "base.html" %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div>
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+{% block content %}
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+.edit-container {
+    max-width: 900px;
+    margin: 60px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+}
+
+.edit-container h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 28px;
+    text-align: center;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form select,
+form input[type="date"],
+form input[type="datetime-local"],
+form input[type="file"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.price-currency {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.price-currency input,
+.price-currency select {
+    flex: 1;
+}
+
+.price-currency label {
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.image-preview-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-preview img {
+    max-width: 120px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.image-preview form {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.image-preview button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    margin-top: 4px;
+    margin-left: 5px;
+}
+
+.image-preview button:hover {
+    background-color: #c82333;
+}
+
+.variant-block {
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    margin-top: 30px;
+    color: #333;
+    font-size: 24px;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+}
+
+select {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff;
+}
+
+input[type="file"] {
+    margin-bottom: 30px;
+}
+
+input[type="file"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+button[type="button"] {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+}
+</style>
+
+<div class="edit-container">
+    <h2>✏️ {{ _('Modifier l\'annonce') }}</h2>
+
+    <form action="{{ url_for('listings.edit_listing', listing_id=listing.id) }}" method="POST" enctype="multipart/form-data" onsubmit="return injectEditSubcategory();">
+        <!-- Catégorie et sous-catégorie -->
+        <select name="category" id="category" required>
+    <option value="">-- {{ _('Catégorie') }} --</option>
+    {% for cat in sousCategories %}
+        <option value="{{ cat }}" {% if listing.category == cat %}selected{% endif %}>{{ _(cat) }}</option>
+    {% endfor %}
+</select>
+
+        <select id="subcategory_select" required>
+    <option value="">-- {{ _('Sous-catégorie') }} --</option>
+        </select>
+
+        <input type="text" id="custom_subcategory" placeholder="{{ _('Entrez une sous-catégorie') }}" style="display: none;">
+        <input type="hidden" name="subcategory" id="subcategory_final">
+
+        <!-- Informations de l'annonce -->
+        <input type="text" name="title" id="title" value="{{ listing.title }}" required>
+        <textarea name="description" required>{{ listing.description }}</textarea>
+
+        <div class="price-currency">
+            <input type="number" name="price" placeholder="{{ _('Prix') }}" value="{{ listing.price }}" required step="0.01">
+            <label for="delivery_fee">{{ _('Frais de livraison estimés') }}:</label>
+            <input type="number" name="delivery_fee" id="delivery_fee" placeholder="{{ _('Ex: 2.50') }}" step="0.01" min="0" value="{{ listing.delivery_fee or '' }}">
+
+            <label>
+                <input type="checkbox" name="expedition_rapide" {% if listing.expedition_rapide %}checked{% endif %}> {{ _('Livré en 1 à 3 jours 🚀') }}
+            </label>
+
+            <label for="original_price">{{ _('Prix initial (avant réduction)') }} :</label>
+            <input type="number" name="original_price" id="original_price" step="0.01" value="{{ listing.original_price or '' }}">
+
+            <label for="discount_price">{{ _('Prix promotionnel') }} :</label>
+            <input type="number" name="discount_price" id="discount_price" step="0.01" value="{{ listing.discount_price or '' }}">
+
+            <label for="promo_start">{{ _('Date de début de la promotion') }}  :</label>
+            <input type="datetime-local" name="promo_start" id="promo_start" value="{{ listing.promo_start.strftime('%Y-%m-%dT%H:%M') if listing.promo_start else '' }}">
+
+            <label for="promo_end">{{ _('Date de fin de la promotion') }}  :</label>
+            <input type="datetime-local" name="promo_end" id="promo_end" value="{{ listing.promo_end.strftime('%Y-%m-%dT%H:%M') if listing.promo_end else '' }}">
+
+            <select name="currency" required>
+                <option value="₽" {% if listing.currency == "₽" %}selected{% endif %}>₽ (Rouble)</option>
+                <option value="€" {% if listing.currency == "€" %}selected{% endif %}>€ (Euro)</option>
+                <option value="$" {% if listing.currency == "$" %}selected{% endif %}>$ (Dollar)</option>
+            </select>
+        </div>
+
+        <!-- Ville -->
+        <select name="city_select" id="city_select" onchange="toggleCustomCity(this.value)" required>
+            <option value="">-- {{ _('Choisissez votre ville') }} --</option>
+            {% for city in ['Moscou','Saint-Pétersbourg','Kazan','Novossibirsk','Ekaterinbourg','Nijni Novgorod','Saransk','Kalouga','Oulianovsk','Orel'] %}
+                <option value="{{ city }}" {% if listing.city == city %}selected{% endif %}>{{ city }}</option>
+            {% endfor %}
+            <option value="Autre" {% if listing.city not in ['Moscou','Saint-Pétersbourg','Kazan','Novossibirsk','Ekaterinbourg','Nijni Novgorod','Saransk','Kalouga','Oulianovsk','Orel'] %}selected{% endif %}>{{ _('Autre...') }}</option>
+        </select>
+
+        <input type="text" name="custom_city" id="custom_city" placeholder="{{ _('Entrez votre ville') }}"
+               value="{{ listing.city if listing.city not in ['Moscou','Saint-Pétersbourg','Kazan','Novossibirsk','Ekaterinbourg','Nijni Novgorod','Saransk','Kalouga','Oulianovsk','Orel'] else '' }}" style="display: none;">
+
+        <!-- État du produit -->
+        <select name="condition" required>
+            <option value="">-- {{ _('État du produit') }} --</option>
+            <option value="Neuf" {% if listing.condition == 'Neuf' %}selected{% endif %}>{{ _('Neuf') }}</option>
+            <option value="Occasion" {% if listing.condition == 'Occasion' %}selected{% endif %}>{{ _('Occasion') }}</option>
+        </select>
+
+        <!-- Images -->
+        <input type="file" name="images" accept="image/*" multiple onchange="previewMultipleImages(event)">
+        <div id="preview-container" class="image-preview-wrapper"></div>
+
+        {% if listing.images %}
+        <p><strong>Images actuelles :</strong></p>
+        <div class="image-preview-wrapper" id="image-preview-container">
+            {% for img in listing.images %}
+            <div class="image-preview" onclick="selectMainImage({{ loop.index0 }})" style="cursor: pointer;">
+                <img src="{{ url_for('static', filename='uploads/' + img.filename) }}" style="border: 2px solid {% if img.is_main %}green{% else %}#ccc{% endif %};">
+                {% if img.is_main %}
+                    <p style="font-size: 0.85rem; color: green;">Image principale ✅</p>
+                {% endif %}
+                <button type="button" title="Supprimer cette image" onclick="deleteImage('{{ url_for('listings.delete_image', image_id=img.id) }}')">×</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <input type="hidden" name="main_image_index" id="main_image_index" value="{% for img in listing.images %}{% if img.is_main %}{{ loop.index0 }}{% endif %}{% endfor %}">
+
+        <h3>📦 {{ _('Informations complémentaires') }}</h3>
+
+<label for="poids">{{ _('Poids (en kg)') }} :</label>
+<input type="number" name="poids" id="poids" step="0.01" min="0" placeholder="{{ _('Ex : 1.25') }}" value="{{ listing.poids or '' }}">
+
+<label for="dimensions">{{ _('Dimensions (L × l × h en cm)') }} :</label>
+<input type="text" name="dimensions" id="dimensions" placeholder="{{ _('Ex : 30 × 20 × 10') }}" value="{{ listing.dimensions or '' }}">
+
+<label for="contenu_pack">{{ _('Contenu du pack') }} :</label>
+<textarea name="contenu_pack" id="contenu_pack" placeholder="{{ _('Ex : 1 câble USB, 1 manuel, 1 housse de transport') }}">{{ listing.contenu_pack or '' }}</textarea>
+
+<label for="tags">{{ _('Mots-clés (séparés par des virgules)') }} :</label>
+<input type="text" name="tags" id="tags" placeholder="{{ _('Ex : bluetooth, rechargeable, sans fil, gaming') }}" value="{{ listing.tags or '' }}">
+
+<label for="date_expiration">{{ _('Date de fin d\'affichage de l’annonce') }} :</label>
+<input type="date" name="date_expiration" id="date_expiration" value="{{ listing.date_expiration }}">
+
+<h3>🎥 {{ _('Vidéo de démonstration') }}</h3>
+
+{% if listing.video_filename %}
+<div>
+    <p><strong>{{ _('Vidéo actuelle') }} :</strong></p>
+    <video width="320" controls>
+        <source src="{{ url_for('static', filename=listing.video_filename) }}" type="video/mp4">
+        {{ _('Votre navigateur ne supporte pas la vidéo.') }}
+    </video>
+</div>
+<button type="button" onclick="deleteVideo('{{ url_for('listings.delete_video', listing_id=listing.id) }}')" style="background-color: #dc3545; color: white; padding: 6px 12px; border: none; border-radius: 6px;">
+    {{ _('Supprimer la vidéo ❌') }}
+</button>
+{% endif %}
+
+<label for="video_file">{{ _('Ajouter une nouvelle vidéo :') }}</label>
+<input type="file" name="video_file" id="video_file" accept="video/*">
+
+<h3>🧬 {{ _('Variantes disponibles') }}</h3>
+<div id="variants-container">
+    {% for variant in listing.variants %}
+    <div class="variant-block">
+        <input type="hidden" name="variant_id_{{ loop.index }}" value="{{ variant.id }}">
+        <input type="text" name="taille_{{ loop.index }}" placeholder="{{ _('Taille (ex : M, L, 42)') }}" value="{{ variant.taille }}">
+        <input type="text" name="couleur_{{ loop.index }}" placeholder="{{ _('Couleur (ex : Bleu, Rouge)') }}" value="{{ variant.couleur }}">
+        <input type="number" name="stock_{{ loop.index }}" placeholder="{{ _('Stock (ex : 2)') }}" value="{{ variant.stock or 1 }}" min="1">
+        <label>{{ _('Prix :') }}</label>
+        <input type="number" name="prix_{{ loop.index }}" step="0.01" value="{{ variant.prix or '' }}">
+        <label>{{ _('Prix promotionnel :') }}</label>
+        <input type="number" name="discount_price_{{ loop.index }}" step="0.01" value="{{ variant.discount_price or '' }}">
+        <label>{{ _('Date début promo :') }}</label>
+        <input type="datetime-local" name="promo_start_{{ loop.index }}" value="{{ variant.promo_start.strftime('%Y-%m-%dT%H:%M') if variant.promo_start else '' }}">
+        <label>{{ _('Date fin promo :') }}</label>
+        <input type="datetime-local" name="promo_end_{{ loop.index }}" value="{{ variant.promo_end.strftime('%Y-%m-%dT%H:%M') if variant.promo_end else '' }}">
+        {% if variant.image_filename %}
+        <p>{{ _('Image actuelle :') }}</p>
+        <img src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}" style="max-width:120px; border-radius: 6px;">
+        {% endif %}
+        <input type="file" name="variant_image_{{ loop.index }}" accept="image/*">
+        <label><input type="checkbox" name="delete_variant_{{ loop.index }}"> {{ _('Supprimer cette variante') }}</label>
+    </div>
+    {% endfor %}
+</div>
+
+<button type="button" onclick="addVariant()">➕ {{ _('Ajouter une variante') }}</button>
+
+<button type="submit">{{ _('💾 Enregistrer les modifications') }}</button>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </form>
+</div>
+
+<script>
+const sousCategories = {
+    "Études & Livres": [
+        "Manuels & Livres universitaires", "Cours imprimés / Polycopiés", "Fiches de révision / Résumés",
+        "Matériel de bureau", "Fournitures scientifiques"
+    ],
+    "Électronique & Informatique": [
+        "Ordinateurs / Laptops", "Smartphones", "Tablettes", "Casques / Écouteurs / Enceintes",
+        "Écrans / Claviers / Souris", "Disques durs / SSD / Clés USB", "Câbles & Chargeurs", "Accessoires tech"
+    ],
+    "Vêtements & Mode": [
+        "Vêtements hommes", "Vêtements femmes", "Vestes / Manteaux", "Chaussures hommes", "Chaussures femmes", "Accessoires"
+    ],
+    "Meubles & Maison": [
+        "Lits / Matelas", "Chaises / Fauteuils", "Bureaux / Tables / Étagères", "Armoires / Rangement",
+        "Décoration intérieure", "Cuisine & électroménager"
+    ],
+    "Logement étudiant": [
+        "Colocation disponible", "Studio / Appartement à louer", "Chambre libre chez l’habitant",
+        "Sous-location courte durée", "Échange temporaire de logement"
+    ],
+    "Cuisine & Produits alimentaires": [
+        "Épices / Condiments", "Nourriture africaine / asiatique", "Produits de base",
+        "Boissons & Snacks", "Ustensiles spécifiques"
+    ],
+    "Voyages & Mobilité": [
+        "Sacs / Valises / Backpacks", "Revente de billets de train / avion", "Covoiturage",
+        "Location de véhicule / trottinette", "Cartes de transport / Abonnements"
+    ],
+    "Services entre étudiants": [
+        "Cours particuliers / Aide scolaire", "Correction de devoirs / Mémoire", "Traductions / Mise en page / CV",
+        "Ménage / Repassage / Courses", "Soins personnels", "Envoi de colis / Retrait", "Soutien administratif"
+    ],
+    "Annonces diverses": [
+        "Événements / Soirées / Concerts", "Jeux vidéos / Consoles", "Appareils photo / Caméras",
+        "Instruments de musique", "Objets perdus / retrouvés", "Objets divers"
+    ],
+    "Demandes & Recherches": [
+        "Recherche de logement", "Recherche de colocataire", "Recherche d’objet", "Recherche de service", "Demande de transport"
+    ]
+};
+
+const exemples = {
+    "Vêtements & Mode": {
+        "Chaussures hommes": "Ex: Nike Air Max 43 - Bon état",
+        "Chaussures femmes": "Ex: Escarpins Zara 38 - Neuf",
+        "Vêtements hommes": "Ex: Jean Levi’s taille L",
+        "Vêtements femmes": "Ex: Robe pagne taille M",
+        "Vestes / Manteaux": "Ex: Manteau hiver - taille 42",
+        "Accessoires": "Ex: Sac à main Zara - Neuf"
+    },
+    "Électronique & Informatique": {
+        "Smartphones": "Ex: iPhone 12 Pro - 128Go - Bleu",
+        "Ordinateurs / Laptops": "Ex: Lenovo ThinkPad i5 - 8Go RAM",
+        "Casques / Écouteurs / Enceintes": "Ex: Casque JBL Bluetooth",
+        "Câbles & Chargeurs": "Ex: Chargeur USB-C Samsung"
+    },
+    "Études & Livres": {
+        "Manuels & Livres universitaires": "Ex: Livre de pharmacologie 2e année",
+        "Cours imprimés / Polycopiés": "Ex: Polycopié de physiologie",
+        "Fiches de révision / Résumés": "Ex: Résumés de pathologie - 3e année"
+    }
+};
+
+function updateSubcategoriesEdit(category, selectedSubcategory) {
+    const subSelect = document.getElementById('subcategory_select');
+    const customInput = document.getElementById('custom_subcategory');
+    const titleInput = document.getElementById('title');
+
+    subSelect.innerHTML = '<option value="">-- Sous-catégorie --</option>';
+    let match = false;
+
+    if (sousCategories[category]) {
+        sousCategories[category].forEach(sub => {
+            const opt = document.createElement('option');
+            opt.value = sub;
+            opt.textContent = sub;
+            if (sub === selectedSubcategory) {
+                opt.selected = true;
+                titleInput.placeholder = exemples[category]?.[sub] || "Ex: Titre de votre annonce";
+                match = true;
+            }
+            subSelect.appendChild(opt);
+        });
+    }
+
+    const optOther = document.createElement('option');
+    optOther.value = "Autre";
+    optOther.textContent = "Autre...";
+    if (!match) {
+        optOther.selected = true;
+        customInput.style.display = "block";
+        customInput.value = selectedSubcategory;
+        titleInput.placeholder = "Entrez un titre personnalisé";
+    } else {
+        customInput.style.display = "none";
+        customInput.value = "";
+    }
+    subSelect.appendChild(optOther);
+}
+
+function injectEditSubcategory() {
+    const selected = document.getElementById('subcategory_select').value;
+    const custom = document.getElementById('custom_subcategory').value;
+    document.getElementById('subcategory_final').value = selected === "Autre" ? custom : selected;
+    return true;
+}
+
+function previewMultipleImages(event) {
+    const container = document.getElementById('preview-container');
+    container.innerHTML = '';
+    Array.from(event.target.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const img = document.createElement('img');
+            img.src = reader.result;
+            img.style.maxWidth = '100px';
+            img.style.border = '1px solid #ccc';
+            img.style.borderRadius = '6px';
+            container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function toggleCustomCity(value) {
+    const input = document.getElementById('custom_city');
+    input.style.display = value === 'Autre' ? 'block' : 'none';
+    input.required = (value === 'Autre');
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    toggleCustomCity(document.getElementById('city_select').value);
+
+    const category = document.getElementById('category').value;
+    const selectedSub = {{ listing.subcategory|tojson }};
+    updateSubcategoriesEdit(category, selectedSub);
+
+    const subSelect = document.getElementById('subcategory_select');
+    subSelect.addEventListener("change", function () {
+        const titleInput = document.getElementById('title');
+        const category = document.getElementById('category').value;
+        const sub = this.value;
+
+        if (sub === "Autre") {
+            document.getElementById('custom_subcategory').style.display = "block";
+            titleInput.placeholder = "Entrez un titre personnalisé";
+        } else {
+            document.getElementById('custom_subcategory').style.display = "none";
+            titleInput.placeholder = exemples[category]?.[sub] || "Ex: Titre de votre annonce";
+        }
+    });
+});
+let variantIndex = {{ listing.variants|length }};
+function addVariant() {
+    variantIndex++;
+    const container = document.getElementById('new-variants');
+    const div = document.createElement('div');
+    div.classList.add('variant-block');
+    div.style.marginTop = "10px";
+    div.innerHTML = `
+        <input type="text" name="taille_new_${variantIndex}" placeholder="Taille">
+        <input type="text" name="couleur_new_${variantIndex}" placeholder="Couleur">
+        <input type="number" name="stock_new_${variantIndex}" placeholder="Stock" min="1" value="1">
+    `;
+    container.appendChild(div);
+    document.getElementById('variant_total').value = variantIndex;
+}
+</script>
+
+    <script>
+document.getElementById('video_file')?.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const previewContainer = document.createElement('div');
+    previewContainer.style.marginTop = '12px';
+
+    // Supprimer preview précédente s’il y en a une
+    const oldPreview = document.getElementById('video-preview-edit');
+    if (oldPreview) oldPreview.remove();
+
+    if (file) {
+        const allowed = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
+        const ext = file.name.split('.').pop().toLowerCase();
+
+        if (!allowed.includes(ext)) {
+            alert("❌ Format non autorisé. Vidéos autorisées : mp4, mov, avi, mkv, webm");
+            event.target.value = '';
+            return;
+        }
+
+        if (file.size > 20 * 1024 * 1024) {
+            alert("❌ Vidéo trop lourde (max 20 Mo).");
+            event.target.value = '';
+            return;
+        }
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.width = 320;
+        video.src = URL.createObjectURL(file);
+
+        previewContainer.id = 'video-preview-edit';
+        previewContainer.appendChild(video);
+        event.target.parentNode.appendChild(previewContainer);
+    }
+});
+</script>
+
+<script>
+function selectMainImage(index) {
+    const previews = document.querySelectorAll('#image-preview-container .image-preview img');
+    previews.forEach((img, i) => {
+        img.style.border = i === index ? '2px solid green' : '2px solid #ccc';
+    });
+    document.getElementById('main_image_index').value = index;
+}
+</script>
+
+<script>
+const categories = {{ sousCategories|tojson }};
+const selectedSubcategory = "{{ listing.subcategory|e }}";
+
+function updateSubcategoriesEdit(category, selectedSubcategory) {
+    const subSelect = document.getElementById('subcategory_select');
+    const customInput = document.getElementById('custom_subcategory');
+    const finalInput = document.getElementById('subcategory_final');
+    const titleInput = document.getElementById('title');
+
+    subSelect.innerHTML = '<option value="">-- Sous-catégorie --</option>';
+    let match = false;
+
+    if (categories[category]) {
+        categories[category].forEach(sub => {
+            const opt = document.createElement('option');
+            opt.value = sub;
+            opt.textContent = sub;
+            if (sub === selectedSubcategory) {
+                opt.selected = true;
+                match = true;
+            }
+            subSelect.appendChild(opt);
+        });
+    }
+
+    const optOther = document.createElement('option');
+    optOther.value = "Autre";
+    optOther.textContent = "Autre...";
+    subSelect.appendChild(optOther);
+
+    if (!match) {
+        optOther.selected = true;
+        customInput.style.display = "block";
+        customInput.value = selectedSubcategory;
+        titleInput.placeholder = "Entrez un titre personnalisé";
+    } else {
+        customInput.style.display = "none";
+        customInput.value = "";
+    }
+
+    finalInput.value = match ? selectedSubcategory : customInput.value;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const catSelect = document.getElementById('category');
+    const subSelect = document.getElementById('subcategory_select');
+    const customSub = document.getElementById('custom_subcategory');
+    const finalInput = document.getElementById('subcategory_final');
+
+    updateSubcategoriesEdit(catSelect.value, selectedSubcategory);
+
+    catSelect.addEventListener('change', () => {
+        updateSubcategoriesEdit(catSelect.value, "");
+    });
+
+    subSelect.addEventListener('change', () => {
+        if (subSelect.value === "Autre") {
+            customSub.style.display = "block";
+            finalInput.value = customSub.value;
+        } else {
+            customSub.style.display = "none";
+            finalInput.value = subSelect.value;
+        }
+    });
+
+    customSub.addEventListener('input', () => {
+        finalInput.value = customSub.value;
+    });
+});
+</script>
+<script>
+const sousCategoriesAvecVariantes = [
+    "Vêtements hommes", "Vêtements femmes", "Vestes / Manteaux",
+    "Chaussures hommes", "Chaussures femmes", "Accessoires",
+    "Smartphones", "Ordinateurs / Laptops", "Tablettes",
+    "Lits / Matelas", "Chaises / Fauteuils", "Bureaux / Tables / Étagères",
+    "Jeux vidéos / Consoles", "Objets divers", "Instruments de musique"
+];
+
+const showMarqueModele = [
+    "Smartphones", "Ordinateurs / Laptops", "Tablettes", "Accessoires tech",
+    "Casques / Écouteurs / Enceintes", "Chaussures hommes", "Chaussures femmes",
+    "Vêtements hommes", "Vêtements femmes", "Vestes / Manteaux",
+    "Appareils photo / Caméras", "Jeux vidéos / Consoles"
+];
+
+const showTextileFields = [
+    "Vêtements hommes", "Vêtements femmes", "Vestes / Manteaux",
+    "Chaussures femmes", "Chaussures hommes", "Accessoires"
+];
+
+function handleDynamicFields() {
+    const selected = document.getElementById("subcategory_select").value;
+    const fieldMarque = document.querySelector('[name="marque"]')?.parentElement;
+    const fieldModele = document.querySelector('[name="modele"]')?.parentElement;
+
+    const fieldFermeture = document.querySelector('[name="fermeture"]')?.parentElement;
+    const fieldMatiere = document.querySelector('[name="matiere"]')?.parentElement;
+
+    if (fieldMarque) fieldMarque.style.display = showMarqueModele.includes(selected) ? 'block' : 'none';
+    if (fieldModele) fieldModele.style.display = showMarqueModele.includes(selected) ? 'block' : 'none';
+    if (fieldFermeture) fieldFermeture.style.display = showTextileFields.includes(selected) ? 'block' : 'none';
+    if (fieldMatiere) fieldMatiere.style.display = showTextileFields.includes(selected) ? 'block' : 'none';
+
+    const variantSection = document.getElementById('variants-container');
+    if (variantSection) {
+        variantSection.style.display = sousCategoriesAvecVariantes.includes(selected) ? 'block' : 'none';
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const subSelect = document.getElementById("subcategory_select");
+    if (subSelect) {
+        handleDynamicFields();
+        subSelect.addEventListener("change", handleDynamicFields);
+    }
+});
+</script>
+
+<script>
+function deleteImage(url) {
+    if (confirm("Voulez-vous vraiment supprimer cette image ?")) {
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = url;
+
+        const csrf = document.createElement("input");
+        csrf.type = "hidden";
+        csrf.name = "csrf_token";
+        csrf.value = "{{ csrf_token() }}";
+
+        form.appendChild(csrf);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+</script>
+
+<script>
+function deleteVideo(url) {
+    if (confirm("Voulez-vous vraiment supprimer la vidéo ?")) {
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = url;
+
+        const csrf = document.createElement("input");
+        csrf.type = "hidden";
+        csrf.name = "csrf_token";
+        csrf.value = "{{ csrf_token() }}";
+
+        form.appendChild(csrf);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+</script>
+
+
+<script>
+document.querySelector('form').addEventListener('submit', function () {
+    alert("✅ Formulaire soumis !");
+});
+</script>
+{% endblock %}

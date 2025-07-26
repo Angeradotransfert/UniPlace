@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('Ajouter une promo') }}{% endblock %}
+
+{% block content %}
+<h1>{{ _('Ajouter une promotion') }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="title" class="form-label">{{ _('Titre') }}</label>
+    <input type="text" class="form-control" id="title" name="title" required maxlength="100">
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">{{ _('Description (optionnelle)') }}</label>
+    <textarea class="form-control" id="description" name="description" rows="2" maxlength="255"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="position" class="form-label">{{ _("Position (ordre d'affichage)") }}</label>
+    <input type="number" class="form-control" id="position" name="position" value="0" min="0">
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">{{ _('Image (png, jpg, jpeg, gif)') }}</label>
+    <input class="form-control" type="file" id="image" name="image" accept="image/*" required>
+  </div>
+  <button type="submit" class="btn btn-success">{{ _('Ajouter') }}</button>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <a href="{{ url_for('admin.admin_promos') }}" class="btn btn-secondary">{{ _('Annuler') }}</a>
+</form>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmez votre email - UniPlace</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 1rem;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      max-width: 400px;
+      width: 100%;
+      padding: 2.5rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    button {
+      background: #ff6f61;
+      border: none;
+      border-radius: 30px;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 111, 97, 0.6);
+    }
+
+    button:hover {
+      background: #ff4a3a;
+      box-shadow: 0 6px 20px rgba(255, 74, 58, 0.8);
+    }
+
+    a.logout {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    a.logout:hover {
+      color: #ff6f61;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 1rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Confirmation d'adresse email requise</h1>
+    <p>
+      Vous devez confirmer votre adresse email pour accéder à cette page.<br />
+      Si vous n'avez pas reçu l'email de confirmation, cliquez sur le bouton ci-dessous pour en recevoir un nouveau.
+    </p>
+
+    <form method="POST">
+      <button type="submit">Renvoyer l'email de confirmation</button>
+    </form>
+
+    <a href="{{ url_for('logout') }}" class="logout">Se déconnecter</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .livraisons-container {
+        max-width: 1000px;
+        margin: 50px auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .livraisons-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+
+    .table-livraisons {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-livraisons th, .table-livraisons td {
+        padding: 14px 18px;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 15px;
+        vertical-align: middle;
+    }
+
+    .table-livraisons th {
+        background-color: #f8f9fa;
+        color: #333;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .table-livraisons tbody tr:hover {
+        background-color: #f5f9ff;
+    }
+
+    .btn-update {
+        background-color: #4CAF50;
+        color: white;
+        padding: 6px 14px;
+        font-size: 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-update:hover {
+        background-color: #45a049;
+    }
+
+    .form-inline {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-inline input, .form-inline select {
+        padding: 6px 10px;
+        font-size: 14px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .link-suivi {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: 500;
+    }
+
+    .link-suivi:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="livraisons-container">
+    <h2 class="livraisons-title">📦 {{ _('Suivi de mes livraisons') }}</h2>
+
+    {% if commandes %}
+    <table class="table-livraisons">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{{ _('Acheteur') }}</th>
+                <th>{{ _('Produit') }}</th>
+                <th>{{ _('Adresse') }}</th>
+                <th>{{ _('Statut') }}</th>
+                <th>{{ _('Suivi') }}</th>
+                <th>{{ _('Action') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cmd in commandes %}
+            <tr>
+                <td>{{ cmd.id }}</td>
+                <td>{{ cmd.buyer.username }}</td>
+                {% for item in cmd.items %}
+                     item.listing.title
+                {% endfor %}
+
+                <td>{{ cmd.delivery_address or '—' }}</td>
+                <td>{{ cmd.tracking_status or _('En préparation') }}</td>
+                <td>
+                    {% if cmd.tracking_number %}
+                        <a class="link-suivi" href="https://www.pochta.ru/tracking#{{ cmd.tracking_number }}" target="_blank">{{ _('Suivre') }}</a>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td>
+                    <form class="form-inline" method="POST" action="{{ url_for('main.vendeur_update_tracking', order_id=cmd.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <input type="text" name="tracking_number" placeholder="{{ _('Numéro de suivi') }}" value="{{ cmd.tracking_number or '' }}">
+
+    <select name="tracking_status">
+        <option value="preparation" {% if cmd.tracking_status == 'preparation' %}selected{% endif %}>{{ _('Préparation') }}</option>
+        <option value="expédié" {% if cmd.tracking_status == 'expédié' %}selected{% endif %}>{{ _('Expédié') }}</option>
+        <option value="livré" {% if cmd.tracking_status == 'livré' %}selected{% endif %}>{{ _('Livré') }}</option>
+    </select>
+
+    <button type="submit" class="btn-update">{{ _('Mettre à jour') }}</button>
+</form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p style="text-align:center; font-size: 1.1rem; color:#777;">{{ _('Aucune vente enregistrée.') }}</p>
+    {% endif %}
+</div>
+{% endblock %}

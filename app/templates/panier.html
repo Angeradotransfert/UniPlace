@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Google Font Baloo 2 -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Baloo 2', cursive;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.panier-container {
+    max-width: 900px;
+    margin: 80px auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.panier-container h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.item-card {
+    background-color: #fefae0;
+    border-left: 6px solid #28a745;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-info a {
+    font-size: 18px;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.item-info a:hover {
+    text-decoration: underline;
+}
+
+.item-card p {
+    margin: 5px 0;
+    color: #444;
+    font-size: 16px;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.total-box {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border-left: 5px solid #28a745;
+    border-radius: 12px;
+    font-size: 18px;
+    color: #333;
+}
+
+.btn-order {
+    margin-top: 25px;
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.btn-order:hover {
+    background-color: #218838;
+}
+</style>
+
+<div class="panier-container">
+    <h2>🛒 {{ _('Votre panier') }}</h2>
+
+    {% if items %}
+        {% set total = namespace(rub=0) %}
+        {% for item in items %}
+            {% set total.rub = total.rub + (item.unit_price * item.quantity) %}
+            <div class="item-card">
+                <!-- Image cliquable -->
+                <a href="{{ url_for('listings.annonce_detail', listing_id=item.listing.id) }}">
+                {% if item.variant and item.variant.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/variants/' ~ item.variant.image_filename) }}" alt="{{ _('Image article') }}" class="item-image">
+                {% elif item.listing.images and item.listing.images[0].filename %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ item.listing.images[0].filename) }}" alt="{{ _('Image article') }}" class="item-image">
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="{{ _('Image article') }}" class="item-image">
+                {% endif %}
+                </a>
+
+                <div class="item-info">
+                    <form action="{{ url_for('main.modifier_quantite', item_id=item.id) }}" method="POST" style="margin-top: 10px;">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <label for="quantite-{{ item.id }}"><strong>{{ _('Changer quantité :') }}</strong></label>
+                        <input type="number" name="quantite" min="1" value="{{ item.quantity }}" style="width: 60px; margin-left: 10px;">
+                        <button type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px;">{{ _('Mettre à jour') }}</button>
+                    </form>
+
+                    <!-- Titre cliquable -->
+                    <a href="{{ url_for('listings.annonce_detail', listing_id=item.listing.id) }}">{{ item.listing.title }}</a>
+
+                    <!-- Prix unitaire enregistré -->
+                    {% set promo_active = false %}
+
+                    {% if item.variant and item.variant.discount_price and item.variant.promo_start and item.variant.promo_end and item.variant.promo_start <= now <= item.variant.promo_end %}
+                        {% set promo_active = true %}
+                    {% elif item.listing.discount_price and item.listing.promo_start and item.listing.promo_end and item.listing.promo_start <= now <= item.listing.promo_end %}
+                        {% set promo_active = true %}
+                    {% endif %}
+
+                    {% if promo_active %}
+                        <p>
+                            {{ _('Prix normal :') }} <span style="text-decoration: line-through; color: #999;">{{ item.listing.price }} RUB</span><br>
+                            {{ _('Prix promo :') }} <span style="color: #d60000; font-weight: bold;">{{ item.unit_price }} RUB</span>
+                        </p>
+                    {% else %}
+                        <p>{{ _('Prix unitaire :') }} {{ item.unit_price }} RUB</p>
+                    {% endif %}
+
+                    {% if item.variant %}
+                        <p><strong>{{ _('Variantes :') }}</strong></p>
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>{{ _('Taille') }} : {{ item.variant.taille }}</li>
+                            <li>{{ _('Couleur') }} : {{ item.variant.couleur }}</li>
+                            {% if item.variant.autre %}
+                                <li>{{ _('Option') }} : {{ item.variant.autre }}</li>
+                            {% endif %}
+                        </ul>
+                    {% else %}
+                        <p><em>{{ _('Pas de variantes') }}</em></p>
+                    {% endif %}
+
+                    <p><strong>{{ _('Quantité :') }}</strong> {{ item.quantity }}</p>
+                </div>
+
+                <!-- Retirer du panier -->
+                <form action="{{ url_for('main.supprimer_du_panier', item_id=item.id) }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="btn-remove" type="submit">❌ {{ _('Retirer') }}</button>
+                </form>
+            </div>
+        {% endfor %}
+
+        <div class="total-box">
+            <p><strong>{{ _('Total :') }}</strong> {{ total.rub }} RUB (~{{ "%.2f"|format(total.rub / taux) }} USDT)</p>
+        </div>
+
+        <!-- UN SEUL bouton Commander -->
+        <a href="{{ url_for('main.recapitulatif_commande') }}" class="btn-order">✅ {{ _('Commander tout') }}</a>
+
+    {% else %}
+        <p style="text-align:center; font-size: 18px;">😕 {{ _('Votre panier est vide pour le moment.') }}</p>
+    {% endif %}
+</div>
+
+<script>
+document.querySelectorAll('.btn-remove').forEach(button => {
+    button.addEventListener('click', function(e) {
+        if (!confirm("❌ {{ _('Êtes-vous sûr de vouloir retirer cet article du panier ?') }}")) {
+            e.preventDefault();
+        }
+    });
+});
+</script>
+{% endblock %}
