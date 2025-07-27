@@ -164,6 +164,45 @@ body {
     border-radius: 10px;
     border: 1px solid transparent;
 }
+
+/* Styles généraux */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Media Query pour les petits écrans (mobile) */
+  @media screen and (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+
+    .menu {
+      display: none; /* Par exemple, on cache le menu principal pour mobile */
+    }
+
+    .menu-mobile {
+      display: block; /* On montre un menu mobile */
+    }
+
+    .header {
+      text-align: center;
+    }
+  }
+
+  /* Media Query pour les écrans plus grands (tablette et plus) */
+  @media screen and (min-width: 769px) {
+    .menu {
+      display: block;
+    }
+
+    .menu-mobile {
+      display: none;
+    }
+  }
+
+
 </style>
 
 <!-- ✅ Flash Messages -->
@@ -193,7 +232,9 @@ body {
     <a href="{{ url_for('main.mes_annonces') }}">📄 {{ _('Voir mes annonces') }}</a>
 
     <!-- Ajout du bouton "Ajouter/Modifier Bannière" -->
+    {% if current_user.is_admin %}
     <a href="{{ url_for('admin.banner_management') }}">🖼️ {{ _('Bannière du site') }}</a>
+    {% endif %}
 
 
 

@@ -1,5 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
+
+<style>
+  /* Styles généraux */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Media Query pour les petits écrans (mobile) */
+  @media screen and (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+
+    .menu {
+      display: none; /* Par exemple, on cache le menu principal pour mobile */
+    }
+
+    .menu-mobile {
+      display: block; /* On montre un menu mobile */
+    }
+
+    .header {
+      text-align: center;
+    }
+  }
+
+  /* Media Query pour les écrans plus grands (tablette et plus) */
+  @media screen and (min-width: 769px) {
+    .menu {
+      display: block;
+    }
+
+    .menu-mobile {
+      display: none;
+    }
+  }
+</style>
+
 <div style="max-width: 800px; margin: auto; padding: 40px 30px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); font-family: 'Baloo 2', cursive; margin-top: 60px;">
     <h1 style="text-align: center; color: #2c3e50; font-size: 2.2rem; margin-bottom: 30px;">📜 {{ _('Conditions de vente sur UniPlace') }}</h1>
 

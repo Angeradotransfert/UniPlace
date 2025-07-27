@@ -333,6 +333,8 @@ import os
 
 @admin_bp.route('/admin/banner_management', methods=['GET', 'POST'])
 def banner_management():
+    if not current_user.is_admin:
+        abort(403)
     form = BannerForm()
     banners = Banner.query.all()  # Récupérer toutes les bannières
 

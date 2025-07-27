@@ -7,7 +7,7 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'changeme')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///uniplace.db'
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static', 'uploads')
     MAX_CONTENT_LENGTH = 20 * 1024 * 1024  # 20 Mo

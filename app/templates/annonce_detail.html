@@ -419,6 +419,42 @@ body {
   background: black;
 }
 
+/* Styles généraux */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Media Query pour les petits écrans (mobile) */
+  @media screen and (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+
+    .menu {
+      display: none; /* Par exemple, on cache le menu principal pour mobile */
+    }
+
+    .menu-mobile {
+      display: block; /* On montre un menu mobile */
+    }
+
+    .header {
+      text-align: center;
+    }
+  }
+
+  /* Media Query pour les écrans plus grands (tablette et plus) */
+  @media screen and (min-width: 769px) {
+    .menu {
+      display: block;
+    }
+
+    .menu-mobile {
+      display: none;
+    }
+  }
 
 </style>
 
@@ -668,24 +704,25 @@ body {
 <div style="display: flex; gap: 15px; margin-top: 15px; align-items: center;">
 
 
-  <!-- Bouton Ajouter au panier -->
-  <form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
+ <!-- Formulaire Ajouter au panier -->
+<form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <button id="btnAjouterPanier" type="submit" class="btn-custom btn-panier"
         {% if total_stock == 0 %}disabled{% endif %}>
-  🛒 {{ _('Ajouter au panier') }}
-</button>
-  </form>
+        🛒 {{ _('Ajouter au panier') }}
+    </button>
+</form>
 
-  <!-- Bouton Acheter maintenant -->
- <form action="{{ url_for('listings.acheter_maintenant', listing_id=annonce.id) }}" method="POST" id="formAcheterMaintenant" style="margin: 0;">
+<!-- Formulaire Acheter maintenant -->
+<form action="{{ url_for('listings.acheter_maintenant', listing_id=annonce.id) }}" method="POST" id="formAcheterMaintenant" style="margin: 0;">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <input type="hidden" name="variant_id" id="variantAcheterMaintenant" value="">
     <button type="submit" id="btnAcheterMaintenant" class="btn-custom"
         {% if total_stock == 0 %}disabled{% endif %}>
-  {{ _('Acheter maintenant') }}
-</button>
-  </form>
+        {{ _('Acheter maintenant') }}
+    </button>
+</form>
+
 
 </div>
 

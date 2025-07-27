@@ -117,6 +117,43 @@ body {
 .btn-order:hover {
     background-color: #218838;
 }
+
+/* Styles généraux */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Media Query pour les petits écrans (mobile) */
+  @media screen and (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+
+    .menu {
+      display: none; /* Par exemple, on cache le menu principal pour mobile */
+    }
+
+    .menu-mobile {
+      display: block; /* On montre un menu mobile */
+    }
+
+    .header {
+      text-align: center;
+    }
+  }
+
+  /* Media Query pour les écrans plus grands (tablette et plus) */
+  @media screen and (min-width: 769px) {
+    .menu {
+      display: block;
+    }
+
+    .menu-mobile {
+      display: none;
+    }
+  }
 </style>
 
 <div class="panier-container">
