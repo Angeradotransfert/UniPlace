@@ -743,7 +743,7 @@ def commander_panier():
             db.session.add(nouvelle_adresse)
             db.session.commit()
 
-    if payment_method not in ["usdt", "carte"]:
+    if payment_method not in ["usdt", "carte", "mobile_money_wave"]:
         flash(_("Mode de paiement invalide."), "danger")
         return redirect(url_for('main.recapitulatif_commande'))
 
@@ -843,9 +843,10 @@ def commander_panier():
     # ✅ Redirection simple sans passer de paramètre URL (inutile maintenant)
     if payment_method == "carte":
         return redirect(url_for('main.paiement_carte'))
-    else:
+    elif payment_method == "usdt":
         return redirect(url_for('main.paiement_crypto'))
-
+    else:  # mobile money
+        return redirect(url_for('main.paiement_mobile_money'))
 
 
 @main_bp.route('/annuler-commande/<int:order_id>', methods=["POST"])
@@ -909,7 +910,7 @@ def recapitulatif_commande():
         delivery_address = (new_address.strip() if new_address and new_address.strip()
                             else (existing_address.strip() if existing_address else None))
 
-        if payment_method not in ['carte', 'usdt']:
+        if payment_method not in ['carte', 'usdt', 'mobile_money_wave', 'mobile_money', 'wave']:
             flash(_("Mode de paiement invalide."), "danger")
             return redirect(url_for('main.recapitulatif_commande'))
 
@@ -940,7 +941,13 @@ def recapitulatif_commande():
             'delivery_address': delivery_address
         }
 
-        return redirect(url_for('main.paiement_carte' if payment_method == 'carte' else 'main.paiement_crypto'))
+        # Rediriger vers la page de paiement selon le mode choisi
+        if payment_method == 'carte':
+            return redirect(url_for('main.paiement_carte'))
+        elif payment_method == 'mobile_money_wave':
+            return redirect(url_for('main.paiement_mobile_money'))  # Redirection vers le paiement Mobile Money Wave
+        elif payment_method in ['usdt', 'mobile_money', 'wave']:
+            return redirect(url_for('main.paiement_crypto'))  # Redirection vers paiement Crypto ou autre
 
     subtotal_rub = sum(
         (get_prix_actuel(item.variant) if item.variant else get_prix_actuel(item.listing)) * item.quantity
@@ -1327,3 +1334,167 @@ def set_language():
     if lang in ['fr', 'en', 'ru']:
         session['lang'] = lang
     return redirect(request.referrer or url_for('index'))
+
+@main_bp.route('/paiement_mobile_money', methods=["GET", "POST"])
+@login_required
+def paiement_mobile_money():
+    order_info = session.get('order_info', {})
+    items_info = order_info.get('items', [])
+    delivery_method = order_info.get('delivery_method')
+    delivery_address = order_info.get('delivery_address')
+    order_id = order_info.get('order_id')
+
+    if not items_info or not delivery_method or not delivery_address or not order_id:
+        flash(_("Informations de commande manquantes."), "danger")
+        return redirect(url_for('main.recapitulatif_commande'))
+
+    subtotal = 0
+    total_livraison = 0
+    order_items_data = []
+
+    for info in items_info:
+        listing = Listing.query.get(info['listing_id'])
+        if not listing:
+            flash(_("Annonce introuvable."), "danger")
+            return redirect(url_for('main.recapitulatif_commande'))
+
+        variant = None
+        if info['variant_id']:
+            variant = ProductVariant.query.filter_by(id=info['variant_id'], listing_id=listing.id).first()
+            if not variant:
+                flash(_("Variante introuvable."), "danger")
+                return redirect(url_for('main.recapitulatif_commande'))
+
+        unit_price = get_prix_actuel(variant) if variant else get_prix_actuel(listing)
+        quantity = info['quantity']
+        delivery_fee = listing.delivery_fee or 0
+
+        subtotal += unit_price * quantity
+        total_livraison += delivery_fee * quantity
+
+        order_items_data.append({
+            'listing': listing,
+            'variant': variant,
+            'quantity': quantity,
+            'unit_price': unit_price
+        })
+
+    commission = round(subtotal * 0.10, 2)
+    total_rub = round(subtotal + total_livraison, 2)
+    taux = get_usdt_to_rub()
+    total_usdt = round(commission / taux, 2)
+
+    if request.method == "POST":
+        orange_number = request.form.get("orange_number")
+        orange_id = request.form.get("orange_id")
+        wave_number = request.form.get("wave_number")
+        wave_id = request.form.get("wave_id")
+
+        order = Order.query.get_or_404(order_id)
+        order.payment_method = "mobile_money_wave"
+        order.status = "en_attente"
+        order.delivery_method = delivery_method
+        order.delivery_address = delivery_address
+        order.orange_number = orange_number
+        order.orange_id = orange_id
+        order.wave_number = wave_number
+        order.wave_id = wave_id
+
+        order.total_rub = total_rub
+        order.total_delivery_fee = total_livraison
+        order.total_commission_rub = commission
+        order.total_usdt = total_usdt
+
+        OrderItem.query.filter_by(order_id=order.id).delete()
+
+        for item in order_items_data:
+            listing = item['listing']
+            variant = item['variant']
+            quantity = item['quantity']
+            unit_price = item['unit_price']
+
+            # Vérifier stock
+            if variant:
+                if variant.stock < quantity:
+                    flash(_("Stock insuffisant pour %(titre)s", titre=listing.title), "danger")
+                    return redirect(url_for('main.recapitulatif_commande'))
+                variant.stock -= quantity
+            else:
+                if listing.stock < quantity:
+                    flash(_("Stock insuffisant pour %(titre)s", titre=listing.title), "danger")
+                    return redirect(url_for('main.recapitulatif_commande'))
+                listing.stock -= quantity
+
+            order_item = OrderItem(
+                order_id=order.id,
+                listing_id=listing.id,
+                quantity=quantity,
+                unit_price=unit_price,
+                commission=round(unit_price * quantity * 0.10, 2),
+                seller_amount=round(unit_price * quantity * 0.90, 2),
+                variant_id=variant.id if variant else None
+            )
+            db.session.add(order_item)
+
+        db.session.commit()
+
+        # 📧 Email admin
+        envoyer_email(
+            destinataire="uniplace188@gmail.com",
+            sujet=_("📢 Nouvelle commande (paiement Mobile Money)"),
+            contenu_html=render_template(
+                "emails/commande_mobile_admin.html.j2",
+                titles=', '.join([item['listing'].title for item in order_items_data]),
+                username=current_user.username,
+                email=current_user.email,
+                orange_number=orange_number,
+                wave_number=wave_number
+            )
+        )
+
+        # 🔔 Telegram admin
+        envoyer_telegram(f"""
+        📢 <b>Commande Mobile Money</b>
+        🛒 Produits : {', '.join([item['listing'].title for item in order_items_data])}
+        👤 {current_user.username}
+        📬 Email : {current_user.email}
+        📱 Orange : {orange_number or 'non renseigné'}
+        🌊 Wave : {wave_number or 'non renseigné'}
+        🔗 <a href="{url_for('admin.admin_commandes_crypto', _external=True)}">Voir les commandes</a>
+        """)
+
+        # 📩 Email vendeurs
+        for item in order_items_data:
+            listing = item['listing']
+            envoyer_email(
+                destinataire=listing.user.email,
+                sujet=_("📦 Nouvelle commande reçue (Paiement Mobile Money)"),
+                contenu_html=render_template(
+                    "emails/commande_mobile_vendeur.html.j2",
+                    vendeur=listing.user,
+                    title=listing.title,
+                    delivery_method=delivery_method,
+                    delivery_address=delivery_address,
+                    acheteur=current_user
+                )
+            )
+            envoyer_notification(
+                listing.user.id,
+                f"Nouvelle commande pour « {listing.title} ».\nPaiement Mobile Money en attente."
+            )
+
+        # 🧹 Vider panier
+        CartItem.query.filter_by(user_id=current_user.id).delete()
+        db.session.commit()
+
+        flash(_("Commande enregistrée avec succès. Paiement Mobile Money en attente ✅"), "success")
+        return redirect(url_for('main.mes_achats'))
+
+    return render_template(
+        "paiement_mobile_money.html",
+        order_items=order_items_data,
+        delivery_method=delivery_method,
+        delivery_address=delivery_address,
+        commission=commission,
+        taux=taux
+    )

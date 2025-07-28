@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle commande Mobile Money</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px; color: #333;">
+    <h2>📢 Nouvelle commande (Paiement Mobile Money)</h2>
+
+    <p><strong>👤 Utilisateur :</strong> {{ username }} ({{ email }})</p>
+
+    <p><strong>🛒 Produits commandés :</strong> {{ titles }}</p>
+
+    <p><strong>📱 Numéro Orange :</strong> {{ orange_number or 'Non fourni' }}</p>
+    <p><strong>🌊 Numéro Wave :</strong> {{ wave_number or 'Non fourni' }}</p>
+
+    <p style="margin-top: 20px;">Rendez-vous sur l’interface admin pour consulter et valider la commande.</p>
+
+    <a href="{{ url_for('admin.admin_commandes_crypto', _external=True) }}" style="display: inline-block; padding: 10px 20px; background-color: #2c3e50; color: #fff; text-decoration: none; border-radius: 5px;">Voir la commande</a>
+</body>
+</html>

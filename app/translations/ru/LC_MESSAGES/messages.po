@@ -3441,3 +3441,57 @@ msgstr "мир"
 
 msgid "d'opportunités !"
 msgstr "возможностей!"
+
+msgid "📦 Commandes Mobile Money en attente"
+msgstr "📦 Ожидающие заказы через Mobile Money"
+
+msgid "Commande"
+msgstr "Заказ"
+
+msgid "En attente"
+msgstr "В ожидании"
+
+msgid "Client"
+msgstr "Клиент"
+
+msgid "Livraison"
+msgstr "Доставка"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Non disponible"
+msgstr "Недоступно"
+
+msgid "Montant total"
+msgstr "Общая сумма"
+
+msgid "Commission"
+msgstr "Комиссия"
+
+msgid "N/A"
+msgstr "Н/Д"
+
+msgid "Paiement Mobile"
+msgstr "Мобильный платеж"
+
+msgid "Orange Money"
+msgstr "Orange Money"
+
+msgid "Non fourni"
+msgstr "Не указано"
+
+msgid "Wave"
+msgstr "Wave"
+
+msgid "Produits"
+msgstr "Товары"
+
+msgid "Valider"
+msgstr "Подтвердить"
+
+msgid "Rejeter"
+msgstr "Отклонить"
+
+msgid "Aucune commande en attente."
+msgstr "Нет ожидающих заказов."

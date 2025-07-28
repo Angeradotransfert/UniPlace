@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-5">{{ _("📦 Commandes Mobile Money en attente") }}</h2>
+
+    {% if commandes %}
+        {% for commande in commandes %}
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">{{ _("Commande") }} #{{ commande.id }}</h5>
+                        <span class="badge bg-warning text-dark">{{ _("En attente") }}</span>
+                    </div>
+
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item"><strong>{{ _("Client") }} :</strong> {{ commande.buyer.username }} <span class="text-muted">({{ commande.buyer.email }})</span></li>
+                        <li class="list-group-item"><strong>{{ _("Livraison") }} :</strong> {{ commande.delivery_method }} – {{ commande.delivery_address }}</li>
+                        <li class="list-group-item">
+                            <strong>{{ _("Date") }} :</strong>
+                            {% if commande.created_at %}
+                                {{ commande.created_at.strftime('%d/%m/%Y %H:%M') }}
+                            {% else %}
+                                <span class="text-muted">{{ _("Non disponible") }}</span>
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item"><strong>{{ _("Montant total") }} :</strong> {{ commande.total_rub }} <span class="badge bg-primary">RUB</span></li>
+                        <li class="list-group-item">
+                            <strong>{{ _("Commission") }} :</strong>
+                            {{ (commande.total_commission_rub / commande.total_usdt) | round(2) if commande.total_usdt else _('N/A') }}
+                        </li>
+                    </ul>
+
+                    <div class="mt-4">
+                        <h6>📱 <strong>{{ _("Paiement Mobile") }}</strong></h6>
+                        <p><strong>{{ _("Orange Money") }} :</strong> {{ commande.orange_number or _('Non fourni') }} <small class="text-muted">/ ID : {{ commande.orange_id or '–' }}</small></p>
+                        <p><strong>{{ _("Wave") }} :</strong> {{ commande.wave_number or _('Non fourni') }} <small class="text-muted">/ ID : {{ commande.wave_id or '–' }}</small></p>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6>🛒 <strong>{{ _("Produits") }}</strong></h6>
+                        <ul class="list-group list-group-flush">
+                            {% for item in commande.items %}
+                                <li class="list-group-item">
+                                    {{ item.listing.title }} – {{ item.quantity }} × {{ item.unit_price }} RUB
+                                    {% if item.variant %}
+                                        <span class="text-muted">({{ item.variant.taille }} / {{ item.variant.couleur }})</span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <form method="POST" action="{{ url_for('admin.valider_commande_mobile', order_id=commande.id) }}" class="me-2">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-success">✅ {{ _("Valider") }}</button>
+                        </form>
+
+                        <form method="POST" action="{{ url_for('admin.refuser_commande_mobile', order_id=commande.id) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger">❌ {{ _("Rejeter") }}</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            {{ _("Aucune commande en attente.") }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

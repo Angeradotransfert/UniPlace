@@ -3453,3 +3453,56 @@ msgstr "un monde"
 msgid "d'opportunités !"
 msgstr "d'opportunités !"
 
+msgid "📦 Commandes Mobile Money en attente"
+msgstr "📦 Commandes Mobile Money en attente"
+
+msgid "Commande"
+msgstr "Commande"
+
+msgid "En attente"
+msgstr "En attente"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Livraison"
+msgstr "Livraison"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Non disponible"
+msgstr "Non disponible"
+
+msgid "Montant total"
+msgstr "Montant total"
+
+msgid "Commission"
+msgstr "Commission"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Paiement Mobile"
+msgstr "Paiement Mobile"
+
+msgid "Orange Money"
+msgstr "Orange Money"
+
+msgid "Non fourni"
+msgstr "Non fourni"
+
+msgid "Wave"
+msgstr "Wave"
+
+msgid "Produits"
+msgstr "Produits"
+
+msgid "Valider"
+msgstr "Valider"
+
+msgid "Rejeter"
+msgstr "Rejeter"
+
+msgid "Aucune commande en attente."
+msgstr "Aucune commande en attente."

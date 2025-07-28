@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle commande pour votre annonce</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 30px; color: #333;">
+    <h2>📦 Vous avez reçu une commande !</h2>
+
+    <p>Bonjour {{ vendeur.username }},</p>
+
+    <p>Votre annonce <strong>{{ title }}</strong> a été commandée par <strong>{{ acheteur.username }}</strong>.</p>
+
+    <p><strong>📬 Livraison :</strong><br>
+    Méthode : {{ delivery_method }}<br>
+    Adresse : {{ delivery_address }}</p>
+
+    <p style="margin-top: 20px; color: #c0392b;"><strong>⚠️ Le paiement a été effectué via Mobile Money et est en attente de validation.</strong></p>
+
+    <p>Connectez-vous à votre compte UniPlace pour suivre la commande et préparer l’expédition.</p>
+
+    <p style="margin-top: 30px;">—<br>L’équipe UniPlace</p>
+</body>
+</html>

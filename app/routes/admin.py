@@ -736,3 +736,37 @@ def confirmer_paiement_carte(order_id):
     flash(_("✅ Paiement confirmé, emails envoyés et articles marqués comme vendus."), "success")
     return redirect(url_for('admin.admin_commandes_carte'))
 
+@admin_bp.route('/commandes-mobile')
+@login_required
+def admin_commandes_mobile():
+    if not current_user.is_admin:
+        abort(403)
+    commandes = Order.query.filter_by(payment_method='mobile_money_wave', status='en_attente').order_by(Order.created_at.desc()).all()
+    return render_template('admin/commandes_mobile.html', commandes=commandes)
+
+@admin_bp.route('/valider-commande-mobile/<int:order_id>', methods=["POST"])
+@login_required
+@admin_required
+def valider_commande_mobile(order_id):
+    order = Order.query.get_or_404(order_id)
+    order.status = "en_attente_vendeur"  # ou "en_attente_livraison" selon ton flow
+    db.session.commit()
+
+    envoyer_notification(order.buyer.id, f"✅ Votre commande #{order.id} a été validée par l’administration.")
+    flash(f"Commande {order.id} validée ✅", "success")
+    return redirect(url_for("admin.admin_commandes_mobile"))
+
+
+@admin_bp.route('/refuser-commande-mobile/<int:order_id>', methods=["POST"])
+@login_required
+@admin_required
+def refuser_commande_mobile(order_id):
+    order = Order.query.get_or_404(order_id)
+    order.status = "annulée"
+    db.session.commit()
+
+    envoyer_notification(order.buyer.id, f"❌ Votre commande #{order.id} a été rejetée.")
+    flash(f"Commande {order.id} rejetée ❌", "warning")
+    return redirect(url_for("admin.admin_commandes_mobile"))
+
+

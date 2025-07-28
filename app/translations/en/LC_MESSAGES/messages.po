@@ -3436,5 +3436,57 @@ msgid "Demande de transport"
 msgstr "e.g., Looking for ride Saint Peter → Moscow this weekend"
 
 
+msgid "📦 Commandes Mobile Money en attente"
+msgstr "📦 Pending Mobile Money Orders"
 
+msgid "Commande"
+msgstr "Order"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Client"
+msgstr "Customer"
+
+msgid "Livraison"
+msgstr "Delivery"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Non disponible"
+msgstr "Not available"
+
+msgid "Montant total"
+msgstr "Total amount"
+
+msgid "Commission"
+msgstr "Commission"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Paiement Mobile"
+msgstr "Mobile Payment"
+
+msgid "Orange Money"
+msgstr "Orange Money"
+
+msgid "Non fourni"
+msgstr "Not provided"
+
+msgid "Wave"
+msgstr "Wave"
+
+msgid "Produits"
+msgstr "Products"
+
+msgid "Valider"
+msgstr "Approve"
+
+msgid "Rejeter"
+msgstr "Reject"
+
+msgid "Aucune commande en attente."
+msgstr "No pending orders."
 

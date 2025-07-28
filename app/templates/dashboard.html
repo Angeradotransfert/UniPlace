@@ -250,6 +250,13 @@ body {
     </a>
     {% endif %}
 
+    {% if current_user.is_admin %}
+    <a href="{{ url_for('admin.admin_commandes_mobile') }}" class="text-white bg-warning px-3 py-2 rounded d-block">
+    📱 Commandes Mobile Money
+</a>
+    {% endif %}
+
+
     <a href="{{ url_for('main.mes_achats') }}">🛒 {{ _('Mes achats') }}</a>
     <a href="{{ url_for('main.mes_ventes') }}">📦 {{ _('Mes ventes') }}</a>
     <li><a href="{{ url_for('main.mes_commandes') }}">🛒 {{ _('Mes commandes') }}</a>

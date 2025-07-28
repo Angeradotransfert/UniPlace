@@ -134,6 +134,12 @@ class Order(db.Model):
     total_commission_rub = db.Column(db.Float, default=0.0)  # frais à payer à UniPlace
     total_usdt = db.Column(db.Float, default=0.0)  # montant payé en USDT (correspond à la commission)
 
+    orange_number = db.Column(db.String(100), nullable=True)
+    orange_id = db.Column(db.String(100), nullable=True)
+    wave_number = db.Column(db.String(100), nullable=True)
+    wave_id = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
     buyer = db.relationship("User", backref="orders")
 
     # ✅ Maintenant une commande peut avoir plusieurs produits via OrderItem
@@ -356,3 +362,4 @@ class BannerForm(FlaskForm):
     image = FileField('Image de la bannière', validators=[DataRequired()])
     is_active = BooleanField('Activer la bannière', default=True)
     submit = SubmitField('Sauvegarder')
+

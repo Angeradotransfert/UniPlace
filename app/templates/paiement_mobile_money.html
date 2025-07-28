@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="max-width: 800px; margin: auto; padding: 40px 20px; font-family: 'Baloo 2', cursive;">
+    <h2 style="text-align: center; color: #2c3e50;">💳 {{ _('Paiement Mobile Money') }}</h2>
+
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        {% if order_items %}
+        {% for item in order_items %}
+            <div style="background: #ffffff; padding: 30px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-top: 25px;">
+                <p><strong>{{ _('Produit') }} :</strong> {{ item.listing.title }}</p>
+
+                {% if item.variant %}
+                    <p><strong>{{ _('Variante') }} :</strong> {{ item.variant.taille or '' }} {{ item.variant.couleur or '' }}</p>
+                {% endif %}
+
+                <p><strong>{{ _('Quantité') }} :</strong> {{ item.quantity }}</p>
+
+                <p><strong>{{ _('Prix') }} :</strong> {{ item.unit_price }} RUB (~{{ (item.unit_price / taux) | round(2) }} USDT)</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <div style="background: #fffaf3; padding: 30px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.04); margin-top: 30px;">
+            <p><strong>💸 {{ _('Frais de confirmation à payer maintenant') }} :</strong>
+                <span style="color: #e67e22; font-weight: bold;">
+                    {{ commission }} RUB (~{{ commission / taux | round(2) }} USDT)
+                </span>
+            </p>
+
+            <p style="color: #c0392b; font-style: italic;">
+                ⚠️ {{ _('Le reste du paiement sera effectué directement avec le vendeur après contact.') }}
+            </p>
+
+            <hr style="margin: 25px 0;">
+
+            <p>{{ _('Veuillez effectuer un virement de') }} <strong>{{ commission }} RUB (~{{ (commission / taux) | round(2) }} USDT)</strong> sur <strong>{{ _('l’un des comptes Mobile Money suivants') }}</strong> :</p>
+
+            <!-- Section Orange Money -->
+<div style="background: #eef7ff; padding: 15px; border-radius: 10px; border-left: 5px solid #007bff; margin-bottom: 20px;">
+    <h3 style="margin: 0 0 10px;">📱 {{ _('Orange Money') }}</h3>
+    <p><strong>{{ _('Numéro Orange Money') }}:</strong> +225 07 16 65 10 33</p>
+    <p><strong>{{ _('Nom du titulaire') }}:</strong> Ode Karimatou</p>
+</div>
+
+<!-- Section Wave -->
+<div style="background: #fff6e5; padding: 15px; border-radius: 10px; border-left: 5px solid #ff9800;">
+    <h3 style="margin: 0 0 10px;">📱 {{ _('Wave') }}</h3>
+    <p><strong>{{ _('Numéro Wave') }}:</strong> +225 07 16 65 10 33</p>
+    <p><strong>{{ _('Nom du titulaire') }}:</strong> Ode Karimatou</p>
+</div>
+
+
+            <p style="margin-top: 20px;"><strong>📋 {{ _('Référence à indiquer') }} :</strong> {{ order_items[0].listing.title }} - UniPlace</p>
+
+            <hr style="margin: 25px 0;">
+            <p><strong>🚚 {{ _('Méthode de livraison') }} :</strong> {{ delivery_method }}</p>
+            <p><strong>📬 Adresse de livraison :</strong><br>{{ delivery_address }}</p>
+        </div>
+
+        <div style="text-align: center;">
+            <button type="submit" style="margin-top: 25px; background-color: #28a745; color: white; padding: 12px 24px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                ✅ {{ _('J’ai payé') }}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

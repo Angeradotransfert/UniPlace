@@ -251,12 +251,14 @@
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
     <div class="mb-3">
-      <label for="payment_method">💳 {{ _('Choisissez votre mode de paiement') }} :</label>
-      <select class="form-select" name="payment_method" required>
-        <option value="usdt">💸 {{ _('USDT') }}</option>
-        <option value="carte">💳 {{ _('Carte bancaire') }}</option>
-      </select>
-    </div>
+  <label for="payment_method">💳 {{ _('Choisissez votre mode de paiement') }} :</label>
+  <select class="form-select" name="payment_method" required>
+    <option value="usdt">💸 {{ _('USDT') }}</option>
+    <option value="carte">💳 {{ _('Carte bancaire') }}</option>
+    <option value="mobile_money_wave">💸 {{ _('Mobile Money / 📱 Wave') }}</option>
+  </select>
+</div>
+
 
     <div class="mb-3">
       <label for="delivery_method">🚚 {{ _('Méthode de livraison') }} :</label>
