@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(200), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     email_confirmed = db.Column(db.Boolean, default=False)
+    currency = db.Column(db.String(5), nullable=True, default='RUB')
 
 
     # 🔐 Infos pour paiements
@@ -215,7 +216,7 @@ class Signalement(db.Model):
 
 class AdresseLivraison(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    utilisateur_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    utilisateur_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     adresse = db.Column(db.Text, nullable=False)
     date_ajout = db.Column(db.DateTime, default=datetime.utcnow)
 

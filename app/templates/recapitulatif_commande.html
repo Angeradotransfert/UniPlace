@@ -210,13 +210,44 @@
 {% endif %}
 
 {% if promo_price != original_price %}
-  <span style="text-decoration: line-through; color: #999;">{{ original_price }} RUB</span>
-  <br>
-  <strong style="color: #e67e22;">{{ promo_price }} RUB</strong>
+  {% if current_user.currency == 'USD' %}
+    <span style="text-decoration: line-through; color: #999;">{{ original_price / taux_usdt | round(2) }} USD</span>
+    <br>
+    <strong style="color: #e67e22;">{{ promo_price / taux_usdt | round(2) }} USD</strong>
+  {% elif current_user.currency == 'EUR' %}
+    <span style="text-decoration: line-through; color: #999;">{{ original_price / taux_eur | round(2) }} EUR</span>
+    <br>
+    <strong style="color: #e67e22;">{{ promo_price / taux_eur | round(2) }} EUR</strong>
+  {% elif current_user.currency == 'CFA' %}
+    <span style="text-decoration: line-through; color: #999;">{{ original_price / taux_cfa | round(2) }} CFA</span>
+    <br>
+    <strong style="color: #e67e22;">{{ promo_price / taux_cfa | round(2) }} CFA</strong>
+  {% else %}
+    <span style="text-decoration: line-through; color: #999;">{{ original_price }} ₽</span>
+    <br>
+    <strong style="color: #e67e22;">{{ promo_price }} ₽</strong>
+  {% endif %}
 {% else %}
-  {{ promo_price }} RUB
+  {% if current_user.currency == 'USD' %}
+    {{ promo_price / taux_usdt | round(2) }} USD
+  {% elif current_user.currency == 'EUR' %}
+    {{ promo_price / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ promo_price / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ promo_price }} ₽
+  {% endif %}
 {% endif %}
-(~ {{ (promo_price / taux) | round(2) }} {{ devise }})<br>
+(~ {% if current_user.currency == 'USD' %}
+  {{ promo_price / taux_usdt | round(2) }} USDT
+{% elif current_user.currency == 'EUR' %}
+  {{ promo_price / taux_eur | round(2) }} EUR
+{% elif current_user.currency == 'CFA' %}
+  {{ promo_price / taux_cfa | round(2) }} CFA
+{% else %}
+  {{ promo_price }} ₽
+{% endif %})
+
 
   <strong>🚚 {{ _('Livraison unitaire') }} :</strong> {{ item.delivery_fee }} RUB (~ {{ (item.delivery_fee / taux) | round(2) }} {{ devise }})<br>
   <strong>📦 {{ _('Quantité') }} :</strong> {{ item.quantity }}<br>
@@ -232,9 +263,69 @@
 
   <div class="total-section">
   <h4>💰 {{ _('Détail de votre commande') }} :</h4>
-  <p><strong>{{ _('Montant total produit') }} :</strong> {{ subtotal_rub }} RUB (~ {{ (subtotal_rub / taux) | round(2) }} {{ devise }})</p>
-  <p><strong>+ {{ _('Livraison') }} :</strong> {{ total_livraison }} RUB (~ {{ (total_livraison / taux) | round(2) }} {{ devise }})</p>
-  <p><strong>= {{ _('Montant total') }} :</strong> {{ subtotal_rub + total_livraison }} RUB (~ {{ ((subtotal_rub + total_livraison) / taux) | round(2) }} {{ devise }})</p>
+ <p><strong>{{ _('Montant total produit') }} :</strong>
+  {% if current_user.currency == 'USD' %}
+    {{ subtotal_rub / taux_usdt | round(2) }} USD
+  {% elif current_user.currency == 'EUR' %}
+    {{ subtotal_rub / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ subtotal_rub / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ subtotal_rub }} ₽
+  {% endif %}
+  (~ {% if current_user.currency == 'USD' %}
+    {{ subtotal_rub / taux_usdt | round(2) }} USDT
+  {% elif current_user.currency == 'EUR' %}
+    {{ subtotal_rub / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ subtotal_rub / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ subtotal_rub }} ₽
+  {% endif %})
+</p>
+
+<p><strong>+ {{ _('Livraison') }} :</strong>
+  {% if current_user.currency == 'USD' %}
+    {{ total_livraison / taux_usdt | round(2) }} USD
+  {% elif current_user.currency == 'EUR' %}
+    {{ total_livraison / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ total_livraison / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ total_livraison }} ₽
+  {% endif %}
+  (~ {% if current_user.currency == 'USD' %}
+    {{ total_livraison / taux_usdt | round(2) }} USDT
+  {% elif current_user.currency == 'EUR' %}
+    {{ total_livraison / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ total_livraison / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ total_livraison }} ₽
+  {% endif %})
+</p>
+
+<p><strong>= {{ _('Montant total') }} :</strong>
+  {% if current_user.currency == 'USD' %}
+    {{ (subtotal_rub + total_livraison) / taux_usdt | round(2) }} USD
+  {% elif current_user.currency == 'EUR' %}
+    {{ (subtotal_rub + total_livraison) / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ (subtotal_rub + total_livraison) / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ subtotal_rub + total_livraison }} ₽
+  {% endif %}
+  (~ {% if current_user.currency == 'USD' %}
+    {{ (subtotal_rub + total_livraison) / taux_usdt | round(2) }} USDT
+  {% elif current_user.currency == 'EUR' %}
+    {{ (subtotal_rub + total_livraison) / taux_eur | round(2) }} EUR
+  {% elif current_user.currency == 'CFA' %}
+    {{ (subtotal_rub + total_livraison) / taux_cfa | round(2) }} CFA
+  {% else %}
+    {{ subtotal_rub + total_livraison }} ₽
+  {% endif %})
+</p>
+
 
   <hr>
 
