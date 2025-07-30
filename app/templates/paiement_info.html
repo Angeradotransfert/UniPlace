@@ -131,7 +131,7 @@
         <input type="hidden" name="action" value="update">
 
         <label for="usdt_address">{{ _('Adresse USDT (TRC20) :') }}</label>
-        <input type="text" name="usdt_address" id="usdt_address" value="{{ current_user.usdt_address or '' }}" required>
+        <input type="text" name="usdt_address" id="usdt_address" value="{{ current_user.usdt_address or '' }}">
 
         <label for="bank_name">{{ _('Nom de la banque :') }}</label>
         <input type="text" name="bank_name" id="bank_name" value="{{ current_user.bank_name or '' }}">
@@ -141,6 +141,16 @@
 
         <label for="card_holder">{{ _('Nom sur la carte :') }}</label>
         <input type="text" name="card_holder" id="card_holder" value="{{ current_user.card_holder or '' }}">
+
+         <!-- Ajout des informations de Mobile Money -->
+        <label for="mobile_money_number">{{ _('Numéro Orange Money :') }}</label>
+        <input type="text" name="mobile_money_number" id="mobile_money_number" value="{{ current_user.mobile_money_number or '' }}">
+
+        <label for="mobile_money_holder">{{ _('Nom titulaire Orange Money :') }}</label>
+        <input type="text" name="mobile_money_holder" id="mobile_money_holder" value="{{ current_user.mobile_money_holder or '' }}">
+
+        <label for="wave_number">{{ _('Numéro Wave :') }}</label>
+        <input type="text" name="wave_number" id="wave_number" value="{{ current_user.wave_number or '' }}">
 
         <div class="btn-group">
             <button type="submit" class="btn-submit">💾 {{ _('Enregistrer') }}</button>

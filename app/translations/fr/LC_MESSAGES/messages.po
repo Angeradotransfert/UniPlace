@@ -3506,3 +3506,60 @@ msgstr "Rejeter"
 
 msgid "Aucune commande en attente."
 msgstr "Aucune commande en attente."
+
+msgid "Vos informations de paiement (visibles après commande)"
+msgstr "Vos informations de paiement (visibles après commande)"
+
+msgid "Ces informations seront transmises à l'acheteur uniquement"
+msgstr "Ces informations seront transmises à l'acheteur uniquement"
+
+msgid "après paiement de la commission"
+msgstr "après paiement de la commission"
+
+msgid "afin qu'il puisse vous régler directement"
+msgstr "afin qu'il puisse vous régler directement"
+
+msgid "Adresse USDT (TRC20)"
+msgstr "Adresse USDT (TRC20)"
+
+msgid "Adresse TRC20"
+msgstr "Adresse TRC20"
+
+msgid "Informations Bancaires"
+msgstr "Informations Bancaires"
+
+msgid "Nom de la banque (Ex: Sberbank, Tinkoff, Vtb)"
+msgstr "Nom de la banque (Ex: Sberbank, Tinkoff, Vtb)"
+
+msgid "Numéro de la carte bancaire (Ex: XXXX XXXX XXXX XXXX)"
+msgstr "Numéro de la carte bancaire (Ex: XXXX XXXX XXXX XXXX)"
+
+msgid "Nom sur la carte"
+msgstr "Nom sur la carte"
+
+msgid "Informations Mobile Money"
+msgstr "Informations Mobile Money"
+
+msgid "Orange Money"
+msgstr "Orange Money"
+
+msgid "Numéro Orange Money (Ex: +225 07 00 00 00 00)"
+msgstr "Numéro Orange Money (Ex: +225 07 00 00 00 00)"
+
+msgid "Nom du titulaire Compte (Ex: TOURE ISMAEL)"
+msgstr "Nom du titulaire Compte (Ex: TOURE ISMAEL)"
+
+msgid "Wave"
+msgstr "Wave"
+
+msgid "Numéro Wave (Ex: +225 07 00 00 00 00)"
+msgstr "Numéro Wave (Ex: +225 07 00 00 00 00)"
+
+msgid "Nom du titulaire Wave (Ex: TOURE ISMAEL)"
+msgstr "Nom du titulaire Wave (Ex: TOURE ISMAEL)"
+
+msgid "Enregistrer toutes les infos"
+msgstr "Enregistrer toutes les infos"
+
+msgid "Supprimer toutes les infos"
+msgstr "Supprimer toutes les infos"

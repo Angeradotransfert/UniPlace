@@ -3495,3 +3495,60 @@ msgstr "Отклонить"
 
 msgid "Aucune commande en attente."
 msgstr "Нет ожидающих заказов."
+
+msgid "Vos informations de paiement (visibles après commande)"
+msgstr "Ваша платёжная информация (доступна после заказа)"
+
+msgid "Ces informations seront transmises à l'acheteur uniquement"
+msgstr "Эта информация будет передана покупателю только"
+
+msgid "après paiement de la commission"
+msgstr "после оплаты комиссии"
+
+msgid "afin qu'il puisse vous régler directement"
+msgstr "чтобы он мог оплатить вам напрямую"
+
+msgid "Adresse USDT (TRC20)"
+msgstr "Адрес USDT (TRC20)"
+
+msgid "Adresse TRC20"
+msgstr "Адрес TRC20"
+
+msgid "Informations Bancaires"
+msgstr "Банковская информация"
+
+msgid "Nom de la banque (Ex: Sberbank, Tinkoff, Vtb)"
+msgstr "Название банка (напр.: Сбербанк, Тинькофф, ВТБ)"
+
+msgid "Numéro de la carte bancaire (Ex: XXXX XXXX XXXX XXXX)"
+msgstr "Номер карты (напр.: XXXX XXXX XXXX XXXX)"
+
+msgid "Nom sur la carte"
+msgstr "Имя на карте"
+
+msgid "Informations Mobile Money"
+msgstr "Информация о мобильных платежах"
+
+msgid "Orange Money"
+msgstr "Orange Money"
+
+msgid "Numéro Orange Money (Ex: +225 07 00 00 00 00)"
+msgstr "Номер Orange Money (напр.: +225 07 00 00 00 00)"
+
+msgid "Nom du titulaire Compte (Ex: TOURE ISMAEL)"
+msgstr "Имя владельца счета (напр.: TOURE ISMAEL)"
+
+msgid "Wave"
+msgstr "Wave"
+
+msgid "Numéro Wave (Ex: +225 07 00 00 00 00)"
+msgstr "Номер Wave (напр.: +225 07 00 00 00 00)"
+
+msgid "Nom du titulaire Wave (Ex: TOURE ISMAEL)"
+msgstr "Имя владельца Wave (напр.: TOURE ISMAEL)"
+
+msgid "Enregistrer toutes les infos"
+msgstr "Сохранить всю информацию"
+
+msgid "Supprimer toutes les infos"
+msgstr "Удалить всю информацию"

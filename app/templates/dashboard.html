@@ -202,6 +202,40 @@ body {
     }
   }
 
+  .btn-action {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-action:hover {
+  transform: scale(1.03);
+}
+
+.btn-enregistrer {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-enregistrer:hover {
+  background-color: #218838;
+}
+
+.btn-supprimer {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-supprimer:hover {
+  background-color: #c82333;
+}
+
+
 
 </style>
 
@@ -384,41 +418,70 @@ body {
 
     <h3>💳 {{ _('Vos informations de paiement (visibles après commande)') }}</h3>
 
-
-    <p style="font-size: 14px; color: #555; margin-bottom: 10px;">
-{{ _("Ces informations seront transmises à l'acheteur uniquement") }} <strong>{{ _('après paiement de la commission') }}</strong>, {{ _("afin qu'il puisse vous régler directement") }}.
+<p style="font-size: 14px; color: #555; margin-bottom: 10px;">
+  {{ _("Ces informations seront transmises à l'acheteur uniquement") }}
+  <strong>{{ _('après paiement de la commission') }}</strong>,
+  {{ _("afin qu'il puisse vous régler directement") }}.
 </p>
 
+<form method="POST" action="{{ url_for('main.paiement_info') }}" style="margin-top: 25px;">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-<form method="POST" action="{{ url_for('main.update_usdt_address') }}" style="margin-top: 25px;">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <label for="usdt_address">💰 {{ _('Adresse USDT (TRC20) pour recevoir les paiements') }} :</label><br>
-    <input type="text" name="usdt_address" value="{{ current_user.usdt_address or '' }}" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;" required>
-    <button type="submit" style="margin-top: 10px; background-color: #28a745; color: white; padding: 10px 18px; border: none; border-radius: 8px;">
-        💾 {{ _('Enregistrer') }}
+  <h3>💰 {{ _('Adresse USDT (TRC20)') }}</h3>
+  <input type="text" name="usdt_address"
+         placeholder="{{ _('Adresse TRC20') }}"
+         value="{{ current_user.usdt_address or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+
+  <h3>🏦 {{ _('Informations Bancaires') }}</h3>
+  <input type="text" name="bank_name"
+         placeholder="{{ _('Nom de la banque (Ex: Sberbank, Tinkoff, Vtb)') }}"
+         value="{{ current_user.bank_name or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+  <input type="text" name="card_number"
+         placeholder="{{ _('Numéro de la carte bancaire (Ex: XXXX XXXX XXXX XXXX)') }}"
+         maxlength="19"
+         value="{{ current_user.card_number or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+  <input type="text" name="card_holder"
+         placeholder="{{ _('Nom sur la carte') }}"
+         value="{{ current_user.card_holder or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+
+  <h3>📱 {{ _('Informations Mobile Money') }}</h3>
+
+  <h3>📱 {{ _('Orange Money') }}</h3>
+  <input type="text" name="mobile_money_number"
+         placeholder="{{ _('Numéro Orange Money (Ex: +225 07 00 00 00 00)') }}"
+         value="{{ current_user.mobile_money_number or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+  <input type="text" name="mobile_money_holder"
+         placeholder="{{ _('Nom du titulaire Compte (Ex: TOURE ISMAEL)') }}"
+         value="{{ current_user.mobile_money_holder or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+
+  <h3>🌊 {{ _('Wave') }}</h3>
+  <input type="text" name="wave_number"
+         placeholder="{{ _('Numéro Wave (Ex: +225 07 00 00 00 00)') }}"
+         value="{{ current_user.wave_number or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+  <input type="text" name="wave_holder"
+         placeholder="{{ _('Nom du titulaire Wave (Ex: TOURE ISMAEL)') }}"
+         value="{{ current_user.wave_holder or '' }}"
+         style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;">
+
+  <div style="margin-top: 20px;">
+    <button type="submit" name="action" value="update" class="btn-action btn-enregistrer" style="margin-right: 10px;">
+      💾 {{ _('Enregistrer toutes les infos') }}
     </button>
+
+    <button type="submit" name="action" value="delete" class="btn-action btn-supprimer">
+      🗑 {{ _('Supprimer toutes les infos') }}
+    </button>
+  </div>
 </form>
 
-<div class="bank-info-card">
 
-    <h3>💳 {{ _('Informations pour virement bancaire') }}</h3>
-
-    <form method="POST" action="{{ url_for('main.update_bank_info') }}">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <label for="bank_name">🏦 {{ _('Nom de la banque') }} :</label>
-    <input type="text" name="bank_name" id="bank_name" placeholder="{{ _('Ex : Tinkoff, Sberbank...') }}"> value="{{ current_user.bank_name or '' }}" required>
-
-    <label for="card_number">💳 {{ _('Numéro de carte bancaire') }}  :</label>
-    <input type="text" name="card_number" id="card_number" placeholder="XXXX XXXX XXXX XXXX" pattern="\d{4} \d{4} \d{4} \d{4}" maxlength="19" value="{{ current_user.card_number or '' }}" required>
-
-    <label for="card_holder">👤 {{ _('Nom complet sur la carte') }} :</label>
-    <input type="text" name="card_holder" id="card_holder" placeholder="{{ _('ISAMAEL KONÉ') }}" value="{{ current_user.card_holder or '' }}" required>
-
-    <button type="submit">💾 {{ _('Enregistrer mes infos bancaires') }}</button>
-</form>
-</div>
-
-</div>
 {% endif %}
 <!-- ✅ JS -->
 <script>

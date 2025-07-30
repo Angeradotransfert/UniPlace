@@ -77,24 +77,32 @@
                             {% endif %}
                         </p>
 
+
                         {% if order.status == 'paid' and item.listing.user and item.listing.user.id not in displayed_vendors %}
-                        <div style="margin-top: 15px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; background-color: #f8f9fa;">
-                            <h4 style="margin-bottom: 10px;">{{ _('📞 Coordonnées du vendeur') }}</h4>
-                            {% if item.listing.user.usdt_address %}
-                                <p><strong>{{ _('🪙 Adresse USDT (TRC20)') }} :</strong> {{ item.listing.user.usdt_address }}</p>
-                            {% endif %}
-                            {% if item.listing.user.bank_name and item.listing.user.card_number and item.listing.user.card_holder %}
-                                <p><strong>{{ _('🏦 Banque') }} :</strong> {{ item.listing.user.bank_name }}</p>
-                                <p><strong>{{ _('💳 Numéro carte') }}:</strong> {{ item.listing.user.card_number }}</p>
-                                <p><strong>{{ _('👤 Titulaire') }} :</strong> {{ item.listing.user.card_holder }}</p>
-                            {% endif %}
-                            <a href="{{ url_for('messaging.send_message', user_id=item.listing.user.id) }}"
-                               style="display: inline-block; margin-top: 10px; padding: 8px 14px; background-color: #007BFF; color: white; border-radius: 8px; text-decoration: none;">
-                               📩 {{ _('Contacter le vendeur') }}
-                            </a>
-                        </div>
-                        {% do displayed_vendors.append(item.listing.user.id) %}
-                        {% endif %}
+<div style="margin-top: 15px; padding: 15px; border: 1px solid #ccc; border-radius: 10px; background-color: #f8f9fa;">
+    <h4 style="margin-bottom: 10px;">{{ _('📞 Coordonnées du vendeur') }}</h4>
+
+    {% if order.payment_method == 'usdt' %}
+        <p><strong>{{ _('🪙 Adresse USDT (TRC20)') }} :</strong> {{ item.listing.user.usdt_address or _('Non fournie') }}</p>
+    {% elif order.payment_method == 'carte' %}
+        <p><strong>{{ _('🏦 Banque') }} :</strong> {{ item.listing.user.bank_name or _('Non fournie') }}</p>
+        <p><strong>{{ _('💳 Numéro carte') }} :</strong> {{ item.listing.user.card_number or _('Non fourni') }}</p>
+        <p><strong>{{ _('👤 Titulaire') }} :</strong> {{ item.listing.user.card_holder or _('Non fourni') }}</p>
+    {% elif order.payment_method == 'mobile_money' %}
+        <p><strong>{{ _('📱 Orange Money') }} :</strong> {{ item.listing.user.mobile_money_number or _('Non fourni') }} – {{ item.listing.user.mobile_money_holder or _('Titulaire inconnu') }}</p>
+        <p><strong>{{ _('🌊 Wave') }} :</strong> {{ item.listing.user.wave_number or _('Non fourni') }} – {{ item.listing.user.wave_holder or _('Titulaire inconnu') }}</p>
+    {% else %}
+        <p>{{ _('Aucune information de paiement disponible.') }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('messaging.send_message', user_id=item.listing.user.id) }}"
+       style="display: inline-block; margin-top: 10px; padding: 8px 14px; background-color: #007BFF; color: white; border-radius: 8px; text-decoration: none;">
+       📩 {{ _('Contacter le vendeur') }}
+    </a>
+</div>
+{% do displayed_vendors.append(item.listing.user.id) %}
+{% endif %}
+
 
                         <p><strong>{{ _('📍 Ville') }} :</strong> {{ item.listing.city }}</p>
                         <p><strong>{{ _('📦 Catégorie') }} :</strong> {{ item.listing.category }} – {{ item.listing.subcategory }}</p>
@@ -104,6 +112,8 @@
                                 💸 {{ _('USDT') }}
                             {% elif order.payment_method == 'carte' %}
                                 💳  {{ _('Carte bancaire') }}
+                            {% elif order.payment_method == 'mobile_money' %}
+                                💳  {{ _('mobile_money') }}
                             {% else %}
                                 ❓ {{ _('Inconnu') }}
                             {% endif %}

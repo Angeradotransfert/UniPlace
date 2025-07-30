@@ -18,6 +18,12 @@ class User(UserMixin, db.Model):
     card_number = db.Column(db.String(50), nullable=True)
     card_holder = db.Column(db.String(100), nullable=True)
 
+    # 💰 Informations Mobile Money
+    mobile_money_number = db.Column(db.String(100), nullable=True)
+    mobile_money_holder = db.Column(db.String(100), nullable=True)
+    wave_number = db.Column(db.String(100), nullable=True)
+    wave_holder = db.Column(db.String(100), nullable=True)
+
     # 💬 Relations (définies via backref dans les autres modèles)
     # Plus besoin de déclarer notifications, listings ici directement
 

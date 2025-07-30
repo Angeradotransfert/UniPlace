@@ -1106,33 +1106,64 @@ def vendeur_update_tracking(order_id):
 def paiement_info():
     if request.method == 'POST':
         action = request.form.get('action')
+
         if action == 'update':
+            # Récupération des informations de paiement
             usdt_address = request.form.get('usdt_address')
             bank_name = request.form.get('bank_name')
             card_number = request.form.get('card_number')
             card_holder = request.form.get('card_holder')
 
+            # Récupération des informations Mobile Money
+            mobile_money_number = request.form.get('mobile_money_number')
+            mobile_money_holder = request.form.get('mobile_money_holder')
+            wave_number = request.form.get('wave_number')
+            wave_holder = request.form.get('wave_holder')
+
+            # Mise à jour des informations de l'utilisateur
             current_user.usdt_address = usdt_address
             current_user.bank_name = bank_name
             current_user.card_number = card_number
             current_user.card_holder = card_holder
 
+            # Mise à jour des informations Mobile Money
+            current_user.mobile_money_number = mobile_money_number
+            current_user.mobile_money_holder = mobile_money_holder
+            current_user.wave_number = wave_number
+            current_user.wave_holder = wave_holder
+
+            # Enregistrer les modifications dans la base de données
             db.session.commit()
+
+            # Force la mise à jour de l'objet user dans la session
+            db.session.refresh(current_user)
+
             flash(_("Infos de paiement mises à jour ✅"), "success")
 
         elif action == 'delete':
+            # Suppression des informations de paiement
             current_user.usdt_address = None
             current_user.bank_name = None
             current_user.card_number = None
             current_user.card_holder = None
 
-            db.session.commit()
-            flash(_("Infos de paiement mises à jour ✅"), "success")
+            # Suppression des informations Mobile Money
+            current_user.mobile_money_number = None
+            current_user.mobile_money_holder = None
+            current_user.wave_number = None
+            current_user.wave_holder = None
 
-        return redirect(url_for('paiement_info'))
+            # Enregistrer la suppression dans la base de données
+            db.session.commit()
+
+            flash(_("Infos de paiement supprimées ✅"), "success")
+
+        return redirect(url_for('main.paiement_info'))  # Rediriger vers la même page après l'action
 
     # GET request : afficher la page avec formulaire
     return render_template('paiement_info.html')
+
+
 
 from flask import make_response
 
@@ -1498,3 +1529,17 @@ def paiement_mobile_money():
         commission=commission,
         taux=taux
     )
+
+@main_bp.route('/update_mobile_money', methods=['POST'])
+@login_required
+def update_mobile_money():
+    current_user.mobile_money_number = request.form.get('mobile_money_number')
+    current_user.mobile_money_holder = request.form.get('mobile_money_holder')
+    current_user.wave_number = request.form.get('wave_number')
+    current_user.wave_holder = request.form.get('wave_holder')
+
+    db.session.commit()
+    flash(_("💾 Informations Mobile Money mises à jour avec succès !"), "success")
+    return redirect(url_for('main.dashboard'))
+
+

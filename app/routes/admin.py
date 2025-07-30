@@ -744,17 +744,89 @@ def admin_commandes_mobile():
     commandes = Order.query.filter_by(payment_method='mobile_money_wave', status='en_attente').order_by(Order.created_at.desc()).all()
     return render_template('admin/commandes_mobile.html', commandes=commandes)
 
-@admin_bp.route('/valider-commande-mobile/<int:order_id>', methods=["POST"])
+@admin_bp.route("/valider-commande-mobile/<int:order_id>", methods=["POST"])
 @login_required
-@admin_required
 def valider_commande_mobile(order_id):
-    order = Order.query.get_or_404(order_id)
-    order.status = "en_attente_vendeur"  # ou "en_attente_livraison" selon ton flow
+    if not current_user.is_admin:
+        return redirect(url_for('main.index'))
+
+    commande = Order.query.get_or_404(order_id)
+    commande.status = 'paid'
+    commande.payment_method = 'mobile_money'  # 🔥 Ajoute cette ligne
+
+    buyer = commande.buyer
+    buyer_email = buyer.email
+    delivery_address = commande.delivery_address or "Non précisée"
+    delivery_method = commande.delivery_method or "Non précisé"
+
+    # 🔹 Regrouper les articles par vendeur
+    vendeurs = {}
+    for item in commande.items:
+        vendeur = item.listing.user
+        if vendeur.id not in vendeurs:
+            vendeurs[vendeur.id] = {
+                "vendeur": vendeur,
+                "articles": []
+            }
+        vendeurs[vendeur.id]["articles"].append(item)
+
+        # ✅ Notification vendeur
+        envoyer_notification(
+            vendeur.id,
+            f"Le paiement de l’annonce « {item.listing.title} » a été confirmé. Contacter l'acheteur."
+        )
+
+        # ✅ Marquer comme vendu si nécessaire
+        if item.variant:
+            if item.variant.stock <= 0:
+                item.variant.is_sold = True
+                if all(v.stock <= 0 for v in item.listing.variants):
+                    item.listing.is_sold = True
+                    item.listing.status = "vendu"
+        else:
+            if item.listing.stock <= 0:
+                item.listing.is_sold = True
+                item.listing.status = "vendu"
+
     db.session.commit()
 
-    envoyer_notification(order.buyer.id, f"✅ Votre commande #{order.id} a été validée par l’administration.")
-    flash(f"Commande {order.id} validée ✅", "success")
-    return redirect(url_for("admin.admin_commandes_mobile"))
+    # ✉️ Email à chaque vendeur
+    for vendeur_data in vendeurs.values():
+        vendeur = vendeur_data["vendeur"]
+        envoyer_email(
+            destinataire=vendeur.email,
+            sujet=_("💰 Paiement confirmé pour votre commande"),
+            contenu_html=render_template(
+                "emails/paiement_confirme_vendeur.html.j2",
+                vendeur=vendeur,
+                buyer=buyer,
+                articles=vendeur_data["articles"],
+                delivery_address=delivery_address,
+                delivery_method=delivery_method
+            )
+        )
+
+    # ✅ Notification acheteur
+    envoyer_notification(
+        buyer.id,
+        _("Votre paiement Mobile Money a été confirmé ✅. Le vendeur vous contactera bientôt.")
+    )
+
+    # ✉️ Email acheteur
+    envoyer_email(
+        destinataire=buyer_email,
+        sujet=_("✅ Paiement confirmé – Le vendeur vous contactera bientôt"),
+        contenu_html=render_template(
+            "emails/paiement_confirme_acheteur.html.j2",
+            buyer=buyer,
+            commande=commande
+        )
+    )
+
+    flash(_("✅ Paiement Mobile Money confirmé, notifications envoyées."), "success")
+    return redirect(url_for('admin.admin_commandes_mobile'))
+
+
 
 
 @admin_bp.route('/refuser-commande-mobile/<int:order_id>', methods=["POST"])

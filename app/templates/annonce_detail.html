@@ -616,119 +616,127 @@ body {
 <form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-    {% if annonce.variants %}
+   {% if annonce.variants %}
     <!-- ✅ Sélection de la variante -->
     <div>
         <label><strong>🧩{{ _('Choisissez une variante') }} :</strong></label>
         <div class="variant-buttons">
             {% for variant in annonce.variants %}
             <label>
-    <input type="radio"
-       name="variant_id"
-       value="{{ variant.id }}"
-       required
-       style="position:absolute; left:-9999px;"
-       data-stock="{{ variant.stock }}"
-       onclick="updateStockInfo(this)">
+                <input type="radio"
+                    name="variant_id"
+                    value="{{ variant.id }}"
+                    required
+                    style="position:absolute; left:-9999px;"
+                    data-stock="{{ variant.stock }}"
+                    onclick="updateStockInfo(this)">
 
-    <div class="btn-variant color-preview"
-         data-stock="{{ variant.stock }}"
-         {% if variant.image_filename %}
-         data-image="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}"
-         data-prix="{{ variant.prix or annonce.price }}"
-         data-original-price="{{ variant.original_price or '' }}"
-         data-discount-price="{{ variant.discount_price or '' }}"
-         data-promo-start="{{ variant.promo_start.isoformat() if variant.promo_start else '' }}"
-         data-promo-end="{{ variant.promo_end.isoformat() if variant.promo_end else '' }}"
-
-         onmouseenter="handleColorHover(this)"
-         onmouseleave="hidePreviewImage()"
-         onclick="changeImage(this); updateStockInfo(this)"
-         {% endif %}>
-
-
-        {{ variant.taille or '' }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}
-        {% if variant.image_filename %}
-        <div class="color-image-preview">
-            <img src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}" alt="aperçu"> alt="aperçu">
-        </div>
-        {% endif %}
-    </div>
-</label>
+                <div class="btn-variant color-preview"
+                     data-stock="{{ variant.stock }}"
+                     {% if variant.image_filename %}
+                     data-image="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}"
+                     data-prix="{{ variant.prix or annonce.price }}"
+                     data-original-price="{{ variant.original_price or '' }}"
+                     data-discount-price="{{ variant.discount_price or '' }}"
+                     data-promo-start="{{ variant.promo_start.isoformat() if variant.promo_start else '' }}"
+                     data-promo-end="{{ variant.promo_end.isoformat() if variant.promo_end else '' }}"
+                     onmouseenter="handleColorHover(this)"
+                     onmouseleave="hidePreviewImage()"
+                     onclick="changeImage(this); updateStockInfo(this)"
+                     {% endif %}>
+                    {{ variant.taille or '' }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}
+                    {% if variant.image_filename %}
+                    <div class="color-image-preview">
+                        <img src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}" alt="aperçu">
+                    </div>
+                    {% endif %}
+                </div>
+            </label>
             {% endfor %}
         </div>
 
-
     <!-- ✅ Affichage dynamique du stock -->
-<div id="variantStockInfo" style="margin-top: 10px;">
-  <div id="variantStockText" style="font-weight: bold;"></div>
+    <div id="variantStockInfo" style="margin-top: 10px;">
+        <div id="variantStockText" style="font-weight: bold;"></div>
 
-  <!-- Barre de stock -->
-  <div class="stock-bar-container" style="margin-top: 6px;">
-    <div class="stock-bar-bg">
-      <div class="stock-bar-fill" id="variantStockBar" style="width: 0%; background-color: green;"></div>
+        <!-- Barre de stock -->
+        <div class="stock-bar-container" style="margin-top: 6px;">
+            <div class="stock-bar-bg">
+                <div class="stock-bar-fill" id="variantStockBar" style="width: 0%; background-color: green;"></div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     </div>
 
     <!-- ✅ Quantité -->
     <div style="margin-top: 15px;">
-        <label><strong>Quantité :</strong></label><br>
+        <label><strong>{{ _('Quantité') }} :</strong></label><br>
         <!-- ✅ Champ quantité avec valeur max dynamique -->
-<div style="margin-top: 15px;">
-    <label><strong>{{ _('Quantité') }} :</strong></label><br>
-    <input type="number" name="quantite" id="inputQuantite" value="1" min="1" max="10" required
-           style="padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
-</div>
-
+        <div style="margin-top: 15px;">
+            <label><strong>{{ _('Quantité') }} :</strong></label><br>
+            <input type="number" name="quantite" id="inputQuantite" value="1" min="1" max="10" required
+                   style="padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
+        </div>
     </div>
 
     <!-- ✅ Message erreur (reste dans le form !) -->
-    <div id="variantWarning" class="alert-variant">
-    ⚠️ {{ _('Veuillez sélectionner une variante avant d’ajouter au panier.') }}
+    <div id="variantWarning" class="alert-variant" style="color: red; font-weight: bold; margin-top: 10px;">
+        ⚠️ {{ _('Veuillez sélectionner une variante avant d’ajouter au panier.') }}
     </div>
 
-        {% if total_stock > 0 %}
-  <p style="margin-top: 10px; color: green; font-weight: bold;">
-    ✅ {{ _('Produit disponible – Stock restant') }} : {{ total_stock }}
-  </p>
-{% else %}
-  <p style="margin-top: 10px; color: red; font-weight: bold;">
-    ❌ {{ _('Ce produit est en rupture de stock') }}
-  </p>
-{% endif %}
+    {% if total_stock > 0 %}
+    <p style="margin-top: 10px; color: green; font-weight: bold;">
+        ✅ {{ _('Produit disponible – Stock restant') }} : {{ total_stock }}
+    </p>
+    {% else %}
+    <p style="margin-top: 10px; color: red; font-weight: bold;">
+        ❌ {{ _('Ce produit est en rupture de stock') }}
+    </p>
+    {% endif %}
 
     <!-- ✅ Conteneur horizontal pour les deux boutons -->
-<div style="display: flex; gap: 15px; margin-top: 15px; align-items: center;">
+    <div style="display: flex; gap: 15px; margin-top: 15px; align-items: center;">
 
+        <!-- Formulaire Ajouter au panier -->
+        <form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button id="btnAjouterPanier" type="submit" class="btn-custom btn-panier"
+                {% if total_stock == 0 or not annonce.variants %}disabled{% endif %}>
+                🛒 {{ _('Ajouter au panier') }}
+            </button>
+        </form>
 
- <!-- Formulaire Ajouter au panier -->
-<form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <button id="btnAjouterPanier" type="submit" class="btn-custom btn-panier"
-        {% if total_stock == 0 %}disabled{% endif %}>
-        🛒 {{ _('Ajouter au panier') }}
-    </button>
-</form>
+        <!-- Formulaire Acheter maintenant -->
+        <form action="{{ url_for('listings.acheter_maintenant', listing_id=annonce.id) }}" method="POST" id="formAcheterMaintenant" style="margin: 0;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="variant_id" id="variantAcheterMaintenant" value="">
+            <button type="submit" id="btnAcheterMaintenant" class="btn-custom"
+                {% if total_stock == 0 or not annonce.variants %}disabled{% endif %}>
+                {{ _('Acheter maintenant') }}
+            </button>
+        </form>
 
-<!-- Formulaire Acheter maintenant -->
-<form action="{{ url_for('listings.acheter_maintenant', listing_id=annonce.id) }}" method="POST" id="formAcheterMaintenant" style="margin: 0;">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="variant_id" id="variantAcheterMaintenant" value="">
-    <button type="submit" id="btnAcheterMaintenant" class="btn-custom"
-        {% if total_stock == 0 %}disabled{% endif %}>
-        {{ _('Acheter maintenant') }}
-    </button>
-</form>
+    </div>
+{% else %}
+    <!-- Si le produit n'a pas de variantes, les boutons sont toujours activés -->
+    <div style="display: flex; gap: 15px; margin-top: 15px; align-items: center;">
+        <form action="{{ url_for('listings.ajouter_au_panier', listing_id=annonce.id) }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn-custom btn-panier" {% if total_stock == 0 %}disabled{% endif %}>
+                🛒 {{ _('Ajouter au panier') }}
+            </button>
+        </form>
 
-
-</div>
-
-
-</form>
+        <form action="{{ url_for('listings.acheter_maintenant', listing_id=annonce.id) }}" method="POST" id="formAcheterMaintenant" style="margin: 0;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" id="btnAcheterMaintenant" class="btn-custom" {% if total_stock == 0 %}disabled{% endif %}>
+                {{ _('Acheter maintenant') }}
+            </button>
+        </form>
+    </div>
 {% endif %}
+
 
 
 

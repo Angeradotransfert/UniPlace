@@ -33,20 +33,32 @@
 
                     <div class="mt-4">
                         <h6>📱 <strong>{{ _("Paiement Mobile") }}</strong></h6>
-                        <p><strong>{{ _("Orange Money") }} :</strong> {{ commande.orange_number or _('Non fourni') }} <small class="text-muted">/ ID : {{ commande.orange_id or '–' }}</small></p>
-                        <p><strong>{{ _("Wave") }} :</strong> {{ commande.wave_number or _('Non fourni') }} <small class="text-muted">/ ID : {{ commande.wave_id or '–' }}</small></p>
-                    </div>
-
-                    <div class="mt-4">
                         <h6>🛒 <strong>{{ _("Produits") }}</strong></h6>
                         <ul class="list-group list-group-flush">
                             {% for item in commande.items %}
                                 <li class="list-group-item">
-                                    {{ item.listing.title }} – {{ item.quantity }} × {{ item.unit_price }} RUB
-                                    {% if item.variant %}
-                                        <span class="text-muted">({{ item.variant.taille }} / {{ item.variant.couleur }})</span>
-                                    {% endif %}
-                                </li>
+    <strong>🛍️ {{ item.listing.title }}</strong> – {{ item.quantity }} × {{ item.unit_price }} RUB
+    {% if item.variant %}
+        <span class="text-muted">({{ item.variant.taille }} / {{ item.variant.couleur }})</span>
+    {% endif %}
+
+    <div style="margin-top: 10px; padding: 12px; background-color: #f9f9f9; border-left: 4px solid #007bff; border-radius: 8px;">
+        <p style="margin: 0; font-size: 14px;">
+            👤 <strong>Vendeur :</strong> {{ item.listing.user.username }}
+        </p>
+        <p style="margin: 0; font-size: 14px;">
+            📱 <strong>Orange Money :</strong>
+            {{ item.listing.user.mobile_money_number or _('Non fourni') }} –
+            {{ item.listing.user.mobile_money_holder or _('Titulaire inconnu') }}
+        </p>
+        <p style="margin: 0; font-size: 14px;">
+            🌊 <strong>Wave :</strong>
+            {{ item.listing.user.wave_number or _('Non fourni') }} –
+            {{ item.listing.user.wave_holder or _('Titulaire inconnu') }}
+        </p>
+    </div>
+</li>
+
                             {% endfor %}
                         </ul>
                     </div>
