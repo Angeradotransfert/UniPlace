@@ -1,87 +1,169 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container py-5">
-    <h2 class="text-center mb-5">{{ _("📦 Commandes Mobile Money en attente") }}</h2>
 
-    {% if commandes %}
+<style>
+  /* Styles généraux */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+    font-family: 'Baloo 2', cursive;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  /* Table Styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+
+  td a {
+    background-color: #6c757d;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+
+  td a:hover {
+    background-color: #5a6268;
+  }
+
+  .badge {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 1rem;
+  }
+
+  .badge-warning {
+    background-color: #ffc107;
+    color: #333;
+  }
+
+  /* Button Styles */
+  .btn {
+    background-color: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+  }
+
+  .btn:hover {
+    opacity: 0.8;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+
+  /* Mobile Responsiveness */
+  @media screen and (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+
+    .menu {
+      display: none;
+    }
+
+    .menu-mobile {
+      display: block;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    table {
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 8px;
+    }
+  }
+</style>
+
+<div class="container">
+  <h2>📦 {{ _('Commandes Mobile Money en attente') }}</h2>
+
+  {% if commandes %}
+    <table>
+      <thead>
+        <tr>
+          <th>{{ _('Commande ID') }}</th>
+          <th>{{ _('Client') }}</th>
+          <th>{{ _('Livraison') }}</th>
+          <th>{{ _('Montant total') }}</th>
+          <th>{{ _('Commission') }}</th>
+          <th>{{ _('Statut') }}</th>
+          <th>{{ _('Actions') }}</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for commande in commandes %}
-            <div class="card shadow-lg border-0 mb-5">
-                <div class="card-body p-4">
-
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title mb-0">{{ _("Commande") }} #{{ commande.id }}</h5>
-                        <span class="badge bg-warning text-dark">{{ _("En attente") }}</span>
-                    </div>
-
-                    <ul class="list-group list-group-flush mb-3">
-                        <li class="list-group-item"><strong>{{ _("Client") }} :</strong> {{ commande.buyer.username }} <span class="text-muted">({{ commande.buyer.email }})</span></li>
-                        <li class="list-group-item"><strong>{{ _("Livraison") }} :</strong> {{ commande.delivery_method }} – {{ commande.delivery_address }}</li>
-                        <li class="list-group-item">
-                            <strong>{{ _("Date") }} :</strong>
-                            {% if commande.created_at %}
-                                {{ commande.created_at.strftime('%d/%m/%Y %H:%M') }}
-                            {% else %}
-                                <span class="text-muted">{{ _("Non disponible") }}</span>
-                            {% endif %}
-                        </li>
-                        <li class="list-group-item"><strong>{{ _("Montant total") }} :</strong> {{ commande.total_rub }} <span class="badge bg-primary">RUB</span></li>
-                        <li class="list-group-item">
-                            <strong>{{ _("Commission") }} :</strong>
-                            {{ (commande.total_commission_rub / commande.total_usdt) | round(2) if commande.total_usdt else _('N/A') }}
-                        </li>
-                    </ul>
-
-                    <div class="mt-4">
-                        <h6>📱 <strong>{{ _("Paiement Mobile") }}</strong></h6>
-                        <h6>🛒 <strong>{{ _("Produits") }}</strong></h6>
-                        <ul class="list-group list-group-flush">
-                            {% for item in commande.items %}
-                                <li class="list-group-item">
-    <strong>🛍️ {{ item.listing.title }}</strong> – {{ item.quantity }} × {{ item.unit_price }} RUB
-    {% if item.variant %}
-        <span class="text-muted">({{ item.variant.taille }} / {{ item.variant.couleur }})</span>
-    {% endif %}
-
-    <div style="margin-top: 10px; padding: 12px; background-color: #f9f9f9; border-left: 4px solid #007bff; border-radius: 8px;">
-        <p style="margin: 0; font-size: 14px;">
-            👤 <strong>Vendeur :</strong> {{ item.listing.user.username }}
-        </p>
-        <p style="margin: 0; font-size: 14px;">
-            📱 <strong>Orange Money :</strong>
-            {{ item.listing.user.mobile_money_number or _('Non fourni') }} –
-            {{ item.listing.user.mobile_money_holder or _('Titulaire inconnu') }}
-        </p>
-        <p style="margin: 0; font-size: 14px;">
-            🌊 <strong>Wave :</strong>
-            {{ item.listing.user.wave_number or _('Non fourni') }} –
-            {{ item.listing.user.wave_holder or _('Titulaire inconnu') }}
-        </p>
-    </div>
-</li>
-
-                            {% endfor %}
-                        </ul>
-                    </div>
-
-                    <div class="d-flex justify-content-end mt-4">
-                        <form method="POST" action="{{ url_for('admin.valider_commande_mobile', order_id=commande.id) }}" class="me-2">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-success">✅ {{ _("Valider") }}</button>
-                        </form>
-
-                        <form method="POST" action="{{ url_for('admin.refuser_commande_mobile', order_id=commande.id) }}">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger">❌ {{ _("Rejeter") }}</button>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
+          <tr>
+            <td>#{{ commande.id }}</td>
+            <td>{{ commande.buyer.username }} <br><small>{{ commande.buyer.email }}</small></td>
+            <td>{{ commande.delivery_method }} – {{ commande.delivery_address }}</td>
+            <td>{{ commande.total_rub }} <span class="badge badge-warning">RUB</span></td>
+            <td>{{ (commande.total_commission_rub / commande.total_usdt) | round(2) if commande.total_usdt else _('N/A') }}</td>
+            <td>
+              {% if commande.status == 'paid' %}
+                <span style="color: green; font-weight: bold;">✅ {{ _('Payé') }}</span>
+              {% else %}
+                <form method="POST" action="{{ url_for('admin.valider_commande_mobile', order_id=commande.id) }}">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn">✅ {{ _('Valider') }}</button>
+                </form>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{{ url_for('admin.admin_commande_detail', order_id=commande.id) }}">🔍 {{ _('Voir') }}</a>
+            </td>
+          </tr>
         {% endfor %}
-    {% else %}
-        <div class="alert alert-info text-center" role="alert">
-            {{ _("Aucune commande en attente.") }}
-        </div>
-    {% endif %}
+      </tbody>
+    </table>
+  {% else %}
+    <p style="text-align: center;">{{ _('Aucune commande en attente.') }}</p>
+  {% endif %}
 </div>
+
 {% endblock %}

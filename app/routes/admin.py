@@ -13,7 +13,7 @@ from app.utils.currency import envoyer_notification
 from app import db
 from app.utils.email_utils import envoyer_email
 from app.models import OrderItem
-from flask import request
+from app import requests
 from app.models import Signalement
 from app.models import EmailLog
 from app.models import BlockedMessage

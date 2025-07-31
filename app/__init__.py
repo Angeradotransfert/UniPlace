@@ -89,3 +89,7 @@ def create_app():
     app.register_blueprint(messaging_bp)
 
     return app
+
+
+def requests():
+    return None

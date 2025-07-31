@@ -202,14 +202,20 @@
         <label for="delivery_fee">{{ _('Frais de livraison estimés (₽)') }} :</label>
         <input type="number" name="delivery_fee" id="delivery_fee" step="0.01" min="0" required>
 
+        <label for="global_stock">{{ _('Stock global') }} :</label>
+        <input type="number" name="global_stock" id="global_stock" min="0" step="1" required>
 
-        <label for="currency">{{ _('Monnaie') }} :</label>
-        <select name="currency" id="currency" required>
-            <option value="RUB">{{ _('₽ RUB') }}</option>
-            <option value="USDT">{{ _('USDT') }}</option>
-            <option value="USD">{{ _('$ USD') }}</option>
-            <option value="EUR">{{ _('€ EUR') }}</option>
-        </select>
+
+
+       <label for="currency">{{ _('Monnaie') }} :</label>
+<select name="currency" id="currency" required>
+    <option value="RUB">{{ _('₽ RUB') }}</option>
+    <option value="USDT">{{ _('USDT') }}</option>
+    <option value="USD">{{ _('$ USD') }}</option>
+    <option value="EUR">{{ _('€ EUR') }}</option>
+    <option value="XOF">{{ _('CFA (XOF)') }}</option>  <!-- Nouvelle option pour CFA -->
+</select>
+
 
         <!-- Condition et Ville -->
         <label for="condition">{{ _('Condition') }} :</label>

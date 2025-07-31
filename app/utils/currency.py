@@ -1,10 +1,12 @@
-import requests
+
 from functools import wraps
 from flask import redirect, url_for, flash
 from flask_login import current_user
 from app.models import Notification
 from app import db
 import os
+from app import requests
+
 
 
 def get_usdt_to_rub():
@@ -24,7 +26,10 @@ def get_taux(devise):
         except Exception as e:
             print(f"Erreur get_taux via Coingecko : {e}")
             return 0.01  # valeur de secours
-    return 1
+    if devise.upper() == 'XOF':  # CFA
+        return 1  # On peut laisser 1 ou ajuster selon un taux
+    return 1  # Default
+
 
 from datetime import datetime
 
