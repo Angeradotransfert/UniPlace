@@ -323,7 +323,7 @@ body {
 
             <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" class="annonce-image">
                 {% if main_image %}
-                    <img src="{{ url_for('static', filename='uploads/' ~ main_image.filename) }}" alt="{{ _('Image de') }} {{ listing.title }}">
+                    <img src="{{ main_image.cloudinary_url }}" alt="{{ _('Image de') }} {{ listing.title }}">
                 {% else %}
                     <img src="{{ url_for('static', filename='placeholder.png') }}" alt="{{ _('Pas d\'image') }}">
                 {% endif %}

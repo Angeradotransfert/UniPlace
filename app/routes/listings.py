@@ -1,32 +1,29 @@
 from flask import Blueprint, jsonify
 from werkzeug.exceptions import abort
 
+from app.routes.main import get_stock_max_global
+
 listings_bp = Blueprint('listings', __name__)
 
 from flask_login import login_required
-from app.models import Listing
 from app.utils import get_usdt_to_rub
 from app import db
 from datetime import timedelta
-from app.models import ProductVariant
 from app.models import CartItem
 from app.utils.currency import get_prix_actuel
-from flask import current_app
 from app.models import ListingImage
 from app.models import OrderItem
 from app.models import Favori
 from app.models import Listing, ProductVariant, Review, Order
 from app.models import Signalement
 from flask_babel import _
-
-
-def get_stock_max_global(listing):
-    if listing.variants:
-        max_variant_stock = max(variant.stock for variant in listing.variants)
-        return max(max_variant_stock, listing.stock or 0)
-    else:
-        return listing.stock or 0
-
+import cloudinary.uploader
+from flask import current_app
+from cloudinary.uploader import destroy
+import io
+from PIL import Image, UnidentifiedImageError
+import ffmpeg
+from app.utils import check_file_size
 
 ALLOWED_EXTENSIONS = {
     'jpg', 'jpeg', 'png', 'gif',
@@ -42,9 +39,151 @@ def allowed_file(filename):
     ext = filename.rsplit('.', 1)[1].lower().strip()
     return ext in ALLOWED_EXTENSIONS
 
+def resize_image(image):
+    """
+    Cette fonction prend une image en entrée, la redimensionne et la retourne sous forme de BytesIO.
+    Elle vérifie d'abord que l'image est bien une image.
+    """
+    try:
+        img = Image.open(image)  # Tente d'ouvrir l'image avec Pillow
+        max_size = (800, 800)  # Définir la taille maximale (800x800 pixels)
+        img.thumbnail(max_size)  # Redimensionne l'image tout en conservant ses proportions
+        img_byte_array = io.BytesIO()  # Crée un flux en mémoire pour l'image redimensionnée
+        img.save(img_byte_array, format='JPEG')  # Sauvegarde l'image redimensionnée dans le flux
+        img_byte_array.seek(0)  # Réinitialise la position du flux au début
+        return img_byte_array  # Retourne le flux d'image redimensionnée
+    except UnidentifiedImageError:
+        # Si le fichier n'est pas une image, retourne l'image d'origine sans modification
+        print("Le fichier n'est pas une image, il sera téléchargé tel quel.")
+        return image
+
+
+def save_image_to_temp_file(resized_image):
+    """
+    Sauvegarde l'image redimensionnée dans un fichier temporaire sur le disque avant l'upload vers Cloudinary.
+    """
+    filename = secure_filename("resized_image.jpg")  # Choisir un nom pour l'image temporaire
+    temp_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+
+    # Sauvegarder l'image redimensionnée dans un fichier temporaire
+    with open(temp_path, 'wb') as f:
+        f.write(resized_image.getbuffer())  # Sauvegarde le flux dans le fichier
+
+    return temp_path
+
+def compress_video(file):
+    """
+    Cette fonction compresse la vidéo pour qu'elle respecte la limite de taille de Cloudinary.
+    """
+    filename = secure_filename(file.filename)
+    temp_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'compressed_' + filename)
+
+    try:
+        # Utiliser ffmpeg pour compresser la vidéo
+        ffmpeg.input(file).output(temp_path, vcodec='libx264', crf=28).run()  # crf=28 est pour la compression
+        return temp_path  # Retourne le chemin du fichier compressé
+    except Exception as e:
+        print(f"Erreur lors de la compression vidéo : {e}")
+        return None  # Si la compression échoue, retourne None
+
+def upload_video_to_cloudinary(file):
+    """
+    Cette fonction upload la vidéo vers Cloudinary après compression.
+    """
+    # Compresser la vidéo
+    compressed_video_path = compress_video(file)
+    if compressed_video_path:
+        # Upload la vidéo compressée vers Cloudinary
+        video_url = cloudinary.uploader.upload(compressed_video_path, resource_type="video")['secure_url']
+
+        # Supprimer le fichier compressé temporaire après l'upload
+        os.remove(compressed_video_path)
+
+        return video_url  # Retourner l'URL de la vidéo sur Cloudinary
+    else:
+        raise Exception("Compression de la vidéo échouée.")
+
+
+
+def upload_to_cloudinary(file):
+    """
+    Cette fonction prend un fichier en entrée, le redimensionne si c'est une image,
+    et l'upload sur Cloudinary.
+    """
+    if file and file.filename:
+        try:
+            # Vérifier si c'est une image
+            if file.content_type.startswith('image'):
+                resized_image = resize_image(file)  # Redimensionner l'image si c'est une image
+
+                if isinstance(resized_image, io.BytesIO):
+                    # Si l'image a été redimensionnée, sauvegarder dans un fichier temporaire
+                    temp_file_path = save_image_to_temp_file(resized_image)
+                else:
+                    # Si ce n'est pas une image (par exemple une vidéo), utiliser le fichier original
+                    temp_file_path = file
+            else:
+                # Si ce n'est pas une image (probablement une vidéo ou autre), ne pas redimensionner
+                temp_file_path = file
+
+            # Upload du fichier vers Cloudinary
+            file_url = cloudinary.uploader.upload(temp_file_path)['secure_url']
+
+            print(f"URL de l'image après upload : {file_url}")
+            file_url = cloudinary.uploader.upload(temp_file_path)['secure_url']
+            print(f"URL générée : {file_url}")
+
+            # Supprimer le fichier temporaire après l'upload
+            if isinstance(resized_image, io.BytesIO):
+                os.remove(temp_file_path)
+
+            return file_url  # Retourner l'URL du fichier sur Cloudinary
+
+        except Exception as e:
+            print(f"Erreur lors de l'upload : {e}")
+            return None
+    else:
+        raise ValueError("Aucun fichier téléchargé")
+
+
+@listings_bp.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        flash('Aucun fichier sélectionné')
+        return redirect(request.url)
+
+    file = request.files['file']
+    if file.filename == '':
+        flash('Aucun fichier sélectionné')
+        return redirect(request.url)
+
+    if file:
+        # S'assurer que le fichier est sécurisé
+        filename = secure_filename(file.filename)
+
+        # Télécharger le fichier sur Cloudinary
+        file_url = upload_to_cloudinary(file)
+        if file_url:
+            flash('Fichier téléchargé avec succès!')
+            return redirect(url_for('listings.uploaded_file', filename=file_url))
+        else:
+            flash('Erreur lors du téléchargement du fichier')
+            return redirect(request.url)
+
+    return redirect(request.url)
+
+
+# Route pour afficher le fichier téléchargé (facultatif)
+@listings_bp.route('/uploaded_file')
+def uploaded_file():
+    filename = request.args.get('filename')
+    return f"Fichier téléchargé avec succès! URL: {filename}"
+
+
 @listings_bp.route('/new-listing', methods=['GET', 'POST'])
 @login_required
 def new_listing():
+    global cloudinary_url
     from flask_babel import _
 
     categories = {
@@ -261,17 +400,17 @@ def new_listing():
         video_file = request.files.get('video_file')
         if video_file and video_file.filename:
             video_filename = video_file.filename.strip()
-            ext = video_filename.rsplit('.', 1)[-1].lower() if '.' in video_filename else ''
             if allowed_file(video_filename):
-                video_name = secure_filename(video_filename)
-                video_path = os.path.join(current_app.config['UPLOAD_FOLDER'], 'videos', video_name)
-                os.makedirs(os.path.dirname(video_path), exist_ok=True)
-                video_file.save(video_path)
-                listing.video_filename = f"uploads/videos/{video_name}"
-                db.session.commit()
-                print(f"🎥 Vidéo enregistrée : {video_path}")
-            else:
-                print(f"⛔ Extension vidéo non autorisée : {video_filename}")
+                # Upload vidéo sur Cloudinary
+                video_url = upload_to_cloudinary(video_file)
+                if video_url:
+                    listing.video_filename = video_url
+                    db.session.commit()
+                    print(f"URL de la vidéo après upload : {video_url}")
+
+                    print(f"🎥 Vidéo enregistrée sur Cloudinary : {video_url}")
+                else:
+                    print("⛔ Erreur lors de l'upload de la vidéo")
 
         # 🖼️ Images principales
         uploaded_images = request.files.getlist("images[]")
@@ -295,11 +434,27 @@ def new_listing():
             os.makedirs(os.path.dirname(filepath), exist_ok=True)
             img.save(filepath)
 
-            db.session.add(ListingImage(
-                listing_id=listing.id,
-                filename=filename,
-                is_main=(idx == main_image_index)
-            ))
+            # Redimensionner l'image avant de la sauvegarder
+            resized_image = resize_image(img)
+
+            # Si l'image est redimensionnée avec BytesIO, ouvre et sauvegarde avec PIL
+            if isinstance(resized_image, io.BytesIO):
+                img_pil = Image.open(resized_image)
+                img_pil.save(filepath)
+
+                # Upload de l'image vers Cloudinary
+            file_url = upload_to_cloudinary(img)
+            print(f"URL de l'image après upload : {file_url}")
+
+            # Vérifier si l'URL est valide avant d'ajouter l'image à la base de données
+            if file_url:
+                # Ajouter l'image à la base de données
+                db.session.add(ListingImage(
+                    listing_id=listing.id,
+                    filename=filename,
+                    is_main=(idx == main_image_index),  # Définir l'image principale
+                    cloudinary_url=file_url  # URL de l'image depuis Cloudinary
+                ))
 
         # 🎨 Variantes
         variant_names = request.form.getlist('variant_name[]')
@@ -335,18 +490,24 @@ def new_listing():
                 prix_variante = None
 
             image_file = variant_images[i] if i < len(variant_images) else None
-            image_filename = None
+            cloudinary_url = None
 
             if image_file and image_file.filename:
                 raw_variant_name = image_file.filename.strip()
                 ext = raw_variant_name.rsplit('.', 1)[-1].lower() if '.' in raw_variant_name else ''
-                print(f"📦 Image variante : '{raw_variant_name}' (ext: '{ext}') → autorisé ? {'✅' if allowed_file(raw_variant_name) else '❌'}")
+                print(
+                    f"📦 Image variante : '{raw_variant_name}' (ext: '{ext}') → autorisé ? {'✅' if allowed_file(raw_variant_name) else '❌'}")
 
                 if allowed_file(raw_variant_name):
-                    image_filename = secure_filename(raw_variant_name)
-                    image_file.save(os.path.join(variant_folder, image_filename))
+                    # Upload de l'image de la variante vers Cloudinary
+                    image_url = upload_to_cloudinary(image_file)
+                    if image_url:
+                        cloudinary_url = image_url  # ✅ Corrigé ici
+
+                    else:
+                        print(f"⛔ Échec upload variante : {raw_variant_name}")
                 else:
-                    print(f"⛔ Image variante non autorisée : {raw_variant_name}")
+                    print(f"⛔ Extension non autorisée pour variante : {raw_variant_name}")
 
             # Gestion des champs promo
             try:
@@ -382,7 +543,7 @@ def new_listing():
                 discount_price=discount_price,
                 promo_start=promo_start,
                 promo_end=promo_end,
-                image_filename=image_filename
+                cloudinary_url=cloudinary_url  # Utilise cloudinary_url ici
             ))
 
         db.session.commit()
@@ -390,6 +551,8 @@ def new_listing():
         return redirect(url_for('main.mes_annonces'))
 
     return render_template('new_listing.html', categories=categories, examples=examples)
+
+
 
 
 @listings_bp.route('/delete-listing/<int:listing_id>', methods=['POST'])
@@ -415,18 +578,31 @@ def delete_listing(listing_id):
         if remaining_items == 0:
             db.session.delete(order)
 
-    # Supprimer toutes les images associées
+    # Supprimer toutes les images associées (Cloudinary)
     for image in listing.images:
-        image_path = os.path.join('static/uploads', image.filename)
-        try:
-            if os.path.exists(image_path):
-                os.remove(image_path)
-        except Exception as e:
-            print(f"Erreur lors de la suppression de {image_path} : {e}")
+        image_url = image.filename  # Supposons que `filename` est l'URL de l'image sur Cloudinary
+        if image_url:
+            public_id = image_url.split('/')[-1].split('.')[0]  # On extrait l'ID public de l'URL
+            try:
+                # Supprimer l'image de Cloudinary en utilisant son public_id
+                destroy(public_id)
+                print(f"Image supprimée de Cloudinary : {image_url}")
+            except Exception as e:
+                print(f"Erreur lors de la suppression de {image_url} de Cloudinary : {e}")
         db.session.delete(image)
 
     # Supprimer toutes les variantes liées à cette annonce
     for variant in listing.variants:
+        if variant.image_filename:  # Supposons que l'image des variantes est stockée de la même manière que pour les annonces
+            variant_image_url = variant.image_filename
+            if variant_image_url:
+                public_id = variant_image_url.split('/')[-1].split('.')[0]  # Extraire l'ID public
+                try:
+                    # Supprimer l'image de Cloudinary
+                    destroy(public_id)
+                    print(f"Image variante supprimée de Cloudinary : {variant_image_url}")
+                except Exception as e:
+                    print(f"Erreur lors de la suppression de {variant_image_url} de Cloudinary : {e}")
         db.session.delete(variant)
 
     # Supprimer l'annonce elle-même
@@ -435,6 +611,7 @@ def delete_listing(listing_id):
 
     flash(_("Annonce supprimée avec succès !"), "success")
     return redirect(url_for('main.dashboard'))
+
 
 
 from flask import render_template, request, redirect, url_for, flash
@@ -538,41 +715,39 @@ def edit_listing(listing_id):
             date_exp = request.form.get('date_expiration')
             listing.date_expiration = datetime.strptime(date_exp, '%Y-%m-%d').date() if date_exp else None
 
-            # 🖼️ Gestion des images
+            # Gestion des images principales
             images = request.files.getlist('images')
             main_image_index = int(request.form.get('main_image_index') or 0)
-            img_folder = os.path.join(current_app.root_path, 'static', 'uploads')
-            os.makedirs(img_folder, exist_ok=True)
 
             for idx, image in enumerate(images):
                 if image and image.filename:
                     filename = secure_filename(image.filename)
-                    image.save(os.path.join(img_folder, filename))
-                    is_main = (idx == main_image_index)
-                    db.session.add(ListingImage(listing_id=listing.id, filename=filename, is_main=is_main))
 
-            # 🎥 Gestion de la vidéo
+                    # Supprimer l'ancienne image de Cloudinary si elle existe
+                    if listing.images:
+                        for old_image in listing.images:
+                            old_image_url = old_image.filename  # URL Cloudinary
+                            public_id = old_image_url.split('/')[-1].split('.')[0]  # Extraire l'ID public
+                            # Suppression de l'image de Cloudinary
+                            destroy(public_id)
+
+                    # Redimensionner l'image avant de l'upload (si nécessaire)
+                    resized_image = resize_image(image)  # Si tu veux redimensionner
+
+                    # Upload de la nouvelle image vers Cloudinary
+                    image_url = upload_to_cloudinary(resized_image)
+                    is_main = (idx == main_image_index)
+                    db.session.add(ListingImage(listing_id=listing.id, filename=image_url, is_main=is_main))
+
+            # Gestion de la vidéo (si mise à jour)
             video_file = request.files.get('video_file')
             if video_file and video_file.filename:
-                ext = video_file.filename.rsplit('.', 1)[-1].lower()
-                if ext in {'mp4', 'mov', 'avi', 'mkv', 'webm'}:
-                    if video_file.content_length and video_file.content_length > 20 * 1024 * 1024:
-                        flash("❌ Vidéo trop lourde (max 20 Mo).", "danger")
-                        return redirect(request.url)
-                    video_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], 'videos')
-                    os.makedirs(video_folder, exist_ok=True)
-                    filename = secure_filename(video_file.filename)
-                    video_file.save(os.path.join(video_folder, filename))
-                    listing.video_filename = f"uploads/videos/{filename}"
-                else:
-                    flash("❌ Format vidéo non autorisé.", "danger")
-                    return redirect(request.url)
+                video_url = upload_to_cloudinary(video_file)
+                listing.video_filename = video_url
 
-            # 🧬 Gestion des variantes
+            # Gestion des variantes
             from app.models import ProductVariant
             variant_total = int(request.form.get("variant_total") or 0)
-            variant_folder = os.path.join(current_app.config['UPLOAD_FOLDER'], 'variants')
-            os.makedirs(variant_folder, exist_ok=True)
 
             for i in range(variant_total):
                 variant_id = request.form.get(f"variant_id_{i}")
@@ -581,8 +756,17 @@ def edit_listing(listing_id):
                     variant = ProductVariant.query.get(int(variant_id))
                     if variant and variant.listing_id == listing.id:
                         if delete_flag:
+                            # Supprimer la variante et l'image de Cloudinary
+                            if variant.image_filename:
+                                public_id = variant.image_filename.split('/')[-1].split('.')[0]
+                                try:
+                                    destroy(public_id)
+                                except Exception as e:
+                                    print(f"Erreur lors de la suppression de l'image variante de Cloudinary : {e}")
                             db.session.delete(variant)
                             continue
+
+                        # Mise à jour des variantes
                         variant.taille = request.form.get(f"taille_{i}")
                         variant.couleur = request.form.get(f"couleur_{i}")
                         variant.stock = int(request.form.get(f"stock_{i}") or 1)
@@ -592,15 +776,23 @@ def edit_listing(listing_id):
                         pe = request.form.get(f"promo_end_{i}")
                         variant.promo_start = datetime.strptime(ps, "%Y-%m-%dT%H:%M") if ps else None
                         variant.promo_end = datetime.strptime(pe, "%Y-%m-%dT%H:%M") if pe else None
+
+                        # Mettre à jour l'image de la variante
                         image = request.files.get(f"variant_image_{i}")
                         if image and image.filename:
-                            ext = image.filename.rsplit('.', 1)[-1].lower()
-                            if ext in {'jpg', 'jpeg', 'png', 'webp', 'gif'}:
-                                filename = secure_filename(image.filename)
-                                image.save(os.path.join(variant_folder, filename))
-                                variant.image_filename = filename
+                            # Supprimer l'ancienne image de Cloudinary pour la variante
+                            if variant.image_filename:
+                                public_id = variant.image_filename.split('/')[-1].split('.')[0]
+                                try:
+                                    destroy(public_id)
+                                except Exception as e:
+                                    print(f"Erreur lors de la suppression de l'image variante de Cloudinary : {e}")
 
-            # ➕ Nouvelles variantes (sans ID)
+                            # Uploader la nouvelle image pour la variante
+                            image_url = upload_to_cloudinary(image)
+                            variant.image_filename = image_url  # Mise à jour de l'URL Cloudinary
+
+            # Ajouter de nouvelles variantes
             i = variant_total
             while True:
                 taille = request.form.get(f"taille_{i}")
@@ -608,7 +800,8 @@ def edit_listing(listing_id):
                 stock = request.form.get(f"stock_{i}")
                 prix = request.form.get(f"prix_{i}")
                 if not taille and not couleur and not prix and not stock:
-                    break  # fin des nouvelles variantes
+                    break  # Fin des nouvelles variantes
+
                 new_variant = ProductVariant(
                     listing_id=listing.id,
                     taille=taille,
@@ -621,13 +814,12 @@ def edit_listing(listing_id):
                     promo_end=datetime.strptime(request.form.get(f"promo_end_{i}"),
                                                 "%Y-%m-%dT%H:%M") if request.form.get(f"promo_end_{i}") else None,
                 )
+
+                # Uploader une image pour la variante
                 image = request.files.get(f"variant_image_{i}")
                 if image and image.filename:
-                    ext = image.filename.rsplit('.', 1)[-1].lower()
-                    if ext in {'jpg', 'jpeg', 'png', 'webp', 'gif'}:
-                        filename = secure_filename(image.filename)
-                        image.save(os.path.join(variant_folder, filename))
-                        new_variant.image_filename = filename
+                    image_url = upload_to_cloudinary(image)
+                    new_variant.image_filename = image_url  # Stocke l'URL Cloudinary
 
                 db.session.add(new_variant)
                 i += 1
@@ -654,20 +846,25 @@ def delete_video(listing_id):
         flash("Action non autorisée.", "danger")
         return redirect(url_for('main.dashboard'))
 
-    # Supprimer le fichier vidéo si existant
+    # Supprimer la vidéo sur Cloudinary si elle existe
     if listing.video_filename:
         try:
-            video_path = os.path.join('static', listing.video_filename)
-            if os.path.exists(video_path):
-                os.remove(video_path)
+            # Extraire l'ID public de l'URL de la vidéo
+            public_id = listing.video_filename.split('/')[-1].split('.')[0]  # Supposons que le nom du fichier est dans l'URL
+            # Supprimer la vidéo de Cloudinary
+            destroy(public_id)
+            print(f"🎥 Vidéo supprimée de Cloudinary : {listing.video_filename}")
         except Exception as e:
-            print(f"Erreur suppression vidéo : {e}")
+            print(f"Erreur suppression vidéo de Cloudinary : {e}")
+            flash("Erreur lors de la suppression de la vidéo.", "danger")
+            return redirect(url_for('listings.edit_listing', listing_id=listing.id))
 
+    # Mettre à jour le champ video_filename dans la base de données
     listing.video_filename = None
     db.session.commit()
+
     flash(_("🎥 Vidéo supprimée avec succès."), "success")
     return redirect(url_for('listings.edit_listing', listing_id=listing.id))
-
 
 @listings_bp.route('/delete-image/<int:image_id>', methods=['POST'])
 @login_required
@@ -679,12 +876,20 @@ def delete_image(image_id):
         flash("Action non autorisée.", "error")
         return redirect(url_for('main.dashboard'))
 
-    # Supprimer le fichier image du disque
-    image_path = os.path.join('static/uploads', image.filename)
-    if os.path.exists(image_path):
-        os.remove(image_path)
+    # Supprimer l'image sur Cloudinary si elle existe
+    if image.filename:
+        try:
+            # Extraire le public_id de l'URL Cloudinary
+            public_id = image.filename.split('/')[-1].split('.')[0]  # Supposons que le nom du fichier est dans l'URL
+            # Supprimer l'image de Cloudinary
+            destroy(public_id)
+            print(f"Image supprimée de Cloudinary : {image.filename}")
+        except Exception as e:
+            print(f"Erreur lors de la suppression de l'image de Cloudinary : {e}")
+            flash("Erreur lors de la suppression de l'image.", "error")
+            return redirect(url_for('listings.edit_listing', listing_id=listing.id))
 
-    # Supprimer de la base de données
+    # Supprimer l'image de la base de données
     db.session.delete(image)
     db.session.commit()
 
@@ -757,10 +962,17 @@ from sqlalchemy.orm import joinedload
 
 @listings_bp.route('/annonce/<int:listing_id>')
 def annonce_detail(listing_id):
+    if listing_id is None:
+        return redirect(url_for('home'))
     annonce = Listing.query.options(
         joinedload(Listing.variants),
-        joinedload(Listing.user)
+        joinedload(Listing.user),
+        joinedload(Listing.images)
     ).get_or_404(listing_id)
+
+    # Vérification des variantes et leurs URLs
+    for variant in annonce.variants:
+        print(variant.cloudinary_url)  # Vérifie si l'URL est bien présente
 
     # 🔁 Promo active sur les variantes
     now = datetime.utcnow()
@@ -786,6 +998,13 @@ def annonce_detail(listing_id):
     # 📦 Stock max global (inchangé)
     stock_max_global = get_stock_max_global(annonce)
 
+    print(annonce.variants)  # Pour vérifier les données des variantes
+
+    # 💻 URLs des images (Cloudinary)
+    annonce.image_urls = [image.cloudinary_url for image in annonce.images]
+
+    # Vidéo (si présente)
+    annonce.video_url = annonce.video_filename  # URL Cloudinary de la vidéo si elle existe
 
     return render_template(
         'annonce_detail.html',
@@ -796,6 +1015,8 @@ def annonce_detail(listing_id):
         stock_max_global=stock_max_global,
         datetime=datetime
     )
+
+
 
 @listings_bp.route('/api/ajouter_au_panier', methods=['POST'])
 @login_required
@@ -992,6 +1213,7 @@ def annonces():
 
     query = Listing.query.filter(Listing.user_id != current_user.id)
 
+    # Filtrage des annonces
     category = request.args.get('category')
     subcategory = request.args.get('subcategory')
     city = request.args.get('city')
@@ -1049,6 +1271,13 @@ def annonces():
     for listing in listings.items:
         listing.active_promo_var = get_active_promo(listing.variants)
 
+        # Assurer que les images Cloudinary sont utilisées
+        listing.image_urls = [image.filename for image in listing.images]  # Cloudinary URLs pour les images
+
+        # Ajout de la vidéo Cloudinary si elle existe
+        if listing.video_filename:
+            listing.video_url = listing.video_filename  # Cloudinary URL pour la vidéo
+
     # ✅ ➕ Calcul du plus grand stock
     max_stocks = []
     for listing in listings.items:
@@ -1061,8 +1290,6 @@ def annonces():
     stock_max_global = max(max_stocks) if max_stocks else 1
 
     for listing in listings.items:
-        listing.active_promo_var = get_active_promo(listing.variants)
-
         # Ajout du flag "is_new" : True si créé dans les 7 derniers jours
         is_new = (now - listing.created_at) <= timedelta(days=7)
 
@@ -1074,7 +1301,8 @@ def annonces():
                            villes=villes,
                            subcats_dict=subcats_dict,
                            stock_max_global=stock_max_global,
-                           now=now)  # ✅ propre
+                           now=now)
+
 
 
 

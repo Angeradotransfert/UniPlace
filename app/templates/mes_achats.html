@@ -60,7 +60,7 @@
                 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
                     {% if item.listing.images and item.listing.images[0] %}
                         <a href="{{ url_for('listings.annonce_detail', listing_id=item.listing.id) }}">
-                            <img src="{{ url_for('static', filename='uploads/' + item.listing.images[0].filename) }}"
+                           <img src="{{ item.listing.images[0].cloudinary_url if item.listing.images else '/static/default.jpg' }}"
                                  alt="Image du produit"
                                  style="max-width: 180px; max-height: 180px; width: auto; height: auto; border-radius: 10px; border: 1px solid #ccc;">
                         </a>

@@ -1,5 +1,7 @@
 import os
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from flask import Flask, session
 from flask import request
 from flask_babel import Babel, _
@@ -26,7 +28,6 @@ def create_app():
     app.config.from_object(Config)
 
     app.jinja_env.add_extension('jinja2.ext.do')
-
 
     # 🔐 Configuration
     app.secret_key = app.config.get("SECRET_KEY", "dev-secret-key")
@@ -58,6 +59,8 @@ def create_app():
             app.config['BABEL_DEFAULT_LOCALE']
         )
 
+
+
     @app.before_request
     def detect_lang():
         lang = request.args.get('lang')
@@ -87,6 +90,13 @@ def create_app():
     app.register_blueprint(listings_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(messaging_bp)
+
+    # 🌐 Configuration de Cloudinary
+    cloudinary.config(
+        cloud_name=app.config['CLOUD_NAME'],  # Cloud name chargé depuis config.py
+        api_key=app.config['API_KEY'],        # API key chargé depuis config.py
+        api_secret=app.config['API_SECRET']   # API secret chargé depuis config.py
+    )
 
     return app
 

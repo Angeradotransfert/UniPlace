@@ -167,9 +167,9 @@ body {
                 <!-- Image cliquable -->
                 <a href="{{ url_for('listings.annonce_detail', listing_id=item.listing.id) }}">
                 {% if item.variant and item.variant.image_filename %}
-                    <img src="{{ url_for('static', filename='uploads/variants/' ~ item.variant.image_filename) }}" alt="{{ _('Image article') }}" class="item-image">
+                    <img src="{{ item.variant.cloudinary_url }}" alt="{{ _('Image article') }}" class="item-image">
                 {% elif item.listing.images and item.listing.images[0].filename %}
-                    <img src="{{ url_for('static', filename='uploads/' ~ item.listing.images[0].filename) }}" alt="{{ _('Image article') }}" class="item-image">
+                    <img src="{{ item.listing.images[0].cloudinary_url }}" alt="{{ _('Image article') }}" class="item-image">
                 {% else %}
                     <img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="{{ _('Image article') }}" class="item-image">
                 {% endif %}

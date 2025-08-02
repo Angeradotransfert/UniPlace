@@ -468,20 +468,22 @@ body {
   <div class="thumbnail-carousel">
   {% for img in annonce.images %}
     <img class="thumbnail"
-         src="{{ url_for('static', filename='uploads/' + img.filename) }}"
+         src="{{ img.cloudinary_url }}"
          onclick="changeImageFromThumbnail(this)">
   {% endfor %}
 
   {% if annonce.variants %}
     {% for variant in annonce.variants %}
-      {% if variant.image_filename %}
-        <img class="thumbnail"
-             src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}"
-             data-variant="{{ variant.taille }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}"
-             data-prix="{{ variant.prix or annonce.price }}"
-             onclick="changeImageFromThumbnail(this)">
-      {% endif %}
-    {% endfor %}
+  {% if variant.cloudinary_url %}
+    <img class="thumbnail"
+         src="{{ variant.cloudinary_url }}"
+         data-variant="{{ variant.taille }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}"
+         data-prix="{{ variant.prix or annonce.price }}"
+         onclick="changeImageFromThumbnail(this)">
+  {% else %}
+    <p>Image non disponible pour cette variante</p>
+  {% endif %}
+{% endfor %}
   {% endif %}
 
       {% if annonce.video_filename %}
@@ -497,8 +499,8 @@ body {
 
   <!-- Image principale à droite -->
   <div class="main-image-column">
-    {% if annonce.images and annonce.images[0] %}
-  <img id="mainProductImage" src="{{ url_for('static', filename='uploads/' + annonce.images[0].filename) }}" alt="Image principale">
+    {% if annonce.images and annonce.images[0].cloudinary_url %}
+   <img id="mainProductImage" src="{{ annonce.images[0].cloudinary_url }}" alt="Image principale">
 {% else %}
   <img id="mainProductImage" src="{{ url_for('static', filename='default.png') }}" alt="Aucune image disponible">
 {% endif %}
@@ -506,7 +508,7 @@ body {
       {% if annonce.video_filename %}
   <div id="mainProductVideo" style="display: none;">
     <video controls style="width: 100%; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-      <source src="{{ url_for('static', filename=annonce.video_filename) }}">
+      <source src="{{ annonce.video_cloudinary_url }}">
       Votre navigateur ne prend pas en charge la vidéo HTML5.
     </video>
   </div>
@@ -633,8 +635,8 @@ body {
 
                 <div class="btn-variant color-preview"
                      data-stock="{{ variant.stock }}"
-                     {% if variant.image_filename %}
-                     data-image="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}"
+                     {% if variant.cloudinary_url %}
+                     data-image="{{ variant.cloudinary_url }}"
                      data-prix="{{ variant.prix or annonce.price }}"
                      data-original-price="{{ variant.original_price or '' }}"
                      data-discount-price="{{ variant.discount_price or '' }}"
@@ -647,7 +649,7 @@ body {
                     {{ variant.taille or '' }}{% if variant.couleur %} - {{ variant.couleur }}{% endif %}
                     {% if variant.image_filename %}
                     <div class="color-image-preview">
-                        <img src="{{ url_for('static', filename='uploads/variants/' + variant.image_filename) }}" alt="aperçu">
+                        <img src="{{ variant.cloudinary_url }}" alt="aperçu">
                     </div>
                     {% endif %}
                 </div>
@@ -947,7 +949,7 @@ body {
 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
   {% for item in similar_annonces %}
     <div style="width: 220px; background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-      <img src="{{ url_for('static', filename='uploads/' + item.images[0].filename) }}" width="100%" style="height: 150px; object-fit: cover;">
+      <img src="{{ item.images[0].cloudinary_url }}" width="100%" style="height: 150px; object-fit: cover;">
       <h5>{{ item.title }}</h5>
       <p>{{ item.price }} ₽</p>
       <a href="{{ url_for('listings.annonce_detail', listing_id=item.id) }}" class="btn-custom btn-message">Voir</a>
@@ -1027,9 +1029,10 @@ function changeImageFromThumbnail(thumbnail) {
     const mainImg = document.getElementById('mainProductImage');
     const mainVid = document.getElementById('mainProductVideo');
 
-    if (mainImg) {
+    if (mainImg && imageUrl) {
         fadeToImage(mainImg, thumbnail.src);
         mainImg.style.display = 'block';
+
     }
     if (mainVid) {
         mainVid.style.display = 'none';

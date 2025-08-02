@@ -86,10 +86,17 @@ def home():
                 listing.promo_start <= now <= listing.promo_end
         )
 
+    # Ajouter les URLs Cloudinary aux annonces
+    for listing in offres_jour + recommandations + populaires + nouveautes:
+        listing.image_url = listing.image_url or 'default_image_url'  # Remplace par un lien par défaut si vide
+        listing.video_cloudinary_url = listing.video_cloudinary_url or 'default_video_url'
+
     sponsorises = Listing.query.filter_by(is_sponsored=True).order_by(Listing.created_at.desc()).limit(4).all()
 
-    # Récupérer toutes les bannières actives
+    # Récupérer toutes les bannières actives et ajouter l'URL Cloudinary
     banners = Banner.query.filter_by(is_active=True).all()
+    for banner in banners:
+        banner.cloudinary_url = banner.cloudinary_url or 'default_banner_image_url'
 
     return render_template(
         'index.html',
@@ -102,6 +109,7 @@ def home():
         sponsorises=sponsorises,
         banners=banners  # Passer toutes les bannières actives à la vue
     )
+
 
 @main_bp.route('/cgu')
 def cgu():
@@ -170,6 +178,7 @@ def payment_success():
 
 from sqlalchemy.orm import joinedload
 
+
 @main_bp.route('/mes-achats')
 @login_required
 def mes_achats():
@@ -177,16 +186,28 @@ def mes_achats():
         Order.query
         .options(
             joinedload(Order.items)
-                .joinedload(OrderItem.listing)
-                .joinedload(Listing.user),
+            .joinedload(OrderItem.listing)
+            .joinedload(Listing.user),
             joinedload(Order.items)
-                .joinedload(OrderItem.listing)
-                .joinedload(Listing.images)
+            .joinedload(OrderItem.listing)
+            .joinedload(Listing.images)
         )
         .filter_by(buyer_id=current_user.id)
         .order_by(Order.timestamp.desc())
         .all()
     )
+
+    # Assurer que les URLs Cloudinary des images sont utilisées
+    for order in orders:
+        for order_item in order.items:
+            listing = order_item.listing
+            # Vérifier si les images existent et remplacer l'URL locale par Cloudinary
+            if listing.images:
+                # Exemple si la première image est utilisée
+                listing.main_image_url = listing.images[0].cloudinary_url if listing.images[
+                    0] else '/static/default.jpg'
+            else:
+                listing.main_image_url = '/static/default.jpg'  # Image par défaut si aucune image n'est présente
 
     return render_template('mes_achats.html', orders=orders)
 
@@ -638,12 +659,12 @@ def panier():
                 unit_price = listing.price
 
         # 🔁 Image : priorité à la variante, sinon au listing
-        if variant and variant.image_filename:
-            image_filename = variant.image_filename
+        if variant and variant.cloudinary_url:
+            image_url = variant.cloudinary_url  # Utiliser l'URL Cloudinary de la variante
         elif listing.images:
-            image_filename = listing.images[0].filename
+            image_url = listing.images[0].cloudinary_url  # Utiliser l'URL Cloudinary de l'image principale du listing
         else:
-            image_filename = None
+            image_url = None  # Image par défaut si aucune image n'est disponible
 
         items_data.append({
             'id': item.id,
@@ -652,7 +673,7 @@ def panier():
             'variant': variant,
             'quantity': quantity,
             'unit_price': unit_price,
-            'image_filename': image_filename
+            'image_url': image_url  # Utiliser l'URL Cloudinary dans les données
         })
 
     total_rub = sum(item['unit_price'] * item['quantity'] for item in items_data)
@@ -668,10 +689,20 @@ def panier():
         now=now  # ← pour comparaison promo
     )
 
+
 @main_bp.route('/mes-annonces')
 @login_required
 def mes_annonces():
+    # Récupérer toutes les annonces de l'utilisateur, triées par date
     listings = Listing.query.filter_by(user_id=current_user.id).order_by(Listing.created_at.desc()).all()
+
+    # Afficher les URLs des images pour chaque annonce (débogage)
+    for listing in listings:
+        for img in listing.images:
+            print(
+                f"URL de l'image pour l'annonce {listing.id}: {img.cloudinary_url}")  # Affiche l'URL pour chaque image
+
+    # Passer les annonces au template
     return render_template('mes_annonces.html', listings=listings)
 
 from functools import wraps

@@ -357,7 +357,7 @@ footer a:hover {
   <div class="carousel-inner">
     {% for promo in promos %}
     <div class="carousel-item {% if loop.first %}active{% endif %}">
-      <img src="{{ url_for('static', filename='uploads/' + promo.image_filename) }}" class="d-block w-100" alt="{{ promo.title }}">
+      <img src="{{ promo.image_filename }}" class="d-block w-100" alt="{{ promo.title }}">
       <div class="carousel-caption d-none d-md-block">
         <h5>{{ promo.title }}</h5>
         {% if promo.description %}
@@ -387,7 +387,7 @@ footer a:hover {
                <span class="badge bg-info text-dark position-absolute top-0 start-0 m-2">{{ _('Sponsorisé') }}</span>
 
                 <!-- Image -->
-                <img src="{{ url_for('static', filename='uploads/' ~ listing.images[0].filename) if listing.images else '/static/default.jpg' }}"
+                <img src="{{ listing.images[0].cloudinary_url if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
                      class="img-fluid rounded mb-2" alt="image">
 
                 <!-- Titre & prix -->
@@ -417,7 +417,7 @@ footer a:hover {
                 <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">🔥 {{ _('Promo') }}</span>
             {% endif %}
 
-            <img src="{{ url_for('static', filename='uploads/' ~ listing.images[0].filename) if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
+            <img src="{{ listing.images[0].cloudinary_url if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
             <h5>{{ listing.title }}</h5>
             <p class="text-danger fw-bold">{{ listing.discount_price }} ₽
                 <del class="text-muted">{{ listing.original_price or listing.price }} ₽</del>
@@ -438,7 +438,7 @@ footer a:hover {
                 <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">🔥 {{ _('Promo') }}</span>
             {% endif %}
 
-            <img src="{{ url_for('static', filename='uploads/' ~ listing.images[0].filename) if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
+            <img src="{{ listing.images[0].cloudinary_url if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
             <h5>{{ listing.title }}</h5>
             <p>{{ listing.price }} ₽</p>
             <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" class="btn btn-sm btn-primary w-100">{{ _('Voir') }}</a>
@@ -459,7 +459,7 @@ footer a:hover {
             {% if listing._is_promo %}
 <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">🔥 {{ _('Promo') }}</span>
 {% endif %}
-            <img src="{{ url_for('static', filename='uploads/' ~ listing.images[0].filename) if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
+            <img src="{{ listing.images[0].cloudinary_url if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
             <h5>{{ listing.title }}</h5>
             <p>{{ _('Note') }} : ⭐ {{ listing.average_rating }}</p>
            <a href="{{ url_for('listings.annonce_detail', listing_id=listing.id) }}" class="btn btn-sm btn-primary w-100">{{ _('Voir') }}</a>
@@ -501,8 +501,7 @@ footer a:hover {
 
 
                 <!-- Image -->
-                <img src="{{ url_for('static', filename='uploads/' ~ listing.images[0].filename) if listing.images else '/static/default.jpg' }}"
-                     class="img-fluid rounded mb-2" alt="image">
+                <img src="{{ listing.images[0].cloudinary_url if listing.images else '/static/default.jpg' }}" class="img-fluid rounded mb-2" alt="image">
 
                 <!-- Titre / prix -->
                 <h5>{{ listing.title }}</h5>

@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify
 from werkzeug.exceptions import abort
 
+from app.routes.listings import upload_to_cloudinary
+
 admin_bp = Blueprint('admin', __name__)
 
 from functools import wraps
@@ -265,23 +267,36 @@ def add_promo():
     if not current_user.is_admin:
         flash(_("Accès refusé"), "danger")
         return redirect(url_for('home'))
+
     if request.method == 'POST':
         title = request.form.get('title')
         description = request.form.get('description')
         position = int(request.form.get('position') or 0)
         file = request.files.get('image')
+
+        # Vérification du fichier
         if not file or not allowed_file(file.filename):
             flash(_("Fichier image invalide."), "danger")
             return redirect(request.url)
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-        promo = Promo(title=title, description=description, position=position, image_filename=filename)
-        db.session.add(promo)
-        db.session.commit()
-        flash(_("Promo ajoutée."), "success")
+
+        # Upload de l'image vers Cloudinary
+        try:
+            image_url = upload_to_cloudinary(file)  # Utiliser la fonction d'upload Cloudinary
+
+            if image_url:
+                promo = Promo(title=title, description=description, position=position, image_filename=image_url)
+                db.session.add(promo)
+                db.session.commit()
+                flash(_("Promo ajoutée."), "success")
+            else:
+                flash(_("Erreur lors de l'upload de l'image."), "danger")
+        except Exception as e:
+            flash(_("Erreur lors de l'upload de l'image : " + str(e)), "danger")
+
         return redirect(url_for('admin.admin_promos'))
+
     return render_template('admin/add_promo.html')
+
 
 @admin_bp.route('/admin/promos/delete/<int:promo_id>', methods=['POST'])
 @login_required

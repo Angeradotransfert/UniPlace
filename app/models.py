@@ -59,6 +59,9 @@ class Listing(db.Model):
     promo_start = db.Column(db.DateTime, nullable=True)
     promo_end = db.Column(db.DateTime, nullable=True)
     is_sponsored = db.Column(db.Boolean, default=False)
+    image_url = db.Column(db.String(255))  # Pour stocker l'URL de l'image principale
+    video_cloudinary_url = db.Column(db.String(255))
+
 
     from datetime import datetime, timedelta
 
@@ -122,6 +125,9 @@ class ListingImage(db.Model):
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
     filename = db.Column(db.String(255), nullable=False)
     is_main = db.Column(db.Boolean, default=False)  # <-- champ ajouté
+    cloudinary_url = db.Column(db.String(255))
+
+
 
     listing = db.relationship('Listing', back_populates='images')
 
@@ -259,6 +265,7 @@ class EmailLog(db.Model):
 class ProductVariant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     listing_id = db.Column(db.Integer, db.ForeignKey('listing.id'), nullable=False)
+    cloudinary_url = db.Column(db.String(255))
 
     taille = db.Column(db.String(20), nullable=True)
     couleur = db.Column(db.String(30), nullable=True)
@@ -369,4 +376,5 @@ class BannerForm(FlaskForm):
     image = FileField('Image de la bannière', validators=[DataRequired()])
     is_active = BooleanField('Activer la bannière', default=True)
     submit = SubmitField('Sauvegarder')
+    cloudinary_url = db.Column(db.String(255))
 
